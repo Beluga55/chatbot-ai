@@ -76,7 +76,7 @@ const handleSubmit = async (e) => {
   loader(messageDiv);
 
   // Fetch Data From Server -> bot response
-  const response = await fetch("https://chatbot-m944.onrender.com", {
+  const response = await fetch("https://chatbot-ai-g3gs.vercel.app", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
