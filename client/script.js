@@ -76,7 +76,7 @@ const handleSubmit = async (e) => {
   loader(messageDiv);
 
   // Fetch Data From Server -> bot response
-  const response = await fetch("https://zany-blue-armadillo-ring.cyclic.app", {
+  const response = await fetch("https://chatbot-rreu.onrender.com", {
     method: "POST",
     headers: {
       "Access-Control-Allow-Headers": "Content-Type",
