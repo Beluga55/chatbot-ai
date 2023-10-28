@@ -82,6 +82,7 @@ const handleSubmit = async (e) => {
       "Access-Control-Allow-Headers": "Content-Type",
       "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
+      "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH",
     },
     body: JSON.stringify({
       prompt: data.get("prompt"),
