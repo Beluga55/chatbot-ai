@@ -80,7 +80,7 @@ const handleSubmit = async (e) => {
     method: "POST",
     headers: {
       "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": "https://chatbot-ai-sage.vercel.app",
       "Content-Type": "application/json",
       "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH",
     },
