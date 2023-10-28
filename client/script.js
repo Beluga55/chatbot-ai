@@ -78,6 +78,7 @@ const handleSubmit = async (e) => {
   // Fetch Data From Server -> bot response
   const response = await fetch("https://chatbot-ai-g3gs.vercel.app", {
     method: "POST",
+    mode: 'no-cors',
     headers: {
       "Access-Control-Allow-Headers": "Content-Type",
       "Access-Control-Allow-Origin": "https://chatbot-ai-sage.vercel.app",
