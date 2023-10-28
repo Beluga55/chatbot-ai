@@ -10,8 +10,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/server.js",
-      "x-vercel-idle-timeout": 180
+      "dest": "/server.js"
     }
   ]
 }
