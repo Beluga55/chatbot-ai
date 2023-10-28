@@ -76,11 +76,11 @@ const handleSubmit = async (e) => {
   loader(messageDiv);
 
   // Fetch Data From Server -> bot response
-  const response = await fetch("https://chatbot-ai-g3gs.vercel.app", {
+  const response = await fetch("https://zany-blue-armadillo-ring.cyclic.app", {
     method: "POST",
     headers: {
       "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Origin": "https://chatbot-ai-sage.vercel.app",
+      "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
       "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH",
     },
