@@ -1,16 +1,22 @@
 import express from "express";
-import * as dotenv from "dotenv";
-import cors from "cors";
-import OpenAI from "openai";
-
 import { MongoClient, ServerApiVersion } from "mongodb";
+import cors from "cors";
+import * as dotenv from "dotenv";
+import compression from "compression";
+import OpenAI from "openai";
 
 dotenv.config();
 
-// MongoDB connection URI should be passed as a string
-const uri = process.env.MONGODB_KEY;
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(compression());
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const uri = process.env.MONGODB_KEY;
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -19,26 +25,16 @@ const client = new MongoClient(uri, {
   },
 });
 
-async function run() {
+async function initializeMongoClient() {
   try {
     await client.connect();
-    console.log("You successfully connected to MongoDB!");
+    console.log("Connected to MongoDB");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
-  } finally {
-    await client.close();
   }
 }
 
-run().catch(console.dir);
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-const app = express();
-app.use(cors());
-app.use(express.json());
+initializeMongoClient().catch(console.dir);
 
 app.get("/", async (req, res) => {
   res.status(200).send({
@@ -53,11 +49,11 @@ app.post("/", async (req, res) => {
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [{ role: "system", content: prompt }],
-      temperature: 0, // Higher values means the model will take more risks.
-      max_tokens: 400, // The maximum number of tokens to generate in the completion. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
-      top_p: 1, // alternative to sampling with temperature, called nucleus sampling
-      frequency_penalty: 0.5, // Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
-      presence_penalty: 0, // Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+      temperature: 0,
+      max_tokens: 400,
+      top_p: 1,
+      frequency_penalty: 0.5,
+      presence_penalty: 0,
     });
 
     res.status(200).send({
