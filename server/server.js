@@ -3,11 +3,12 @@ import * as dotenv from "dotenv";
 import cors from "cors";
 import OpenAI from "openai";
 
-// MONGO DB
 import { MongoClient, ServerApiVersion } from "mongodb";
 
-const uri =
-  "mongodb+srv://chowah36:76ad3b7e46@cluster0.5i2ccr0.mongodb.net/?retryWrites=true&w=majority";
+dotenv.config();
+
+// MongoDB connection URI should be passed as a string
+const uri = process.env.MONGODB_KEY;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -21,10 +22,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
-    await client.db("admin").command({ ping: 1 });
-    console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!"
-    );
+    console.log("You successfully connected to MongoDB!");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
   } finally {
@@ -33,8 +31,6 @@ async function run() {
 }
 
 run().catch(console.dir);
-
-dotenv.config();
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
