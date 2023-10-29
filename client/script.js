@@ -75,7 +75,7 @@ const handleSubmit = async (e) => {
 
   loader(messageDiv);
 
-  // Fetch Data From Server -> bot response
+  // Fetch Data From Server -> bot response https://chatbot-rreu.onrender.com
   const response = await fetch("https://chatbot-rreu.onrender.com", {
     method: "POST",
     headers: {

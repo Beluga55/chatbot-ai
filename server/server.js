@@ -25,6 +25,8 @@ const client = new MongoClient(uri, {
   },
 });
 
+let conversationHistory = [];
+
 async function initializeMongoClient() {
   try {
     await client.connect();
@@ -46,14 +48,24 @@ app.post("/", async (req, res) => {
   try {
     const prompt = req.body.prompt;
 
+    conversationHistory.push({ role: "user", content: prompt });
+
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
-      messages: [{ role: "system", content: prompt }],
+      messages: [
+        { role: "system", content: "You are a helpful assistant." },
+        ...conversationHistory, // Include the entire conversation history
+      ],
       temperature: 0,
       max_tokens: 400,
       top_p: 1,
       frequency_penalty: 0.5,
-      presence_penalty: 0,
+      presence_penalty: 0.5,
+    });
+
+    conversationHistory.push({
+      role: "assistant",
+      content: response.choices[0].message.content,
     });
 
     res.status(200).send({
