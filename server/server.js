@@ -53,6 +53,8 @@ app.post("/", async (req, res) => {
 
     // Include the main OpenAI logic here
     async function main() {
+      let botResponse = "";
+
       const completion = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         messages: [
@@ -68,15 +70,18 @@ app.post("/", async (req, res) => {
       });
 
       for await (const chunk of completion) {
-        console.log(chunk.choices[0].delta.content);
-        conversationHistory.push({
-          role: "assistant",
-          content: chunk.choices[0].delta.content,
-        });
+        if (chunk.choices[0].delta.content !== undefined) {
+          conversationHistory.push({
+            role: "assistant",
+            content: chunk.choices[0].delta.content,
+          });
+          botResponse += chunk.choices[0].delta.content;
+        }
       }
 
+      // Send the entire conversation history, including bot responses
       res.status(200).send({
-        bot: conversationHistory[conversationHistory.length - 1].content,
+        bot: botResponse,
       });
     }
 
