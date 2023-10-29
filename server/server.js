@@ -38,6 +38,7 @@ async function initializeMongoClient() {
 
 initializeMongoClient().catch(console.dir);
 
+// Move the main OpenAI logic into the Express route
 app.get("/", async (req, res) => {
   res.status(200).send({
     message: "Hello from CodeX!",
@@ -50,26 +51,38 @@ app.post("/", async (req, res) => {
 
     conversationHistory.push({ role: "user", content: prompt });
 
-    const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [
-        { role: "system", content: "You are a helpful assistant." },
-        ...conversationHistory, // Include the entire conversation history
-      ],
-      temperature: 0,
-      max_tokens: 400,
-      top_p: 1,
-      frequency_penalty: 0.5,
-      presence_penalty: 0.5,
-    });
+    // Include the main OpenAI logic here
+    async function main() {
+      const completion = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [
+          { role: "system", content: "You are a helpful assistant." },
+          ...conversationHistory,
+        ],
+        stream: true,
+        temperature: 0,
+        max_tokens: 1024,
+        top_p: 1,
+        frequency_penalty: 0.5,
+        presence_penalty: 0.5,
+      });
 
-    conversationHistory.push({
-      role: "assistant",
-      content: response.choices[0].message.content,
-    });
+      for await (const chunk of completion) {
+        console.log(chunk.choices[0].delta.content);
+        conversationHistory.push({
+          role: "assistant",
+          content: chunk.choices[0].delta.content,
+        });
+      }
 
-    res.status(200).send({
-      bot: response.choices[0].message.content,
+      res.status(200).send({
+        bot: conversationHistory[conversationHistory.length - 1].content,
+      });
+    }
+
+    main().catch((error) => {
+      console.error(error);
+      res.status(500).send(error || "Something went wrong");
     });
   } catch (error) {
     console.error(error);
