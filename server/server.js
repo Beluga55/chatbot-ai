@@ -38,13 +38,7 @@ async function initializeMongoClient() {
 
 initializeMongoClient().catch(console.dir);
 
-// Move the main OpenAI logic into the Express route
-app.get("/", async (req, res) => {
-  res.status(200).send({
-    message: "Hello from CodeX!",
-  });
-});
-
+// Express route for handling API requests
 app.post("/", async (req, res) => {
   try {
     const prompt = req.body.prompt;
@@ -63,7 +57,7 @@ app.post("/", async (req, res) => {
         ],
         stream: true,
         temperature: 0,
-        max_tokens: 1024,
+        max_tokens: 500,
         top_p: 1,
         frequency_penalty: 0.5,
         presence_penalty: 0.5,
@@ -83,10 +77,16 @@ app.post("/", async (req, res) => {
       res.status(200).send({
         bot: botResponse,
       });
+
+      console.log(conversationHistory);
+      if (conversationHistory.length > 10) {
+        conversationHistory = conversationHistory.slice(-100);
+      }
     }
 
     main().catch((error) => {
       console.error(error);
+
       res.status(500).send(error || "Something went wrong");
     });
   } catch (error) {
