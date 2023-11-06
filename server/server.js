@@ -80,7 +80,7 @@ app.post("/", async (req, res) => {
 
       console.log(conversationHistory);
       if (conversationHistory.length > 10) {
-        conversationHistory = conversationHistory.slice(-100);
+        conversationHistory = conversationHistory.slice(-500);
       }
     }
 
