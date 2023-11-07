@@ -79,10 +79,7 @@ const handleSubmit = async (e) => {
   const response = await fetch("https://chatbot-rreu.onrender.com", {
     method: "POST",
     headers: {
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
-      "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PATCH",
     },
     body: JSON.stringify({
       prompt: data.get("prompt"),

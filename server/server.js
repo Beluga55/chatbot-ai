@@ -47,8 +47,6 @@ app.post("/", async (req, res) => {
 
     // Include the main OpenAI logic here
     async function main() {
-      let botResponse = "";
-
       const completion = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         messages: [
@@ -69,16 +67,19 @@ app.post("/", async (req, res) => {
             role: "assistant",
             content: chunk.choices[0].delta.content,
           });
-          botResponse += chunk.choices[0].delta.content;
+
+          // Print the content of the chunk as it arrives
+          console.log(chunk.choices[0].delta.content);
+
+          // Send the content as it arrives
+          res.write(chunk.choices[0].delta.content);
         }
       }
 
-      // Send the entire conversation history, including bot responses
-      res.status(200).send({
-        bot: botResponse,
-      });
-
+      // Mark the response as complete
+      res.end();
       console.log(conversationHistory);
+
       if (conversationHistory.length > 10) {
         conversationHistory = conversationHistory.slice(-500);
       }
@@ -86,7 +87,6 @@ app.post("/", async (req, res) => {
 
     main().catch((error) => {
       console.error(error);
-
       res.status(500).send(error || "Something went wrong");
     });
   } catch (error) {
@@ -95,6 +95,6 @@ app.post("/", async (req, res) => {
   }
 });
 
-app.listen(5001, () =>
+app.listen(5000, () =>
   console.log("AI server started on http://localhost:5000")
 );
