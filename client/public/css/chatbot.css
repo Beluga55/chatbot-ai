@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;300;400;500;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Alegreya Sans", sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 body {
@@ -55,7 +55,7 @@ body {
 
 .chat {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1024px;
   margin: 0 auto;
 
   display: flex;
@@ -94,6 +94,7 @@ body {
 
   max-width: 100%;
   overflow-x: scroll;
+  margin-top: 5px;
 
   /*
    * white space refers to any spaces, tabs, or newline characters that are used to format the CSS code
@@ -114,27 +115,26 @@ body {
 
 form {
   width: 100%;
-  max-width: 1280px;
+  align-items: center;
+  max-width: 1024px;
   margin: 0 auto;
   padding: 10px;
   background: #40414f;
-
   display: flex;
   flex-direction: row;
   gap: 10px;
+  border-radius: 0.75rem 0.75rem 0 0;
 }
 
 textarea {
   width: 100%;
-
   color: #fff;
-  font-size: 18px;
-
+  font-size: 1rem;
   padding: 10px;
   background: transparent;
-  border-radius: 5px;
   border: none;
   outline: none;
+  resize: none;
 }
 
 button {
