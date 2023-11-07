@@ -17,6 +17,8 @@ export default defineConfig({
         faq: resolve(root, "faq.html"),
         login: resolve(root, "login.html"),
         signup: resolve(root, "signup.html"),
+        styleCss: resolve(root, 'public', 'css', 'style.css'),
+        chatbotCss: resolve(root, 'public', 'css', 'chatbot.css'),
       },
     },
   },
