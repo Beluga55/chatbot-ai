@@ -7,13 +7,13 @@ const chatContainer = document.querySelector("#chat_container");
 let loadInterval;
 
 function loader(element) {
-  element.textContent = "";
+  element.innerHTML = "";
 
   loadInterval = setInterval(() => {
-    element.textContent += ".";
+    element.innerHTML += ".";
 
     if (element.textContent === "....") {
-      element.textContent = "";
+      element.innerHTML = "";
     }
   }, 300);
 }
@@ -21,7 +21,7 @@ function loader(element) {
 function typeText(element, text) {
   let index = 0;
 
-  let interval = setInterval(() => {
+  const interval = setInterval(() => {
     if (index < text.length) {
       element.innerHTML += text.charAt(index);
       index++;
@@ -49,7 +49,9 @@ function chatStripe(isAi, value, uniqueId) {
               alt="${isAi ? "bot" : "user"}"
             />
           </div>
-          <div class="message" id=${uniqueId}>${value}</div>
+          <div class="message">
+            <p id=${uniqueId}>${value}</p>
+          </div>
         </div>
       </div>
     `;
@@ -59,9 +61,10 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   const data = new FormData(form);
+  const userPrompt = data.get("prompt");
 
   // User's chatstripe
-  chatContainer.innerHTML += chatStripe(false, data.get("prompt"));
+  chatContainer.innerHTML += chatStripe(false, userPrompt);
 
   form.reset();
 
@@ -76,13 +79,13 @@ const handleSubmit = async (e) => {
   loader(messageDiv);
 
   // Fetch Data From Server -> bot response https://chatbot-rreu.onrender.com -> http://localhost:5001
-  const response = await fetch("http://localhost:5001", {
+  const response = await fetch("https://chatbot-rreu.onrender.com", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      prompt: data.get("prompt"),
+      prompt: userPrompt,
     }),
   });
 
@@ -91,9 +94,9 @@ const handleSubmit = async (e) => {
 
   if (response.ok) {
     const data = await response.json();
-    const parsedData = data.bot.trim();
+    const botResponse = data.bot.trim();
 
-    typeText(messageDiv, parsedData);
+    typeText(messageDiv, botResponse);
   } else {
     const err = await response.text();
 

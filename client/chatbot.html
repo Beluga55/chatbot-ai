@@ -1,22 +1,63 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <title>Chatbot - AI</title>
-    <link rel="stylesheet" href="css/chatbot.css">
+    <link rel="stylesheet" href="css/chatbot.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+    <header class="header">
+      <nav class="nav container">
+        <div class="nav__logo">
+          <h2>Chatbot AI</h2>
+        </div>
+        <i class="bx bx-menu-alt-right"></i>
+      </nav>
+    </header>
+
+    <!-- NAV MENU -->
+    <div class="nav__menu">
+      <i class="bx bx-x"></i>
+      <div class="nav__menu-content">
+        <div><i class="bx bxs-home"></i><a href="index.html">Home</a></div>
+        <div><i class="bx bx-notepad"></i><a href="about.html">About</a></div>
+        <div><i class="bx bxs-comment-dots"></i><a href="faq.html">Faq</a></div>
+      </div>
+
+      <div class="nav__profile">
+        <div class="nav__profile-content">
+          <div>
+            <img src="assets/empty-user.png" alt="empty-user" />
+            <p class="nav__name">Alexander</p>
+          </div>
+          <a href="index.html"><i class='bx bx-log-out'></i></a>
+        </div>
+      </div>
+    </div>
+
     <div id="app">
       <div id="chat_container"></div>
 
       <form>
-        <textarea name="prompt" rows="1" cols="1" placeholder="Ask Codex..."></textarea>
-        <button type="submit"><img src="assets/send.svg" /></button>
+        <textarea
+          name="prompt"
+          rows="1"
+          cols="1"
+          placeholder="Ask Chatbot..."
+        ></textarea>
+        <button type="submit"><i class="bx bx-send"></i></button>
       </form>
     </div>
 
     <script type="module" src="script.js"></script>
+    <script src="navigation.js"></script>
   </body>
 </html>

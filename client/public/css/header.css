@@ -1,0 +1,119 @@
+.header {
+  position: fixed;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0px 1000px rgba(255, 255, 255, 0.5);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.5rem;
+}
+
+.nav__logo h2 {
+  font-size: 0.938rem;
+  color: var(--White);
+}
+
+.bx-menu-alt-right {
+  font-size: 1.25rem;
+  color: var(--White);
+}
+
+.nav__menu {
+  position: absolute;
+  right: 0;
+  background: var(--White);
+  height: 100vh;
+  width: 180px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out,
+              visibility 0.3s ease-in-out;
+}
+
+.nav__menu.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav__menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 5rem 2.5rem 0 2.5rem;
+}
+
+.nav__menu-content > div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav__menu-content > div > i {
+  font-size: 1.5rem;
+}
+
+.nav__menu-content a {
+  text-decoration: none;
+  font-size: 0.85rem;
+  color: black;
+  font-weight: 500;
+}
+
+.bx-x {
+  right: 1.5rem;
+  top: 1.5rem;
+  position: absolute;
+  font-size: 1.5rem;
+}
+
+.nav__profile {
+  position: absolute;
+  bottom: 0;
+  background: rgba(45, 45, 45, 0.6);
+  width: 100%;
+  padding: 0.75rem;
+}
+
+.nav__profile-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.nav__profile-content > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav__profile-content img {
+  width: 30px;
+  height: 30px;
+}
+
+.nav__profile-content p {
+  font-size: 0.75rem;
+  color: var(--White);
+  font-weight: 500;
+}
+
+.nav__profile-content a {
+  height: 20px;
+}
+
+.bx-log-out {
+  color: var(--White);
+  font-size: 1.25rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    margin-inline: auto;
+  }
+}
