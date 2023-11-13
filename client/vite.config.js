@@ -18,6 +18,7 @@ export default defineConfig({
         login: resolve(root, "login.html"),
         signup: resolve(root, "signup.html"),
         scriptjs: resolve(root, "script.js"),
+        navigation: resolve(root, "navigation.js"),
         styleCss: resolve(root, "public", "css", "style.css"),
         chatbotCss: resolve(root, "public", "css", "chatbot.css"),
       },
