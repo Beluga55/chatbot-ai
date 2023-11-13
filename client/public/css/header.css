@@ -27,6 +27,7 @@
 .nav__menu {
   position: absolute;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100vh;
   background: transparent;
@@ -86,5 +87,57 @@
   visibility: visible;
 }
 
+#signout {
+  display: none;
+}
+
 @media screen and (min-width: 576px) {
+  .nav {
+    margin: 1.25rem;
+  }
+
+  .nav__close-menu {
+    display: none;
+  }
+
+  .nav__menu {
+    position: relative;
+    width: initial;
+    height: initial;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav__menu ul {
+    margin: 0;
+  }
+
+  .nav__background {
+    width: initial;
+    height: initial;
+    background-color: transparent;
+  }
+
+  .nav__background i {
+    display: none;
+  }
+
+  .nav__menu ul li a {
+    color: var(--White);
+  }
+
+  .bx-menu-alt-right {
+    display: none;
+  }
+
+  .nav button {
+    font-weight: 600;
+    background: var(--White);
+    padding: 0.65rem 1.25rem;
+    border-radius: 2rem;
+  }
+
+  #signout {
+    display: block;
+  }
 }

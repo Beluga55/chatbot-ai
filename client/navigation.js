@@ -1,6 +1,7 @@
 const navMenu = document.querySelector(".nav__menu");
 const closeButton = document.querySelector(".bx-x");
 const openButton = document.querySelector(".bx-menu-alt-right");
+const signoutBtn = document.getElementById("signout");
 
 function openNavigationMenu() {
   navMenu.classList.add("show");
@@ -8,6 +9,10 @@ function openNavigationMenu() {
 
 function closeNavigationMenu() {
   navMenu.classList.remove("show");
+}
+
+function redirectToMainPage() {
+  window.location.href = "index.html";
 }
 
 if (openButton) {
@@ -21,3 +26,5 @@ if (closeButton) {
     closeNavigationMenu();
   });
 }
+
+signoutBtn.addEventListener("click", redirectToMainPage);
