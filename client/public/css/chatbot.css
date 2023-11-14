@@ -1,11 +1,14 @@
+@import url(header.css);
+@import url(style.css);
+
 body {
-  background: #343541;
+  background: var(--MainBackground);
 }
 
 #app {
   width: 100vw;
   height: 100vh;
-  background: #343541;
+  background: var(--MainBackground);
 
   display: flex;
   flex-direction: column;
@@ -42,7 +45,7 @@ body {
 }
 
 .ai {
-  background: #40414f;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .chat {
@@ -105,7 +108,8 @@ form {
   max-width: 1024px;
   margin: 0 auto;
   padding: 10px;
-  background: #40414f;
+  background: var(--TransparentWhite);
+  box-shadow: 0 0 1000px 0 rgba(255, 255, 255, 0.5);
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -121,13 +125,6 @@ textarea {
   border: none;
   outline: none;
   resize: none;
-}
-
-button {
-  outline: 0;
-  border: 0;
-  cursor: pointer;
-  background: transparent;
 }
 
 form img {

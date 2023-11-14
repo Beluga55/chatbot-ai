@@ -1,12 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Main Page - Chatbot AI</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <a href="chatbot.html">Testing</a>
-</body>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav container">
+        <div class="nav__logo">
+          <h2>Chatbot AI</h2>
+          <i class="bx bx-bot"></i>
+        </div>
+
+        <div class="nav__menu">
+          <div class="nav__close-menu">
+            <div class="nav__logo">
+              <h2>Chatbot AI</h2>
+              <i class="bx bx-bot"></i>
+            </div>
+            <i class="bx bx-x"></i>
+          </div>
+
+          <ul>
+            <li>
+              <div class="nav__background">
+                <i class="bx bxs-home"></i>
+                <a href="index.html">Home</a>
+              </div>
+            </li>
+            <li>
+              <div class="nav__background">
+                <i class="bx bxs-info-circle"></i>
+                <a href="about.html">About</a>
+              </div>
+            </li>
+            <li>
+              <div class="nav__background">
+                <i class="bx bxs-chat"></i>
+                <a href="faq.html">FAQs</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <i class="bx bx-menu-alt-right"></i>
+        <button id="login">Login</button>
+      </nav>
+    </header>
+
+    <script type="module" src="navigation.js"></script>
+  </body>
 </html>

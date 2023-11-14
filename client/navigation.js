@@ -2,6 +2,7 @@ const navMenu = document.querySelector(".nav__menu");
 const closeButton = document.querySelector(".bx-x");
 const openButton = document.querySelector(".bx-menu-alt-right");
 const signoutBtn = document.getElementById("signout");
+const loginBtn = document.getElementById("login");
 
 function openNavigationMenu() {
   navMenu.classList.add("show");
@@ -13,6 +14,10 @@ function closeNavigationMenu() {
 
 function redirectToMainPage() {
   window.location.href = "index.html";
+}
+
+function redirectToLoginPage() {
+  window.location.href = "login.html"
 }
 
 if (openButton) {
@@ -27,4 +32,10 @@ if (closeButton) {
   });
 }
 
-signoutBtn.addEventListener("click", redirectToMainPage);
+if (signoutBtn) {
+  signoutBtn.addEventListener("click", redirectToMainPage);
+}
+
+if(loginBtn) {
+  loginBtn.addEventListener("click", redirectToLoginPage);
+}

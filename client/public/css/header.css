@@ -1,7 +1,7 @@
 .header {
   position: fixed;
   width: 100%;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--TransparentWhite);
   box-shadow: 0 0px 1000px rgba(255, 255, 255, 0.5);
 }
 
@@ -10,6 +10,18 @@
   align-items: center;
   justify-content: space-between;
   margin: 1.5rem;
+}
+
+.nav__logo {
+  display: flex;
+  align-items: center;
+  column-gap: 0.3rem;
+}
+
+.bx-bot {
+  color: var(--White);
+  font-size: 1.25rem;
+  height: 23px;
 }
 
 .nav__logo h2,
@@ -54,15 +66,26 @@
   margin-top: 5rem;
 }
 
-.nav__menu ul li {
-  list-style: none;
+.nav__menu ul li a {
+  font-weight: 600;
+  color: var(--Black);
+  font-size: 0.85rem;
 }
 
-.nav__menu ul li a {
-  text-decoration: none;
-  font-weight: 600;
-  color: black;
-  font-size: 0.85rem;
+.nav__menu ul li a::before {
+  content: "";
+  width: 0%;
+  position: absolute;
+  height: 2px;
+  background: var(--HoverColor);
+  bottom: 2px;
+  margin-left: 1px;
+  border-radius: 4px;
+  transition: width 0.3s ease-in-out; /* Add transition for a smooth effect */
+}
+
+.nav__menu ul li a:hover::before {
+  width: 10%;
 }
 
 .nav__background {
@@ -87,7 +110,8 @@
   visibility: visible;
 }
 
-#signout {
+#signout,
+#login {
   display: none;
 }
 
@@ -137,7 +161,15 @@
     border-radius: 2rem;
   }
 
-  #signout {
+  #signout,
+  #login {
     display: block;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+
+  #signout:hover,
+  #login:hover {
+    background: var(--HoverBtn);
+    color: var(--White);
   }
 }

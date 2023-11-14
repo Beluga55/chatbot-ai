@@ -9,6 +9,27 @@
 
 :root {
   --White: hsl(0, 100%, 100%);
+  --Black: hsl(0, 0%, 0%);
+  --DarkBlue: hsl(205, 100%, 15%);
+  --MainBackground: hsl(204, 100%, 5%);
+  --HoverColor: hsl(201, 100%, 36%);
+  --TransparentWhite: rgba(255, 255, 255, 0.2);
+  --HoverBtn: #003a61;
+}
+
+button {
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
 }
 
 @media screen and (min-width: 1024px) {

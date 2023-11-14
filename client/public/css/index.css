@@ -1,0 +1,6 @@
+@import url(header.css);
+@import url(style.css);
+
+body {
+  background-color: var(--MainBackground);
+}
