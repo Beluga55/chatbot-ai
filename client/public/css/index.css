@@ -53,6 +53,89 @@ body {
   color: var(--White);
 }
 
+/* COMPANIES SECTION */
+.companies__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5rem;
+  padding: 8rem 0;
+}
+
+.companies__container img {
+  width: auto;
+  height: 25px;
+  object-fit: cover;
+}
+
+/* BANNER SECTION */
+.banner__container {
+  margin-inline: 1.5rem;
+  padding: 3rem 0;
+}
+
+.banner__container h2 {
+  background: rgb(155, 88, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(155, 88, 255, 1) 0%,
+    rgba(31, 57, 247, 1) 50%,
+    rgba(78, 178, 248, 1) 100%
+  );
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.banner__content-wrapper {
+  display: grid;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.banner__content {
+  background-image: linear-gradient(
+    109.6deg,
+    rgba(109, 168, 252, 0.15) 11.2%,
+    rgba(85, 135, 243, 0.5) 91.2%
+  );
+  padding: 2rem;
+  border-radius: 0.25rem;
+}
+
+.banner__content h3 {
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.banner__content h3::before {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 10rem;
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+  bottom: -5px;
+  border-radius: 0.25rem;
+}
+
+.banner__content h3,
+.banner__content p {
+  color: var(--White);
+}
+
+.banner__content p {
+  font-size: 14px;
+  margin-top: 1rem;
+  text-align: initial;
+}
+
+/* REGISTER PART */
+.register__container {
+  padding: 8rem 0;
+  margin-inline: 1.5rem;
+}
+
 @media screen and (min-width: 576px) {
   .hero__container {
     display: grid;
@@ -64,24 +147,47 @@ body {
   .hero__content {
     margin-bottom: 0;
   }
+
+  .companies__container {
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .banner__content-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .banner__content-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media screen and (min-width: 920px) {
   .hero__container {
     gap: 3rem;
   }
-  
+
   .hero__content h1 {
     font-size: 2.5rem;
   }
 
-  .hero__content p {
+  .banner__container h2 {
+    font-size: 1.75rem;
+  }
+
+  .hero__content p,
+  .banner__content p {
     font-size: 0.938rem;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .hero__container {
+  .hero__container,
+  .banner__container {
     margin: 0;
   }
 }

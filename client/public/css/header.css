@@ -32,8 +32,9 @@
 }
 
 .bx-menu-alt-right,
-.bx-x {
-  font-size: 1.25rem;
+.bx-x,
+.bx-user-circle {
+  font-size: 1.3rem;
   color: var(--White);
 }
 
@@ -78,7 +79,8 @@
   width: 0%;
   position: absolute;
   height: 2px;
-  background: var(--HoverColor);
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
   bottom: 2px;
   margin-left: 1px;
   border-radius: 4px;
@@ -87,6 +89,12 @@
 
 .nav__menu ul li a:hover::before {
   width: 10%;
+}
+
+.nav__menu-right {
+  display: flex;
+  align-items: center;
+  column-gap: 0.35rem;
 }
 
 .nav__background {
@@ -117,14 +125,16 @@
 }
 
 /* Change background header */
-.scroll-header {
-  background-color: var(--White);
-}
-
-.scroll-header .nav__logo h2,
-.scroll-header .nav__logo i,
-.scroll-header .nav i {
-  color: var(--Black);
+.scroll-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
+  z-index: -1;
 }
 
 @media screen and (min-width: 576px) {
@@ -142,8 +152,8 @@
     height: initial;
     opacity: 1;
     visibility: visible;
-    -webkit-backdrop-filter: blur(0px);
-    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: initial;
+    backdrop-filter: initial;
   }
 
   .nav__menu ul {
@@ -164,7 +174,8 @@
     color: var(--White);
   }
 
-  .bx-menu-alt-right {
+  .bx-menu-alt-right,
+  .nav__menu-right {
     display: none;
   }
 
@@ -185,10 +196,6 @@
   #login:hover {
     background: var(--HoverBtn);
     color: var(--White);
-  }
-
-  .scroll-header .nav__menu ul li a {
-    color: var(--Black);
   }
 
   .scroll-header #signout,
