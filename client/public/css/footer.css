@@ -1,0 +1,125 @@
+.footer {
+  padding: 3rem 0;
+  margin-inline: 1.5rem;
+}
+
+.upper__hr {
+  margin-top: 2rem;
+  margin-inline: 1.5rem;
+  border: 1px solid rgba(109, 151, 230, 0.2);
+  border-radius: 0.25rem;
+}
+
+.lower__hr {
+  margin-inline: 1.5rem;
+  border: 1px solid rgba(109, 151, 230, 0.2);
+  border-radius: 0.25rem;
+  margin-bottom: 2rem;
+}
+
+.footer__container {
+  display: grid;
+  gap: 2rem;
+}
+
+.footer__container .footer__content:first-child p {
+  color: var(--White);
+  font-size: 14px;
+  margin-top: 0.5rem;
+  text-align: initial;
+}
+
+.footer__content span {
+  color: var(--White);
+  font-weight: 600;
+  font-size: 14px;
+  position: relative;
+  z-index: -1;
+}
+
+.footer__content span::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  bottom: -6px;
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+  width: 3rem;
+  height: 2px;
+  border-radius: 0.25rem;
+}
+
+.footer__nav-links,
+.footer__contact-information {
+  margin-top: 1rem;
+}
+
+.footer__nav-links ul {
+  display: grid;
+  gap: 1rem;
+}
+
+.footer__nav-links ul li a {
+  font-size: 14px;
+  color: var(--White);
+}
+
+.footer__contact-information {
+  display: grid;
+  gap: 1rem;
+}
+
+.footer__contact-content {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.footer__contact-content i,
+.footer__contact-content p,
+.social__icons i,
+.sub__footer span {
+  color: var(--White);
+}
+
+.footer__contact-content i {
+  font-size: 1.25rem;
+}
+.social__icons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.social__icons i {
+  font-size: 1.75rem;
+}
+
+.footer__contact-content p,
+.sub__footer span {
+  font-size: 14px;
+  text-align: initial;
+}
+
+.sub__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-inline: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media screen and (min-width: 576px) {
+  .footer__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .footer__container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .footer__content {
+    justify-self: center;
+  }
+}

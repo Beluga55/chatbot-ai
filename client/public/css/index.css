@@ -1,4 +1,5 @@
 @import url(header.css);
+@import url(footer.css);
 @import url(style.css);
 
 body {
@@ -113,7 +114,7 @@ body {
   content: "";
   position: absolute;
   height: 2px;
-  width: 10rem;
+  width: 8rem;
   background-color: #8bc6ec;
   background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
   bottom: -5px;
@@ -176,6 +177,75 @@ body {
   color: var(--White);
 }
 
+/* Trends */
+.trends__container {
+  margin-inline: 1.5rem;
+  padding: 3rem 0;
+}
+
+.trends__container h2 {
+  background: rgb(155, 88, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(155, 88, 255, 1) 0%,
+    rgba(31, 57, 247, 1) 50%,
+    rgba(78, 178, 248, 1) 100%
+  );
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.trends__content-grid {
+  display: grid;
+  margin-top: 2.5rem;
+  gap: 2rem;
+}
+
+.trends__content img {
+  height: 170px;
+  object-fit: cover;
+  border-radius: 0.25rem;
+}
+
+.trends__content {
+  background-image: linear-gradient(
+    109.6deg,
+    rgba(109, 168, 252, 0.15) 11.2%,
+    rgba(85, 135, 243, 0.5) 91.2%
+  );
+  border-radius: 0.25rem;
+  position: relative;
+  z-index: 0;
+}
+
+.trends__description {
+  padding: 0.75rem 1rem;
+}
+
+.trends__description span {
+  color: var(--White);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.trends__description p {
+  text-align: initial;
+  color: var(--White);
+  font-size: 14px;
+  margin-top: 0.5rem;
+  margin-bottom: 4rem;
+}
+
+.trends__description a {
+  color: var(--White);
+  font-size: 12px;
+  font-weight: 600;
+  position: absolute;
+  bottom: 20px;
+  z-index: 1
+}
+
 @media screen and (min-width: 576px) {
   .hero__container,
   .register__container {
@@ -203,6 +273,11 @@ body {
   .banner__content-wrapper {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .trends__content-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -226,14 +301,28 @@ body {
     font-size: 2.5rem;
   }
 
-  .banner__container h2 {
-    font-size: 1.75rem;
+  .banner__container h2,
+  .trends__container h2 {
+    font-size: 1.8rem;
   }
 
   .hero__content p,
   .banner__content p,
   .register__content p {
     font-size: 0.938rem;
+  }
+
+  .trends__content-grid {
+    grid-template-columns: 375px 1fr 1fr;
+  }
+
+  .trends__content-grid .trends__content:first-child {
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+
+  .trends__content-grid .trends__content:first-child img {
+    height: 400px;
   }
 }
 
