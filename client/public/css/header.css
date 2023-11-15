@@ -3,6 +3,7 @@
   width: 100%;
   background: var(--TransparentWhite);
   box-shadow: 0 0px 1000px rgba(255, 255, 255, 0.5);
+  transition: 0.3s ease-in-out;
 }
 
 .nav {
@@ -115,6 +116,17 @@
   display: none;
 }
 
+/* Change background header */
+.scroll-header {
+  background-color: var(--White);
+}
+
+.scroll-header .nav__logo h2,
+.scroll-header .nav__logo i,
+.scroll-header .nav i {
+  color: var(--Black);
+}
+
 @media screen and (min-width: 576px) {
   .nav {
     margin: 1.25rem;
@@ -130,6 +142,8 @@
     height: initial;
     opacity: 1;
     visibility: visible;
+    -webkit-backdrop-filter: blur(0px);
+    backdrop-filter: blur(0px);
   }
 
   .nav__menu ul {
@@ -171,5 +185,14 @@
   #login:hover {
     background: var(--HoverBtn);
     color: var(--White);
+  }
+
+  .scroll-header .nav__menu ul li a {
+    color: var(--Black);
+  }
+
+  .scroll-header #signout,
+  .scroll-header #login {
+    border: 1px solid rgba(45, 45, 45, 0.5);
   }
 }

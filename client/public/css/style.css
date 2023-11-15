@@ -14,7 +14,7 @@
   --MainBackground: hsl(204, 100%, 5%);
   --HoverColor: hsl(201, 100%, 36%);
   --TransparentWhite: rgba(255, 255, 255, 0.2);
-  --HoverBtn: #003a61;
+  --HoverBtn: hsl(214, 60%, 33%);
 }
 
 button {
@@ -30,6 +30,15 @@ a {
 
 li {
   list-style: none;
+}
+
+img {
+  width: 100%;
+}
+
+p {
+  line-height: 1.5;
+  text-align: justify;
 }
 
 @media screen and (min-width: 1024px) {

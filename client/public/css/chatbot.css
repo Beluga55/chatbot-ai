@@ -7,7 +7,7 @@ body {
 
 #app {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background: var(--MainBackground);
 
   display: flex;
@@ -114,6 +114,8 @@ form {
   flex-direction: row;
   gap: 10px;
   border-radius: 0.75rem 0.75rem 0 0;
+  position: fixed;
+  bottom: 0;
 }
 
 textarea {

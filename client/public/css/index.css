@@ -4,3 +4,84 @@
 body {
   background-color: var(--MainBackground);
 }
+
+.hero__container {
+  padding-top: 7.5rem;
+  margin-inline: 1.5rem;
+}
+
+.hero__content {
+  margin-bottom: 2rem;
+}
+
+.hero__content h1 {
+  background: rgb(155, 88, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(155, 88, 255, 1) 0%,
+    rgba(31, 57, 247, 1) 50%,
+    rgba(78, 178, 248, 1) 100%
+  );
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 2rem;
+}
+
+.hero__content p,
+.hero__content button {
+  color: var(--White);
+}
+
+.hero__content p {
+  font-size: 14px;
+  margin-top: 1rem;
+}
+
+#getStarted {
+  margin-top: 1.5rem;
+  background: var(--White);
+  padding: 0.65rem 1.25rem;
+  font-weight: 600;
+  border-radius: 0.2rem;
+  color: var(--Black);
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+#getStarted:hover {
+  background: var(--HoverBtn);
+  color: var(--White);
+}
+
+@media screen and (min-width: 576px) {
+  .hero__container {
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero__content {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (min-width: 920px) {
+  .hero__container {
+    gap: 3rem;
+  }
+  
+  .hero__content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero__content p {
+    font-size: 0.938rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .hero__container {
+    margin: 0;
+  }
+}
