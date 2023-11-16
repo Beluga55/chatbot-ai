@@ -120,13 +120,6 @@ input[type="text"] {
   color: var(--White);
 }
 
-.password__wrapper,
-.username__email {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-}
-
 @media screen and (min-width: 576px) {
   .login__content-wrapper {
     display: grid;
@@ -145,6 +138,12 @@ input[type="text"] {
 
   .login__button {
     margin-bottom: 1rem;
+  }
+
+  .password__wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
   }
 }
 
