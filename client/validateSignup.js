@@ -59,7 +59,7 @@ function validateSignupForm() {
   return true;
 }
 
-async function submitForm() {
+async function submitForm(event) {
   // Validate the form
   if (!validateSignupForm()) {
     event.preventDefault();

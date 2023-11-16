@@ -112,6 +112,10 @@ app.post("/signup", async (req, res) => {
     const db = client.db("Chatbot");
     const collection = db.collection("Users");
 
+    // Create unique indexes on 'username' and 'email'
+    await collection.createIndex({ username: 1 }, { unique: true });
+    await collection.createIndex({ email: 1 }, { unique: true });
+
     await collection.insertOne({ username, email, password });
 
     // If you reach this point, the insertion was successful, but no response is sent to the frontend
