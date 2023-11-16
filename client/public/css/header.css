@@ -26,24 +26,30 @@
   height: 23px;
 }
 
-.nav__logo h2,
-.nav__close-menu h2 {
+.nav__logo h2 {
   font-size: 0.938rem;
   color: var(--White);
 }
 
 .bx-menu-alt-right,
-.bx-x,
-.bx-user-circle {
+.bx-left-arrow-alt,
+.bx-user-circle,
+.bx-log-out {
   font-size: 1.3rem;
   color: var(--White);
+}
+
+.bx-left-arrow-alt {
+  position: absolute;
+  left: 1.5rem;
+  top: 1.5rem;
 }
 
 .nav__menu {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 50%;
   height: 100vh;
   background: transparent;
   -webkit-backdrop-filter: blur(100px);
@@ -54,24 +60,29 @@
   z-index: 1;
 }
 
-.nav__close-menu {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 1.5rem;
+.nav__links {
+  margin-inline: 1.5rem;
+  padding-top: 5rem;
 }
 
-.nav__menu ul {
+.nav__links ul {
+  display: grid;
+  gap: 2rem;
+}
+
+.nav__links ul li {
   display: flex;
   align-items: center;
-  justify-content: center;
-  column-gap: 2rem;
-  margin-top: 5rem;
+  gap: 0.5rem;
+}
+
+.nav__links ul li i {
+  color: var(--White);
 }
 
 .nav__menu ul li a {
   font-weight: 600;
-  color: var(--Black);
+  color: var(--White);
   font-size: 0.85rem;
 }
 
@@ -82,8 +93,7 @@
   height: 2px;
   background-color: #8bc6ec;
   background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
-  bottom: 2px;
-  margin-left: 1px;
+  bottom: -5px;
   border-radius: 4px;
   transition: width 0.3s ease-in-out; /* Add transition for a smooth effect */
 }
@@ -96,19 +106,6 @@
   display: flex;
   align-items: center;
   column-gap: 0.35rem;
-}
-
-.nav__background {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  row-gap: 0.5rem;
-  background-color: var(--White);
-  padding: 0.5rem;
-  width: 70px;
-  height: 70px;
-  border-radius: 0.25rem;
 }
 
 .nav__menu ul li i {
@@ -143,10 +140,6 @@
     margin: 1.25rem;
   }
 
-  .nav__close-menu {
-    display: none;
-  }
-
   .nav__menu {
     position: relative;
     width: initial;
@@ -157,26 +150,28 @@
     backdrop-filter: initial;
   }
 
-  .nav__menu ul {
+  .nav__menu ul,
+  .nav__links {
     margin: 0;
   }
 
-  .nav__background {
-    width: initial;
-    height: initial;
-    background-color: transparent;
-  }
-
-  .nav__background i {
-    display: none;
+  .nav__links {
+    padding: 0;
   }
 
   .nav__menu ul li a {
     color: var(--White);
   }
 
+  .nav__links ul {
+    display: flex;
+    gap: 3rem;
+  }
+
   .bx-menu-alt-right,
-  .nav__menu-right {
+  .nav__menu-right,
+  .bx-left-arrow-alt,
+  .nav__links ul li i {
     display: none;
   }
 

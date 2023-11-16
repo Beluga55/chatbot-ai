@@ -1,7 +1,7 @@
 const navMenu = document.querySelector(".nav__menu");
-const closeButton = document.querySelector(".bx-x");
+const closeButton = document.querySelector(".bx-left-arrow-alt");
 const openButton = document.querySelector(".bx-menu-alt-right");
-const signoutBtn = document.getElementById("signout");
+const signoutBtn = document.querySelectorAll(".signout");
 const loginBtn = document.getElementById("login");
 const loginIcon = document.querySelector(".bx-user-circle");
 const header = document.getElementById("header");
@@ -35,8 +35,10 @@ if (closeButton) {
   });
 }
 
-if (signoutBtn) {
-  signoutBtn.addEventListener("click", redirectToMainPage);
+if (signoutBtn.length > 0) {
+  signoutBtn.forEach((element) => {
+    element.addEventListener("click", redirectToMainPage);
+  });
 }
 
 if (loginBtn && loginIcon) {
