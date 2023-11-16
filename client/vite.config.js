@@ -19,6 +19,7 @@ export default defineConfig({
         signup: resolve(root, "signup.html"),
         scriptjs: resolve(root, "script.js"),
         navigation: resolve(root, "navigation.js"),
+        validate: resolve(root, "validateSignup.js")
       },
     },
   },

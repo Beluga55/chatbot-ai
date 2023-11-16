@@ -95,6 +95,32 @@ app.post("/", async (req, res) => {
   }
 });
 
+// Handle form submissions
+app.post("/signup", async (req, res) => {
+  try {
+    const formData = req.body;
+
+    // Assuming your form data structure is simple, adjust accordingly
+    const { username, email, password } = formData;
+
+    // Validate form data
+    if (!username || !email || !password) {
+      return res.status(400).json({ error: "Invalid form data" });
+    }
+
+    // Insert the form data into MongoDB
+    const db = client.db("Chatbot");
+    const collection = db.collection("Users");
+
+    await collection.insertOne({ username, email, password });
+
+    // If you reach this point, the insertion was successful, but no response is sent to the frontend
+  } catch (error) {
+    console.error("Error handling form submission:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.listen(5001, () =>
   console.log("AI server started on http://localhost:5000")
 );

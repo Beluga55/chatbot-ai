@@ -120,6 +120,13 @@ input[type="text"] {
   color: var(--White);
 }
 
+.error__text {
+  color: rgb(247, 69, 69);
+  font-size: 12px;
+  font-weight: 600;
+  display: none;
+}
+
 @media screen and (min-width: 576px) {
   .login__content-wrapper {
     display: grid;

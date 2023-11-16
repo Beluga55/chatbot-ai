@@ -63,16 +63,18 @@
                 <button class="login__btn signup__login-button">Login</button>
               </div>
             </div>
-            <form class="login__form">
+            <form class="login__form" id="signupForm">
               <h2>Signup</h2>
               <div class="username__email">
                 <div class="login__email">
                   <label>Username</label>
                   <input type="text" id="signupUsername" />
+                  <p id="error__username" class="error__text">Username cannot be empty</p>
                 </div>
                 <div class="login__email">
                   <label>Email</label>
                   <input type="email" id="signupEmail" />
+                  <p id="error__email" class="error__text">Email cannot be empty</p>
                 </div>
               </div>
               
@@ -80,14 +82,17 @@
                 <div class="login__password">
                   <label>Password</label>
                   <input type="password" id="signupPassword" />
+                  <p id="error__password" class="error__text">Password cannot be empty</p>
                 </div>
                 <div class="verify__password">
                   <label>Verify Password</label>
                   <input type="password" id="verifyPassword" />
+                  <p id="error__verifyPassword" class="error__text">Verify password cannot be empty</p>
+                  <p id="error__passwordNotMatch" class="error__text">Password Do Not Match</p>
                 </div>
               </div>
 
-              <button id="submit__login-button" class="submit__login-button">
+              <button type="submit" id="submit__signup-button" class="submit__login-button">
                 Signup
               </button>
             </form>
@@ -168,5 +173,6 @@
     </footer>
 
     <script type="module" src="navigation.js"></script>
+    <script type="module" src="validateSignup.js"></script>
   </body>
 </html>
