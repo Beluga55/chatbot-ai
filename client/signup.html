@@ -4,7 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Signup Page - Chatbot AI</title>
-    <link rel="stylesheet" href="css/style.css" />
+
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/login.css" />
   </head>
   <body>
     <header class="header" id="header">
@@ -32,13 +38,63 @@
         </div>
 
         <div class="nav__menu-right">
-          <i class="bx bx-user-circle"></i>
+          <i class="bx bx-user-circle login__btn"></i>
           <i class="bx bx-menu-alt-right"></i>
         </div>
 
-        <button id="login">Login</button>
+        <button class="login__btn" id="login">Login</button>
       </nav>
     </header>
+
+    <main>
+      <!-- One SVG And One Login Form -->
+      <section class="login container">
+        <div class="login__container">
+          <div class="login__content-wrapper">
+            <div class="login__content">
+              <h1>New Here?</h1>
+              <p>
+                Ready to embark on a journey of discovery? Begin your adventure
+                by creating your personalized account. Uncover a world of
+                information tailored just for you!
+              </p>
+              <div class="login__button">
+                <p>Already have an account?</p>
+                <button class="login__btn signup__login-button">Login</button>
+              </div>
+            </div>
+            <form class="login__form">
+              <h2>Signup</h2>
+              <div class="username__email">
+                <div class="login__email">
+                  <label>Username</label>
+                  <input type="text" id="signupUsername" />
+                </div>
+                <div class="login__email">
+                  <label>Email</label>
+                  <input type="email" id="signupEmail" />
+                </div>
+              </div>
+              
+              <div class="password__wrapper">
+                <div class="login__password">
+                  <label>Password</label>
+                  <input type="password" id="signupPassword" />
+                </div>
+                <div class="verify__password">
+                  <label>Verify Password</label>
+                  <input type="password" id="verifyPassword" />
+                </div>
+              </div>
+
+              <button id="submit__login-button" class="submit__login-button">
+                Signup
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <hr class="upper__hr container" />
 
@@ -110,5 +166,7 @@
         <i class="bx bxl-meta"></i>
       </div>
     </footer>
+
+    <script type="module" src="navigation.js"></script>
   </body>
 </html>

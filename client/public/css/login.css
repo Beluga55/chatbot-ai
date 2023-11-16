@@ -61,7 +61,8 @@
   border-radius: 0.25rem;
 }
 
-.signup__button {
+.signup__button,
+.signup__login-button {
   background: var(--White);
   font-weight: 600;
   color: var(--Black);
@@ -72,7 +73,8 @@
 }
 
 .login__email,
-.login__password {
+.login__password,
+.verify__password {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
@@ -85,7 +87,8 @@
 }
 
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="text"] {
   padding: 0.65rem;
   outline: none;
   font-weight: 600;
@@ -115,6 +118,13 @@ input[type="password"] {
 .submit__login-button:hover {
   background: var(--HoverBtn);
   color: var(--White);
+}
+
+.password__wrapper,
+.username__email {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
 }
 
 @media screen and (min-width: 576px) {
