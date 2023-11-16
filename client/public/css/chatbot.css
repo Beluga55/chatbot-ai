@@ -1,10 +1,6 @@
 @import url(header.css);
 @import url(style.css);
 
-body {
-  background: var(--MainBackground);
-}
-
 #app {
   width: 100vw;
   min-height: 100vh;

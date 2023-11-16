@@ -6,33 +6,34 @@ const loginBtn = document.getElementById("login");
 const loginIcon = document.querySelector(".bx-user-circle");
 const header = document.getElementById("header");
 const getStarted = document.getElementById("getStarted");
+const signupBtn = document.querySelector(".signup__button");
 
-function openNavigationMenu() {
+const openNavigationMenu = () => {
   navMenu.classList.add("show");
-}
+};
 
-function closeNavigationMenu() {
+const closeNavigationMenu = () => {
   navMenu.classList.remove("show");
-}
+};
 
-function redirectToMainPage() {
+const redirectToMainPage = () => {
   window.location.href = "index.html";
-}
+};
 
-function redirectToLoginPage() {
+const redirectToLoginPage = () => {
   window.location.href = "login.html";
-}
+};
+
+const redirectToSignupPage = () => {
+  window.location.href = "signup.html";
+};
 
 if (openButton) {
-  openButton.addEventListener("click", () => {
-    openNavigationMenu();
-  });
+  openButton.addEventListener("click", openNavigationMenu);
 }
 
 if (closeButton) {
-  closeButton.addEventListener("click", () => {
-    closeNavigationMenu();
-  });
+  closeButton.addEventListener("click", closeNavigationMenu);
 }
 
 if (signoutBtn.length > 0) {
@@ -46,6 +47,10 @@ if (loginBtn && loginIcon) {
   loginIcon.addEventListener("click", redirectToLoginPage);
 }
 
+if (signupBtn) {
+  signupBtn.addEventListener("click", redirectToSignupPage);
+}
+
 // TESTING
 if (getStarted) {
   getStarted.addEventListener("click", () => {
@@ -54,12 +59,8 @@ if (getStarted) {
 }
 
 /*=============== CHANGE BACKGROUND HEADER ===============*/
-function scrollHeader() {
-  if (this.scrollY >= 50) {
-    header.classList.add("scroll-header");
-  } else {
-    header.classList.remove("scroll-header");
-  }
-}
+const scrollHeader = () => {
+  header.classList.toggle("scroll-header", window.scrollY >= 50);
+};
 
 window.addEventListener("scroll", scrollHeader);

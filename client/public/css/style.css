@@ -16,6 +16,10 @@
   --HoverBtn: hsl(214, 60%, 33%);
 }
 
+body {
+  background-color: var(--MainBackground);
+}
+
 button {
   outline: 0;
   border: 0;

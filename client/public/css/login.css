@@ -1,0 +1,153 @@
+@import url(header.css);
+@import url(footer.css);
+@import url(style.css);
+
+.login__container {
+  padding-top: 8rem;
+  margin-inline: 1.5rem;
+}
+
+.login__content h1 {
+  background: rgb(155, 88, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(155, 88, 255, 1) 0%,
+    rgba(31, 57, 247, 1) 50%,
+    rgba(78, 178, 248, 1) 100%
+  );
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 2rem;
+}
+
+.login__content p,
+.login__content span,
+.login__form h2,
+.login__form label {
+  color: var(--White);
+}
+
+.login__content p {
+  text-align: initial;
+  font-size: 14px;
+  margin: 1rem 0;
+}
+
+.login__button p {
+  font-size: 14px;
+  font-weight: 600;
+  position: relative;
+  z-index: -1;
+  width: fit-content;
+}
+
+.login__button p::before {
+  position: absolute;
+  content: "";
+  width: 50%;
+  height: 2px;
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+  bottom: -5px;
+}
+
+.login__button {
+  margin-top: 1rem;
+}
+
+.login__form {
+  margin-top: 3rem;
+  border-radius: 0.25rem;
+}
+
+.signup__button {
+  background: var(--White);
+  font-weight: 600;
+  color: var(--Black);
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+  transition: background 0.3s ease-in-out, color 0.3 ease-in-out;
+}
+
+.login__email,
+.login__password {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.login__form label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+input[type="email"],
+input[type="password"] {
+  padding: 0.65rem;
+  outline: none;
+  font-weight: 600;
+  background: transparent;
+  border-radius: 0.25rem;
+  border: 2px solid transparent; /* Set border to transparent */
+  border-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+  border-image-slice: 1; /* Ensure the entire border is covered by the gradient */
+  color: var(--White);
+}
+
+.submit__login-button {
+  margin-top: 1.5rem;
+  background: var(--White);
+  padding: 0.65rem 1.5rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  color: var(--Black);
+}
+
+.signup__button,
+.submit__login-button {
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.signup__button:hover,
+.submit__login-button:hover {
+  background: var(--HoverBtn);
+  color: var(--White);
+}
+
+@media screen and (min-width: 576px) {
+  .login__content-wrapper {
+    display: grid;
+    align-items: center;
+    gap: 4rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .login__content {
+    order: 1;
+  }
+
+  .login__form {
+    margin-top: 0;
+  }
+
+  .login__button {
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .login__container {
+    margin-inline: 0;
+  }
+
+  .login__content h1 {
+    font-size: 2.5rem;
+  }
+
+  .login__content-wrapper {
+    height: 45vh;
+  }
+}

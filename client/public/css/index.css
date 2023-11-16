@@ -2,10 +2,6 @@
 @import url(footer.css);
 @import url(style.css);
 
-body {
-  background-color: var(--MainBackground);
-}
-
 .hero__container {
   padding-top: 7.5rem;
   margin-inline: 1.5rem;
