@@ -45,6 +45,8 @@ async function submitLogin(event) {
   var email = document.getElementById("loginEmail").value;
   var password = document.getElementById("loginPassword").value;
 
+  // http://localhost:5001
+
   const response = await fetch("https://chatbot-rreu.onrender.com/login", {
     method: "POST",
     headers: {
@@ -59,6 +61,7 @@ async function submitLogin(event) {
 
     // Store the token in localStorage
     localStorage.setItem("token", result.token);
+    localStorage.setItem("username", result.username);
 
     loginForm.reset();
     if (result.role === "admin") {

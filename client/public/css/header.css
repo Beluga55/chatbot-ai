@@ -14,7 +14,7 @@
   margin: 1.5rem;
 }
 
-.nav__logo {
+.nav__logo div:first-child {
   display: flex;
   align-items: center;
   column-gap: 0.3rem;
@@ -60,9 +60,36 @@
   z-index: 1;
 }
 
+.nav__user {
+  position: absolute;
+  bottom: 0;
+  background: var(--TransparentWhite);
+  width: 100%;
+}
+
+.nav__user-content {
+  margin-inline: 0.75rem;
+  padding: 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav__user-content span {
+  color: var(--White);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.nav__user img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
 .nav__links {
   margin-inline: 1.5rem;
-  padding-top: 5rem;
+  padding-top: 7rem;
 }
 
 .nav__links ul {
@@ -135,6 +162,10 @@
   z-index: -1;
 }
 
+.nav__username {
+  display: none;
+}
+
 @media screen and (min-width: 576px) {
   .nav {
     margin: 1.25rem;
@@ -161,6 +192,20 @@
 
   .nav__menu ul li a {
     color: var(--White);
+  }
+
+  .nav__user {
+    display: none;
+  }
+
+  .nav__username {
+    display: block;
+  }
+
+  .nav__logo .nav__username span {
+    color: var(--White);
+    font-size: 13px;
+    font-weight: 600;
   }
 
   .nav__links ul {

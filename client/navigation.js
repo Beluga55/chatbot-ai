@@ -5,6 +5,7 @@ const signoutBtn = document.querySelectorAll(".signout");
 const loginBtn = document.querySelectorAll(".login__btn");
 const header = document.getElementById("header");
 const signupBtn = document.querySelectorAll(".signup__button");
+const username = document.querySelectorAll(".nav-username");
 
 const openNavigationMenu = () => {
   navMenu.classList.add("show");
@@ -17,6 +18,7 @@ const closeNavigationMenu = () => {
 const redirectToMainPage = () => {
   window.location.href = "index.html";
   localStorage.removeItem("token");
+  localStorage.removeItem("username");
 };
 
 const redirectToLoginPage = () => {
@@ -50,6 +52,13 @@ if (loginBtn.length > 0) {
 if (signupBtn.length > 0) {
   signupBtn.forEach((e) => {
     e.addEventListener("click", redirectToSignupPage);
+  });
+}
+
+if (username.length > 0) {
+  const dataUsername = localStorage.getItem("username");
+  username.forEach((e) => {
+    e.textContent = dataUsername;
   });
 }
 

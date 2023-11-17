@@ -128,9 +128,6 @@ app.post("/signup", async (req, res) => {
       password: hashedPassword,
     });
 
-    // If you reach this point, the insertion was successful, but no response is sent to the frontend
-    console.log(insert);
-
     if (insert.acknowledged === true) {
       res.status(200).send({
         message: "Form submitted successfully",
@@ -187,6 +184,7 @@ app.post("/login", async (req, res) => {
           message: "Login successful as admin",
           token,
           role: admin.role,
+          username: admin.username,
         });
       } else {
         // Passwords do not match
@@ -209,6 +207,7 @@ app.post("/login", async (req, res) => {
         res.json({
           message: "Login successful as user",
           token,
+          username: user.username,
         });
       } else {
         // Passwords do not match
