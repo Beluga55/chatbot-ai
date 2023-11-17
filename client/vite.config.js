@@ -20,7 +20,9 @@ export default defineConfig({
         scriptjs: resolve(root, "script.js"),
         navigation: resolve(root, "navigation.js"),
         validateSignup: resolve(root, "validateSignup.js"),
-        validateLogin: resolve(root, "validateLogin.js")
+        validateLogin: resolve(root, "validateLogin.js"),
+        validateChatBot: resolve(root, "authMiddleware.js"),
+        endPoint: resolve(root, "endPointVerify.js")
       },
     },
   },

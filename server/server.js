@@ -39,7 +39,7 @@ async function initializeMongoClient() {
   }
 }
 
-initializeMongoClient().catch(console.dir);
+initializeMongoClient().catch(console.dir); 
 
 // Express route for handling API requests
 app.post("/", async (req, res) => {

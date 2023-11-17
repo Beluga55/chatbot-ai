@@ -1,4 +1,5 @@
 const loginButton = document.getElementById("submit__login-button");
+const loginForm = document.getElementById("loginForm");
 
 function validateEmail(email) {
   // Regular expression for a simple email validation
@@ -55,11 +56,17 @@ async function submitLogin(event) {
   if (response.ok) {
     const result = await response.json();
     console.log(result.message);
+
+    // Store the token in localStorage
+    localStorage.setItem("token", result.token);
+
+    loginForm.reset();
     window.location.href = "chatbot.html";
   } else {
     // Handle login error
     const errorData = await response.json();
     console.error(errorData.error);
+    document.getElementById("wrong__email-password").style.display = "block";
   }
 }
 
