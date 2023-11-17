@@ -4,6 +4,8 @@ import cors from "cors";
 import * as dotenv from "dotenv";
 import compression from "compression";
 import OpenAI from "openai";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 dotenv.config();
 
@@ -16,6 +18,7 @@ const uri = process.env.MONGODB_KEY;
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
+const secretKey = process.env.SECRET_KEY;
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -108,6 +111,9 @@ app.post("/signup", async (req, res) => {
       return res.status(400).json({ error: "Invalid form data" });
     }
 
+    // Hash the password before storing it
+    const hashedPassword = await bcrypt.hash(password, 10); // 10 is the number of salt rounds
+
     // Insert the form data into MongoDB
     const db = client.db("Chatbot");
     const collection = db.collection("Users");
@@ -116,7 +122,11 @@ app.post("/signup", async (req, res) => {
     await collection.createIndex({ username: 1 }, { unique: true });
     await collection.createIndex({ email: 1 }, { unique: true });
 
-    const insert = await collection.insertOne({ username, email, password });
+    const insert = await collection.insertOne({
+      username,
+      email,
+      password: hashedPassword,
+    });
 
     // If you reach this point, the insertion was successful, but no response is sent to the frontend
     console.log(insert);
@@ -141,6 +151,48 @@ app.post("/signup", async (req, res) => {
       console.error("Error handling form submission:", error);
       res.status(500).send({ error: "Internal Server Error" });
     }
+  }
+});
+
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Insert the form data into MongoDB
+    const db = client.db("Chatbot");
+    const collection = db.collection("Users");
+
+    // Retrieve the user from the database based on the provided email
+    const user = await collection.findOne({ email });
+
+    if (!user) {
+      return res.status(401).send({ error: "Invalid email or password" });
+    }
+
+    // Compare the provided password with the hashed password from the database
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (passwordMatch) {
+      // Passwords match, login successful
+      const token = jwt.sign(
+        { userId: user._id, email: user.email },
+        secretKey,
+        {
+          expiresIn: "1h",
+        }
+      );
+
+      res.json({
+        message: "Login successful",
+        token,
+      });
+    } else {
+      // Passwords do not match
+      res.status(401).json({ error: "Invalid email or password" });
+    }
+  } catch (error) {
+    console.error("Error during login:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 

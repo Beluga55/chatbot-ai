@@ -14,6 +14,8 @@ function validateSignupForm() {
   document.getElementById("error__password").style.display = "none";
   document.getElementById("error__verifyPassword").style.display = "none";
   document.getElementById("error__passwordNotMatch").style.display = "none";
+  document.getElementById("error__passwordLength").style.display = "none";
+  document.getElementById("error__uppercase").style.display = "none"; // Add new error display for uppercase character
 
   // Get form values
   var username = document.getElementById("signupUsername").value;
@@ -40,6 +42,13 @@ function validateSignupForm() {
   // Validate password
   if (password.trim() === "") {
     document.getElementById("error__password").style.display = "block";
+    return false;
+  } else if (password.length < 8) {
+    document.getElementById("error__passwordLength").style.display = "block";
+    return false;
+  } else if (!/[A-Z]/.test(password)) {
+    // Check if there is at least one uppercase character
+    document.getElementById("error__uppercase").style.display = "block";
     return false;
   }
 
@@ -73,7 +82,9 @@ async function submitForm(event) {
   var email = document.getElementById("signupEmail").value;
   var password = document.getElementById("signupPassword").value;
 
-  const response = await fetch("https://chatbot-rreu.onrender.com/signup", {
+  // http://localhost:5001
+
+  const response = await fetch("http://localhost:5001/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

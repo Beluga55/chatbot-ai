@@ -68,12 +68,20 @@
               <div class="login__email">
                 <label>Email</label>
                 <input type="email" id="loginEmail" />
+                <p id="error__email" class="error__text">
+                  Email cannot be empty
+                </p>
               </div>
               <div class="login__password">
                 <label>Password</label>
                 <input type="password" id="loginPassword" />
+                <p id="error__password" class="error__text">
+                  Password cannot be empty
+                </p>
               </div>
-              <button id="submit__login-button" class="submit__login-button">Login</button>
+              <button type="submit" id="submit__login-button" class="submit__login-button">
+                Login
+              </button>
             </form>
           </div>
         </div>
@@ -151,6 +159,7 @@
       </div>
     </footer>
 
+    <script type="module" src="validateLogin.js"></script>
     <script type="module" src="navigation.js"></script>
   </body>
 </html>

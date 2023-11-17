@@ -4,8 +4,7 @@ const openButton = document.querySelector(".bx-menu-alt-right");
 const signoutBtn = document.querySelectorAll(".signout");
 const loginBtn = document.querySelectorAll(".login__btn");
 const header = document.getElementById("header");
-const getStarted = document.getElementById("getStarted");
-const signupBtn = document.querySelector(".signup__button");
+const signupBtn = document.querySelectorAll(".signup__button");
 
 const openNavigationMenu = () => {
   navMenu.classList.add("show");
@@ -47,14 +46,9 @@ if (loginBtn.length > 0) {
   });
 }
 
-if (signupBtn) {
-  signupBtn.addEventListener("click", redirectToSignupPage);
-}
-
-// TESTING
-if (getStarted) {
-  getStarted.addEventListener("click", () => {
-    window.location.href = "chatbot.html";
+if (signupBtn.length > 0) {
+  signupBtn.forEach((e) => {
+    e.addEventListener("click", redirectToSignupPage);
   });
 }
 
