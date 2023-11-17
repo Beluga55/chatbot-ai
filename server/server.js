@@ -39,7 +39,7 @@ async function initializeMongoClient() {
   }
 }
 
-initializeMongoClient().catch(console.dir); 
+initializeMongoClient().catch(console.dir);
 
 // Express route for handling API requests
 app.post("/", async (req, res) => {
@@ -161,34 +161,59 @@ app.post("/login", async (req, res) => {
     // Insert the form data into MongoDB
     const db = client.db("Chatbot");
     const collection = db.collection("Users");
+    const collectionAdmin = db.collection("Admin");
 
-    // Retrieve the user from the database based on the provided email
+    // Retrieve the user and admin from the respective collections based on the provided email
     const user = await collection.findOne({ email });
+    const admin = await collectionAdmin.findOne({ email });
 
-    if (!user) {
+    if (!user && !admin) {
       return res.status(401).send({ error: "Invalid email or password" });
-    }
+    } else if (admin) {
+      // Compare the provided password with the hashed password from the Admin collection
+      const passwordMatch = await bcrypt.compare(password, admin.password);
 
-    // Compare the provided password with the hashed password from the database
-    const passwordMatch = await bcrypt.compare(password, user.password);
+      if (passwordMatch) {
+        // Passwords match, login successful
+        const token = jwt.sign(
+          { userId: admin._id, email: admin.email },
+          secretKey,
+          {
+            expiresIn: "1h",
+          }
+        );
 
-    if (passwordMatch) {
-      // Passwords match, login successful
-      const token = jwt.sign(
-        { userId: user._id, email: user.email },
-        secretKey,
-        {
-          expiresIn: "1h",
-        }
-      );
+        res.json({
+          message: "Login successful as admin",
+          token,
+          role: admin.role,
+        });
+      } else {
+        // Passwords do not match
+        res.status(401).json({ error: "Invalid email or password" });
+      }
+    } else if (user) {
+      // Compare the provided password with the hashed password from the Users collection
+      const passwordMatch = await bcrypt.compare(password, user.password);
 
-      res.json({
-        message: "Login successful",
-        token,
-      });
-    } else {
-      // Passwords do not match
-      res.status(401).json({ error: "Invalid email or password" });
+      if (passwordMatch) {
+        // Passwords match, login successful
+        const token = jwt.sign(
+          { userId: user._id, email: user.email },
+          secretKey,
+          {
+            expiresIn: "1h",
+          }
+        );
+
+        res.json({
+          message: "Login successful as user",
+          token,
+        });
+      } else {
+        // Passwords do not match
+        res.status(401).json({ error: "Invalid email or password" });
+      }
     }
   } catch (error) {
     console.error("Error during login:", error);
@@ -197,5 +222,5 @@ app.post("/login", async (req, res) => {
 });
 
 app.listen(5001, () =>
-  console.log("AI server started on http://localhost:5000")
+  console.log("AI server started on http://localhost:5001")
 );

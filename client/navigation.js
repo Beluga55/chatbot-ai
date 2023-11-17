@@ -16,6 +16,7 @@ const closeNavigationMenu = () => {
 
 const redirectToMainPage = () => {
   window.location.href = "index.html";
+  localStorage.removeItem("token");
 };
 
 const redirectToLoginPage = () => {

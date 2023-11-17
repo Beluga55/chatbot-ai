@@ -61,7 +61,12 @@ async function submitLogin(event) {
     localStorage.setItem("token", result.token);
 
     loginForm.reset();
-    window.location.href = "chatbot.html";
+    if (result.role === "admin") {
+      window.location.href = "admin.html";
+      localStorage.setItem("role", result.role);
+    } else {
+      window.location.href = "chatbot.html";
+    }
   } else {
     // Handle login error
     const errorData = await response.json();
