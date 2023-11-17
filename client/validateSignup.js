@@ -66,6 +66,8 @@ async function submitForm(event) {
     return;
   }
 
+  event.preventDefault();
+
   // Get form values
   var username = document.getElementById("signupUsername").value;
   var email = document.getElementById("signupEmail").value;
@@ -78,6 +80,26 @@ async function submitForm(event) {
     },
     body: JSON.stringify({ username, email, password }),
   });
+
+  if (response.ok) {
+    const result = await response.json();
+    console.log(result.message);
+
+    document.getElementById("duplicate__username").style.display = "none";
+    document.getElementById("duplicate__email").style.display = "none";
+    document.querySelector(".signup__success-overlay").classList.add("show");
+
+    signupForm.reset();
+  } else {
+    const errorData = await response.json();
+    console.log(errorData.error);
+
+    if (response.status === 400) {
+      // Handle duplicate entry error
+      document.getElementById("duplicate__username").style.display = "block";
+      document.getElementById("duplicate__email").style.display = "block";
+    }
+  }
 }
 
 signupButton.addEventListener("click", function (e) {

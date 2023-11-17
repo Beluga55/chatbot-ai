@@ -127,6 +127,72 @@ input[type="text"] {
   display: none;
 }
 
+.signup__success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.signup__success-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.signup__overlay-content {
+  margin-inline: 1.5rem;
+  background: var(--TransparentWhite);
+  padding: 2rem 1.5rem 2.5rem;
+  border-radius: 0.25rem;
+  width: 400px;
+}
+
+.signup__overlay-content h2 {
+  background: rgb(155, 88, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(155, 88, 255, 1) 0%,
+    rgb(91, 109, 240) 50%,
+    rgba(78, 178, 248, 1) 100%
+  );
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 1.75rem;
+}
+
+.signup__overlay-content p {
+  color: var(--White);
+  font-size: 14px;
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.signup__success-overlay a {
+  background: var(--White);
+  color: var(--Black);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.25rem;
+  transition: 0.3s ease-in-out;
+}
+
+.signup__success-overlay a:hover {
+  background: var(--HoverBtn);
+  color: var(--White);
+}
+
 @media screen and (min-width: 576px) {
   .login__content-wrapper {
     display: grid;
@@ -165,5 +231,9 @@ input[type="text"] {
 
   .login__content-wrapper {
     height: 45vh;
+  }
+
+  .signup__overlay-content h2 {
+    font-size: 2rem;
   }
 }

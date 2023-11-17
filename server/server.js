@@ -116,12 +116,31 @@ app.post("/signup", async (req, res) => {
     await collection.createIndex({ username: 1 }, { unique: true });
     await collection.createIndex({ email: 1 }, { unique: true });
 
-    await collection.insertOne({ username, email, password });
+    const insert = await collection.insertOne({ username, email, password });
 
     // If you reach this point, the insertion was successful, but no response is sent to the frontend
+    console.log(insert);
+
+    if (insert.acknowledged === true) {
+      res.status(200).send({
+        message: "Form submitted successfully",
+      });
+    } else {
+      // Insertion failed
+      res.status(500).json({ error: "Failed to insert data" });
+    }
   } catch (error) {
     console.error("Error handling form submission:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+
+    if (error.code === 11000) {
+      return res
+        .status(400)
+        .send({ error: "Email or username is already taken" });
+    } else {
+      // Handle other errors
+      console.error("Error handling form submission:", error);
+      res.status(500).send({ error: "Internal Server Error" });
+    }
   }
 });
 
