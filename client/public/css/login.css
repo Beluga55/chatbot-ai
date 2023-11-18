@@ -69,7 +69,7 @@
   padding: 0.65rem 1.25rem;
   border-radius: 0.25rem;
   margin-top: 1rem;
-  transition: background 0.3s ease-in-out, color 0.3 ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 .login__email,
@@ -115,6 +115,7 @@ input[type="text"] {
 }
 
 .signup__button:hover,
+.signup__login-button:hover,
 .submit__login-button:hover {
   background: var(--HoverBtn);
   color: var(--White);

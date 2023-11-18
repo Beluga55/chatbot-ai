@@ -27,17 +27,15 @@
         <div class="nav__menu">
           <i class="bx bx-left-arrow-alt"></i>
 
-          <div class="nav__links">
-            <ul>
-              <li><i class="bx bxs-home"></i><a href="index.html">Home</a></li>
-              <li>
-                <i class="bx bxs-info-circle"></i><a href="about.html">About</a>
-              </li>
-              <li>
-                <i class="bx bxs-chat"></i>
-                <a href="faq.html">FAQs</a>
-              </li>
-            </ul>
+          <!-- Store The Title Here -->
+          <div class="nav__title">
+            <div class="new__chat">
+              <div>
+                <i class="bx bx-chat"></i>
+                <p>New Chat</p>
+              </div>
+            </div>
+            <div class="nav__title-content"></div>
           </div>
 
           <div class="nav__user">
@@ -45,15 +43,16 @@
               <img src="assets/empty-user.png" alt="empty-user" />
               <span class="nav-username"></span>
             </div>
+            <div>
+              <i class="bx bx-trash"></i>
+              <i class="bx bx-log-out signout"></i>
+            </div>
           </div>
         </div>
 
         <div class="nav__menu-right">
-          <i class="bx bx-log-out signout"></i>
           <i class="bx bx-menu-alt-right"></i>
         </div>
-
-        <button id="signout" class="signout">Signout</button>
       </nav>
     </header>
 

@@ -19,6 +19,7 @@ const redirectToMainPage = () => {
   window.location.href = "index.html";
   localStorage.removeItem("token");
   localStorage.removeItem("username");
+  localStorage.removeItem("randomID");
 };
 
 const redirectToLoginPage = () => {
