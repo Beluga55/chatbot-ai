@@ -3,7 +3,7 @@ import user from "./assets/user.svg";
 
 document.addEventListener("DOMContentLoaded", async function () {
   // Make a request to your server endpoint
-  const response = await fetch("http://localhost:5001/getAllTitles", {
+  const response = await fetch("https://chatbot-rreu.onrender.com/getAllTitles", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
