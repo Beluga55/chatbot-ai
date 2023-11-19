@@ -122,6 +122,12 @@
   gap: 0.5rem;
 }
 
+.nav__user-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .nav__user-content span {
   color: var(--White);
   font-weight: 600;

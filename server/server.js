@@ -207,10 +207,14 @@ app.post("/signup", async (req, res) => {
     await collection.createIndex({ username: 1 }, { unique: true });
     await collection.createIndex({ email: 1 }, { unique: true });
 
+    // Specify the default role (in this case, 'user')
+    const defaultRole = "user";
+
     const insert = await collection.insertOne({
       username,
       email,
       password: hashedPassword,
+      role: defaultRole,
     });
 
     if (insert.acknowledged === true) {
@@ -243,61 +247,46 @@ app.post("/login", async (req, res) => {
     // Insert the form data into MongoDB
     const db = client.db("Chatbot");
     const collection = db.collection("Users");
-    const collectionAdmin = db.collection("Admin");
 
-    // Retrieve the user and admin from the respective collections based on the provided email
+    // Retrieve the user based on the provided email
     const user = await collection.findOne({ email });
-    const admin = await collectionAdmin.findOne({ email });
 
-    if (!user && !admin) {
+    if (!user) {
       return res.status(401).send({ error: "Invalid email or password" });
-    } else if (admin) {
-      // Compare the provided password with the hashed password from the Admin collection
-      const passwordMatch = await bcrypt.compare(password, admin.password);
+    }
 
-      if (passwordMatch) {
-        // Passwords match, login successful
-        const token = jwt.sign(
-          { userId: admin._id, email: admin.email },
-          secretKey,
-          {
-            expiresIn: "1h",
-          }
-        );
+    // Compare the provided password with the hashed password from the Users collection
+    const passwordMatch = await bcrypt.compare(password, user.password);
 
+    if (passwordMatch) {
+      // Passwords match, login successful
+      const token = jwt.sign(
+        { userId: user._id, email: user.email },
+        secretKey,
+        {
+          expiresIn: "1h",
+        }
+      );
+
+      if (user.role === "admin") {
+        // If the user is an admin, include admin-specific details in the response
         res.json({
           message: "Login successful as admin",
           token,
-          role: admin.role,
-          username: admin.username,
+          role: user.role,
+          username: user.username,
         });
       } else {
-        // Passwords do not match
-        res.status(401).json({ error: "Invalid email or password" });
-      }
-    } else if (user) {
-      // Compare the provided password with the hashed password from the Users collection
-      const passwordMatch = await bcrypt.compare(password, user.password);
-
-      if (passwordMatch) {
-        // Passwords match, login successful
-        const token = jwt.sign(
-          { userId: user._id, email: user.email },
-          secretKey,
-          {
-            expiresIn: "1h",
-          }
-        );
-
+        // If the user is not an admin, include regular user details in the response
         res.json({
           message: "Login successful as user",
           token,
           username: user.username,
         });
-      } else {
-        // Passwords do not match
-        res.status(401).json({ error: "Invalid email or password" });
       }
+    } else {
+      // Passwords do not match
+      res.status(401).json({ error: "Invalid email or password" });
     }
   } catch (error) {
     console.error("Error during login:", error);
@@ -347,7 +336,6 @@ app.post("/getAllTitles", async (req, res) => {
   }
 });
 
-// Tomorrow fixed randomID
 app.delete("/deleteAllData", async (req, res) => {
   const username = req.body.username;
   try {
@@ -355,11 +343,27 @@ app.delete("/deleteAllData", async (req, res) => {
     const collection = db.collection("Title");
     const converHistory = db.collection("conversationHistory");
 
-    // Delete all documents in the "Title" collection
-    const result = await collection.deleteMany({});
-    await converHistory.deleteMany({});
+    // Find documents in the "Title" collection with the given username
+    const titleDocuments = await collection
+      .find({ username: username })
+      .toArray();
 
-    console.log(result.deletedCount, "documents deleted");
+    // Extract randomIDs from the Title documents
+    const randomIDs = titleDocuments.map((doc) => doc.randomID);
+
+    // Delete documents in the "converHistory" collection where randomID matches
+    const resultConverHistory = await converHistory.deleteMany({
+      randomID: { $in: randomIDs },
+    });
+
+    // Delete all documents in the "Title" collection
+    const result = await collection.deleteMany({ username: username });
+
+    console.log(result.deletedCount, "documents deleted from Title collection");
+    console.log(
+      resultConverHistory.deletedCount,
+      "documents deleted from converHistory collection"
+    );
 
     res.status(204).end(); // No content success response
   } catch (error) {

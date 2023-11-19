@@ -3,15 +3,18 @@ import user from "./assets/user.svg";
 
 document.addEventListener("DOMContentLoaded", async function () {
   // Make a request to your server endpoint
-  const response = await fetch("https://chatbot-rreu.onrender.com/getAllTitles", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      username: localStorage.getItem("username"),
-    }),
-  });
+  const response = await fetch(
+    "https://chatbot-rreu.onrender.com/getAllTitles",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: localStorage.getItem("username"),
+      }),
+    }
+  );
 
   if (response.ok) {
     const data = await response.json();
@@ -42,7 +45,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 });
 
-// Delete Document From Database
+// Delete Document From Database https://chatbot-rreu.onrender.com/
 const deleteIcon = document.querySelector(".bx-trash");
 
 deleteIcon.addEventListener("click", async function () {
@@ -55,6 +58,9 @@ deleteIcon.addEventListener("click", async function () {
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          username: localStorage.getItem("username"),
+        }),
       }
     );
 
