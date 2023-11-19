@@ -62,6 +62,7 @@ app.post("/", async (req, res) => {
     // Include the main OpenAI logic here
     async function main() {
       let botResponse = "";
+      let botTitleResponse = "";
 
       const completion = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
@@ -104,14 +105,19 @@ app.post("/", async (req, res) => {
               content: `Generate a concise title based on the following conversation:\n\nUser Prompt: ${userPrompt}\n`,
             },
           ],
+          stream: true,
           temperature: 0.7,
           max_tokens: 20, // Adjust the value to control the length of the title
         });
 
+        for await (const chunk of titleGenerationResponse) {
+          if (chunk.choices[0].delta.content !== undefined) {
+            botTitleResponse += chunk.choices[0].delta.content;
+          }
+        }
+
         // Extract the generated title from the API response
-        const generatedTitle =
-          titleGenerationResponse.choices[0]?.message?.content ||
-          "No title generated";
+        const generatedTitle = botTitleResponse;
 
         const randomID = uuidv4();
 

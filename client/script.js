@@ -211,8 +211,6 @@ const handleSubmit = async (e) => {
 
   const getRandomID = chatContainer.getAttribute("class");
 
-  console.log(status);
-
   const data = new FormData(form);
   const userPrompt = data.get("prompt");
 
