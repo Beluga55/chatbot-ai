@@ -125,7 +125,7 @@
 .nav__user-icon {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
 .nav__user-content span {
@@ -210,6 +210,10 @@
   padding: 0.75rem 1.5rem;
   font-size: 13px;
   transition: 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .title:hover {

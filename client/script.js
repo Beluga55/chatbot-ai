@@ -35,12 +35,13 @@ document.addEventListener("DOMContentLoaded", async function () {
         // Set a unique id for each paragraph based on the index
         paragraph.id = `${titleAndRandomID.randomID}`;
 
+        const tripleDot = document.createElement("i");
+        tripleDot.classList.add("bx");
+        tripleDot.classList.add("bxs-trash-alt");
+
         navTitleContent.appendChild(paragraph);
+        paragraph.appendChild(tripleDot);
       });
-    }
-  } else {
-    if (response.status === 404) {
-      console.log("No Titles Found");
     }
   }
 });
@@ -65,7 +66,6 @@ deleteIcon.addEventListener("click", async function () {
     );
 
     if (response.ok) {
-      console.log("All data deleted successfully");
       const navTitleContent = document.querySelector(".nav__title-content");
       navTitleContent.innerHTML = "";
       chatContainer.innerHTML = "";
@@ -124,6 +124,43 @@ parentContainer.addEventListener("click", async function (event) {
       console.error(
         `Server returned ${response.status}: ${await response.text()}`
       );
+    }
+  } else if (
+    event.target.classList.contains("bx") &&
+    event.target.classList.contains("bxs-trash-alt")
+  ) {
+    // If the clicked element is the trash icon
+    const titleElement = event.target.closest(".title");
+    // console.log(titleElement);
+    if (titleElement) {
+      const titleID = titleElement.id;
+
+      titleElement.remove();
+
+      const response = await fetch(
+        "https://chatbot-rreu.onrender.com/delOneConver",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            titleID: titleID,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        await response.json();
+
+        chatContainer.innerHTML = "";
+        chatContainer.classList.value = "";
+        navMenu.classList.remove("show");
+      } else {
+        console.error(
+          `Server returned ${response.status}: ${await response.text()}`
+        );
+      }
     }
   }
 });
@@ -255,11 +292,15 @@ const handleSubmit = async (e) => {
 
     if (data.status === false) {
       const paragraph = document.createElement("p");
+      const tripleDot = document.createElement("i");
       paragraph.classList.add("title");
+      tripleDot.classList.add("bx");
+      tripleDot.classList.add("bxs-trash-alt");
       paragraph.id = `${data.randomID}`;
       chatContainer.classList.add(`${data.randomID}`);
       paragraph.textContent = data.generatedTitle || "Default Title";
       navTitleContent.appendChild(paragraph);
+      paragraph.appendChild(tripleDot);
     }
 
     typeText(messageDiv, botResponse);

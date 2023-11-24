@@ -334,7 +334,7 @@ app.post("/getAllTitles", async (req, res) => {
         res.json({ titlesAndRandomIDs });
       }
     } else {
-      res.status(404).json({ error: "No titles found" });
+      res.status(200).json({ titlesAndRandomIDs: [] });
     }
   } catch (error) {
     console.error(error);
@@ -394,6 +394,38 @@ app.post("/retrieveHistory", async (req, res) => {
       const responses = historyDocument.responses;
 
       res.json({ randomID: randomID, prompts, responses });
+    } else {
+      res
+        .status(404)
+        .json({ error: "Random ID not found in Title or conversationHistory" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.post("/delOneConver", async (req, res) => {
+  try {
+    const randomID = req.body.titleID;
+
+    const db = client.db("Chatbot");
+    const titleCollection = db.collection("Title");
+    const historyCollection = db.collection("conversationHistory");
+
+    const titleDocument = await titleCollection.findOne({ randomID });
+    const historyDocument = await historyCollection.findOne({ randomID });
+
+    if (titleDocument && historyDocument) {
+      // Delete document from Title collection
+      await titleCollection.deleteOne({ randomID });
+
+      // Delete document from conversationHistory collection
+      await historyCollection.deleteOne({
+        randomID,
+      });
+
+      res.status(200).json({ success: true });
     } else {
       res
         .status(404)

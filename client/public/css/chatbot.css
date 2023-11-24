@@ -139,20 +139,27 @@ form img {
   padding: 10px;
 }
 
+.nav__menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100vh;
+  background: transparent;
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  z-index: 1;
+}
+
+.bxs-trash-alt {
+  font-size: 1rem;
+}
+
 @media screen and (min-width: 576px) {
   .nav__menu {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100vh;
-    background: transparent;
-    -webkit-backdrop-filter: blur(100px);
-    backdrop-filter: blur(100px);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-    z-index: 1;
     width: 250px;
   }
 
