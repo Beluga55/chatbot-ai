@@ -48,8 +48,16 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 // Delete Document From Database https://chatbot-rreu.onrender.com/
 const deleteIcon = document.querySelector(".bx-trash");
+const overflowMenu = document.querySelector(".overflow__delete-menu");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
 
-deleteIcon.addEventListener("click", async function () {
+deleteIcon.addEventListener("click", () => {
+  navMenu.classList.remove("show");
+  overflowMenu.classList.add("show");
+});
+
+yesBtn.addEventListener("click", async function () {
   navMenu.classList.remove("show");
   try {
     const response = await fetch(
@@ -70,6 +78,7 @@ deleteIcon.addEventListener("click", async function () {
       navTitleContent.innerHTML = "";
       chatContainer.innerHTML = "";
       chatContainer.classList.value = "";
+      overflowMenu.classList.remove("show");
     } else {
       console.error(
         `Server returned ${response.status}: ${await response.text()}`
@@ -78,6 +87,10 @@ deleteIcon.addEventListener("click", async function () {
   } catch (error) {
     console.error(error);
   }
+});
+
+noBtn.addEventListener("click", () => {
+  overflowMenu.classList.remove("show");
 });
 
 // Click Title to retrieve prompts and response
