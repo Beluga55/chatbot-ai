@@ -13,7 +13,7 @@
   flex: 1;
   width: 100%;
   max-height: 81vh;
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
   overflow-y: scroll;
 
   display: flex;
@@ -25,6 +25,14 @@
 
   scroll-behavior: smooth;
   margin-top: 5rem;
+}
+
+.nav__title {
+  margin-top: 5rem;
+}
+
+.nav__menu {
+  overflow-y: auto;
 }
 
 /* hides scrollbar */
@@ -288,6 +296,10 @@ form img {
     display: block;
   }
 
+  .nav__title {
+    margin-top: 1.5rem;
+  }
+
   .nav__menu {
     position: relative;
     opacity: 1;
@@ -298,6 +310,7 @@ form img {
 
   .nav__header {
     margin: 1.5rem 0;
+    z-index: 1;
   }
 
   .nav {
@@ -313,15 +326,12 @@ form img {
     width: 100%;
     max-width: 1024px;
     position: relative;
+    height: 100vh;
   }
 
   .container {
     max-width: initial;
     margin-inline: initial;
-  }
-
-  .nav__header {
-    z-index: 1;
   }
 
   .nav__menu-right,
@@ -332,5 +342,7 @@ form img {
 
   .nav__wrapper {
     padding-right: 4rem;
+    overflow-y: auto;
+    height: 100vh;
   }
 }
