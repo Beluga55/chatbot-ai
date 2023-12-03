@@ -297,7 +297,7 @@ form img {
   .nav__wrapper {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100svh;
     padding-right: 4rem;
   }
 
