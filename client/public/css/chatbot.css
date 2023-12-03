@@ -261,6 +261,10 @@ form img {
   color: var(--Black);
 }
 
+.bot__mistakes {
+  display: none;
+}
+
 @media screen and (min-width: 576px) {
   .nav__menu-right,
   .bx-menu-alt-right,
@@ -363,5 +367,15 @@ form img {
   form {
     position: relative;
     margin-top: 1.5rem;
+    border-radius: 0.5rem;
+  }
+
+  .bot__mistakes {
+    text-align: center;
+    color: var(--White);
+    font-size: 12px;
+    font-weight: 600;
+    margin: 0.5rem 0;
+    display: block;
   }
 }
