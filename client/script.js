@@ -160,6 +160,13 @@ parentContainer.addEventListener("click", async function (event) {
     const randomID = event.target.id;
     navMenu.classList.remove("show");
 
+    // Remove active__title class from all titles
+    const allTitles = document.querySelectorAll(".title");
+    allTitles.forEach((title) => title.classList.remove("active__title"));
+
+    // Add active__title class to the clicked title
+    event.target.classList.add("active__title");
+
     const response = await fetch(
       "https://chatbot-rreu.onrender.com/retrieveHistory",
       {

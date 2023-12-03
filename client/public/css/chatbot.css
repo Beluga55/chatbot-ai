@@ -256,6 +256,11 @@ form img {
   background: none;
 }
 
+.active__title {
+  background: var(--White);
+  color: var(--Black);
+}
+
 @media screen and (min-width: 576px) {
   .nav__menu-right,
   .bx-menu-alt-right,

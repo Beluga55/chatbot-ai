@@ -102,7 +102,7 @@ app.post("/", async (req, res) => {
             { role: "system", content: "You are a helpful assistant." },
             {
               role: "user",
-              content: `Generate a concise title based on the following conversation:\n\nUser Prompt: ${userPrompt}\n`,
+              content: `Generate a concise title with less than 10 words based on the following conversation:\n\nUser Prompt: ${userPrompt}\n`,
             },
           ],
           stream: true,

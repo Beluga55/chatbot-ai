@@ -95,22 +95,28 @@
 @media screen and (min-width: 576px) {
   #signout-btn {
     display: block;
+    transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
+  }
+
+  #signout-btn:hover {
+    color: var(--White);
+    background: var(--HoverBtn);
+  }
+
+  .service {
+    margin-top: 8rem;
+    margin-bottom: 5rem;
+    min-height: 60vh;
   }
 
   .service__container {
     max-width: 768px;
+    padding-top: 0;
+    margin: 0 1.5rem;
   }
 
   .service__content-container {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .service {
-    height: 100vh;
-  }
-
-  .service__container {
-    padding-top: 0;
   }
 }
 
