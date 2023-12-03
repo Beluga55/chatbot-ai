@@ -3,7 +3,7 @@
 
 #app {
   width: 100vw;
-  min-height: 100vh;
+  min-height: 100svh;
   background: var(--MainBackground);
   display: flex;
   flex-direction: column;
@@ -148,7 +148,7 @@ form img {
   top: 0;
   left: 0;
   width: 60%;
-  height: 100vh;
+  height: 100svh;
   background: transparent;
   -webkit-backdrop-filter: blur(100px);
   backdrop-filter: blur(100px);
