@@ -27,7 +27,7 @@
   margin-top: 5rem;
 }
 
-.nav__title {
+.new__chat {
   margin-top: 5rem;
 }
 
@@ -164,6 +164,8 @@ form img {
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   z-index: 1;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 .bxs-trash-alt {
@@ -292,11 +294,18 @@ form img {
     display: block;
   }
 
+  .nav__wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding-right: 4rem;
+  }
+
   .nav__username {
     display: block;
   }
 
-  .nav__title {
+  .new__chat {
     margin-top: 1.5rem;
   }
 
@@ -311,6 +320,12 @@ form img {
   .nav__header {
     margin: 1.5rem 0;
     z-index: 1;
+    position: relative;
+  }
+
+  #chat_container {
+    margin-top: 0;
+    padding-bottom: 0;
   }
 
   .nav {
@@ -325,8 +340,8 @@ form img {
   #app {
     width: 100%;
     max-width: 1024px;
-    position: relative;
-    height: 100vh;
+    min-height: 0px;
+    flex-grow: 1;
   }
 
   .container {
@@ -340,9 +355,8 @@ form img {
     display: none;
   }
 
-  .nav__wrapper {
-    padding-right: 4rem;
-    overflow-y: auto;
-    height: 100vh;
+  form {
+    position: relative;
+    margin-top: 1.5rem;
   }
 }
