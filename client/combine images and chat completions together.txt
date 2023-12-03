@@ -1,0 +1,5 @@
+1) First code the two buttons in the navigation menu
+2) We need validation for both button (if classList.contains("gpt-3.5") execute the handleSubmit code else execute the image generation to the backend
+3) Send a request to the backend with prompt, the prompt is the text that user enter (code at the handleSubmit there)
+4) Code the backend to generate a images for openai, store the images into the database (not sure how to do it)
+5) if successfully retrieve the images to the frontend

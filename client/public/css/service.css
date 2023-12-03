@@ -5,11 +5,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
 }
 
 .service__container {
-  padding-top: 5rem;
+  padding-top: 8rem;
   margin-inline: 1.5rem;
 }
 
@@ -99,12 +98,19 @@
   }
 
   .service__container {
-    padding: 0;
     max-width: 768px;
   }
 
   .service__content-container {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .service {
+    height: 100vh;
+  }
+
+  .service__container {
+    padding-top: 0;
   }
 }
 
