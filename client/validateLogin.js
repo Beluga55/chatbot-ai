@@ -57,18 +57,18 @@ async function submitLogin(event) {
 
   if (response.ok) {
     const result = await response.json();
-    console.log(result.message);
 
     // Store the token in localStorage
     localStorage.setItem("token", result.token);
     localStorage.setItem("username", result.username);
+    localStorage.setItem("role", result.role);
 
     loginForm.reset();
+
     if (result.role === "admin") {
       window.location.href = "admin.html";
-      localStorage.setItem("role", result.role);
     } else {
-      window.location.href = "chatbot.html";
+      window.location.href = "selectService.html";
     }
   } else {
     // Handle login error

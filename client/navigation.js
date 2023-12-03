@@ -6,6 +6,7 @@ const loginBtn = document.querySelectorAll(".login__btn");
 const header = document.getElementById("header");
 const signupBtn = document.querySelectorAll(".signup__button");
 const username = document.querySelectorAll(".nav-username");
+const serviceContainers = document.querySelectorAll(".service__content");
 
 const openNavigationMenu = () => {
   navMenu.classList.add("show");
@@ -19,7 +20,7 @@ const redirectToMainPage = () => {
   window.location.href = "index.html";
   localStorage.removeItem("token");
   localStorage.removeItem("username");
-  localStorage.removeItem("randomID");
+  localStorage.removeItem("role");
 };
 
 const redirectToLoginPage = () => {
@@ -69,3 +70,21 @@ const scrollHeader = () => {
 };
 
 window.addEventListener("scroll", scrollHeader);
+
+// REDIRECT TO CHATBOT OR IMAGE GENERATOR
+serviceContainers.forEach(function (container) {
+  container.addEventListener("click", function () {
+    // Get the service name from the clicked container
+    const serviceName = container.querySelector("h2").innerText;
+    handleClick(serviceName);
+  });
+});
+
+// Function to handle the click event
+function handleClick(serviceName) {
+  if (serviceName === "GPT-3.5-Turbo") {
+    window.location.href = "chatbot.html";
+  } else if (serviceName === "DALL-E 2") {
+    window.location.href = "dalle-2.html";
+  }
+}

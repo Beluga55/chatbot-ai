@@ -287,6 +287,7 @@ app.post("/login", async (req, res) => {
         res.json({
           message: "Login successful as user",
           token,
+          role: user.role,
           username: user.username,
         });
       }

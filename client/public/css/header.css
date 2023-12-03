@@ -271,10 +271,6 @@
     color: var(--White);
   }
 
-  .nav__username {
-    display: block;
-  }
-
   .nav__logo .nav__username span {
     color: var(--White);
     font-size: 13px;

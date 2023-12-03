@@ -1,0 +1,115 @@
+@import url(header.css);
+@import url(style.css);
+
+.service {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.service__container {
+  padding-top: 5rem;
+  margin-inline: 1.5rem;
+}
+
+.service__container h1 {
+  background: rgb(155, 88, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(155, 88, 255, 1) 0%,
+    rgb(91, 109, 240) 50%,
+    rgba(78, 178, 248, 1) 100%
+  );
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 2rem;
+}
+
+.service__content-container {
+  margin-top: 2rem;
+  display: grid;
+  gap: 2rem;
+}
+
+.service__content {
+  background: var(--TransparentWhite);
+  padding: 1.5rem;
+  border-radius: 0.25rem;
+  transition: background 0.3s ease-in-out;
+}
+
+.service__content:hover {
+  background: var(--White);
+}
+
+.service__content:hover h2,
+.service__content:hover p {
+  color: var(--Black);
+}
+
+.service__content h2 {
+  color: var(--White);
+  transition: color 0.3s ease-in-out;
+  position: relative;
+  width: fit-content;
+}
+
+.service__content h2::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+  bottom: -5px;
+  border-radius: 0.25rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.service__content:hover h2::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+.service__content p {
+  color: var(--White);
+  font-size: 14px;
+  margin-top: 1rem;
+  line-height: 1.75;
+  text-align: left;
+  transition: color 0.3s ease-in-out;
+  font-weight: 600;
+}
+
+.bx-log-out {
+  padding-right: 0;
+}
+
+#signout-btn {
+  display: none;
+}
+
+@media screen and (min-width: 576px) {
+  #signout-btn {
+    display: block;
+  }
+
+  .service__container {
+    padding: 0;
+    max-width: 768px;
+  }
+
+  .service__content-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .service__container h1 {
+    font-size: 2.5rem;
+  }
+}

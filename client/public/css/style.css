@@ -24,6 +24,7 @@ button {
   outline: 0;
   border: 0;
   cursor: pointer;
+  background: transparent;
 }
 
 a {

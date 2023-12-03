@@ -14,16 +14,6 @@
   <body>
     <header class="header" id="header">
       <nav class="nav container">
-        <div class="nav__logo">
-          <div>
-            <h2>Chatbot AI</h2>
-            <i class="bx bx-bot"></i>
-          </div>
-          <div class="nav__username">
-            <span>Welcome Back, <span class="nav-username"></span></span>
-          </div>
-        </div>
-
         <div class="nav__menu">
           <i class="bx bx-left-arrow-alt"></i>
 
@@ -50,6 +40,38 @@
           </div>
         </div>
 
+        <div class="nav__wrapper">
+          <div class="nav__header">
+            <div class="nav__logo">
+              <div>
+                <h2>Chatbot AI</h2>
+                <i class="bx bx-bot"></i>
+              </div>
+              <div class="nav__username">
+                <span>Welcome Back, <span class="nav-username"></span></span>
+              </div>
+            </div>
+
+            <div class="nav__menu-right">
+              <i class="bx bx-menu-alt-right"></i>
+            </div>
+          </div>
+
+          <div id="app">
+            <div id="chat_container"></div>
+
+            <form>
+              <textarea
+                name="prompt"
+                rows="1"
+                cols="1"
+                placeholder="Ask Chatbot..."
+              ></textarea>
+              <button type="submit"><i class="bx bx-send"></i></button>
+            </form>
+          </div>
+        </div>
+
         <div class="overflow__delete-menu">
           <div class="overflow__delete-content">
             <h2>Are you sure you wanna delete all conversation?</h2>
@@ -59,29 +81,11 @@
             </div>
           </div>
         </div>
-
-        <div class="nav__menu-right">
-          <i class="bx bx-menu-alt-right"></i>
-        </div>
       </nav>
     </header>
 
-    <div id="app">
-      <div id="chat_container"></div>
-
-      <form>
-        <textarea
-          name="prompt"
-          rows="1"
-          cols="1"
-          placeholder="Ask Chatbot..."
-        ></textarea>
-        <button type="submit"><i class="bx bx-send"></i></button>
-      </form>
-    </div>
-
     <script type="module" src="script.js"></script>
     <script type="module" src="navigation.js"></script>
-    <script type="module" src="endPointVerify.js"></script>
+    <script type="module" src="authMiddleware.js"></script>
   </body>
 </html>
