@@ -466,7 +466,7 @@ app.post("/validateEmail", async (req, res) => {
           id: id,
         };
         const token = jwt.sign(payload, secret, { expiresIn: "15m" });
-        const link = `http://localhost:5001/reset-password/${id}/${token}`;
+        const link = `https://chatbot-rreu.onrender.com/reset-password/${id}/${token}`;
 
         // Send the link using email
         sendResetPasswordEmail(email, link);
