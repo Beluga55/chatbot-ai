@@ -8,35 +8,29 @@
 }
 
 .login__content h1 {
-  background: rgb(155, 88, 255);
-  background: linear-gradient(
-    90deg,
-    rgba(155, 88, 255, 1) 0%,
-    rgba(31, 57, 247, 1) 50%,
-    rgba(78, 178, 248, 1) 100%
-  );
+  font-size: 2rem;
+  background: linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  font-size: 2rem;
+  font-weight: 700;
 }
 
 .login__content p,
 .login__content span,
 .login__form h2,
 .login__form label {
-  color: var(--White);
+  color: var(--text);
 }
 
 .login__content p {
   text-align: initial;
-  font-size: 14px;
+  font-size: 0.85rem;
   margin: 1rem 0;
 }
 
 .login__button p {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 0.85rem;
   position: relative;
   z-index: -1;
   width: fit-content;
@@ -47,9 +41,9 @@
   content: "";
   width: 50%;
   height: 2px;
-  background-color: #8bc6ec;
-  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+  background: linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
   bottom: -5px;
+  border-radius: 0.25rem;
 }
 
 .login__button {
@@ -61,10 +55,18 @@
   border-radius: 0.25rem;
 }
 
+.login__form h2 {
+  font-size: 2rem;
+  background: linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: 700;
+}
+
 .signup__button,
 .signup__login-button {
   background: var(--White);
-  font-weight: 600;
   color: var(--Black);
   padding: 0.65rem 1.25rem;
   border-radius: 0.25rem;
@@ -82,8 +84,7 @@
 }
 
 .login__form label {
-  font-weight: 600;
-  font-size: 14px;
+  font-size: 0.85rem;
 }
 
 input[type="email"],
@@ -95,7 +96,7 @@ input[type="text"] {
   background: transparent;
   border-radius: 0.25rem;
   border: 2px solid transparent; /* Set border to transparent */
-  border-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+  border-image: linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
   border-image-slice: 1; /* Ensure the entire border is covered by the gradient */
   color: var(--White);
 }
@@ -105,26 +106,26 @@ input[type="text"] {
   background: var(--White);
   padding: 0.65rem 1.5rem;
   border-radius: 0.25rem;
-  font-weight: 600;
   color: var(--Black);
 }
 
 .signup__button,
 .submit__login-button {
-  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .signup__button:hover,
 .signup__login-button:hover,
 .submit__login-button:hover {
-  background: var(--HoverBtn);
+  background: var(--accent);
   color: var(--White);
+  transform: translate(0, -3px);
+  box-shadow: 0 20px 80px -10px var(--accent);
 }
 
 .error__text {
   color: rgb(247, 69, 69);
   font-size: 12px;
-  font-weight: 600;
   display: none;
 }
 
@@ -202,8 +203,7 @@ input[type="text"] {
 
 .forgot__password a {
   color: var(--White);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 0.85rem;
   text-decoration: underline;
   transition: color 0.3s ease-in-out;
 }
@@ -234,12 +234,6 @@ input[type="text"] {
 
   .login__button {
     margin-bottom: 1rem;
-  }
-
-  .password__wrapper {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
   }
 }
 

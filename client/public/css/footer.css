@@ -24,7 +24,7 @@
 
 .footer__container .footer__content:first-child p {
   color: var(--White);
-  font-size: 14px;
+  font-size: 0.8rem;
   margin-top: 0.5rem;
   text-align: initial;
 }
@@ -32,7 +32,7 @@
 .footer__content span {
   color: var(--White);
   font-weight: 600;
-  font-size: 14px;
+  font-size: 0.8rem;
   position: relative;
   z-index: -1;
 }
@@ -42,8 +42,7 @@
   position: absolute;
   z-index: -1;
   bottom: -6px;
-  background-color: #8bc6ec;
-  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+  background: linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
   width: 3rem;
   height: 2px;
   border-radius: 0.25rem;
@@ -60,7 +59,7 @@
 }
 
 .footer__nav-links ul li a {
-  font-size: 14px;
+  font-size: 0.8rem;
   color: var(--White);
 }
 
@@ -96,7 +95,7 @@
 
 .footer__contact-content p,
 .sub__footer span {
-  font-size: 14px;
+  font-size: 0.8rem;
   text-align: initial;
 }
 

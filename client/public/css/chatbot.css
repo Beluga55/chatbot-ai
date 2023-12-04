@@ -27,12 +27,79 @@
   margin-top: 5rem;
 }
 
+.bx-chat {
+  color: var(--text);
+  font-size: 1.25rem;
+  transition: color 0.3s ease-in-out;
+}
+
 .new__chat {
   margin-top: 5rem;
 }
 
+.new__chat {
+  background: var(--cardBackground);
+  transition: 0.3s ease-in-out;
+  margin-inline: 0.85rem;
+  border-radius: 0.85rem;
+}
+
+.new__chat > div {
+  display: flex;
+  align-items: center;
+  margin-inline: 1.5rem;
+  gap: 0.5rem;
+}
+
+.new__chat:hover {
+  background: var(--White);
+}
+
+.new__chat p {
+  padding: 1rem 0;
+  font-size: 0.85rem;
+  transition: color 0.3s ease-in-out;
+}
+
+.new__chat:hover p,
+.new__chat:hover i {
+  color: var(--Black);
+}
+
+.title {
+  margin-top: 1rem;
+  text-align: initial;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.8rem;
+  transition: 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .nav__menu {
   overflow-y: auto;
+}
+
+.nav__user-content span {
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+.nav__user img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+.nav__user {
+  background: var(--cardBackground);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.85rem;
 }
 
 /* hides scrollbar */
@@ -100,6 +167,7 @@
 
 .message p {
   line-height: 1.75;
+  font-size: 0.85rem;
 }
 
 /* hides scrollbar */
@@ -126,8 +194,8 @@ form {
 
 textarea {
   width: 100%;
-  color: var(--White);
-  font-size: 0.85rem;
+  color: var(--text);
+  font-size: 0.8rem;
   padding: 10px;
   background: transparent;
   border: none;
@@ -140,9 +208,9 @@ form img {
   height: 30px;
 }
 
-.bx-send {
+.bx-chevrons-up {
   color: var(--White);
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
 /* Add desired styles for code blocks */
@@ -276,6 +344,11 @@ form img {
     width: 250px;
   }
 
+  .nav__logo .nav__username span {
+    color: var(--text);
+    font-size: 0.85rem;
+  }
+
   .nav button {
     padding: initial;
     border-radius: 0;
@@ -372,9 +445,8 @@ form img {
 
   .bot__mistakes {
     text-align: center;
-    color: var(--White);
+    color: var(--text);
     font-size: 12px;
-    font-weight: 600;
     margin: 0.5rem 0;
     display: block;
   }

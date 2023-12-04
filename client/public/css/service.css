@@ -13,29 +13,24 @@
 }
 
 .service__container h1 {
-  background: rgb(155, 88, 255);
-  background: linear-gradient(
-    90deg,
-    rgba(155, 88, 255, 1) 0%,
-    rgb(91, 109, 240) 50%,
-    rgba(78, 178, 248, 1) 100%
-  );
+  font-size: 2rem;
+  background: linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  font-size: 2rem;
+  font-weight: 700;
 }
 
 .service__content-container {
   margin-top: 2rem;
   display: grid;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .service__content {
-  background: var(--TransparentWhite);
-  padding: 1.5rem;
-  border-radius: 0.25rem;
+  background: var(--cardBackground);
+  padding: 2rem;
+  border-radius: 1rem;
   transition: background 0.3s ease-in-out;
 }
 
@@ -53,6 +48,7 @@
   transition: color 0.3s ease-in-out;
   position: relative;
   width: fit-content;
+  font-weight: 500;
 }
 
 .service__content h2::before {
@@ -60,28 +56,22 @@
   position: absolute;
   width: 100%;
   height: 3px;
-  background-color: #8bc6ec;
-  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
   bottom: -5px;
   border-radius: 0.25rem;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  background: linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
 }
 
 .service__content:hover h2::before {
-  opacity: 1;
-  visibility: visible;
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
 }
 
 .service__content p {
-  color: var(--White);
-  font-size: 14px;
+  font-size: 0.85rem;
   margin-top: 1rem;
-  line-height: 1.75;
+  line-height: 2.25;
   text-align: left;
   transition: color 0.3s ease-in-out;
-  font-weight: 600;
 }
 
 .bx-log-out {
@@ -95,12 +85,14 @@
 @media screen and (min-width: 576px) {
   #signout-btn {
     display: block;
-    transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out, background 0.3s ease-in-out, transform 0.3s ease-in-out;
   }
 
   #signout-btn:hover {
     color: var(--White);
-    background: var(--HoverBtn);
+    background: var(--accent);
+    box-shadow: 0 20px 80px -10px var(--accent);
+    transform: translate(0, -3px);
   }
 
   .service {

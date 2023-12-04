@@ -1,19 +1,28 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Raleway", sans-serif;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
 }
 
 :root {
   --White: hsl(0, 100%, 100%);
   --Black: hsl(0, 0%, 0%);
   --DarkBlue: hsl(205, 100%, 15%);
-  --MainBackground: hsl(204, 100%, 5%);
+  --MainBackground: hsl(213, 41%, 5%);
   --TransparentWhite: rgba(255, 255, 255, 0.2);
   --HoverBtn: hsl(214, 60%, 33%);
+
+  /* Gradient */
+  --primary: hsl(209, 40%, 73%);
+  --secondary: hsl(261, 39%, 35%);
+  --accent: hsl(283, 39%, 59%);
+  --secondary-accent: hsl(261, 39%, 35%, 20%);
+  --text: hsl(212, 38%, 91%);
+  --cardBackground: hsl(209, 40%, 73%, 5%);
 }
 
 body {
@@ -40,12 +49,20 @@ img {
 }
 
 p {
-  line-height: 1.5;
+  line-height: 1.75;
   text-align: justify;
+  font-weight: 400;
 }
 
 .bx {
   cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p {
+  color: var(--text);
 }
 
 @media screen and (min-width: 1024px) {

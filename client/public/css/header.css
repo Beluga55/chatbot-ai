@@ -1,11 +1,11 @@
 .header {
   position: fixed;
   width: 100%;
-  background: var(--TransparentWhite);
-  box-shadow: 0 0px 1000px rgba(255, 255, 255, 0.5);
+  background: transparent;
   transition: 0.3s ease-in-out;
   z-index: 2;
   top: 0;
+  border-bottom: 1px solid var(--TransparentWhite);
 }
 
 .nav {
@@ -19,41 +19,6 @@
   display: flex;
   align-items: center;
   column-gap: 0.3rem;
-}
-
-.new__chat {
-  background: var(--TransparentWhite);
-  transition: 0.3s ease-in-out;
-}
-
-.new__chat:hover {
-  background: var(--White);
-}
-
-.new__chat > div {
-  display: flex;
-  align-items: center;
-  margin-inline: 1.5rem;
-  gap: 0.5rem;
-}
-
-.bx-chat {
-  color: var(--White);
-  font-size: 1.25rem;
-  transition: color 0.3s ease-in-out;
-}
-
-.new__chat p {
-  padding: 1rem 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--White);
-  transition: color 0.3s ease-in-out;
-}
-
-.new__chat:hover p,
-.new__chat:hover i {
-  color: var(--Black);
 }
 
 .bx-bot {
@@ -101,15 +66,6 @@
   z-index: 1;
 }
 
-.nav__user {
-  background: var(--TransparentWhite);
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 0.85rem;
-}
-
 .nav__user-content {
   margin-inline: 0.75rem;
   padding: 0.75rem 0;
@@ -122,18 +78,6 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
-}
-
-.nav__user-content span {
-  color: var(--White);
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.nav__user img {
-  width: 40px;
-  height: 40px;
-  object-fit: cover;
 }
 
 .nav__links {
@@ -149,7 +93,7 @@
 .nav__links ul li {
   display: flex;
   align-items: center;
-  gap: 0.5rem;  
+  gap: 0.5rem;
 }
 
 .nav__links ul li i {
@@ -157,9 +101,13 @@
 }
 
 .nav__menu ul li a {
-  font-weight: 600;
   color: var(--White);
   font-size: 0.85rem;
+  transition: opacity 0.3s ease;
+}
+
+.nav__menu ul li a:hover {
+  opacity: 0.6;
 }
 
 .nav__menu ul li a::before {
@@ -167,8 +115,7 @@
   width: 0%;
   position: absolute;
   height: 2px;
-  background-color: #8bc6ec;
-  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
+  background: linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
   bottom: -5px;
   border-radius: 4px;
   transition: width 0.3s ease-in-out; /* Add transition for a smooth effect */
@@ -196,20 +143,6 @@
 #signout,
 #login {
   display: none;
-}
-
-.title {
-  color: var(--White);
-  font-weight: 600;
-  margin-top: 1rem;
-  text-align: initial;
-  padding: 0.75rem 1.5rem;
-  font-size: 13px;
-  transition: 0.3s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
 }
 
 .title:hover {
@@ -262,14 +195,8 @@
     padding: 0;
   }
 
-  .nav__menu ul li a {
-    color: var(--White);
-  }
-
-  .nav__logo .nav__username span {
-    color: var(--White);
-    font-size: 13px;
-    font-weight: 600;
+  .nav__menu ul li a:hover {
+    opacity: 1;
   }
 
   .nav__links ul {
@@ -285,7 +212,6 @@
   }
 
   .nav button {
-    font-weight: 600;
     background: var(--White);
     padding: 0.65rem 1.25rem;
     border-radius: 2rem;
@@ -294,13 +220,15 @@
   #signout,
   #login {
     display: block;
-    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out;
   }
 
   #signout:hover,
   #login:hover {
-    background: var(--HoverBtn);
+    background: var(--accent);
     color: var(--White);
+    transform: translate(0, -3px);
+    box-shadow: 0 20px 80px -10px var(--accent);
   }
 
   .scroll-header #signout,
