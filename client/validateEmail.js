@@ -37,7 +37,7 @@ async function submitEmail(event) {
 
   var email = document.getElementById("reset-password-email").value;
 
-  const response = await fetch("http://localhost:5001/validateEmail", {
+  const response = await fetch("https://chatbot-rreu.onrender.com/validateEmail", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

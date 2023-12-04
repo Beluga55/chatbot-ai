@@ -8,6 +8,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 import { ObjectId } from "mongodb";
+import nodemailer from "nodemailer";
+import { google } from "googleapis";
 
 dotenv.config();
 
@@ -466,8 +468,8 @@ app.post("/validateEmail", async (req, res) => {
         const token = jwt.sign(payload, secret, { expiresIn: "15m" });
         const link = `http://localhost:5001/reset-password/${id}/${token}`;
 
-        // Send the link using email (Later)
-        console.log(link);
+        // Send the link using email
+        sendResetPasswordEmail(email, link);
 
         res.status(200).json({
           message: "Link has been sent to your email",
@@ -482,6 +484,48 @@ app.post("/validateEmail", async (req, res) => {
     console.log(error.message);
   }
 });
+
+// Function to send the email using Nodemailer
+async function sendResetPasswordEmail(email, link) {
+  const clientID = process.env.CLIENT_ID;
+  const clientSecret = process.env.CLIENT_SECRET;
+  const redirectURI = process.env.REDIRECT_URI;
+  const refreshToken = process.env.REFRESH_TOKEN;
+
+  const oAuth2Client = new google.auth.OAuth2(
+    clientID,
+    clientSecret,
+    redirectURI
+  );
+  oAuth2Client.setCredentials({ refresh_token: refreshToken });
+  try {
+    const accessToken = await oAuth2Client.getAccessToken();
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        type: "OAUTH2",
+        user: "testingforchatbotai@gmail.com",
+        clientId: clientID,
+        clientSecret: clientSecret,
+        refreshToken: refreshToken,
+        accessToken: accessToken,
+      },
+    });
+
+    const mailOptions = {
+      from: "CHATBOT - AI <testingforchatbotai@gmail.com>",
+      to: email,
+      subject: "Password Reset Link",
+      text: `Click on the following link to reset your password: ${link},`,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log("Password reset email sent successfully");
+  } catch (error) {
+    console.error("Error sending password reset email:", error.message);
+  }
+}
 
 // GET PARAMETER TO REDIRECT USERS TO THE DEDICATED PAGE
 app.get("/reset-password/:id/:token", async (req, res) => {
@@ -503,10 +547,10 @@ app.get("/reset-password/:id/:token", async (req, res) => {
         const payload = jwt.verify(token, secret);
 
         res.send(`
-    <script>
-      window.location.href = 'http://localhost:5173/resetPassword.html?id=${id}&token=${token}&userEmail=${matchingEmail}';
-    </script>
-  `);
+        <script>
+          window.location.href = 'https://chatbot-ai-ashy.vercel.app/resetPassword.html?id=${id}&token=${token}&userEmail=${matchingEmail}';
+        </script>
+        `);
       } catch (error) {
         console.log(error.message);
       }

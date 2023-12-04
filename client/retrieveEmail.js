@@ -63,7 +63,7 @@ async function updatePassword(event) {
 
   var newPassword = document.querySelector(".new__password").value;
 
-  const response = await fetch("http://localhost:5001/updatePassword", {
+  const response = await fetch("https://chatbot-rreu.onrender.com/updatePassword", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
