@@ -63,17 +63,22 @@ async function updatePassword(event) {
 
   var newPassword = document.querySelector(".new__password").value;
 
-  const response = await fetch("https://chatbot-rreu.onrender.com/updatePassword", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ userToken, userEmail, newPassword }),
-  });
+  const response = await fetch(
+    "https://chatbot-rreu.onrender.com/updatePassword",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userToken, userEmail, newPassword }),
+    }
+  );
 
   if (response.ok) {
-    const result = await response.json();
-    console.log(result.message);
+    await response.json();
+
+    const overlay = document.querySelector(".password__success-overlay");
+    overlay.classList.add("show");
   } else {
     const errorData = await response.json();
     console.log(errorData.error);

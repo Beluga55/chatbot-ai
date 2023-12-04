@@ -553,6 +553,11 @@ app.get("/reset-password/:id/:token", async (req, res) => {
         `);
       } catch (error) {
         console.log(error.message);
+        res.send(
+          `<script>
+            alert("Invalid Signature");
+          </script>`
+        )
       }
     }
   }
