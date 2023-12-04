@@ -75,7 +75,7 @@
 .login__email,
 .login__password,
 .verify__password {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -194,6 +194,28 @@ input[type="text"] {
   color: var(--White);
 }
 
+.forgot__password {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.forgot__password a {
+  color: var(--White);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.3s ease-in-out;
+}
+
+.forgot__password a:hover {
+  color: transparent;
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #df8bec 0%, #e295b2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
 @media screen and (min-width: 576px) {
   .login__content-wrapper {
     display: grid;
@@ -228,10 +250,6 @@ input[type="text"] {
 
   .login__content h1 {
     font-size: 2.5rem;
-  }
-
-  .login__content-wrapper {
-    height: 45vh;
   }
 
   .signup__overlay-content h2 {

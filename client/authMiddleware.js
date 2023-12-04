@@ -45,9 +45,25 @@ const protectAdminRoute = () => {
   return true;
 };
 
+// PROTECT RESET PASSWORD ROUTE
+const resetPasswordRoute = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const userToken = urlParams.get("token");
+
+  if (!userToken || userToken === "") {
+    alert("You do not have permission to access this page.");
+    window.history.back();
+    return false;
+  }
+
+  return true;
+};
+
 // CHECK AND PROTECT ROUTES
 if (window.location.pathname === "/admin.html") {
   protectAdminRoute();
 } else if (window.location.pathname === "/chatbot.html") {
   protectUserRoute();
+} else if (window.location.pathname === "/resetPassword.html") {
+  resetPasswordRoute();
 }

@@ -7,6 +7,7 @@ import OpenAI from "openai";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
+import { ObjectId } from "mongodb";
 
 dotenv.config();
 
@@ -435,6 +436,135 @@ app.post("/delOneConver", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.post("/validateEmail", async (req, res) => {
+  try {
+    const email = req.body.email;
+
+    // Make sure the email is in the database
+    const db = client.db("Chatbot");
+    const users = db.collection("Users");
+
+    // Check inside the database whether it match the prompt from user
+    const checkEmail = await users.findOne({ email });
+
+    // Extract the password from the database based on the email provided
+    if (checkEmail) {
+      const id = checkEmail._id;
+      const email = checkEmail.email;
+      const password = checkEmail.password;
+
+      // After checking we need to validate whether both email is the same
+      if (email === email) {
+        const secret = process.env.VALIDATE_JWT_SECRET_KEY + password;
+        const payload = {
+          email: email,
+          id: id,
+        };
+        const token = jwt.sign(payload, secret, { expiresIn: "15m" });
+        const link = `http://localhost:5001/reset-password/${id}/${token}`;
+
+        // Send the link using email (Later)
+        console.log(link);
+
+        res.status(200).json({
+          message: "Link has been sent to your email",
+        });
+      }
+    } else {
+      res.status(401).json({
+        message: "This user doesn't exist",
+      });
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
+// GET PARAMETER TO REDIRECT USERS TO THE DEDICATED PAGE
+app.get("/reset-password/:id/:token", async (req, res) => {
+  const { id, token } = req.params;
+  // Validate the id whether it is exist
+  const db = client.db("Chatbot");
+  const users = db.collection("Users");
+
+  const findID = await users.findOne({ _id: new ObjectId(id) });
+  if (findID) {
+    const matchingID = findID._id.toString();
+    const matchingEmail = findID.email;
+    const matchingPassword = findID.password;
+
+    if (id === matchingID) {
+      const secret = process.env.VALIDATE_JWT_SECRET_KEY + matchingPassword;
+
+      try {
+        const payload = jwt.verify(token, secret);
+
+        res.send(`
+    <script>
+      window.location.href = 'http://localhost:5173/resetPassword.html?id=${id}&token=${token}&userEmail=${matchingEmail}';
+    </script>
+  `);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+  }
+});
+
+app.post("/updatePassword", async (req, res) => {
+  const token = req.body.userToken;
+  const newPassword = req.body.newPassword;
+  const userEmail = req.body.userEmail;
+
+  // Extract the current hashed password (assuming it has never been updated)
+  const db = client.db("Chatbot");
+  const users = db.collection("Users");
+
+  const user = await users.findOne({ email: userEmail });
+
+  if (user) {
+    const oldHashedPassword = user.password;
+
+    // CHECK THE TOKEN
+    const secret = process.env.VALIDATE_JWT_SECRET_KEY + oldHashedPassword;
+
+    try {
+      const payload = jwt.verify(token, secret);
+
+      // Check if the new password is the same as the old password
+      if (await bcrypt.compare(newPassword, oldHashedPassword)) {
+        return res.status(401).json({
+          message: "Your current password is the same!",
+        });
+      }
+
+      // Hash the new password
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+      // Update the password
+      const result = await users.updateOne(
+        { email: userEmail },
+        { $set: { password: hashedPassword } }
+      );
+
+      if (result.modifiedCount === 1) {
+        // Password updated successfully
+        res.status(200).json({ message: "Password updated successfully" });
+      } else {
+        // Password update failed
+        res.status(500).json({ error: "Failed to update password" });
+      }
+    } catch (error) {
+      // Handle token verification failure
+      console.log(error.message);
+      res.status(401).json({ error: "Invalid token" });
+    }
+  } else {
+    // User not found
+    res.status(404).json({ error: "User not found" });
   }
 });
 

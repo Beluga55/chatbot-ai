@@ -34,7 +34,7 @@ function validateLoginForm() {
 }
 
 async function submitLogin(event) {
-  // Validate The From
+  // Validate The Form
   if (!validateLoginForm()) {
     event.preventDefault();
     return;
