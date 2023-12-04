@@ -105,12 +105,12 @@ app.post("/", async (req, res) => {
             { role: "system", content: "You are a helpful assistant." },
             {
               role: "user",
-              content: `Generate a concise title with less than 10 words based on the following conversation:\n\nUser Prompt: ${userPrompt}\n`,
+              content: `Generate a concise title with less than 8 words based on the following conversation:\n\nUser Prompt: ${userPrompt}\n`,
             },
           ],
           stream: true,
           temperature: 0.7,
-          max_tokens: 20, // Adjust the value to control the length of the title
+          max_tokens: 15, // Adjust the value to control the length of the title
         });
 
         for await (const chunk of titleGenerationResponse) {
