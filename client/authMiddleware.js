@@ -50,7 +50,7 @@ const resetPasswordRoute = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const userToken = urlParams.get("token");
 
-  if (!userToken || userToken === "") {
+  if (userToken === "") {
     alert("You do not have permission to access this page.");
     window.history.back();
     return false;

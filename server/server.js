@@ -67,10 +67,16 @@ app.post("/", async (req, res) => {
       let botResponse = "";
       let botTitleResponse = "";
 
+      if(prompt.trim() === "") {
+        res.status(500).send("Please provide some text...");
+        return;
+      }
+
       const completion = await openai.chat.completions.create({
         model: "gpt-3.5-turbo-1106",
         messages: [
-          { role: "system", content: "You are a helpful assistant." },
+          { role: "system", content: "You are a helpful assistant and your name is Chatbot." },
+          { role: "user", content: prompt },
           ...conversationHistory,
         ],
         stream: true,
@@ -102,7 +108,7 @@ app.post("/", async (req, res) => {
         const titleGenerationResponse = await openai.chat.completions.create({
           model: "gpt-3.5-turbo", // Use an appropriate model for title generation
           messages: [
-            { role: "system", content: "You are a helpful assistant." },
+            { role: "system", content: "You are a helpful assistant and your name is Chatbot." },
             {
               role: "user",
               content: `Generate a concise title with less than 8 words based on the following conversation:\n\nUser Prompt: ${userPrompt}\n`,
@@ -557,7 +563,7 @@ app.get("/reset-password/:id/:token", async (req, res) => {
           `<script>
             alert("Invalid Signature");
           </script>`
-        )
+        );
       }
     }
   }

@@ -111,7 +111,8 @@ input[type="text"] {
 
 .signup__button,
 .submit__login-button {
-  transition: background 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
 }
 
 .signup__button:hover,
@@ -160,13 +161,7 @@ input[type="text"] {
 }
 
 .signup__overlay-content h2 {
-  background: rgb(155, 88, 255);
-  background: linear-gradient(
-    90deg,
-    rgba(155, 88, 255, 1) 0%,
-    rgb(91, 109, 240) 50%,
-    rgba(78, 178, 248, 1) 100%
-  );
+  background: linear-gradient(120deg, var(--primary), var(--accent));
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
@@ -175,7 +170,7 @@ input[type="text"] {
 
 .signup__overlay-content p {
   color: var(--White);
-  font-size: 14px;
+  font-size: 0.85rem;
   margin-top: 1rem;
   margin-bottom: 1.25rem;
 }
@@ -184,15 +179,15 @@ input[type="text"] {
   background: var(--White);
   color: var(--Black);
   font-size: 12px;
-  font-weight: 600;
   padding: 0.65rem 1.25rem;
   border-radius: 0.25rem;
-  transition: 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .signup__success-overlay a:hover {
-  background: var(--HoverBtn);
+  background: var(--accent);
   color: var(--White);
+  box-shadow: 0 20px 80px -10px var(--accent);
 }
 
 .forgot__password {

@@ -296,7 +296,7 @@ const handleSubmit = async (e) => {
 
   // https://chatbot-rreu.onrender.com/
 
-  const response = await fetch("https://chatbot-rreu.onrender.com/", {
+  const response = await fetch("http://localhost:5001/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
