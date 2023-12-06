@@ -84,8 +84,16 @@ app.post("/", async (req, res) => {
         }
       }
     } else {
+      storedResponses = [];
       storedResponses.push({ role: "user", content: prompt });
     }
+
+    if (randomID === null) {
+      storedResponses = [];
+      storedResponses.push({ role: "user", content: prompt });
+    }
+
+    console.log(...storedResponses);
 
     // Include the main OpenAI logic here
     async function main() {
@@ -98,7 +106,7 @@ app.post("/", async (req, res) => {
       }
 
       const completion = await openai.chat.completions.create({
-        model: "gpt-4-0613", // gpt-3.5-turbo-1106
+        model: "gpt-4-0613", // gpt-3.5-turbo-1106 // gpt-4-0613
         messages: [
           {
             role: "system",
