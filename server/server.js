@@ -32,7 +32,8 @@ const client = new MongoClient(uri, {
   },
 });
 
-let conversationHistory = [];
+let storedResponses = [];
+let modifiedResponse = "";
 
 async function initializeMongoClient() {
   try {
@@ -54,13 +55,31 @@ app.post("/", async (req, res) => {
     const randomID = req.body.randomID;
 
     const db = client.db("Chatbot");
-    const collectionUsers = db.collection("Users");
+    const collectionTitle = db.collection("Title");
+    const converHistory = db.collection("conversationHistory");
 
-    await collectionUsers.findOne({
-      username,
-    });
+    // Extract randomID
+    if (randomID !== "") {
+      const storedRandomID = await converHistory.findOne({ randomID });
+      const matchRandomID = storedRandomID.randomID;
 
-    conversationHistory.push({ role: "user", content: prompt });
+      // Compare randomID
+      if (randomID === matchRandomID) {
+        // Extract Responses From Database
+        const historyResponse = await converHistory.findOne({ randomID });
+        const responses = historyResponse.responses;
+
+        for (let i = 0; i < responses.length; i++) {
+          const modifyResponse = responses[i];
+          modifiedResponse += modifyResponse;
+        }
+
+        storedResponses.push({ role: "user", content: prompt });
+        storedResponses.push({ role: "assistant", content: modifiedResponse });
+      }
+    } else {
+      storedResponses.push({ role: "user", content: prompt });
+    }
 
     // Include the main OpenAI logic here
     async function main() {
@@ -79,7 +98,7 @@ app.post("/", async (req, res) => {
             role: "system",
             content: "You are a helpful assistant and your name is Chatbot.",
           },
-          ...conversationHistory
+          ...storedResponses,
         ],
         stream: true,
         temperature: 0,
@@ -91,10 +110,6 @@ app.post("/", async (req, res) => {
 
       for await (const chunk of completion) {
         if (chunk.choices[0].delta.content !== undefined) {
-          conversationHistory.push({
-            role: "assistant",
-            content: chunk.choices[0].delta.content,
-          });
           botResponse += chunk.choices[0].delta.content;
         }
       }
@@ -135,15 +150,11 @@ app.post("/", async (req, res) => {
 
         const randomID = uuidv4();
 
-        const collectionTitle = db.collection("Title");
-
         await collectionTitle.insertOne({
           username,
           randomID,
           generatedTitle,
         });
-
-        const converHistory = db.collection("conversationHistory");
 
         await converHistory.insertOne({
           randomID,
@@ -183,11 +194,6 @@ app.post("/", async (req, res) => {
           bot: botResponse,
           status: status,
         });
-      }
-
-      console.log(conversationHistory);
-      if (conversationHistory.length > 10) {
-        conversationHistory = conversationHistory.slice(-1000);
       }
     }
 

@@ -3,7 +3,8 @@
 
 #app {
   width: 100vw;
-  min-height: 100svh;
+  min-height: 0;
+  flex-grow: 1;
   background: var(--MainBackground);
   display: flex;
   flex-direction: column;
@@ -13,18 +14,13 @@
   flex: 1;
   width: 100%;
   max-height: 81vh;
-  padding-bottom: 3rem;
   overflow-y: scroll;
-
   display: flex;
   flex-direction: column;
   gap: 10px;
-
   -ms-overflow-style: none;
   scrollbar-width: none;
-
   scroll-behavior: smooth;
-  margin-top: 5rem;
 }
 
 .bx-chat {
@@ -176,10 +172,8 @@
 }
 
 form {
-  width: 100%;
   align-items: center;
   max-width: 1024px;
-  margin: 0 auto;
   padding: 10px;
   background: var(--TransparentWhite);
   box-shadow: 0 0 1000px 0 rgba(255, 255, 255, 0.5);
@@ -187,9 +181,10 @@ form {
   flex-direction: row;
   gap: 10px;
   border-radius: 0.75rem 0.75rem 0 0;
-  position: absolute;
-  bottom: 0;
+  position: relative;
+  border-radius: 0.5rem;
   background-color: var(--MainBackground);
+  margin: 1.5rem 1rem 0;
 }
 
 textarea {
@@ -234,6 +229,19 @@ form img {
   z-index: 1;
   display: grid;
   grid-template-rows: auto 1fr auto;
+}
+
+.nav__wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+}
+
+.bot__mistakes {
+  text-align: center;
+  color: var(--text);
+  font-size: 0.75rem;
+  margin: 0.5rem 1rem;
 }
 
 .bxs-trash-alt {
@@ -316,8 +324,8 @@ form img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: fixed;
   width: calc(100% - 3rem);
+  position: relative;
 }
 
 .header {
@@ -327,10 +335,6 @@ form img {
 .active__title {
   background: var(--White);
   color: var(--Black);
-}
-
-.bot__mistakes {
-  display: none;
 }
 
 @media screen and (min-width: 576px) {
@@ -376,10 +380,11 @@ form img {
     display: block;
   }
 
+  form {
+    margin: 1.5rem 0 0;
+  }
+
   .nav__wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100svh;
     padding-right: 4rem;
   }
 
@@ -402,12 +407,6 @@ form img {
   .nav__header {
     margin: 1.5rem 0;
     z-index: 1;
-    position: relative;
-  }
-
-  #chat_container {
-    margin-top: 0;
-    padding-bottom: 0;
   }
 
   .nav {
@@ -422,8 +421,6 @@ form img {
   #app {
     width: 100%;
     max-width: 1024px;
-    min-height: 0px;
-    flex-grow: 1;
   }
 
   .container {
@@ -435,19 +432,5 @@ form img {
   .bx-menu-alt-right,
   .bx-left-arrow-alt {
     display: none;
-  }
-
-  form {
-    position: relative;
-    margin-top: 1.5rem;
-    border-radius: 0.5rem;
-  }
-
-  .bot__mistakes {
-    text-align: center;
-    color: var(--text);
-    font-size: 12px;
-    margin: 0.5rem 0;
-    display: block;
   }
 }
