@@ -8,6 +8,7 @@ const signupBtn = document.querySelectorAll(".signup__button");
 const username = document.querySelectorAll(".nav-username");
 const serviceContainers = document.querySelectorAll(".service__content");
 const textarea = document.getElementById("promptTextarea");
+const form = document.querySelector("form");
 
 if (textarea) {
   textarea.addEventListener("input", function () {
@@ -21,6 +22,12 @@ if (textarea) {
     if (this.value.trim() === "") {
       this.style.overflowY = "hidden";
       this.style.height = "auto";
+    }
+  });
+
+  form.addEventListener("keyup", (e) => {
+    if (e.keyCode === 13) {
+      textarea.style.height = "auto";
     }
   });
 }

@@ -245,6 +245,10 @@ form img {
   margin: 0.5rem 1rem;
 }
 
+#promptTextarea {
+  transition: height 0.3s ease-in-out;
+}
+
 .bxs-trash-alt {
   font-size: 1rem;
 }

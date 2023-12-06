@@ -61,21 +61,27 @@ app.post("/", async (req, res) => {
     // Extract randomID
     if (randomID !== "") {
       const storedRandomID = await converHistory.findOne({ randomID });
-      const matchRandomID = storedRandomID.randomID;
 
-      // Compare randomID
-      if (randomID === matchRandomID) {
-        // Extract Responses From Database
-        const historyResponse = await converHistory.findOne({ randomID });
-        const responses = historyResponse.responses;
+      if (storedRandomID) {
+        const matchRandomID = storedRandomID.randomID;
 
-        for (let i = 0; i < responses.length; i++) {
-          const modifyResponse = responses[i];
-          modifiedResponse += modifyResponse;
+        // Compare randomID
+        if (randomID === matchRandomID) {
+          // Extract Responses From Database
+          const historyResponse = await converHistory.findOne({ randomID });
+          const responses = historyResponse.responses;
+
+          for (let i = 0; i < responses.length; i++) {
+            const modifyResponse = responses[i];
+            modifiedResponse += modifyResponse;
+          }
+
+          storedResponses.push({ role: "user", content: prompt });
+          storedResponses.push({
+            role: "assistant",
+            content: modifiedResponse,
+          });
         }
-
-        storedResponses.push({ role: "user", content: prompt });
-        storedResponses.push({ role: "assistant", content: modifiedResponse });
       }
     } else {
       storedResponses.push({ role: "user", content: prompt });
@@ -92,7 +98,7 @@ app.post("/", async (req, res) => {
       }
 
       const completion = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo-1106",
+        model: "gpt-4-0613", // gpt-3.5-turbo-1106
         messages: [
           {
             role: "system",
@@ -131,12 +137,12 @@ app.post("/", async (req, res) => {
             },
             {
               role: "user",
-              content: `Generate a concise title with less than 8 words based on the following conversation:\n\nUser Prompt: ${userPrompt}\n`,
+              content: `Generate a concise title with less than 5 words based on the following conversation:\n\nUser Prompt: ${userPrompt}\n`,
             },
           ],
           stream: true,
           temperature: 0.7,
-          max_tokens: 15, // Adjust the value to control the length of the title
+          max_tokens: 10, // Adjust the value to control the length of the title
         });
 
         for await (const chunk of titleGenerationResponse) {

@@ -254,9 +254,9 @@ newChatBtn.addEventListener("click", () => {
   chatContainer.classList.value = "";
   navMenu.classList.remove("show");
   var activeTitles = document.querySelectorAll(".active__title");
-    activeTitles.forEach(function (title) {
-      title.classList.remove("active__title");
-    });
+  activeTitles.forEach(function (title) {
+    title.classList.remove("active__title");
+  });
 });
 
 const handleSubmit = async (e) => {
