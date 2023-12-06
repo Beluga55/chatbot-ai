@@ -7,6 +7,23 @@ const header = document.getElementById("header");
 const signupBtn = document.querySelectorAll(".signup__button");
 const username = document.querySelectorAll(".nav-username");
 const serviceContainers = document.querySelectorAll(".service__content");
+const textarea = document.getElementById("promptTextarea");
+
+if (textarea) {
+  textarea.addEventListener("input", function () {
+    this.style.maxHeight = "100px";
+    this.style.height = Math.min(this.scrollHeight, 100) + "px"; // Set a maximum height of 100px
+    this.style.overflowY = "auto";
+  });
+
+  // Set a minimum height when the content is empty
+  textarea.addEventListener("input", function () {
+    if (this.value.trim() === "") {
+      this.style.overflowY = "hidden";
+      this.style.height = "auto";
+    }
+  });
+}
 
 const openNavigationMenu = () => {
   navMenu.classList.add("show");

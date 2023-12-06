@@ -196,6 +196,7 @@ textarea {
   border: none;
   outline: none;
   resize: none;
+  overflow-y: hidden;
 }
 
 form img {
