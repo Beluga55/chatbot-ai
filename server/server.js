@@ -33,7 +33,6 @@ const client = new MongoClient(uri, {
 });
 
 let storedResponses = [];
-let modifiedResponse = "";
 
 async function initializeMongoClient() {
   try {
@@ -70,17 +69,17 @@ app.post("/", async (req, res) => {
           // Extract Responses From Database
           const historyResponse = await converHistory.findOne({ randomID });
           const responses = historyResponse.responses;
+          const mostRecentResponse =
+            responses.length > 0 ? responses[responses.length - 1] : null;
 
-          for (let i = 0; i < responses.length; i++) {
-            const modifyResponse = responses[i];
-            modifiedResponse += modifyResponse;
+          if (mostRecentResponse) {
+            storedResponses.push({
+              role: "assistant",
+              content: mostRecentResponse,
+            });
           }
 
           storedResponses.push({ role: "user", content: prompt });
-          storedResponses.push({
-            role: "assistant",
-            content: modifiedResponse,
-          });
         }
       }
     } else {
@@ -118,8 +117,8 @@ app.post("/", async (req, res) => {
         temperature: 0,
         max_tokens: 500,
         top_p: 1,
-        frequency_penalty: 0.5,
-        presence_penalty: 0.5,
+        frequency_penalty: 0.6,
+        presence_penalty: 0.6,
       });
 
       for await (const chunk of completion) {
