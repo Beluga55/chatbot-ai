@@ -342,7 +342,11 @@ const handleSubmit = async (e) => {
   }
 };
 
-form.addEventListener("submit", handleSubmit);
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  handleSubmit();
+});
+
 form.addEventListener("keyup", (e) => {
   if (e.keyCode === 13 && !e.shiftKey) {
     handleSubmit(e);

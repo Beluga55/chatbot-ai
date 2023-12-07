@@ -12,21 +12,26 @@ const form = document.querySelector("form");
 
 if (textarea) {
   textarea.addEventListener("input", function () {
-    this.style.maxHeight = "100px";
+    this.style.maxHeight = "auto";
     this.style.height = Math.min(this.scrollHeight, 100) + "px"; // Set a maximum height of 100px
     this.style.overflowY = "auto";
-  });
 
-  // Set a minimum height when the content is empty
-  textarea.addEventListener("input", function () {
     if (this.value.trim() === "") {
       this.style.overflowY = "hidden";
       this.style.height = "auto";
     }
   });
 
-  form.addEventListener("keyup", (e) => {
+  textarea.addEventListener("keydown", function (e) {
+    if (e.key === "Backspace" || e.key === "Delete") {
+      this.style.height = "auto";
+      this.style.height = Math.min(this.scrollHeight, 100) + "px";
+    }
+  });
+
+  form.addEventListener("keydown", (e) => {
     if (e.keyCode === 13) {
+      e.preventDefault();
       textarea.style.height = "auto";
     }
   });
