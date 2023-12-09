@@ -102,7 +102,7 @@
   gap: 0.5rem;
   transition: 0.3s ease-in-out;
   background: var(--cardBackground);
-  padding: 0.8rem 0;
+  padding: 1rem 0;
   border-radius: 0.85rem;
 }
 
@@ -254,5 +254,9 @@
   .scroll-header #signout,
   .scroll-header #login {
     border: 1px solid rgba(45, 45, 45, 0.5);
+  }
+
+  .nav__links ul li {
+    background: none;
   }
 }
