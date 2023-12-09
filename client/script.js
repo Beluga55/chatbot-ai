@@ -3,6 +3,7 @@ import user from "./assets/user.svg";
 
 // FUNCTIONS ON TOP
 const form = document.querySelector("form");
+const submitIcon = document.querySelector(".bx-chevrons-up");
 const chatContainer = document.querySelector("#chat_container");
 
 let loadInterval;
@@ -87,17 +88,19 @@ document.addEventListener("DOMContentLoaded", async function () {
       // Create a paragraph for each title and randomID and append it to navTitleContent
       data.titlesAndRandomIDs.forEach((titleAndRandomID) => {
         const paragraph = document.createElement("p");
+        const span = document.createElement("span");
         paragraph.classList.add("title");
-        paragraph.textContent = `${titleAndRandomID.titles}` || "Default Title";
+        span.textContent = `${titleAndRandomID.titles}` || "Default Title";
 
         // Set a unique id for each paragraph based on the index
         paragraph.id = `${titleAndRandomID.randomID}`;
 
         const tripleDot = document.createElement("i");
         tripleDot.classList.add("bx");
-        tripleDot.classList.add("bxs-trash-alt");
+        tripleDot.classList.add("bx-trash-alt");
 
         navTitleContent.appendChild(paragraph);
+        paragraph.appendChild(span);
         paragraph.appendChild(tripleDot);
       });
     }
@@ -155,9 +158,11 @@ noBtn.addEventListener("click", () => {
 const parentContainer = document.querySelector(".nav__title-content");
 
 parentContainer.addEventListener("click", async function (event) {
-  if (event.target.classList.contains("title")) {
+  const clickedElement = event.target.closest(".title");
+
+  if (clickedElement) {
     // Extract the ID from the clicked element's id attribute
-    const randomID = event.target.id;
+    const randomID = clickedElement.id;
     navMenu.classList.remove("show");
 
     // Remove active__title class from all titles
@@ -165,7 +170,7 @@ parentContainer.addEventListener("click", async function (event) {
     allTitles.forEach((title) => title.classList.remove("active__title"));
 
     // Add active__title class to the clicked title
-    event.target.classList.add("active__title");
+    clickedElement.classList.add("active__title");
 
     const response = await fetch(
       "https://chatbot-rreu.onrender.com/retrieveHistory",
@@ -321,14 +326,16 @@ const handleSubmit = async (e) => {
 
     if (data.status === false) {
       const paragraph = document.createElement("p");
+      const span = document.createElement("span");
       const tripleDot = document.createElement("i");
       paragraph.classList.add("title");
       tripleDot.classList.add("bx");
-      tripleDot.classList.add("bxs-trash-alt");
+      tripleDot.classList.add("bx-trash-alt");
       paragraph.id = `${data.randomID}`;
       chatContainer.classList.add(`${data.randomID}`);
-      paragraph.textContent = data.generatedTitle || "Default Title";
+      span.textContent = data.generatedTitle || "Default Title";
       navTitleContent.appendChild(paragraph);
+      paragraph.appendChild(span);
       paragraph.appendChild(tripleDot);
     }
 
@@ -342,8 +349,9 @@ const handleSubmit = async (e) => {
   }
 };
 
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
+form.addEventListener("submit", handleSubmit);
+
+submitIcon.addEventListener("click", () => {
   handleSubmit();
 });
 

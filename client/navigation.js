@@ -9,6 +9,22 @@ const username = document.querySelectorAll(".nav-username");
 const serviceContainers = document.querySelectorAll(".service__content");
 const textarea = document.getElementById("promptTextarea");
 const form = document.querySelector("form");
+const navList = document.querySelector(".nav__links ul");
+const listItems = navList.querySelectorAll("li");
+
+listItems.forEach((li) => {
+  li.addEventListener("click", function (event) {
+    const clickedLink = event.currentTarget.querySelector("a");
+
+    if (clickedLink) {
+      event.preventDefault();
+
+      const redirectLink = clickedLink.getAttribute("href");
+
+      window.location.href = redirectLink;
+    }
+  });
+});
 
 if (textarea) {
   textarea.addEventListener("input", function () {

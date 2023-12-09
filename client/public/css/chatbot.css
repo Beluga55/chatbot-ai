@@ -63,7 +63,7 @@
 }
 
 .title {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   text-align: initial;
   padding: 0.75rem 1.5rem;
   font-size: 0.8rem;
@@ -72,6 +72,43 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+}
+
+.title span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: textExpand 1s ease-in-out;
+}
+
+.title:hover {
+  margin-inline: 0.85rem;
+  border-radius: 0.85rem;
+}
+
+.title:hover span {
+  white-space: initial;
+  animation: textOpacity 1s ease-in-out;
+}
+
+@keyframes textExpand {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes textOpacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .nav__menu {
@@ -249,8 +286,13 @@ form img {
   transition: height 0.3s ease-in-out;
 }
 
-.bxs-trash-alt {
-  font-size: 1rem;
+.bx-trash-alt {
+  font-size: 1.25rem;
+  transition: color 0.3s ease-in-out;
+}
+
+.bx-trash-alt:hover {
+  color: red;
 }
 
 .overflow__delete-menu {
@@ -284,16 +326,12 @@ form img {
 }
 
 .overflow__delete-content h2 {
-  background: rgb(155, 88, 255);
-  background: linear-gradient(
-    90deg,
-    rgba(155, 88, 255, 1) 0%,
-    rgb(57, 79, 247) 50%,
-    rgba(78, 178, 248, 1) 100%
-  );
+  background: linear-gradient(120deg, var(--primary) 0%, var(--accent) 100%);
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
+  font-weight: 700;
+  font-size: 1.75rem;
 }
 
 .overflow__delete-content > div {
@@ -309,12 +347,15 @@ form img {
   padding: 0.65rem 1.25rem;
   font-weight: 600;
   border-radius: 0.25rem;
-  transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out, background 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
 }
 
 .overflow__delete-content button:hover {
   color: var(--White);
-  background: var(--HoverBtn);
+  background: var(--accent);
+  transform: translate(0, -3px);
+  box-shadow: 0 20px 80px -10px var(--accent);
 }
 
 .nav {
@@ -340,6 +381,8 @@ form img {
 .active__title {
   background: var(--White);
   color: var(--Black);
+  border-radius: 0.85rem;
+  margin-inline: 0.85rem;
 }
 
 @media screen and (min-width: 576px) {

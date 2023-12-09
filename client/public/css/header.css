@@ -39,6 +39,11 @@
 .bx-trash {
   font-size: 1.3rem;
   color: var(--White);
+  transition: color 0.3s ease-in-out;
+}
+
+.bx-trash:hover {
+  color: rgb(247, 82, 82);
 }
 
 .bx-log-out {
@@ -81,19 +86,33 @@
 }
 
 .nav__links {
-  margin-inline: 1.5rem;
+  margin-inline: 0.85rem;
   padding-top: 7rem;
 }
 
 .nav__links ul {
   display: grid;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .nav__links ul li {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
+  transition: 0.3s ease-in-out;
+  background: var(--cardBackground);
+  padding: 0.8rem 0;
+  border-radius: 0.85rem;
+}
+
+.nav__links ul li:hover {
+  background: var(--White);
+}
+
+.nav__links ul li:hover i,
+.nav__links ul li:hover a {
+  color: var(--Black);
 }
 
 .nav__links ul li i {
@@ -104,6 +123,7 @@
   color: var(--White);
   font-size: 0.85rem;
   transition: opacity 0.3s ease;
+  height: 20px;
 }
 
 .nav__menu ul li a:hover {
