@@ -13,7 +13,7 @@ const navList = document.querySelector(".nav__links ul");
 
 if (navList) {
   const listItems = navList.querySelectorAll("li");
-  
+
   listItems.forEach((li) => {
     li.addEventListener("click", function (event) {
       const clickedLink = event.currentTarget.querySelector("a");
@@ -48,7 +48,7 @@ if (textarea) {
     }
   });
 
-  form.addEventListener("keydown", (e) => {
+  form.addEventListener("keyup", (e) => {
     if (e.keyCode === 13) {
       e.preventDefault();
       textarea.style.height = "auto";
