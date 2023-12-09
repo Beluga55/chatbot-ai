@@ -258,5 +258,15 @@
 
   .nav__links ul li {
     background: none;
+    padding: 0;
+  }
+
+  .nav__links ul li:hover {
+    background: none;
+  }
+
+  .nav__links ul li:hover a,
+  .nav__links ul li:hover i {
+    color: var(--White);
   }
 }
