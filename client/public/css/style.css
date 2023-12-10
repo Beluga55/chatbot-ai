@@ -23,6 +23,7 @@
   --secondary-accent: hsl(261, 39%, 35%, 20%);
   --text: hsl(212, 38%, 91%);
   --cardBackground: hsl(209, 40%, 73%, 5%);
+  --lightPurple: hsl(234, 75%, 75%);
 }
 
 body {

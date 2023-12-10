@@ -290,7 +290,9 @@
 
 @media screen and (min-width: 1024px) {
   .hero__container,
-  .banner__container {
+  .banner__container,
+  .trends__container,
+  .register__container {
     margin: 0;
   }
 }
