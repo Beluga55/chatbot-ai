@@ -77,7 +77,7 @@ async function submitCollabForm(event) {
   var content = document.getElementById("textarea-input").value;
 
   // We need a response from backend
-  const response = await fetch("http://localhost:5001/collabForm", {
+  const response = await fetch("https://chatbot-rreu.onrender.com/collabForm", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
