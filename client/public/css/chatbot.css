@@ -385,6 +385,11 @@ form img {
   margin-inline: 0.85rem;
 }
 
+.active__title span {
+  white-space: initial;
+  animation: none;
+}
+
 @media screen and (min-width: 576px) {
   .nav__menu-right,
   .bx-menu-alt-right,
@@ -480,5 +485,16 @@ form img {
   .bx-menu-alt-right,
   .bx-left-arrow-alt {
     display: none;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .nav__wrapper {
+    align-items: center;
+  }
+
+  .nav__header {
+    width: 100%;
+    max-width: 1024px;
   }
 }

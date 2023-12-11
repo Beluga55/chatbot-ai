@@ -639,13 +639,75 @@ app.post("/updatePassword", async (req, res) => {
     } catch (error) {
       // Handle token verification failure
       console.log(error.message);
-      res.status(401).json({ error: "Invalid token" });
+      res.status(401).json({ message: "Invalid token" });
     }
   } else {
     // User not found
-    res.status(404).json({ error: "User not found" });
+    res.status(404).json({ message: "User not found" });
   }
 });
+
+// Send Collaboration Form To Business Gmail
+app.post("/collabForm", async (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const content = req.body.content;
+
+  try {
+    // Send an email using nodemailer
+    await sendCollabEmail(name, email, content);
+
+    res.status(200).json({
+      message: "The form is submitted",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to submit form",
+    });
+  }
+});
+
+// Function to send the email using Nodemailer (Collab)
+async function sendCollabEmail(name, email, content) {
+  const clientID = process.env.CLIENT_ID;
+  const clientSecret = process.env.CLIENT_SECRET;
+  const redirectURI = process.env.REDIRECT_URI;
+  const refreshToken = process.env.REFRESH_TOKEN;
+
+  const oAuth2Client = new google.auth.OAuth2(
+    clientID,
+    clientSecret,
+    redirectURI
+  );
+  oAuth2Client.setCredentials({ refresh_token: refreshToken });
+
+  try {
+    const accessToken = await oAuth2Client.getAccessToken();
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        type: "OAUTH2",
+        user: "testingforchatbotai@gmail.com",
+        clientId: clientID,
+        clientSecret: clientSecret,
+        refreshToken: refreshToken,
+        accessToken: accessToken,
+      },
+    });
+
+    const mailOptions = {
+      from: "CHATBOT - AI <testingforchatbotai@gmail.com>",
+      to: "testingforchatbotai@gmail.com",
+      subject: "Collaboration Request",
+      text: "Name: " + name + "\nEmail: " + email + "\nContent: " + content,
+    };
+
+    await transporter.sendMail(mailOptions);
+  } catch (error) {
+    console.error("Error sending password reset email:", error.message);
+  }
+}
 
 app.listen(5001, () =>
   console.log("AI server started on http://localhost:5001")

@@ -58,6 +58,9 @@
             isn't just a story; it's a journey through creative dreams and
             digital wonders.
           </p>
+          <button class="collaboration__btn" id="collaboration-btn">
+            Look For Collaboration
+          </button>
         </div>
       </section>
 
@@ -191,6 +194,87 @@
           </div>
         </div>
       </section>
+
+      <!-- Collaboration -->
+      <section class="collaboration container" id="collaboration">
+        <div class="collaboration__container">
+          <div class="collaboration__text">
+            <div>
+              <h1>Collaboration</h1>
+              <p>
+                Looking for collaboration? Fill up the form below and join
+                forces with us to create impactful collaborations that benefit
+                both parties.
+              </p>
+            </div>
+          </div>
+
+          <div class="collaboration__form">
+            <!-- ACTUAL FORM -->
+            <form class="collaboration__submit-form" id="collaboration-form">
+              <h2>Let's Collab!</h2>
+              <div class="collaboration__input-form">
+                <div class="collaboration__input">
+                  <label>Name</label>
+                  <input type="text" id="input-name" />
+                  <p class="error__text" id="error-name"></p>
+                </div>
+
+                <div class="collaboration__input">
+                  <label>Email</label>
+                  <input type="email" id="input-email" />
+                  <p class="error__text" id="error-email"></p>
+                </div>
+
+                <div class="collaboration__input">
+                  <label>Additional Content</label>
+                  <textarea id="textarea-input" cols="10" rows="5"></textarea>
+                  <p class="error__text" id="error-content"></p>
+                </div>
+              </div>
+              <button
+                class="collaboration__submit-btn"
+                id="collaboration-submit-btn"
+                type="submit"
+              >
+                Submit
+              </button>
+            </form>
+
+            <div class="collaboration__benefits">
+              <h2>Benefits of collaboration</h2>
+              <div class="collaboration__content">
+                <i class="bx bxs-checkbox-checked"></i>
+                <p>Expanded Functionality</p>
+              </div>
+              <div class="collaboration__content">
+                <i class="bx bxs-checkbox-checked"></i>
+                <p>Innovation and Creativity</p>
+              </div>
+              <div class="collaboration__content">
+                <i class="bx bxs-checkbox-checked"></i>
+                <p>Knowledge Sharing</p>
+              </div>
+              <div class="collaboration__content">
+                <i class="bx bxs-checkbox-checked"></i>
+                <p>Access To New Audience</p>
+              </div>
+              <div class="collaboration__content">
+                <i class="bx bxs-checkbox-checked"></i>
+                <p>Resource Sharing</p>
+              </div>
+              <div class="collaboration__content">
+                <i class="bx bxs-checkbox-checked"></i>
+                <p>Cross-Promotion Opportunities</p>
+              </div>
+              <div class="collaboration__content">
+                <i class="bx bxs-checkbox-checked"></i>
+                <p>Continuous Improvement</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <hr class="upper__hr container" />
@@ -267,5 +351,6 @@
     </footer>
 
     <script type="module" src="navigation.js"></script>
+    <script type="module" src="collab.js"></script>
   </body>
 </html>

@@ -37,24 +37,26 @@ async function submitEmail(event) {
 
   var email = document.getElementById("reset-password-email").value;
 
-  const response = await fetch("https://chatbot-rreu.onrender.com/validateEmail", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email }),
-  });
+  const response = await fetch(
+    "https://chatbot-rreu.onrender.com/validateEmail",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    }
+  );
 
   try {
     if (response.ok) {
       const result = await response.json();
-      
+
       // Output the link to the frontend
       const successTxt = document.querySelector(".error__text");
       successTxt.style.display = "block";
       successTxt.style.color = "lime";
       successTxt.innerText = `${result.message}`;
-
     } else {
       const error = await response.json();
       const successTxt = document.querySelector(".error__text");

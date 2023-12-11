@@ -27,6 +27,7 @@ export default defineConfig({
         validateLogin: resolve(root, "validateLogin.js"),
         authMiddleware: resolve(root, "authMiddleware.js"),
         retrieveEmail: resolve(root, "retrieveEmail.js"),
+        collab: resolve(root, "collab.js")
       },
     },
   },
