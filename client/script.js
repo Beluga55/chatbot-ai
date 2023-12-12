@@ -210,9 +210,9 @@ parentContainer.addEventListener("click", async function (event) {
     }
   }
   // DELETE ONLY ONE CHAT HISTORY
-  else if (
+  if (
     event.target.classList.contains("bx") &&
-    event.target.classList.contains("bxs-trash-alt")
+    event.target.classList.contains("bx-trash-alt")
   ) {
     // If the clicked element is the trash icon
     const titleElement = event.target.closest(".title");
