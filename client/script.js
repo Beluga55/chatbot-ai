@@ -107,14 +107,23 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 });
 
+// TRIGGERS THE USER MENU
+const userMenu = document.querySelector(".nav__user-selection");
+const userSelection = document.querySelector(".nav__user-content");
+
+userSelection.addEventListener("click", () => {
+  userMenu.classList.add("show");
+});
+
 // DELETE DOCUMENT FROM DATABASE
-const deleteIcon = document.querySelector(".bx-trash");
+const deleteButton = document.getElementById("delete-all-conversation");
 const overflowMenu = document.querySelector(".overflow__delete-menu");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 
-deleteIcon.addEventListener("click", () => {
+deleteButton.addEventListener("click", () => {
   navMenu.classList.remove("show");
+  userMenu.classList.remove("show");
   overflowMenu.classList.add("show");
 });
 
