@@ -4,6 +4,7 @@ import user from "./assets/user.svg";
 // FUNCTIONS ON TOP
 const form = document.querySelector("form");
 const submitIcon = document.querySelector(".bx-chevrons-up");
+const textarea = document.getElementById("promptTextarea");
 const chatContainer = document.querySelector("#chat_container");
 
 let loadInterval;
@@ -107,13 +108,18 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 });
 
-// TRIGGERS THE USER MENU
+// TRIGGERS AND CLOSE THE USER MENU
 const userMenu = document.querySelector(".nav__user-selection");
 const userSelection = document.querySelector(".nav__user-content");
+const closeBtn = document.querySelector(".bx-x");
 
 userSelection.addEventListener("click", () => {
   userMenu.classList.add("show");
 });
+
+closeBtn.addEventListener("click", () => {
+  userMenu.classList.remove("show");
+})
 
 // DELETE DOCUMENT FROM DATABASE
 const deleteButton = document.getElementById("delete-all-conversation");
@@ -273,8 +279,7 @@ newChatBtn.addEventListener("click", () => {
   });
 });
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+const handleSubmit = async () => {
 
   // Declare the status variable outside the if-else block
   let status;
@@ -362,6 +367,7 @@ form.addEventListener("submit", handleSubmit);
 
 submitIcon.addEventListener("click", () => {
   handleSubmit();
+  textarea.style.height = "auto";
 });
 
 form.addEventListener("keyup", (e) => {

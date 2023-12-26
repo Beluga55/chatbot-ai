@@ -163,6 +163,13 @@
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
+.nav__user-selection .bx-x {
+  position: absolute;
+  right: 1rem;
+  font-size: 1.25rem;
+  color: var(--White);
+}
+
 .nav__user-selection.show {
   opacity: 1;
   visibility: visible;
@@ -175,11 +182,12 @@
   gap: 0.5rem;
   width: 100%;
   padding: 0.75rem 1rem;
-  transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .nav__user-selection button:hover {
-  background: var(--TransparentWhite);
+  background: var(--White);
+  color: var(--Black);
 }
 
 /* hides scrollbar */
@@ -471,11 +479,12 @@ form img {
     gap: 0.5rem;
     width: 100%;
     padding: 0.75rem 1rem;
-    transition: background 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
   }
 
   .nav__user-selection button:hover {
-    background: var(--TransparentWhite);
+    background: var(--White);
+    color: var(--Black);
   }
 
   #yesBtn,
