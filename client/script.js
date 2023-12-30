@@ -121,7 +121,10 @@ userSelection.addEventListener("click", () => {
 
 function closeMenu(event) {
   // Check if the click was outside the user menu and its trigger
-  if (!userMenu.contains(event.target) && !userSelection.contains(event.target)) {
+  if (
+    !userMenu.contains(event.target) &&
+    !userSelection.contains(event.target)
+  ) {
     userMenu.classList.remove("show");
     // Remove the event listner when the menu is closed
     document.body.removeEventListener("click", closeMenu);

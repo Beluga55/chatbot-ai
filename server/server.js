@@ -67,15 +67,21 @@ app.post("/", async (req, res) => {
         // Compare randomID
         if (randomID === matchRandomID) {
           // Extract Responses From Database
-          const historyResponse = await converHistory.findOne({ randomID });
-          const responses = historyResponse.responses;
-          const mostRecentResponse =
-            responses.length > 0 ? responses[responses.length - 1] : null;
+          const historyResponse = await converHistory.findOne(
+            { randomID },
+            { latestBotResponse: 1 }
+          );
 
-          if (mostRecentResponse) {
+          // Use latest responses directly (if available)
+          const lastBotResponse = historyResponse?.latestBotResponse;
+
+          // Clear the array make sure is not overloaded
+          storedResponses = [];
+
+          if (lastBotResponse) {
             storedResponses.push({
               role: "assistant",
-              content: mostRecentResponse,
+              content: lastBotResponse,
             });
           }
 
@@ -87,11 +93,13 @@ app.post("/", async (req, res) => {
       storedResponses.push({ role: "user", content: prompt });
     }
 
+    // When the browser is refreshed
     if (randomID === null) {
       storedResponses = [];
       storedResponses.push({ role: "user", content: prompt });
     }
 
+    // Testing Purpose
     console.log(...storedResponses);
 
     // Include the main OpenAI logic here
@@ -173,6 +181,7 @@ app.post("/", async (req, res) => {
           randomID,
           prompts: [userPrompt],
           responses: [assistantResponse],
+          latestBotResponse: assistantResponse,
         });
 
         // Send the title along with the API response
@@ -192,6 +201,9 @@ app.post("/", async (req, res) => {
             $push: {
               prompts: userPrompt,
               responses: assistantResponse,
+            },
+            $set: {
+              latestBotResponse: assistantResponse,
             },
           }
         );
