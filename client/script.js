@@ -111,15 +111,22 @@ document.addEventListener("DOMContentLoaded", async function () {
 // TRIGGERS AND CLOSE THE USER MENU
 const userMenu = document.querySelector(".nav__user-selection");
 const userSelection = document.querySelector(".nav__user-content");
-const closeBtn = document.querySelector(".bx-x");
 
 userSelection.addEventListener("click", () => {
   userMenu.classList.add("show");
+
+  // Add event listener to the document body
+  document.body.addEventListener("click", closeMenu);
 });
 
-closeBtn.addEventListener("click", () => {
-  userMenu.classList.remove("show");
-})
+function closeMenu(event) {
+  // Check if the click was outside the user menu and its trigger
+  if (!userMenu.contains(event.target) && !userSelection.contains(event.target)) {
+    userMenu.classList.remove("show");
+    // Remove the event listner when the menu is closed
+    document.body.removeEventListener("click", closeMenu);
+  }
+}
 
 // DELETE DOCUMENT FROM DATABASE
 const deleteButton = document.getElementById("delete-all-conversation");
@@ -280,6 +287,7 @@ newChatBtn.addEventListener("click", () => {
 });
 
 const handleSubmit = async () => {
+  event.preventDefault();
 
   // Declare the status variable outside the if-else block
   let status;
