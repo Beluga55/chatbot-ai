@@ -29,13 +29,46 @@
 
           <div class="nav__user">
             <div class="nav__user-content">
+              <!-- Users Image (To Be Changed) -->
               <img src="assets/empty-user.png" alt="empty-user" />
               <span class="nav-username"></span>
             </div>
             <div class="nav__user-selection">
-              <button id="delete-all-conversation"><i class="bx bx-trash"></i>Clear Chat</button>
-              <button class="signout"><i class="bx bx-log-out"></i>Logout</button>
+              <button id="delete-all-conversation">
+                <i class="bx bx-trash"></i>Clear Chat
+              </button>
+              <label
+                for="profile-picture-input-1"
+                class="profile-picture-input"
+              >
+                <button id="upload-profile-picture">
+                  <i class="bx bx-cloud-upload"></i>Change Avatar
+                </button>
+              </label>
+              <button class="signout">
+                <i class="bx bx-log-out"></i>Logout
+              </button>
+              <!-- Hidden File Input -->
+              <input
+                type="file"
+                name="profilePicture"
+                id="profile-picture-input"
+                accept="image/*"
+              />
             </div>
+          </div>
+        </div>
+
+        <!-- Outside The Nav Menu Div -->
+        <div class="preview__image">
+          <div class="preview__image-content">
+            <!-- Waiting to be changed -->
+            <img id="preview-image" />
+            <div class="preview__button">
+              <button id="confirm-upload" disabled>Upload</button>
+              <button id="select-again-button">Select Again</button>
+            </div>
+            <button id="preview-close">Close Preview</button>
           </div>
         </div>
 
@@ -59,7 +92,7 @@
           <div id="app">
             <div id="chat_container"></div>
 
-            <form>
+            <form id="chatbot-form">
               <textarea
                 name="prompt"
                 rows="1"
@@ -67,7 +100,7 @@
                 placeholder="Ask Chatbot..."
                 id="promptTextarea"
               ></textarea>
-              <button type="submit"><i class='bx bx-chevrons-up'></i></button>
+              <button type="submit"><i class="bx bx-chevrons-up"></i></button>
             </form>
             <p class="bot__mistakes">
               ChatGPT is capable of making errors. It's advisable to verify

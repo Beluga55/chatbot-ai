@@ -289,6 +289,44 @@ newChatBtn.addEventListener("click", () => {
   });
 });
 
+// WHEN THE UPLOAD BUTTON IS CLICKED
+const uploadButton = document.getElementById("upload-profile-picture");
+const selectAgainBtn = document.getElementById("select-again-button");
+const profilePictureInput = document.getElementById("profile-picture-input");
+const previewImage = document.getElementById("preview-image");
+const confirmUploadButton = document.getElementById("confirm-upload");
+const previewImageDiv = document.querySelector(".preview__image");
+const closePreview = document.getElementById("preview-close");
+
+uploadButton.addEventListener("click", () => {
+  profilePictureInput.click();
+});
+
+selectAgainBtn.addEventListener("click", () => {
+  profilePictureInput.value = ""; // Clear the existing selection
+  profilePictureInput.click(); // Trigger it again
+});
+
+closePreview.addEventListener("click", () => {
+  previewImageDiv.classList.remove("show"); // Remove the preview
+})
+
+function handleImageInputChange(inputElement) {
+  const selectedImage = inputElement.files[0];
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    previewImage.src = event.target.result;
+    previewImageDiv.classList.add("show"); // Show the preview
+    confirmUploadButton.disabled = false; // Enable the confirmation button
+  };
+  reader.readAsDataURL(selectedImage);
+}
+
+// AFTER USERS HAS SELECTED THE IMAGE
+profilePictureInput.addEventListener("change", () => {
+  handleImageInputChange(profilePictureInput);
+});
+
 const handleSubmit = async () => {
   event.preventDefault();
 
