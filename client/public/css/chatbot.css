@@ -338,10 +338,10 @@ form img {
 }
 
 .preview__image-content {
-  margin-inline: 1.5rem;
   background: var(--cardBackground);
   padding: 1.5rem;
   border-radius: 0.25rem;
+  width: calc(100% - 3rem);
   max-width: 500px;
   position: absolute;
   top: 50%;
