@@ -48,13 +48,19 @@
               <button class="signout">
                 <i class="bx bx-log-out"></i>Logout
               </button>
-              <!-- Hidden File Input -->
-              <input
-                type="file"
-                name="profilePicture"
-                id="profile-picture-input"
-                accept="image/*"
-              />
+              <!-- Hidden File Input And Form Submission -->
+              <form
+                id="upload-form"
+                method="POST"
+                enctype="multipart/form-data"
+              >
+                <input
+                  type="file"
+                  name="file"
+                  id="profile-picture-input"
+                  accept="image/*"
+                />
+              </form>
             </div>
           </div>
         </div>
@@ -113,10 +119,13 @@
 
         <div class="overflow__delete-menu">
           <div class="overflow__delete-content">
-            <h2>Are you sure you wanna delete all conversation?</h2>
+            <h2>
+              This action cannot be undone. Are you sure you want to delete all
+              messages?
+            </h2>
             <div>
-              <button id="yesBtn">Yes</button>
-              <button id="noBtn">No</button>
+              <button id="yesBtn">Delete</button>
+              <button id="noBtn">Cancel</button>
             </div>
           </div>
         </div>

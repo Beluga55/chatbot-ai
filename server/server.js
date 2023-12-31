@@ -10,6 +10,8 @@ import { v4 as uuidv4 } from "uuid";
 import { ObjectId } from "mongodb";
 import nodemailer from "nodemailer";
 import { google } from "googleapis";
+import multer from "multer";
+import { GridFsStorage } from "multer-gridfs-storage";
 
 dotenv.config();
 
@@ -32,8 +34,6 @@ const client = new MongoClient(uri, {
   },
 });
 
-let storedResponses = [];
-
 async function initializeMongoClient() {
   try {
     await client.connect();
@@ -44,6 +44,21 @@ async function initializeMongoClient() {
 }
 
 initializeMongoClient().catch(console.dir);
+
+const storage = new GridFsStorage({
+  url: uri,
+  file: (req, file) => {
+    // instead of an object a string is returned
+    return {
+      filename: "file_" + Date.now(),
+      bucketName: "uploads", // Optional bucket for organization
+    };
+  },
+});
+
+const upload = multer({ storage });
+
+let storedResponses = [];
 
 // Express route for handling API requests
 app.post("/", async (req, res) => {
@@ -720,6 +735,21 @@ async function sendCollabEmail(name, email, content) {
     console.error("Error sending password reset email:", error.message);
   }
 }
+
+// UPLOAD IMAGE TO DATABASE
+app.post("/upload", upload.single("file"), async (req, res) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res.status(400).send("No file uploaded");
+    }
+
+    res.json({ filename: file.filename, fileId: file.id });
+  } catch (error) {
+    console.error("Error handling image upload:", error);
+    res.status(500).send("Error uploading image");
+  }
+});
 
 app.listen(5001, () =>
   console.log("AI server started on http://localhost:5001")

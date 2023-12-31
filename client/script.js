@@ -2,7 +2,7 @@ import bot from "./assets/bot.svg";
 import user from "./assets/user.svg";
 
 // FUNCTIONS ON TOP
-const form = document.querySelector("form");
+const form = document.getElementById("chatbot-form");
 const submitIcon = document.querySelector(".bx-chevrons-up");
 const textarea = document.getElementById("promptTextarea");
 const chatContainer = document.querySelector("#chat_container");
@@ -309,7 +309,7 @@ selectAgainBtn.addEventListener("click", () => {
 
 closePreview.addEventListener("click", () => {
   previewImageDiv.classList.remove("show"); // Remove the preview
-})
+});
 
 function handleImageInputChange(inputElement) {
   const selectedImage = inputElement.files[0];
@@ -325,6 +325,29 @@ function handleImageInputChange(inputElement) {
 // AFTER USERS HAS SELECTED THE IMAGE
 profilePictureInput.addEventListener("change", () => {
   handleImageInputChange(profilePictureInput);
+});
+
+// UPLOAD THE IMAGE SECTION
+const uploadForm = document.getElementById("upload-form");
+const uploadImageButton = document.getElementById("confirm-upload");
+
+uploadImageButton.addEventListener("click", async function () {
+  event.preventDefault();
+  const formData = new FormData(uploadForm);
+  console.log(formData);
+
+  try {
+    const response = await fetch("http://localhost:5001/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+    // Handle Successful Upload
+    console.log("Image uploaded successfully:", data);
+  } catch (error) {
+    console.error("Error uploading image:", error);
+  }
 });
 
 const handleSubmit = async () => {

@@ -8,7 +8,7 @@ const signupBtn = document.querySelectorAll(".signup__button");
 const username = document.querySelectorAll(".nav-username");
 const serviceContainers = document.querySelectorAll(".service__content");
 const textarea = document.getElementById("promptTextarea");
-const form = document.querySelector("form");
+const form = document.getElementById("chatbot-form");
 const navList = document.querySelector(".nav__links ul");
 
 if (navList) {
