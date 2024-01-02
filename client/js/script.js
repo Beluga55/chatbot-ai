@@ -1,5 +1,5 @@
-import bot from "./assets/bot.svg";
-import user from "./assets/user.svg";
+import bot from "../assets/bot.svg";
+import user from "../assets/user.svg";
 
 // FUNCTIONS ON TOP
 const form = document.getElementById("chatbot-form");
@@ -289,67 +289,6 @@ newChatBtn.addEventListener("click", () => {
   });
 });
 
-// WHEN THE UPLOAD BUTTON IS CLICKED
-const uploadButton = document.getElementById("upload-profile-picture");
-const selectAgainBtn = document.getElementById("select-again-button");
-const profilePictureInput = document.getElementById("profile-picture-input");
-const previewImage = document.getElementById("preview-image");
-const confirmUploadButton = document.getElementById("confirm-upload");
-const previewImageDiv = document.querySelector(".preview__image");
-const closePreview = document.getElementById("preview-close");
-
-uploadButton.addEventListener("click", () => {
-  profilePictureInput.click();
-});
-
-selectAgainBtn.addEventListener("click", () => {
-  profilePictureInput.value = ""; // Clear the existing selection
-  profilePictureInput.click(); // Trigger it again
-});
-
-closePreview.addEventListener("click", () => {
-  previewImageDiv.classList.remove("show"); // Remove the preview
-});
-
-function handleImageInputChange(inputElement) {
-  const selectedImage = inputElement.files[0];
-  const reader = new FileReader();
-  reader.onload = (event) => {
-    previewImage.src = event.target.result;
-    previewImageDiv.classList.add("show"); // Show the preview
-    confirmUploadButton.disabled = false; // Enable the confirmation button
-  };
-  reader.readAsDataURL(selectedImage);
-}
-
-// AFTER USERS HAS SELECTED THE IMAGE
-profilePictureInput.addEventListener("change", () => {
-  handleImageInputChange(profilePictureInput);
-});
-
-// UPLOAD THE IMAGE SECTION
-const uploadForm = document.getElementById("upload-form");
-const uploadImageButton = document.getElementById("confirm-upload");
-
-uploadImageButton.addEventListener("click", async function () {
-  event.preventDefault();
-  const formData = new FormData(uploadForm);
-  console.log(formData);
-
-  try {
-    const response = await fetch("http://localhost:5001/upload", {
-      method: "POST",
-      body: formData,
-    });
-
-    const data = await response.json();
-    // Handle Successful Upload
-    console.log("Image uploaded successfully:", data);
-  } catch (error) {
-    console.error("Error uploading image:", error);
-  }
-});
-
 const handleSubmit = async () => {
   event.preventDefault();
 
@@ -445,5 +384,60 @@ submitIcon.addEventListener("click", () => {
 form.addEventListener("keyup", (e) => {
   if (e.keyCode === 13 && !e.shiftKey) {
     handleSubmit(e);
+  }
+});
+
+// TRIGGERS THE POPUP MENU
+const triggerUploadMenu = document.getElementById("upload-profile-picture");
+const triggerMenu = document.querySelector(".preview__image");
+const closePreview = document.getElementById("close-preview");
+const uploadButton = document.getElementById("upload-button");
+const uploadImage = document.getElementById("upload-image");
+const chosenImage = document.getElementById("preview-image");
+const formUploadImage = document.getElementById("form-upload-image");
+
+triggerUploadMenu.addEventListener("click", () => {
+  triggerMenu.classList.add("show");
+});
+
+closePreview.addEventListener("click", () => {
+  triggerMenu.classList.remove("show");
+  chosenImage.style.display = "none";
+  formUploadImage.reset();
+});
+
+function handleImageInputChange(inputElement) {
+  const selectedImage = inputElement.files[0];
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    chosenImage.src = event.target.result;
+    chosenImage.style.display = "block";
+    uploadImage.style.marginTop = "1rem";
+  };
+  reader.readAsDataURL(selectedImage);
+}
+
+// AFTER USERS HAS SELECTED THE IMAGE
+uploadImage.addEventListener("change", () => {
+  handleImageInputChange(uploadImage);
+});
+
+// UPLOAD THE IMAGE TO THE BACKEND TO PROCESS
+uploadButton.addEventListener("click", async function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(formUploadImage);
+
+  try {
+    const response = await fetch("http://localhost:5001/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+    // Handle Successful Upload
+    console.log(data.message);
+  } catch (error) {
+    console.error("Error uploading image:", error);
   }
 });

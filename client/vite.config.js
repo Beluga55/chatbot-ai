@@ -2,13 +2,9 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 
 const root = resolve(__dirname, "");
-const outDir = resolve(__dirname, "dist");
 
 export default defineConfig({
-  root,
   build: {
-    outDir,
-    emptyOutDir: true,
     rollupOptions: {
       input: {
         main: resolve(root, "index.html"),
@@ -21,13 +17,13 @@ export default defineConfig({
         admin: resolve(root, "admin.html"),
         forgotPassword: resolve(root, "forgotPassword.html"),
         resetPassword: resolve(root, "resetPassword.html"),
-        scriptjs: resolve(root, "script.js"),
+        scriptjs: resolve(root, "js/script.js"),
         navigation: resolve(root, "navigation.js"),
         validateSignup: resolve(root, "validateSignup.js"),
         validateLogin: resolve(root, "validateLogin.js"),
         authMiddleware: resolve(root, "authMiddleware.js"),
         retrieveEmail: resolve(root, "retrieveEmail.js"),
-        collab: resolve(root, "collab.js")
+        collab: resolve(root, "collab.js"),
       },
     },
   },

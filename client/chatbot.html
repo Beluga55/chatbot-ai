@@ -37,47 +37,33 @@
               <button id="delete-all-conversation">
                 <i class="bx bx-trash"></i>Clear Chat
               </button>
-              <label
-                for="profile-picture-input-1"
-                class="profile-picture-input"
-              >
-                <button id="upload-profile-picture">
-                  <i class="bx bx-cloud-upload"></i>Change Avatar
-                </button>
-              </label>
+              <button id="upload-profile-picture">
+                <i class="bx bx-cloud-upload"></i>Change Avatar
+              </button>
               <button class="signout">
                 <i class="bx bx-log-out"></i>Logout
               </button>
-              <!-- Hidden File Input And Form Submission -->
-              <!-- <form
-                id="upload-form"
-                method="POST"
-                enctype="multipart/form-data"
-              >
-                <input
-                  type="file"
-                  name="file"
-                  id="profile-picture-input"
-                  accept="image/*"
-                />
-              </form> -->
             </div>
           </div>
         </div>
 
-        <!-- Outside The Nav Menu Div -->
-        <!-- <div class="preview__image">
-          <div class="preview__image-content">
-            <div class="image-wrapper">
-              <img id="preview-image" />
-            </div>
-            <div class="preview__button">
-              <button id="confirm-upload" disabled>Upload</button>
-              <button id="select-again-button">Select Again</button>
-            </div>
-            <button id="preview-close">Close Preview</button>
+        <!-- TRIGGER THE UPLOAD MENU -->
+        <div class="preview__image">
+          <div>
+            <img class="selected__image" id="preview-image" />
+            <form class="form__upload-image" id="form-upload-image">
+              <input
+                type="file"
+                name="image"
+                class="file__upload-image"
+                id="upload-image"
+                accept="image/*"
+              />
+              <button type="submit" id="upload-button">Upload</button>
+              <button type="button" id="close-preview">Close</button>
+            </form>
           </div>
-        </div> -->
+        </div>
 
         <div class="nav__wrapper">
           <div class="nav__header">
@@ -131,8 +117,8 @@
       </nav>
     </header>
 
-    <script type="module" src="script.js"></script>
-    <script type="module" src="navigation.js"></script>
-    <script type="module" src="authMiddleware.js"></script>
+    <script type="module" src="js/script.js"></script>
+    <script type="module" src="js/navigation.js"></script>
+    <script type="module" src="js/authMiddleware.js"></script>
   </body>
 </html>

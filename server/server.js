@@ -10,8 +10,8 @@ import { v4 as uuidv4 } from "uuid";
 import { ObjectId } from "mongodb";
 import nodemailer from "nodemailer";
 import { google } from "googleapis";
-// import multer from "multer";
-// import { GridFsStorage } from "multer-gridfs-storage";
+import multer from "multer";
+import { GridFsStorage } from "multer-gridfs-storage";
 
 dotenv.config();
 
@@ -45,18 +45,21 @@ async function initializeMongoClient() {
 
 initializeMongoClient().catch(console.dir);
 
-// const storage = new GridFsStorage({
-//   url: uri,
-//   file: (req, file) => {
-//     // instead of an object a string is returned
-//     return {
-//       filename: "file_" + Date.now(),
-//       bucketName: "uploads", // Optional bucket for organization
-//     };
-//   },
-// });
+const database = client.db("Chatbot");
 
-// const upload = multer({ storage });
+const storage = new GridFsStorage({
+  url: uri,
+  db: database,
+  file: (req, file) => {
+    // Custom configuration for storing files, if needed
+    return {
+      filename: file.originalname,
+      bucketName: "uploads", // replace with your bucket name
+    };
+  },
+});
+
+const upload = multer({ storage: storage });
 
 let storedResponses = [];
 
@@ -737,19 +740,21 @@ async function sendCollabEmail(name, email, content) {
 }
 
 // UPLOAD IMAGE TO DATABASE
-// app.post("/upload", upload.single("file"), async (req, res) => {
-//   try {
-//     const file = req.file;
-//     if (!file) {
-//       return res.status(400).send("No file uploaded");
-//     }
+app.post("/upload", upload.single("image"), async (req, res) => {
+  try {
+    const image = req.file;
+    if (!image) {
+      return res.status(400).send("No file uploaded");
+    }
 
-//     res.json({ filename: file.filename, fileId: file.id });
-//   } catch (error) {
-//     console.error("Error handling image upload:", error);
-//     res.status(500).send("Error uploading image");
-//   }
-// });
+    res.status(200).json({
+      message: "Successfully uploaded!",
+    });
+  } catch (error) {
+    console.error("Error handling image upload:", error);
+    res.status(500).send("Error uploading image");
+  }
+});
 
 app.listen(5001, () =>
   console.log("AI server started on http://localhost:5001")

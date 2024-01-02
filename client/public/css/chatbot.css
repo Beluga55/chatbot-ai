@@ -301,36 +301,22 @@ form img {
   font-size: 1.5rem;
 }
 
-#profile-picture-input,
-#upload-form {
+.selected__image {
   display: none;
-}
-
-#preview-image {
   border-radius: 0.25rem;
-}
-
-.profile-picture-input {
-  width: 100%;
-}
-
-.image-wrapper {
-  overflow-y: auto;
-  max-height: 300px;
 }
 
 .preview__image {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100svh;
-  background: transparent;
   backdrop-filter: blur(100px);
+  z-index: 2;
+  width: 100%;
+  height: 100%;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-  z-index: 2;
 }
 
 .preview__image.show {
@@ -338,45 +324,45 @@ form img {
   visibility: visible;
 }
 
-.preview__image-content {
+.preview__image > div {
+  width: calc(100% - 3rem);
   background: var(--cardBackground);
   padding: 1.5rem;
   border-radius: 0.25rem;
-  width: calc(100% - 3rem);
   max-width: 500px;
+  max-height: 80vh;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-height: 80svh;
-  overflow-y: scroll;
-  scrollbar-gutter: stable;
 }
 
-.preview__button {
+.form__upload-image {
   display: flex;
-  gap: 1rem;
-  margin: 1rem 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.preview__image-content p {
-  font-size: 12px;
-  text-align: left;
-}
-
-.preview__image-content button {
-  width: 100%;
+.form__upload-image button {
   background: var(--White);
-  text-align: center;
-  font-size: 12px;
-  border-radius: 0.25rem;
+  width: 100%;
   padding: 0.65rem 0;
-  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+  border-radius: 0.25rem;
+  font-size: 12px;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
 }
 
-.preview__image-content button:hover {
+.form__upload-image button:hover {
   background: var(--accent);
   color: var(--White);
+  transform: translate(0, -3px);
+}
+
+.file__upload-image {
+  color: var(--White);
+  margin-bottom: 0.5rem;
 }
 
 /* Add desired styles for code blocks */
@@ -567,19 +553,20 @@ form img {
     color: var(--Black);
   }
 
-  .preview__image-content button {
-    width: 100%;
+  .form__upload-image button {
     background: var(--White);
-    text-align: center;
-    font-size: 12px;
-    border-radius: 0.25rem;
+    width: 100%;
     padding: 0.65rem 0;
-    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+    border-radius: 0.25rem;
+    font-size: 12px;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out,
+      transform 0.3s ease-in-out;
   }
 
-  .preview__image-content button:hover {
+  .form__upload-image button:hover {
     background: var(--accent);
     color: var(--White);
+    transform: translate(0, -3px);
   }
 
   #yesBtn,
@@ -603,7 +590,7 @@ form img {
     display: block;
   }
 
-  form {
+  #chatbot-form {
     margin: 1.5rem 0 0;
   }
 
