@@ -1,31 +1,48 @@
+/* =========================== MODULES =========================== */
+
+/* ========== CONNECTION MODULE ========== */
 import express from "express";
 import { MongoClient, ServerApiVersion } from "mongodb";
+import { ObjectId } from "mongodb";
 import cors from "cors";
+
+/* ========== API KEYS MODULE ========== */
 import * as dotenv from "dotenv";
+
+/* ========== COMPRESSION MODULE ========== */
 import compression from "compression";
+
+/* ========== CHATBOT MODULE ========== */
 import OpenAI from "openai";
+
+/* ========== SECURITY MODULE ========== */
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
-import { ObjectId } from "mongodb";
+
+/* ========== SEND EMAILS MODULE ========== */
 import nodemailer from "nodemailer";
 import { google } from "googleapis";
+
+/* ========== UPLOAD IMAGES MODULE ========== */
 import multer from "multer";
 import { GridFsStorage } from "multer-gridfs-storage";
 
+/* ========== ACCESS TO ENVIRONMENT VARIABLES (ENV) ========== */
 dotenv.config();
 
+/* ========== CONNECT EXPRESS, CORS, COMPRESSION ========== */
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(compression());
 
+/* ========== EXTRACT KEYS FROM ENV FILE ========== */
 const uri = process.env.MONGODB_KEY;
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const secretKey = process.env.SECRET_KEY;
 
+/* ========== CONNECTION TO MONGO DATABASE ========== */
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -37,65 +54,65 @@ const client = new MongoClient(uri, {
 async function initializeMongoClient() {
   try {
     await client.connect();
-    console.log("Connected to MongoDB");
+    console.log("Connected To MongoDB");
   } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
+    console.error("Error Connecting To MongoDB: ", error);
   }
 }
 
 initializeMongoClient().catch(console.dir);
 
+/* ========== GLOBAL VARIABLES FOR MONGODB DATABASE, COLLECTION AND CHATBOT ARRAY ========== */
 const database = client.db("Chatbot");
+const title = database.collection("Title");
+const users = database.collection("Users");
+const converHistory = database.collection("conversationHistory");
+let storedResponses = [];
 
+/* ========== INITIALIZE GRIDFS CONFIGURATION ========== */
 const storage = new GridFsStorage({
   url: uri,
   db: database,
   file: (req, file) => {
-    // Custom configuration for storing files, if needed
     return {
       filename: file.originalname,
-      bucketName: "uploads", // replace with your bucket name
+      bucketName: "uploads",
     };
   },
 });
 
+/* ========== INITIALIZE MULTER CONFIGURATION ========== */
 const upload = multer({ storage: storage });
 
-let storedResponses = [];
+/* ====================== EXPRESS ROUTE HANDLING API REQUESTS ====================== */
 
-// Express route for handling API requests
+/* ========== EXPRESS CHATBOT CONFIGURATION ========== */
 app.post("/", async (req, res) => {
   try {
-    const prompt = req.body.prompt;
-    const username = req.body.username;
-    const status = req.body.status;
-    const randomID = req.body.randomID;
+    const { prompt, username, status, randomID } = req.body;
 
-    const db = client.db("Chatbot");
-    const collectionTitle = db.collection("Title");
-    const converHistory = db.collection("conversationHistory");
-
-    // Extract randomID
+    // CHECK RANDOM ID (MATCH OR EMPTY)
     if (randomID !== "") {
       const storedRandomID = await converHistory.findOne({ randomID });
 
       if (storedRandomID) {
         const matchRandomID = storedRandomID.randomID;
 
-        // Compare randomID
+        // COMPARE THE RANDOM ID WITH THE EXTRACTION FROM THE DATABASE
         if (randomID === matchRandomID) {
-          // Extract Responses From Database
+          // EXTRACT THE RESPONSE WITH THE MATCHING RANDOM ID AND THE BOT LAST RESPONSE
           const historyResponse = await converHistory.findOne(
             { randomID },
             { latestBotResponse: 1 }
           );
 
-          // Use latest responses directly (if available)
+          // USE LATEST RESPONSES DIRECTLY (IF AVAILABLE)
           const lastBotResponse = historyResponse?.latestBotResponse;
 
-          // Clear the array make sure is not overloaded
+          // CLEAR THE ARRAY MAKE SURE IS NOT OVERLOADED
           storedResponses = [];
 
+          // PUSH THE ASSISTANT RESPONSE FIRST THEN USER PROMPT
           if (lastBotResponse) {
             storedResponses.push({
               role: "assistant",
@@ -111,27 +128,26 @@ app.post("/", async (req, res) => {
       storedResponses.push({ role: "user", content: prompt });
     }
 
-    // When the browser is refreshed
+    // WHEN THE BROWSER IS REFRESHED
     if (randomID === null) {
       storedResponses = [];
       storedResponses.push({ role: "user", content: prompt });
     }
 
-    // Testing Purpose
-    console.log(...storedResponses);
-
-    // Include the main OpenAI logic here
+    // RETRIEVE API RESPONSE FROM OPENAI
     async function main() {
       let botResponse = "";
       let botTitleResponse = "";
 
+      // IF EMPTY PROMPT SUBMITTED
       if (prompt.trim() === "") {
         res.status(500).send("Please provide some text...");
         return;
       }
 
+      // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
       const completion = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo-1106", // gpt-3.5-turbo-1106 // gpt-4-0613
+        model: "gpt-3.5-turbo-1106",
         messages: [
           {
             role: "system",
@@ -141,28 +157,23 @@ app.post("/", async (req, res) => {
         ],
         stream: true,
         temperature: 0,
-        max_tokens: 500,
+        max_tokens: 400,
         top_p: 1,
         frequency_penalty: 0.6,
         presence_penalty: 0.6,
       });
 
+      // COMBINE STREAM WORDS USING FOR LOOP
       for await (const chunk of completion) {
         if (chunk.choices[0].delta.content !== undefined) {
           botResponse += chunk.choices[0].delta.content;
         }
       }
 
-      // Extract the user's prompt from the conversation history
-      const userPrompt = prompt;
-
-      // Extract the assistant's response from the conversation history
-      const assistantResponse = botResponse;
-
+      // GENERATE TITLE BASED ON THE PROMPT
       if (status === false) {
-        // Make a new API request to ChatGPT to generate a short title
         const titleGenerationResponse = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo", // Use an appropriate model for title generation
+          model: "gpt-3.5-turbo",
           messages: [
             {
               role: "system",
@@ -170,58 +181,55 @@ app.post("/", async (req, res) => {
             },
             {
               role: "user",
-              content: `Generate a concise title with less than 5 words based on the following conversation:\n\nUser Prompt: ${userPrompt}\n`,
+              content: `Generate a concise title with less than 5 words based on the following conversation:\n\nUser Prompt: ${prompt}\n`,
             },
           ],
           stream: true,
           temperature: 0.7,
-          max_tokens: 10, // Adjust the value to control the length of the title
+          max_tokens: 10,
         });
 
+        // COMBINE STREAM WORDS USING FOR LOOP
         for await (const chunk of titleGenerationResponse) {
           if (chunk.choices[0].delta.content !== undefined) {
             botTitleResponse += chunk.choices[0].delta.content;
           }
         }
 
-        // Extract the generated title from the API response
-        const generatedTitle = botTitleResponse;
-
+        // GENERATE A RANDOM ID FOR EACH TITLE
         const randomID = uuidv4();
 
-        await collectionTitle.insertOne({
+        // INSERT THE REQUIRED DATA TO DATABASE
+        await title.insertOne({
           username,
           randomID,
-          generatedTitle,
+          generatedTitle: botTitleResponse,
         });
 
         await converHistory.insertOne({
           randomID,
-          prompts: [userPrompt],
-          responses: [assistantResponse],
-          latestBotResponse: assistantResponse,
+          prompts: [prompt],
+          responses: [botResponse],
+          latestBotResponse: botResponse,
         });
 
-        // Send the title along with the API response
+        // SEND THE TITLE ALONG WITH THE API RESPONSE
         res.status(200).send({
           bot: botResponse,
-          generatedTitle: generatedTitle,
-          assistantResponse: assistantResponse,
+          generatedTitle: botTitleResponse,
           randomID: randomID,
           status: status,
         });
       } else {
-        const converHistory = db.collection("conversationHistory");
-
         const updateResult = await converHistory.updateOne(
           { randomID },
           {
             $push: {
-              prompts: userPrompt,
-              responses: assistantResponse,
+              prompts: prompt,
+              responses: botResponse,
             },
             $set: {
-              latestBotResponse: assistantResponse,
+              latestBotResponse: botResponse,
             },
           }
         );
@@ -232,7 +240,7 @@ app.post("/", async (req, res) => {
           console.log("Document not updated");
         }
 
-        // Send the title along with the API response
+        // SEND THE API RESPONSE AND STATUS ONLY
         res.status(200).send({
           bot: botResponse,
           status: status,
@@ -240,164 +248,142 @@ app.post("/", async (req, res) => {
       }
     }
 
+    // CATCH ALL ERRORS
     main().catch((error) => {
       console.error(error);
-
-      res.status(500).send(error || "Something went wrong");
+      res.status(500).send(error || "Something Went Wrong");
     });
   } catch (error) {
     console.error(error);
-    res.status(500).send(error || "Something went wrong");
+    res.status(500).send(error || "Something Went Wrong");
   }
 });
 
-// Check edit database structure (role === admin ? user)
-// Handle form submissions
+/* ========== EXPRESS LOGIN CONFIGURATION ========== */
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // RETRIEVE THE USER BASED ON THE PROVIDED EMAIL
+    const user = await users.findOne({ email });
+
+    // CHECK IF THE USERS EXIST
+    if (!user) {
+      return res.status(401).send({ error: "Invalid email or password" });
+    }
+
+    // COMPARE THE PROVIDED PASSWORD AND HASHED PASSWORD FROM THE COLLECTION
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (passwordMatch) {
+      // ASSIGN A TOKEN UPON LOGIN SUCCESS
+      const token = jwt.sign(
+        { userId: user._id, email: user.email },
+        secretKey,
+        { expiresIn: "1h" }
+      );
+
+      // SEND BACK THE TOKEN, ROLE AND USERNAME
+      res.json({
+        token,
+        role: user.role,
+        username: user.username,
+      });
+    } else {
+      // PASSWORD DO NOT MATCH
+      res.status(401).json({ error: "Invalid email or password" });
+    }
+  } catch (error) {
+    console.error("Error during login: ", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+/* ========== EXPRESS SIGNUP CONFIGURATION ========== */
 app.post("/signup", async (req, res) => {
   try {
-    const formData = req.body;
+    const { username, email, password } = req.body;
 
-    // Assuming your form data structure is simple, adjust accordingly
-    const { username, email, password } = formData;
-
-    // Validate form data
+    // VALIDATE FORM DATA
     if (!username || !email || !password) {
       return res.status(400).json({ error: "Invalid form data" });
     }
 
-    // Hash the password before storing it
-    const hashedPassword = await bcrypt.hash(password, 10); // 10 is the number of salt rounds
+    // HASH THE PASSWORD BEFORE STORING IT
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Insert the form data into MongoDB
-    const db = client.db("Chatbot");
-    const collection = db.collection("Users");
+    // CREATE UNIQUE INDEXES ON USERNAME AND EMAIL
+    await users.createIndex({ username: 1 }, { unique: true });
+    await users.createIndex({ email: 1 }, { unique: true });
 
-    // Create unique indexes on 'username' and 'email'
-    await collection.createIndex({ username: 1 }, { unique: true });
-    await collection.createIndex({ email: 1 }, { unique: true });
-
-    // Specify the default role (in this case, 'user')
+    // THE DEFAULT ROLE IS USER
     const defaultRole = "user";
 
-    const insert = await collection.insertOne({
+    // INSERT TO DATABASE
+    const insert = await users.insertOne({
       username,
       email,
       password: hashedPassword,
       role: defaultRole,
     });
 
+    // CHECKS WHETHER SUCCESSFULLY INSERT
     if (insert.acknowledged === true) {
-      res.status(200).send({
-        message: "Form submitted successfully",
-      });
+      // NO CONTENT SUCCESS RESPONSE
+      res.status(204).end();
     } else {
-      // Insertion failed
       res.status(500).json({ error: "Failed to insert data" });
     }
   } catch (error) {
     console.error("Error handling form submission:", error);
 
+    // CHECKS DUPLLICATE EMAIL AND USERNAME
     if (error.code === 11000) {
       return res
         .status(400)
         .send({ error: "Email or username is already taken" });
     } else {
-      // Handle other errors
       console.error("Error handling form submission:", error);
       res.status(500).send({ error: "Internal Server Error" });
     }
   }
 });
 
-app.post("/login", async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    // Insert the form data into MongoDB
-    const db = client.db("Chatbot");
-    const collection = db.collection("Users");
-
-    // Retrieve the user based on the provided email
-    const user = await collection.findOne({ email });
-
-    if (!user) {
-      return res.status(401).send({ error: "Invalid email or password" });
-    }
-
-    // Compare the provided password with the hashed password from the Users collection
-    const passwordMatch = await bcrypt.compare(password, user.password);
-
-    if (passwordMatch) {
-      // Passwords match, login successful
-      const token = jwt.sign(
-        { userId: user._id, email: user.email },
-        secretKey,
-        {
-          expiresIn: "1h",
-        }
-      );
-
-      if (user.role === "admin") {
-        // If the user is an admin, include admin-specific details in the response
-        res.json({
-          message: "Login successful as admin",
-          token,
-          role: user.role,
-          username: user.username,
-        });
-      } else {
-        // If the user is not an admin, include regular user details in the response
-        res.json({
-          message: "Login successful as user",
-          token,
-          role: user.role,
-          username: user.username,
-        });
-      }
-    } else {
-      // Passwords do not match
-      res.status(401).json({ error: "Invalid email or password" });
-    }
-  } catch (error) {
-    console.error("Error during login:", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
+/* ========== EXPRESS GET ALL TITLES CONFIGURATION ========== */
 app.post("/getAllTitles", async (req, res) => {
-  const username = req.body.username;
   try {
-    const db = client.db("Chatbot");
-    const collection = db.collection("Title");
-    const historyCollection = db.collection("conversationHistory");
+    const username = req.body.username;
 
-    // Fetch all documents and project only the generatedTitle field
-    const titleResult = await collection
+    // FETCH ALL DOCUMENTS AND PROJECT THE GENERATED TITLE FIELD
+    const titleResult = await title
       .find(
         { username: username },
         { projection: { _id: 0, generatedTitle: 1, randomID: 1 } }
       )
       .toArray();
 
+    // IF THERE IS TITLES INSIDE THIS USERNAME
     if (titleResult.length > 0) {
-      // Extract randomIDs from the "Title" collection
-      const titleRandomIDs = titleResult.map((doc) => doc.randomID);
+      // MAP THE TITLES
+      const titleResultArray = titleResult.map((doc) => doc.randomID);
 
-      // Fetch documents from "conversationHistory" where randomID is in titleRandomIDs
-      const historyResult = await historyCollection
-        .find({ randomID: { $in: titleRandomIDs } })
+      // FETCH DOCUMENTS FROM CONVERSATION HISTORY AND CHECK THE RANDOM ID IS SAME WITH THE TITLE RANDOM ID ON THE TITLE
+      const converHistoryCollection = await converHistory
+        .find({ randomID: { $in: titleResultArray } })
         .toArray();
 
-      if (historyResult.length > 0) {
-        // If there are matching randomIDs in both collections, return titles and randomIDs
+      // IF YES, MAP ALL THE TITLES AND RANDOMID TOGETHER
+      if (converHistoryCollection.length > 0) {
         const titlesAndRandomIDs = titleResult.map((doc) => ({
           titles: doc.generatedTitle,
           randomID: doc.randomID,
         }));
 
+        // SEND BACK TO THE FRONTEND
         res.json({ titlesAndRandomIDs });
       }
     } else {
+      // IF NOTHING SEND AN EMPTY ARRAY TO PREVENT ERROR
       res.status(200).json({ titlesAndRandomIDs: [] });
     }
   } catch (error) {
@@ -406,52 +392,40 @@ app.post("/getAllTitles", async (req, res) => {
   }
 });
 
+/* ========== EXPRESS DELETE ALL DATA CONFIGURATION ========== */
 app.delete("/deleteAllData", async (req, res) => {
-  const username = req.body.username;
   try {
-    const db = client.db("Chatbot");
-    const collection = db.collection("Title");
-    const converHistory = db.collection("conversationHistory");
+    const username = req.body.username;
 
-    // Find documents in the "Title" collection with the given username
-    const titleDocuments = await collection
-      .find({ username: username })
-      .toArray();
+    // FIND DOCUMENT IN THE TITLE COLLECTION WITH THE GIVEN USERNAME
+    const titleDocuments = await title.find({ username: username }).toArray();
 
-    // Extract randomIDs from the Title documents
+    // EXTRACT THE DATA AND MAP THE RANDOM ID INTO A NEW ARRAY
     const randomIDs = titleDocuments.map((doc) => doc.randomID);
 
-    // Delete documents in the "converHistory" collection where randomID matches
-    const resultConverHistory = await converHistory.deleteMany({
+    // DELETE DOCUMENTS IN THE "CONVERHISTORY" COLLECTION WHERE RANDOM ID MATCHES
+    await converHistory.deleteMany({
       randomID: { $in: randomIDs },
     });
 
-    // Delete all documents in the "Title" collection
-    const result = await collection.deleteMany({ username: username });
+    // DELETE ALL THE TITLES ASSOCIATED WITH THE USERNAME
+    await title.deleteMany({ username: username });
 
-    console.log(result.deletedCount, "documents deleted from Title collection");
-    console.log(
-      resultConverHistory.deletedCount,
-      "documents deleted from converHistory collection"
-    );
-
-    res.status(204).end(); // No content success response
+    // NO CONTENT SUCCESS RESPONSE
+    res.status(204).end();
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
+/* ========== EXPRESS RETRIEVE CHAT HISTORY CONFIGURATION ========== */
 app.post("/retrieveHistory", async (req, res) => {
   try {
-    const randomID = req.body.randomID; // Use req.query to get the randomID from the query parameters
+    const randomID = req.body.randomID;
 
-    const db = client.db("Chatbot");
-    const titleCollection = db.collection("Title");
-    const historyCollection = db.collection("conversationHistory");
-
-    const titleDocument = await titleCollection.findOne({ randomID });
-    const historyDocument = await historyCollection.findOne({ randomID });
+    const titleDocument = await title.findOne({ randomID });
+    const historyDocument = await converHistory.findOne({ randomID });
 
     if (titleDocument && historyDocument) {
       const prompts = historyDocument.prompts;
@@ -459,9 +433,9 @@ app.post("/retrieveHistory", async (req, res) => {
 
       res.json({ randomID: randomID, prompts, responses });
     } else {
-      res
-        .status(404)
-        .json({ error: "Random ID not found in Title or conversationHistory" });
+      res.status(404).json({
+        error: "Random ID not found in Title or Conversation History",
+      });
     }
   } catch (error) {
     console.error(error);
@@ -469,27 +443,21 @@ app.post("/retrieveHistory", async (req, res) => {
   }
 });
 
+/* ========== EXPRESS DELETE SINGLE CONVERSATION CONFIGURATION ========== */
 app.post("/delOneConver", async (req, res) => {
   try {
     const randomID = req.body.titleID;
 
-    const db = client.db("Chatbot");
-    const titleCollection = db.collection("Title");
-    const historyCollection = db.collection("conversationHistory");
-
-    const titleDocument = await titleCollection.findOne({ randomID });
-    const historyDocument = await historyCollection.findOne({ randomID });
+    const titleDocument = await title.findOne({ randomID });
+    const historyDocument = await converHistory.findOne({ randomID });
 
     if (titleDocument && historyDocument) {
-      // Delete document from Title collection
-      await titleCollection.deleteOne({ randomID });
+      // DELETE DOCUMENT FROM TITLE COLECTION AND CONVERSATION COLLECTION
+      await title.deleteOne({ randomID });
+      await converHistory.deleteOne({ randomID });
 
-      // Delete document from conversationHistory collection
-      await historyCollection.deleteOne({
-        randomID,
-      });
-
-      res.status(200).json({ success: true });
+      // NO CONTENT SUCCESS RESPONSE
+      res.status(204).end();
     } else {
       res
         .status(404)
@@ -501,66 +469,28 @@ app.post("/delOneConver", async (req, res) => {
   }
 });
 
-app.post("/validateEmail", async (req, res) => {
-  try {
-    const email = req.body.email;
-
-    // Make sure the email is in the database
-    const db = client.db("Chatbot");
-    const users = db.collection("Users");
-
-    // Check inside the database whether it match the prompt from user
-    const checkEmail = await users.findOne({ email });
-
-    // Extract the password from the database based on the email provided
-    if (checkEmail) {
-      const id = checkEmail._id;
-      const email = checkEmail.email;
-      const password = checkEmail.password;
-
-      // After checking we need to validate whether both email is the same
-      if (email === email) {
-        const secret = process.env.VALIDATE_JWT_SECRET_KEY + password;
-        const payload = {
-          email: email,
-          id: id,
-        };
-        const token = jwt.sign(payload, secret, { expiresIn: "15m" });
-        const link = `https://chatbot-rreu.onrender.com/reset-password/${id}/${token}`;
-
-        // Send the link using email
-        sendResetPasswordEmail(email, link);
-
-        res.status(200).json({
-          message: "Link has been sent to your email",
-        });
-      }
-    } else {
-      res.status(401).json({
-        message: "This user doesn't exist",
-      });
-    }
-  } catch (error) {
-    console.log(error.message);
-  }
-});
-
-// Function to send the email using Nodemailer
+/* ========== EXPRESS RESET PASSWORD CONFIGURATION (FUNCTION ON TOP) ========== */
 async function sendResetPasswordEmail(email, link) {
   const clientID = process.env.CLIENT_ID;
   const clientSecret = process.env.CLIENT_SECRET;
   const redirectURI = process.env.REDIRECT_URI;
   const refreshToken = process.env.REFRESH_TOKEN;
 
+  // AUTHENTICATION FROM GOOGLE (OAUTH2)
   const oAuth2Client = new google.auth.OAuth2(
     clientID,
     clientSecret,
     redirectURI
   );
+
+  // GET THE REFRESH TOKEN
   oAuth2Client.setCredentials({ refresh_token: refreshToken });
+
+  // TRY TO SEND EMAIL USING NODEMAILER
   try {
     const accessToken = await oAuth2Client.getAccessToken();
 
+    // AUTHENTICATION FOR NODEMAILER
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -573,6 +503,7 @@ async function sendResetPasswordEmail(email, link) {
       },
     });
 
+    // DEFINE NODEMAILER CONFIGURATION
     const mailOptions = {
       from: "CHATBOT - AI <testingforchatbotai@gmail.com>",
       to: email,
@@ -581,123 +512,132 @@ async function sendResetPasswordEmail(email, link) {
     };
 
     await transporter.sendMail(mailOptions);
-    console.log("Password reset email sent successfully");
   } catch (error) {
     console.error("Error sending password reset email:", error.message);
   }
 }
 
-// GET PARAMETER TO REDIRECT USERS TO THE DEDICATED PAGE
+/* ========== STEP 1: VALIDATE EMAIL ========== */
+app.post("/validateEmail", async (req, res) => {
+  try {
+    const email = req.body.email;
+
+    // CHECK THE DATABASE WHETHER THIS USER EXIST
+    const checkEmail = await users.findOne({ email });
+
+    // EXTRACT THE REQUIRED DATA
+    if (checkEmail) {
+      const id = checkEmail._id;
+      const email = checkEmail.email;
+      const password = checkEmail.password;
+
+      // CHECK THE EMAIL WHETHER IT IS SAME AND SIGN A JWT TOKEN
+      if (email === email) {
+        const secret = process.env.VALIDATE_JWT_SECRET_KEY + password;
+        const payload = { email: email, id: id };
+        const token = jwt.sign(payload, secret, { expiresIn: "15m" });
+        const link = `https://chatbot-rreu.onrender.com/reset-password/${id}/${token}`;
+
+        // SEND THE LINK USING FUNCTION
+        sendResetPasswordEmail(email, link);
+
+        res.status(200).json({ message: "Link has been sent to your email" });
+      }
+    } else {
+      res.status(401).json({ message: "This user doesn't exist" });
+    }
+  } catch (error) {
+    console.log("There is an error: ", error.message);
+  }
+});
+
+/* ========== STEP 2: REDIRECT USERS TO DEDICATED PAGE ========== */
 app.get("/reset-password/:id/:token", async (req, res) => {
-  const { id, token } = req.params;
-  // Validate the id whether it is exist
-  const db = client.db("Chatbot");
-  const users = db.collection("Users");
+  try {
+    const { id, token } = req.params;
 
-  const findID = await users.findOne({ _id: new ObjectId(id) });
-  if (findID) {
-    const matchingID = findID._id.toString();
-    const matchingEmail = findID.email;
-    const matchingPassword = findID.password;
+    // FIND ONE USER AND MATCH IT WITH THE ID FROM THE POST REQUEST
+    const findID = await users.findOne({ _id: new ObjectId(id) });
 
-    if (id === matchingID) {
-      const secret = process.env.VALIDATE_JWT_SECRET_KEY + matchingPassword;
+    if (findID) {
+      const matchingID = findID._id.toString();
+      const matchingEmail = findID.email;
+      const matchingPassword = findID.password;
+
+      if (id === matchingID) {
+        const secret = process.env.VALIDATE_JWT_SECRET_KEY + matchingPassword;
+
+        try {
+          // VERIFY THE JWT TOKEN
+          jwt.verify(token, secret);
+
+          res.send(`
+          <script>
+            window.location.href = 'https://chatbot-ai-ashy.vercel.app/resetPassword.html?id=${id}&token=${token}&userEmail=${matchingEmail}';
+          </script>
+          `);
+        } catch (error) {
+          console.log(error.message);
+          res.send(
+            `<script>
+              alert("Invalid Signature");
+            </script>`
+          );
+        }
+      }
+    }
+  } catch (error) {
+    console.error("There is an error occurred: ", error.message);
+  }
+});
+
+/* ========== STEP 3: UPDATE PASSWORD ========== */
+app.post("/updatePassword", async (req, res) => {
+  try {
+    const { userToken, newPassword, userEmail } = req.body;
+
+    // EXTRACT THE CURRENT HASHED PASSWORD (ASSUMING IT HAS NEVER BEEN UPDATED)
+    const user = await users.findOne({ email: userEmail });
+
+    if (user) {
+      const oldHashedPassword = user.password;
+      const secret = process.env.VALIDATE_JWT_SECRET_KEY + oldHashedPassword;
 
       try {
-        const payload = jwt.verify(token, secret);
+        jwt.verify(userToken, secret);
 
-        res.send(`
-        <script>
-          window.location.href = 'https://chatbot-ai-ashy.vercel.app/resetPassword.html?id=${id}&token=${token}&userEmail=${matchingEmail}';
-        </script>
-        `);
-      } catch (error) {
-        console.log(error.message);
-        res.send(
-          `<script>
-            alert("Invalid Signature");
-          </script>`
+        // CHECK IF THE NEW PASSWORD IS SAME WITH THE OLD PASSWORD
+        if (await bcrypt.compare(newPassword, oldHashedPassword)) {
+          return res.status(401).json({
+            message: "Your current password is the same!",
+          });
+        }
+
+        // HASH AND UPDATE THE NEW PASSWORD
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        const result = await users.updateOne(
+          { email: userEmail },
+          { $set: { password: hashedPassword } }
         );
+
+        if (result.modifiedCount === 1) {
+          res.status(200).json({ message: "Password updated successfully" });
+        } else {
+          res.status(500).json({ error: "Failed to update password" });
+        }
+      } catch (error) {
+        console.error("Invalid token: ", error.message);
+        res.status(401).json({ message: "Invalid token" });
       }
+    } else {
+      res.status(404).json({ message: "User not found" });
     }
-  }
-});
-
-app.post("/updatePassword", async (req, res) => {
-  const token = req.body.userToken;
-  const newPassword = req.body.newPassword;
-  const userEmail = req.body.userEmail;
-
-  // Extract the current hashed password (assuming it has never been updated)
-  const db = client.db("Chatbot");
-  const users = db.collection("Users");
-
-  const user = await users.findOne({ email: userEmail });
-
-  if (user) {
-    const oldHashedPassword = user.password;
-
-    // CHECK THE TOKEN
-    const secret = process.env.VALIDATE_JWT_SECRET_KEY + oldHashedPassword;
-
-    try {
-      const payload = jwt.verify(token, secret);
-
-      // Check if the new password is the same as the old password
-      if (await bcrypt.compare(newPassword, oldHashedPassword)) {
-        return res.status(401).json({
-          message: "Your current password is the same!",
-        });
-      }
-
-      // Hash the new password
-      const hashedPassword = await bcrypt.hash(newPassword, 10);
-
-      // Update the password
-      const result = await users.updateOne(
-        { email: userEmail },
-        { $set: { password: hashedPassword } }
-      );
-
-      if (result.modifiedCount === 1) {
-        // Password updated successfully
-        res.status(200).json({ message: "Password updated successfully" });
-      } else {
-        // Password update failed
-        res.status(500).json({ error: "Failed to update password" });
-      }
-    } catch (error) {
-      // Handle token verification failure
-      console.log(error.message);
-      res.status(401).json({ message: "Invalid token" });
-    }
-  } else {
-    // User not found
-    res.status(404).json({ message: "User not found" });
-  }
-});
-
-// Send Collaboration Form To Business Gmail
-app.post("/collabForm", async (req, res) => {
-  const name = req.body.name;
-  const email = req.body.email;
-  const content = req.body.content;
-
-  try {
-    // Send an email using nodemailer
-    await sendCollabEmail(name, email, content);
-
-    res.status(200).json({
-      message: "The form is submitted",
-    });
   } catch (error) {
-    res.status(500).json({
-      message: "Failed to submit form",
-    });
+    console.error("An error occurred: ", error.message);
   }
 });
 
-// Function to send the email using Nodemailer (Collab)
+/* ========== EXPRESS SEND COLLAB FORM CONFIGURATION (FUNCTION ON TOP) ========== */
 async function sendCollabEmail(name, email, content) {
   const clientID = process.env.CLIENT_ID;
   const clientSecret = process.env.CLIENT_SECRET;
@@ -739,7 +679,23 @@ async function sendCollabEmail(name, email, content) {
   }
 }
 
-// UPLOAD IMAGE TO DATABASE
+/* ========== STEP 1: SEND COLLAB FORM (THE ONLY STEP) ========== */
+app.post("/collabForm", async (req, res) => {
+  try {
+    const { name, email, content } = req.body;
+
+    try {
+      await sendCollabEmail(name, email, content);
+      res.status(200).json({ message: "The form is submitted" });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to submit form" });
+    }
+  } catch (error) {
+    console.error("Failed to send collab form: ", error.message);
+  }
+});
+
+/* ========== EXPRESS UPLOAD IMAGE CONFIGURATION (NOT FINISHED) ========== */
 app.post("/upload", upload.single("image"), async (req, res) => {
   try {
     const image = req.file;

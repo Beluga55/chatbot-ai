@@ -261,8 +261,6 @@ parentContainer.addEventListener("click", async function (event) {
       );
 
       if (response.ok) {
-        await response.json();
-
         chatContainer.innerHTML = "";
         chatContainer.classList.value = "";
         navMenu.classList.remove("show");

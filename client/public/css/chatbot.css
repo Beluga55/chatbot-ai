@@ -154,8 +154,9 @@
   flex-direction: column;
   align-items: flex-start;
   margin-inline: 0.85rem;
-  background: var(--cardBackground);
+  background: var(--MainBackground);
   width: calc(100% - 1.7rem);
+  border: 1px solid var(--White);
   border-radius: 0.85rem;
   padding: 1rem 0;
   opacity: 0;
@@ -249,13 +250,11 @@
   text-align: justify;
 }
 
-.message > p {
-  white-space: pre-wrap;
-}
-
 .message p {
   line-height: 1.75;
   font-size: 0.85rem;
+  white-space: pre-wrap;
+  text-align: initial;
 }
 
 /* hides scrollbar */
@@ -324,17 +323,23 @@ form img {
   visibility: visible;
 }
 
-.preview__image > div {
+.preview__image-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: calc(100% - 3rem);
   background: var(--cardBackground);
   padding: 1.5rem;
   border-radius: 0.25rem;
   max-width: 500px;
   max-height: 80vh;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  overflow-y: scroll;
+}
+
+.image__wrapper {
+  overflow-y: scroll;
+  max-height: 300px;
 }
 
 .form__upload-image {

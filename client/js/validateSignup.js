@@ -93,9 +93,6 @@ async function submitForm(event) {
   });
 
   if (response.ok) {
-    const result = await response.json();
-    console.log(result.message);
-
     document.getElementById("duplicate__username").style.display = "none";
     document.getElementById("duplicate__email").style.display = "none";
     document.querySelector(".signup__success-overlay").classList.add("show");
