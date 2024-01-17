@@ -1,0 +1,36 @@
+/* ====== Client Side Folder ====== */
+
+Initialize Vite
+npm create vite@latest client --template vanilla
+
+Install All Dependencies
+npm install
+
+Run Vite
+npm run dev
+
+/* ====== Server Side Folder ====== */
+
+Initialize Server
+npm init -y
+
+Dependencies Needed For This Project (Currently)
+npm install bcryptjs compression concurrently cors dotenv express formidable googleapis gridfs-stream jsonwebtoken mongodb nodemailer nodemon openai uuid
+
+/* ====== Dependencies Usage ====== */
+
+(1) bcryptjs = Encrypt and Hash Password
+(2) compression = Compress data before sending back to client
+(3) concurrently = Run Client and Server concurrently
+(4) cors = Cross Origin Resouce Sharing
+(5) dotenv = Secure API keys (Environment Variable)
+(6) express = Define Routes using HTTP methods and URL
+(7) formidable = Parse Multipart Form Data (Including Text and Image)
+(8) googleapis = Gmail API needed this package
+(9) gridfs-stream = Upload Image To MongoDB
+(10) jsonwebtoken = Store token and it can verify whether the user is authorized
+(11) mongodb = Connect to database
+(12) nodemailer = Sending gmail response to client
+(13) nodemon = Refresh the server if anything is added
+(14) openai = ChatGPT API
+(15) uuid = Generate Random ID

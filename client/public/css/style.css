@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+  --White: hsl(0, 100%, 100%);
+  --Black: hsl(0, 0%, 0%);
+  --MainBackground: hsl(213, 41%, 5%);
+  --TransparentWhite: rgba(255, 255, 255, 0.2);
+  --Primary: hsl(209, 40%, 73%);
+  --Accent: hsl(283, 39%, 59%);
+  --TextColor: hsl(212, 38%, 91%);
+  --CardBackground: hsl(209, 40%, 73%, 5%);
+  --LightPurple: hsl(234, 75%, 75%);
+  --Poppins: "Poppins", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--Poppins);
+  font-weight: 500; /* Default font weight */
+}
+
+body {
+  background-color: var(--MainBackground);
+}
+
+button {
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+}
+
+p {
+  line-height: 1.75;
+  font-weight: 400;
+}
+
+.bx {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p {
+  color: var(--TextColor);
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    margin-inline: auto;
+  }
+}

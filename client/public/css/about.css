@@ -1,0 +1,393 @@
+@import url(icons.css);
+@import url(header.css);
+@import url(footer.css);
+@import url(style.css);
+
+.hero {
+  margin-top: 10rem;
+  display: flex;
+  justify-content: center;
+}
+
+.hero__container {
+  margin-inline: 1.5rem;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero h1,
+.hero p {
+  text-align: center;
+}
+
+.hero h1 {
+  color: var(--White);
+  font-size: 2rem;
+  position: relative;
+  font-weight: 700;
+}
+
+.hero h1::before {
+  content: "";
+  position: absolute;
+  width: 5rem;
+  height: 2px;
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  bottom: -5px;
+  border-radius: 0.25rem;
+}
+
+.hero p {
+  margin-top: 1rem;
+  color: var(--White);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.collaboration__btn {
+  background: var(--White);
+  color: var(--Black);
+  padding: 0.65rem 1.25rem;
+  margin-top: 1.5rem;
+  border-radius: 0.25rem;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out,
+    background 0.3s ease-in-out;
+}
+
+.collaboration__btn:hover {
+  background: var(--Accent);
+  color: var(--White);
+  transform: translate(0, -3px);
+  box-shadow: 0 20px 80px -10px var(--Accent);
+}
+
+.mission,
+.story,
+.collaboration {
+  margin-top: 8rem;
+}
+
+/* PERSONAL STORY */
+.story__container h1 {
+  text-align: center;
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 1.75rem;
+  color: transparent;
+  font-weight: 700;
+}
+
+.story__timeline {
+  background: var(--CardBackground);
+  padding: 2rem 2rem 2rem 3rem;
+  border-radius: 0.85rem;
+  max-width: 800px;
+  margin: 1.5rem auto;
+}
+
+.story__timeline-wrapper {
+  position: relative;
+}
+
+.story__timeline-wrapper span {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 3px;
+  background: var(--White);
+  border-radius: 0.5rem;
+}
+
+.story__year-content {
+  display: grid;
+  gap: 3rem;
+}
+
+.second__part {
+  margin-top: 3rem;
+}
+
+.story__year-content > div {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.story__year {
+  position: absolute;
+  padding: 5px 10px;
+  background: var(--LightPurple);
+  left: -24px;
+  border-radius: 0.85rem;
+}
+
+.story__year p {
+  font-size: 0.8rem;
+  color: var(--White);
+  font-weight: 600;
+}
+
+.story__event {
+  margin-left: 2.5rem;
+}
+
+.story__description h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.story__description p {
+  text-align: initial;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.mission h1 {
+  position: relative;
+  text-align: center;
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 2rem;
+  color: transparent;
+  font-weight: bold;
+}
+
+.mission__container,
+.story__container {
+  margin-inline: 1.5rem;
+}
+
+.mission__cards-container {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.mission__cards-content {
+  background: var(--CardBackground);
+  padding: 2rem;
+  border-radius: 0.85rem;
+}
+
+.mission__cards-text {
+  position: relative;
+}
+
+.mission__cards-text div {
+  margin-left: 1.5rem;
+}
+
+.mission__cards-content span {
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 2px;
+  border-radius: 0.5rem;
+}
+
+.mission__cards-content h2 {
+  width: fit-content;
+  position: relative;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.mission__cards-content p {
+  text-align: initial;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+
+/* COLLABORATION */
+.collaboration__container {
+  margin-inline: 1.5rem;
+}
+
+.collaboration__text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collaboration__text > div {
+  max-width: 500px;
+}
+
+.collaboration__text h1 {
+  font-weight: 700;
+  color: transparent;
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 1.75rem;
+  text-align: center;
+}
+
+.collaboration__text p {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.collaboration__form {
+  display: grid;
+  background: var(--CardBackground);
+  margin-top: 1.5rem;
+  padding: 2rem;
+  border-radius: 0.85rem;
+}
+
+.collaboration__form h2 {
+  font-weight: 600;
+  font-size: 1.5rem;
+  position: relative;
+  width: fit-content;
+}
+
+.collaboration__form h2::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  height: 2px;
+  width: 50%;
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent));
+  border-radius: 0.25rem;
+}
+
+.collaboration__submit-form {
+  order: 1;
+  margin-top: 3rem;
+}
+
+.collaboration__content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.collaboration__content i {
+  font-size: 1.5rem;
+  color: var(--Accent);
+}
+
+.collaboration__content p {
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.collaboration__input {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.collaboration__input label {
+  color: var(--White);
+  font-size: 0.85rem;
+}
+
+.error__text {
+  color: red;
+  font-size: 12px;
+  font-weight: 600;
+  display: none;
+}
+
+.collaboration__submit-btn {
+  margin-top: 2rem;
+  background: var(--White);
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.25rem;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out,
+    background 0.3s ease-in-out;
+}
+
+.collaboration__submit-btn:hover {
+  color: var(--White);
+  background: var(--Accent);
+  transform: translate(0, -3px);
+  box-shadow: 0 20px 80px -10px var(--Accent);
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  padding: 0.65rem;
+  outline: none;
+  background: transparent;
+  border-radius: 0.25rem;
+  border: 2px solid transparent;
+  border-image: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  border-image-slice: 1;
+  color: var(--White);
+  font-size: 0.8rem;
+}
+
+textarea {
+  resize: none;
+}
+
+@media screen and (min-width: 650px) {
+  .collaboration__form {
+    display: grid;
+    gap: 2rem;
+    padding: 3rem;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+  }
+
+  .collaboration__benefits {
+    margin-top: 0;
+  }
+
+  .collaboration__submit-form {
+    margin-top: 0;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .mission__cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .story__timeline-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .second__part {
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 920px) {
+  .hero h1,
+  .mission__container h1,
+  .story__container h1,
+  .collaboration__text h1 {
+    font-size: 2.5rem;
+  }
+
+  .mission__cards-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .mission__container,
+  .collaboration__container {
+    margin-inline: 0;
+  }
+}

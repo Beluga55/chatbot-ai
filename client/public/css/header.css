@@ -1,0 +1,211 @@
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: transparent;
+  transition: 0.3s ease-in-out;
+  z-index: 2;
+  border-bottom: 1px solid var(--TransparentWhite);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.5rem;
+}
+
+.nav__logo div:first-child {
+  display: flex;
+  align-items: center;
+  column-gap: 0.3rem;
+}
+
+.nav__logo h2 {
+  font-size: 0.938rem;
+  color: var(--White);
+}
+
+.nav__menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  max-width: 500px;
+  height: 100vh;
+  background: transparent;
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  z-index: 1;
+}
+
+.nav__menu.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav__links {
+  margin-inline: 0.85rem;
+  padding-top: 7rem;
+}
+
+.nav__links ul {
+  display: grid;
+  gap: 1rem;
+}
+
+.nav__links ul li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: 0.3s ease-in-out;
+  background: var(--CardBackground);
+  padding: 1rem 0;
+  border-radius: 0.85rem;
+}
+
+.nav__links ul li:hover {
+  background: var(--White);
+}
+
+.nav__links ul li:hover i,
+.nav__links ul li:hover a,
+.nav__links ul li:hover p {
+  color: var(--Black);
+}
+
+.nav__links ul li i {
+  font-size: 1.25rem;
+  color: var(--White);
+  transition: color 0.3s ease-in-out;
+}
+
+.nav__menu ul li a {
+  color: var(--White);
+  font-size: 0.85rem;
+  transition: opacity 0.3s ease;
+  height: 20px;
+}
+
+.nav__menu ul li a:hover {
+  opacity: 0.6;
+}
+
+.nav__menu ul li a::before {
+  content: "";
+  width: 0%;
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  bottom: -5px;
+  border-radius: 4px;
+  transition: width 0.3s ease-in-out; /* Add transition for a smooth effect */
+}
+
+.nav__menu ul li a:hover::before {
+  width: 10%;
+}
+
+.nav__menu-right {
+  display: flex;
+  align-items: center;
+  column-gap: 0.35rem;
+}
+
+.nav__menu-right .bx-log-out {
+  font-size: 1.3rem;
+}
+
+/* Navigation Button For Desktop */
+#signout,
+#login {
+  display: none;
+}
+
+/* Change background header */
+.scroll-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
+  z-index: -1;
+}
+
+@media screen and (min-width: 576px) {
+  .nav {
+    margin: 1.25rem;
+  }
+
+  .nav__menu {
+    position: relative;
+    width: initial;
+    height: initial;
+    opacity: 1;
+    visibility: visible;
+    -webkit-backdrop-filter: initial;
+    backdrop-filter: initial;
+  }
+
+  .nav__menu ul,
+  .nav__links {
+    margin: 0;
+  }
+
+  .nav__menu ul li a:hover {
+    opacity: 1;
+  }
+
+  .nav__links {
+    padding: 0;
+  }
+
+  .nav__links ul {
+    display: flex;
+    gap: 3rem;
+  }
+
+  .nav__links ul li {
+    background: none;
+    padding: 0;
+  }
+
+  .nav__links ul li:hover {
+    background: none;
+  }
+
+  .nav__links ul li:hover a,
+  .nav__links ul li:hover i {
+    color: var(--White);
+  }
+
+  .nav__links ul li i,
+  .nav__menu-right {
+    display: none;
+  }
+
+  #signout,
+  #login {
+    background: var(--White);
+    padding: 0.65rem 1.25rem;
+    border-radius: 2rem;
+    display: block;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out,
+      transform 0.3s ease-in-out;
+  }
+
+  #signout:hover,
+  #login:hover {
+    background: var(--Accent);
+    color: var(--White);
+    transform: translate(0, -3px);
+    box-shadow: 0 20px 80px -10px var(--Accent);
+  }
+}

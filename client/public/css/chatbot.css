@@ -1,0 +1,693 @@
+@import url(icons.css);
+@import url(header.css);
+@import url(style.css);
+
+/* HEADER AND NAV MENU */
+.header {
+  background: none;
+}
+
+.nav {
+  margin: 0;
+}
+
+.nav__menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+  height: 100svh;
+  background: transparent;
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow-y: auto;
+}
+
+.new__chat {
+  background: var(--CardBackground);
+  transition: 0.3s ease-in-out;
+  margin: 5rem 0.85rem 0;
+  border-radius: 0.85rem;
+}
+
+.new__chat > div {
+  display: flex;
+  align-items: center;
+  margin-inline: 1.5rem;
+  gap: 0.5rem;
+}
+
+.new__chat:hover {
+  background: var(--White);
+}
+
+.new__chat p {
+  padding: 1rem 0;
+  font-size: 0.85rem;
+  transition: color 0.3s ease-in-out;
+}
+
+.new__chat:hover p,
+.new__chat:hover i {
+  color: var(--Black);
+}
+
+.nav__title-content {
+  overflow-y: scroll;
+}
+
+.active__title {
+  background: var(--White);
+  color: var(--Black);
+  border-radius: 0.85rem;
+  margin-inline: 0.85rem;
+}
+
+.active__title span {
+  white-space: initial;
+  animation: none;
+}
+
+.nav__user {
+  margin-top: 0.85rem;
+  position: relative;
+}
+
+.nav__user img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.nav__user-content {
+  margin: 0.75rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background 0.3s ease-in-out;
+  border-radius: 0.85rem;
+  background: var(--CardBackground);
+}
+
+.nav__user-content:hover {
+  background: var(--TransparentWhite);
+  cursor: pointer;
+}
+
+.nav__user-content span {
+  font-size: 0.8rem;
+  color: var(--TextColor);
+}
+
+.nav__user-selection {
+  position: absolute;
+  top: -10.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-inline: 0.85rem;
+  background: var(--MainBackground);
+  width: calc(100% - 1.7rem);
+  border: 1px solid var(--White);
+  border-radius: 0.85rem;
+  padding: 1rem 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.nav__user-selection .bx-x {
+  position: absolute;
+  right: 1rem;
+  font-size: 1.25rem;
+  color: var(--White);
+}
+
+.nav__user-selection.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav__user-selection button {
+  color: var(--White);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.nav__user-selection button:hover {
+  background: var(--White);
+  color: var(--Black);
+}
+
+.nav__user-selection button i {
+  transition: color 0.3s ease-in-out;
+}
+
+.nav__user-selection button:hover i {
+  color: var(--Black);
+}
+
+/* PREVIEW IMAGE OVERLAY */
+.preview__image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(100px);
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.preview__image.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.preview__image-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 3rem);
+  background: var(--CardBackground);
+  padding: 1.5rem;
+  border-radius: 0.25rem;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+
+.image__wrapper {
+  overflow-y: scroll;
+  max-height: 300px;
+}
+
+.selected__image {
+  display: none;
+  border-radius: 0.25rem;
+}
+
+.form__upload-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form__upload-image button {
+  background: var(--White);
+  width: 100%;
+  padding: 0.65rem 0;
+  border-radius: 0.25rem;
+  font-size: 12px;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+
+.form__upload-image button:hover {
+  background: var(--Accent);
+  color: var(--White);
+  transform: translate(0, -3px);
+}
+
+.file__upload-image {
+  color: var(--White);
+  margin-bottom: 0.5rem;
+}
+
+/* CHATBOT APP DESIGN */
+.nav__wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+}
+
+.nav__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 3rem);
+  position: relative;
+  margin: 1.5rem;
+}
+
+.nav__username {
+  display: none;
+}
+
+#app {
+  width: 100vw;
+  min-height: 0;
+  flex-grow: 1;
+  background: var(--MainBackground);
+  display: flex;
+  flex-direction: column;
+}
+
+#chat_container {
+  flex: 1;
+  width: 100%;
+  max-height: 81vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.chat__container-greeting {
+  position: relative;
+  height: 100vh;
+}
+
+.chat__greeting {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+}
+
+.chat__greeting h2 {
+  font-weight: 600;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.chat__greeting p {
+  margin-top: 1rem;
+  font-size: 14px;
+  text-align: center;
+}
+
+.title {
+  margin-top: 1.5rem;
+  text-align: initial;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.8rem;
+  transition: 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.title span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: textExpand 1s ease-in-out;
+}
+
+.title:hover {
+  margin-inline: 0.85rem;
+  border-radius: 0.85rem;
+  background: var(--White);
+  color: var(--Black);
+}
+
+.title:hover span {
+  white-space: initial;
+  animation: textOpacity 1s ease-in-out;
+}
+
+@keyframes textExpand {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes textOpacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* hides scrollbar */
+#chat_container::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper {
+  width: 100%;
+  padding: 15px;
+  border-radius: 0.25rem;
+}
+
+.ai {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.chat {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.profile {
+  width: 36px;
+  height: 36px;
+  border-radius: 5px;
+
+  background: #5436da;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ai .profile {
+  background: #10a37f;
+}
+
+.profile img {
+  width: 60%;
+  height: 60%;
+  object-fit: contain;
+}
+
+.message {
+  flex: 1;
+  color: #dcdcdc;
+  font-size: 0.938rem;
+  max-width: 100%;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  text-align: justify;
+}
+
+.message p {
+  line-height: 1.75;
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+  text-align: initial;
+}
+
+/* hides scrollbar */
+.message::-webkit-scrollbar {
+  display: none;
+}
+
+#chatbot-form {
+  align-items: center;
+  max-width: 1024px;
+  padding: 10px;
+  background: var(--TransparentWhite);
+  box-shadow: 0 0 1000px 0 rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  border-radius: 0.75rem 0.75rem 0 0;
+  position: relative;
+  border-radius: 0.5rem;
+  background-color: var(--MainBackground);
+  margin: 1.5rem 1rem 0;
+}
+
+textarea {
+  width: 100%;
+  color: var(--TextColor);
+  font-size: 0.8rem;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow-y: hidden;
+}
+
+form img {
+  width: 30px;
+  height: 30px;
+}
+
+/* Add desired styles for code blocks */
+/* .code-block {
+  background-color: #f0f0f0;
+  padding: 10px;
+} */
+
+.bot__mistakes {
+  text-align: center;
+  color: var(--TextColor);
+  font-size: 0.75rem;
+  margin: 0.5rem 1rem;
+}
+
+#promptTextarea {
+  transition: height 0.3s ease-in-out;
+}
+
+.overflow__delete-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: transparent;
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  z-index: 2;
+}
+
+.overflow__delete-menu.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overflow__delete-content {
+  margin-inline: 1.5rem;
+  background: var(--TransparentWhite);
+  padding: 1.5rem;
+  border-radius: 0.25rem;
+  max-width: 500px;
+}
+
+.overflow__delete-content h2 {
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: 700;
+  font-size: 1.75rem;
+}
+
+.overflow__delete-content > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.overflow__delete-content button {
+  margin-top: 1rem;
+  background: var(--White);
+  color: var(--Black);
+  padding: 0.65rem 1.25rem;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  transition: color 0.3s ease-in-out, background 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+
+.overflow__delete-content button:hover {
+  color: var(--White);
+  background: var(--Accent);
+  transform: translate(0, -3px);
+  box-shadow: 0 20px 80px -10px var(--Accent);
+}
+
+.copy__button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--CardBackground);
+  margin-top: 1rem;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+}
+
+.message p.copy__description {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@media screen and (min-width: 576px) {
+  .nav__menu-right,
+  .bx-menu-alt-right,
+  .bx-left-arrow-alt {
+    display: block;
+  }
+
+  .nav__menu {
+    width: 250px;
+  }
+
+  .nav__logo .nav__username span {
+    color: var(--TextColor);
+    font-size: 0.85rem;
+  }
+
+  .nav button {
+    padding: initial;
+    border-radius: 0;
+    background: none;
+  }
+
+  .nav__user-selection button {
+    color: var(--White);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+  }
+
+  .nav__user-selection button:hover {
+    background: var(--White);
+    color: var(--Black);
+  }
+
+  .form__upload-image button {
+    background: var(--White);
+    width: 100%;
+    padding: 0.65rem 0;
+    border-radius: 0.25rem;
+    font-size: 12px;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out,
+      transform 0.3s ease-in-out;
+  }
+
+  .form__upload-image button:hover {
+    background: var(--Accent);
+    color: var(--White);
+    transform: translate(0, -3px);
+  }
+
+  #yesBtn,
+  #noBtn {
+    background: var(--White);
+    border-radius: 0.25rem;
+    padding: 0.65rem 1.25rem;
+  }
+
+  #yesBtn:hover,
+  #noBtn:hover {
+    background: var(--Accent);
+    color: var(--White);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .bx-menu-alt-right,
+  .nav__menu-right,
+  .bx-left-arrow-alt {
+    display: block;
+  }
+
+  #chatbot-form {
+    margin: 1.5rem 0 0;
+  }
+
+  .nav__wrapper {
+    padding-right: 4rem;
+  }
+
+  .nav__username {
+    display: block;
+  }
+
+  .new__chat {
+    margin-top: 1.5rem;
+  }
+
+  .nav__menu {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    width: 250px;
+    border-right: 1px solid var(--TransparentWhite);
+  }
+
+  .nav__header {
+    margin: 1.5rem 0;
+    z-index: 1;
+  }
+
+  .nav {
+    align-items: initial;
+    justify-content: initial;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 4rem;
+  }
+
+  #app {
+    width: 100%;
+    max-width: 1024px;
+  }
+
+  .container {
+    max-width: initial;
+    margin-inline: initial;
+  }
+
+  .nav__menu-right,
+  .bx-menu-alt-right,
+  .bx-left-arrow-alt {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .nav__wrapper {
+    align-items: center;
+  }
+
+  .nav__header {
+    width: 100%;
+    max-width: 1024px;
+  }
+}

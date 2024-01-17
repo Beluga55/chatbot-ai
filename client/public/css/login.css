@@ -1,0 +1,248 @@
+@import url(icons.css);
+@import url(header.css);
+@import url(footer.css);
+@import url(style.css);
+
+.login__container {
+  padding-top: 8rem;
+  margin-inline: 1.5rem;
+}
+
+.login__content h1 {
+  font-size: 2rem;
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: 700;
+}
+
+.login__content span,
+.login__form label {
+  color: var(--TextColor);
+}
+
+.login__content p {
+  font-size: 0.85rem;
+  margin: 1rem 0;
+}
+
+.login__button p {
+  font-size: 0.85rem;
+  position: relative;
+  z-index: -1;
+  width: fit-content;
+}
+
+.login__button p::before {
+  position: absolute;
+  content: "";
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  bottom: -5px;
+  border-radius: 0.25rem;
+}
+
+.login__button {
+  margin-top: 1rem;
+}
+
+.login__form {
+  margin-top: 3rem;
+  border-radius: 0.25rem;
+}
+
+.login__form h2 {
+  font-size: 2rem;
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: 700;
+}
+
+.login__email,
+.login__password,
+.verify__password {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.login__form label {
+  font-size: 0.85rem;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  padding: 0.65rem;
+  outline: none;
+  font-weight: 600;
+  background: transparent;
+  border-radius: 0.25rem;
+  border: 2px solid transparent; /* Set border to transparent */
+  border-image: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  border-image-slice: 1; /* Ensure the entire border is covered by the gradient */
+  color: var(--White);
+}
+
+.submit__login-button {
+  margin-top: 1.5rem;
+  background: var(--White);
+  padding: 0.65rem 1.5rem;
+  border-radius: 0.25rem;
+  color: var(--Black);
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+
+.signup__button,
+.signup__login-button {
+  background: var(--White);
+  color: var(--Black);
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+
+.signup__button:hover,
+.signup__login-button:hover,
+.submit__login-button:hover {
+  background: var(--Accent);
+  color: var(--White);
+  transform: translate(0, -3px);
+  box-shadow: 0 20px 80px -10px var(--Accent);
+}
+
+.error__text {
+  color: rgb(247, 69, 69);
+  font-size: 12px;
+  display: none;
+}
+
+.signup__success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  -webkit-backdrop-filter: blur(100px);
+  backdrop-filter: blur(100px);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.signup__success-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.signup__overlay-content {
+  margin-inline: 1.5rem;
+  background: var(--TransparentWhite);
+  padding: 2rem 1.5rem 2.5rem;
+  border-radius: 0.25rem;
+  width: 400px;
+}
+
+.signup__overlay-content h2 {
+  background: linear-gradient(120deg, var(--Primary), var(--Accent));
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 1.75rem;
+}
+
+.signup__overlay-content p {
+  color: var(--White);
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.signup__success-overlay a {
+  background: var(--White);
+  color: var(--Black);
+  font-size: 12px;
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.25rem;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.signup__success-overlay a:hover {
+  background: var(--Accent);
+  color: var(--White);
+  box-shadow: 0 20px 80px -10px var(--Accent);
+}
+
+.forgot__password {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.forgot__password a {
+  color: var(--White);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  transition: color 0.3s ease-in-out;
+}
+
+.forgot__password a:hover {
+  color: transparent;
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #df8bec 0%, #e295b2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@media screen and (min-width: 576px) {
+  .login__content-wrapper {
+    display: grid;
+    align-items: center;
+    gap: 4rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .login__content {
+    order: 1;
+  }
+
+  .login__form {
+    margin-top: 0;
+  }
+
+  .login__button {
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .login-wrapper {
+    height: 45vh;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .login__container {
+    margin-inline: 0;
+  }
+
+  .login__content h1 {
+    font-size: 2.5rem;
+  }
+
+  .signup__overlay-content h2 {
+    font-size: 2rem;
+  }
+}

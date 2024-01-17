@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Chatbot - AI</title>
+    <link rel="stylesheet" href="css/chatbot.css" />
+  </head>
+  <body>
+    <header class="header" id="header">
+      <nav class="nav container">
+        <div class="nav__menu">
+          <i class="bx bx-left-arrow-alt"></i>
+
+          <!-- Store The Title Here -->
+          <div class="new__chat">
+            <div>
+              <i class="bx bx-chat"></i>
+              <p>New Chat</p>
+            </div>
+          </div>
+
+          <div class="nav__title-content"></div>
+
+          <div class="nav__user">
+            <div class="nav__user-content">
+              <!-- Users Image (To Be Changed) -->
+              <img
+                id="image-pfp"
+                src="assets/empty-user.png"
+                alt="empty-user"
+              />
+              <span class="nav-username"></span>
+            </div>
+            <div class="nav__user-selection">
+              <button id="delete-all-conversation">
+                <i class="bx bx-trash"></i>Clear Chat
+              </button>
+              <button id="upload-profile-picture">
+                <i class="bx bx-cloud-upload"></i>Change Avatar
+              </button>
+              <button class="signout">
+                <i class="bx bx-log-out"></i>Logout
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRIGGER THE UPLOAD MENU -->
+        <div class="preview__image">
+          <div class="preview__image-content">
+            <div class="image__wrapper">
+              <img class="selected__image" id="preview-image" />
+            </div>
+            <form class="form__upload-image" id="form-upload-image">
+              <input
+                type="file"
+                name="image"
+                class="file__upload-image"
+                id="upload-image"
+                accept="image/*"
+              />
+              <button type="submit" id="upload-button">Upload</button>
+              <button type="button" id="close-preview">Close</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="nav__wrapper">
+          <div class="nav__header">
+            <div class="nav__logo">
+              <div>
+                <h2>Chatbot AI</h2>
+                <i class="bx bx-bot"></i>
+              </div>
+              <div class="nav__username">
+                <span>Welcome Back, <span class="nav-username"></span></span>
+              </div>
+            </div>
+
+            <div class="nav__menu-right">
+              <i class="bx bx-menu-alt-right"></i>
+            </div>
+          </div>
+
+          <div id="app">
+            <div id="chat_container">
+              <div class="chat__container-greeting">
+                <div class="chat__greeting">
+                  <h2>How can i help you today?</h2>
+                  <p>
+                    Hello! I'm your chat companion, driven by the powerful
+                    GPT-3.5. Ask away or just chat casually—I'm here for a
+                    simple and enjoyable conversation!
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <form id="chatbot-form">
+              <textarea
+                name="prompt"
+                rows="1"
+                cols="1"
+                placeholder="Ask Chatbot..."
+                id="promptTextarea"
+              ></textarea>
+              <button type="submit"><i class="bx bx-chevrons-up"></i></button>
+            </form>
+            <p class="bot__mistakes">
+              ChatGPT is capable of making errors. It's advisable to verify
+              critical information.
+            </p>
+          </div>
+        </div>
+
+        <div class="overflow__delete-menu">
+          <div class="overflow__delete-content">
+            <h2>
+              This action cannot be undone. Are you sure you want to delete all
+              messages?
+            </h2>
+            <div>
+              <button id="yesBtn">Delete</button>
+              <button id="noBtn">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <script type="module" src="js/chatbot/chatbot.js"></script>
+    <script type="module" src="js/navigation.js"></script>
+    <script type="module" src="js/authMiddleware.js"></script>
+  </body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup Page - Chatbot AI</title>
+
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body>
+    <header class="header" id="header">
+      <nav class="nav container">
+        <div class="nav__logo">
+          <div>
+            <h2>Chatbot AI</h2>
+            <i class="bx bx-bot"></i>
+          </div>
+        </div>
+
+        <div class="nav__menu">
+          <i class="bx bx-left-arrow-alt"></i>
+
+          <div class="nav__links">
+            <ul>
+              <li><i class="bx bxs-home"></i><a href="index.html">Home</a></li>
+              <li>
+                <i class="bx bxs-info-circle"></i><a href="about.html">About</a>
+              </li>
+              <li>
+                <i class="bx bxs-chat"></i>
+                <a href="faq.html">FAQs</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="nav__menu-right">
+          <i class="bx bx-user-circle login__btn"></i>
+          <i class="bx bx-menu-alt-right"></i>
+        </div>
+
+        <button class="login__btn" id="login">Login</button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- One SVG And One Login Form -->
+      <section class="login container">
+        <div class="login__container">
+          <div class="login__content-wrapper">
+            <div class="login__content">
+              <h1>New Here?</h1>
+              <p>
+                Ready to embark on a journey of discovery? Begin your adventure
+                by creating your personalized account. Uncover a world of
+                information tailored just for you!
+              </p>
+              <div class="login__button">
+                <p>Already have an account?</p>
+                <button class="login__btn signup__login-button">Login</button>
+              </div>
+            </div>
+            <form class="login__form" id="signupForm">
+              <h2>Signup</h2>
+              <div class="username__email">
+                <div class="login__email">
+                  <label>Username</label>
+                  <input type="text" id="signupUsername" />
+                  <p id="error__username" class="error__text">
+                    Username cannot be empty
+                  </p>
+                  <p id="duplicate__username" class="error__text">
+                    Please choose a different username
+                  </p>
+                </div>
+                <div class="login__email">
+                  <label>Email</label>
+                  <input type="email" id="signupEmail" />
+                  <p id="error__email" class="error__text">
+                    Email cannot be empty
+                  </p>
+                  <p id="duplicate__email" class="error__text">
+                    Please choose a different email
+                  </p>
+                </div>
+              </div>
+
+              <div class="password__wrapper">
+                <div class="login__password">
+                  <label>Password</label>
+                  <input type="password" id="signupPassword" />
+                  <p id="error__password" class="error__text">
+                    Password cannot be empty
+                  </p>
+                  <p id="error__passwordLength" class="error__text">
+                    Password is too short
+                  </p>
+                  <p id="error__uppercase" class="error__text">
+                    Password must contain one uppercase character
+                  </p>
+                </div>
+                <div class="verify__password">
+                  <label>Verify Password</label>
+                  <input type="password" id="verifyPassword" />
+                  <p id="error__verifyPassword" class="error__text">
+                    Verify password cannot be empty
+                  </p>
+                  <p id="error__passwordNotMatch" class="error__text">
+                    Password Do Not Match
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                id="submit__signup-button"
+                class="submit__login-button"
+              >
+                Signup
+              </button>
+
+              <div class="signup__success-overlay">
+                <div class="signup__overlay-content">
+                  <h2>Signup Succesfully</h2>
+                  <p>
+                    Kindly select the button below to gracefully proceed to our
+                    esteemed login page. Feel free to peruse our website at your
+                    leisure by navigating through the refined options in the
+                    navigation bar.
+                  </p>
+                  <a href="login.html">Login now</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <hr class="upper__hr container" />
+
+    <!-- Footer -->
+    <footer class="footer container">
+      <div class="footer__container">
+        <div class="footer__content">
+          <!-- Chatbot AI -->
+          <div class="nav__logo">
+            <div>
+              <h2>Chatbot AI</h2>
+              <i class="bx bx-bot"></i>
+            </div>
+          </div>
+          <p>
+            Transforming interactions with advanced chatbot AI for seamless
+            communication.
+          </p>
+        </div>
+        <div class="footer__content">
+          <span>Contact Information</span>
+          <div class="footer__contact-information">
+            <div class="footer__contact-content">
+              <i class="bx bx-phone"></i>
+              <p>(555) 123-4567</p>
+            </div>
+            <div class="footer__contact-content">
+              <i class="bx bx-mail-send"></i>
+              <p>info@yourdomain.com</p>
+            </div>
+            <div class="footer__contact-content">
+              <i class="bx bxs-map"></i>
+              <p>123 Main Street Cityville, State 54321 Countryland</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer__content">
+          <!-- Navigation Links -->
+          <span>Navigation Links</span>
+          <div class="footer__nav-links">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="faq.html">FAQs</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer__content">
+          <span>All The Credits</span>
+          <div class="footer__contact-information">
+            <div class="footer__contact-content">
+              <i class="bx bx-images"></i>
+              <p>Images From Javascript Mastery</p>
+            </div>
+            <div class="footer__contact-content">
+              <i class="bx bx-bulb"></i>
+              <p>Ideas From Javascript Mastery</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <hr class="lower__hr container" />
+
+    <footer class="sub__footer container">
+      <span>Coded By Justin, All Rights Reserved</span>
+      <div class="footer__social-icons">
+        <i class="bx bxl-github"></i>
+        <i class="bx bxl-instagram"></i>
+        <i class="bx bxl-meta"></i>
+      </div>
+    </footer>
+
+    <script type="module" src="js/navigation.js"></script>
+    <script type="module" src="js/signup.js"></script>
+  </body>
+</html>

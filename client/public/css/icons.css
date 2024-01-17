@@ -1,0 +1,68 @@
+.bx-bot {
+  color: var(--White);
+  font-size: 1.25rem;
+  height: 23px;
+}
+
+.bx-menu-alt-right,
+.bx-left-arrow-alt,
+.bx-user-circle,
+.bx-log-out {
+  font-size: 1.3rem;
+  color: var(--White);
+  transition: color 0.3s ease-in-out;
+}
+
+.bx-left-arrow-alt {
+  position: absolute;
+  left: 1.5rem;
+  top: 1.5rem;
+}
+
+.bx-chat {
+  color: var(--TextColor);
+  font-size: 1.25rem;
+  transition: color 0.3s ease-in-out;
+}
+
+.bx-chevrons-up {
+  color: var(--White);
+  font-size: 1.5rem;
+}
+
+.bx-trash,
+.bx-log-out,
+.bx-cloud-upload {
+  font-size: 1rem;
+}
+
+.bx-trash-alt {
+  font-size: 1.25rem;
+  transition: color 0.3s ease-in-out;
+}
+
+.bx-trash-alt:hover {
+  color: red;
+}
+
+.bx-copy {
+  color: var(--White);
+  font-size: 1.25rem;
+}
+
+.bx-check-square {
+  color: lime;
+  font-size: 1.25rem;
+}
+
+.bxs-x-square {
+  color: red;
+  font-size: 1.25rem;
+}
+
+@media screen and (min-width: 576px) {
+  .bx-menu-alt-right,
+  .bx-left-arrow-alt {
+    display: none;
+  }
+}

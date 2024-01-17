@@ -1,0 +1,301 @@
+@import url(icons.css);
+@import url(header.css);
+@import url(footer.css);
+@import url(style.css);
+
+/* HERO SECTION */
+.hero__container {
+  padding-top: 7.5rem;
+  margin-inline: 1.5rem;
+}
+
+.hero__content {
+  margin-bottom: 2rem;
+}
+
+.hero__content h1 {
+  font-size: 2rem;
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: 700;
+}
+
+.hero__content p {
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+
+#getStarted {
+  margin-top: 1.5rem;
+  background: var(--White);
+  padding: 0.65rem 1.25rem;
+  font-weight: 500;
+  border-radius: 0.2rem;
+  color: var(--Black);
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+
+#getStarted:hover {
+  background: var(--Accent);
+  color: var(--White);
+  box-shadow: 0 20px 80px -10px var(--Accent);
+  transform: translate(0, -3px);
+}
+
+/* COMPANIES SECTION */
+.companies__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5rem;
+  padding: 8rem 0;
+}
+
+.companies__container img {
+  width: auto;
+  height: 25px;
+  object-fit: cover;
+}
+
+/* BANNER SECTION */
+.banner__container {
+  margin-inline: 1.5rem;
+  padding: 3rem 0;
+}
+
+.banner__container h2 {
+  font-size: 2rem;
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: 700;
+  text-align: center;
+}
+
+.banner__content-wrapper {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.banner__content {
+  background: var(--CardBackground);
+  padding: 2.5rem;
+  border-radius: 1rem;
+}
+
+.banner__content h3 {
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: -1;
+  width: fit-content;
+}
+
+.banner__content h3::before {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 25%;
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  bottom: -5px;
+  border-radius: 0.25rem;
+  z-index: -1;
+}
+
+.banner__content h3,
+.banner__content p {
+  color: var(--White);
+}
+
+.banner__content p {
+  font-size: 0.85rem;
+  margin-top: 1rem;
+  text-align: initial;
+}
+
+/* REGISTER PART */
+.register__container {
+  padding: 8rem 0;
+  margin-inline: 1.5rem;
+}
+
+.register__content {
+  margin-top: 1.5rem;
+}
+
+.register__content h2 {
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.register__content p {
+  color: var(--White);
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+
+.register__content button {
+  background: var(--White);
+  color: var(--Black);
+  margin-top: 1.5rem;
+  font-weight: 500;
+  padding: 0.65rem 1.25rem;
+  border-radius: 0.25rem;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+
+.register__content button:hover {
+  background: var(--Accent);
+  color: var(--White);
+  transform: translate(0, -3px);
+  box-shadow: 0 20px 80px -10px var(--Accent);
+}
+
+/* TRENDING */
+.trends__container {
+  margin-inline: 1.5rem;
+  padding: 3rem 0;
+}
+
+.trends__container h2 {
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.trends__content-grid {
+  display: grid;
+  margin-top: 2.5rem;
+  gap: 2rem;
+}
+
+.trends__content {
+  background: var(--CardBackground);
+  border-radius: 1rem;
+  position: relative;
+  z-index: 0;
+}
+
+.trends__content img {
+  height: 170px;
+  object-fit: cover;
+  border-radius: 0.25rem;
+}
+
+.trends__description {
+  padding: 0.75rem 1rem;
+}
+
+.trends__description span {
+  color: var(--White);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.trends__description p {
+  text-align: initial;
+  color: var(--White);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  margin-bottom: 4rem;
+}
+
+.trends__description a {
+  color: var(--White);
+  font-size: 12px;
+  font-weight: 600;
+  position: absolute;
+  bottom: 20px;
+  z-index: 1;
+}
+
+@media screen and (min-width: 576px) {
+  .hero__container,
+  .register__container {
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero__content {
+    margin-bottom: 0;
+  }
+
+  .companies__container {
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .banner__content-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .register__content {
+    margin-top: 0;
+  }
+
+  .trends__content-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .banner__content-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .register__content h2 {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (min-width: 920px) {
+  .hero__container,
+  .register__container {
+    gap: 3rem;
+  }
+
+  .hero__content h1,
+  .register__content h2,
+  .banner__container h2 {
+    font-size: 2.5rem;
+  }
+
+  .trends__content-grid {
+    grid-template-columns: 375px 1fr 1fr;
+  }
+
+  .trends__content-grid .trends__content:first-child {
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+
+  .trends__content-grid .trends__content:first-child img {
+    height: 400px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .hero__container,
+  .banner__container,
+  .trends__container,
+  .register__container {
+    margin: 0;
+  }
+}
