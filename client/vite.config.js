@@ -17,6 +17,8 @@ export default defineConfig({
         admin: resolve(root, "admin.html"),
         forgotPassword: resolve(root, "forgotPassword.html"),
         resetPassword: resolve(root, "resetPassword.html"),
+        pricing: resolve(root, "pricing.html"),
+        success: resolve(root, "success.html"),
         swiper: resolve(root, "js/swiper.js"),
         authMiddleware: resolve(root, "js/authMiddleware.js"),
         collaboration: resolve(root, "js/collaboration.js"),
