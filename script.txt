@@ -15,7 +15,7 @@ Initialize Server
 npm init -y
 
 Dependencies Needed For This Project (Currently)
-npm install bcryptjs compression concurrently cors dotenv express formidable googleapis gridfs-stream jsonwebtoken mongodb nodemailer nodemon openai uuid
+npm install bcryptjs compression concurrently cors dotenv express formidable googleapis gridfs-stream jsonwebtoken mongodb nodemailer nodemon openai uuid stripe cookie-parser
 
 /* ====== Dependencies Usage ====== */
 
@@ -34,3 +34,5 @@ npm install bcryptjs compression concurrently cors dotenv express formidable goo
 (13) nodemon = Refresh the server if anything is added
 (14) openai = ChatGPT API
 (15) uuid = Generate Random ID
+(16) stripe = Payment Gateway
+(17) cookie-parser = Parse Cookies

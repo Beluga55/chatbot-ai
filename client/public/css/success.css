@@ -1,0 +1,49 @@
+@import url(style.css);
+
+.success {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 3rem);
+  max-width: 500px;
+}
+
+.success__container {
+  background: var(--TransparentWhite);
+  padding: 2rem;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 0.25rem;
+}
+
+.success__container h2 {
+  font-size: 1.75rem;
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: 600;
+}
+
+.success__container p {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+}
+
+.success__redirect-button {
+  background: var(--White);
+  padding: 0.65rem 1.25rem;
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 0.25rem;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+
+.success__redirect-button:hover {
+  background: var(--Accent);
+  color: var(--White);
+  transform: translate(0, -3px);
+  box-shadow: 0 20px 80px -10px var(--Accent);
+}

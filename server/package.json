@@ -3,6 +3,7 @@
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
     "concurrently": "^8.2.2",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
@@ -14,6 +15,7 @@
     "nodemailer": "^6.9.8",
     "nodemon": "^3.0.2",
     "openai": "^4.24.7",
+    "stripe": "^14.12.0",
     "uuid": "^9.0.1"
   },
   "name": "server",
@@ -22,7 +24,6 @@
     "node": "20.9.0"
   },
   "type": "module",
-  "devDependencies": {},
   "scripts": {
     "server": "nodemon server",
     "client": "npm run --prefix ../client dev",

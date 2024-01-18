@@ -42,39 +42,104 @@ async function submitLogin(event) {
 
   event.preventDefault();
 
-  var email = document.getElementById("loginEmail").value;
-  var password = document.getElementById("loginPassword").value;
+  const intendedAction = localStorage.getItem("intendedAction");
 
-  // https://chatbot-rreu.onrender.com
+  if (intendedAction) {
+    var email = document.getElementById("loginEmail").value;
+    var password = document.getElementById("loginPassword").value;
 
-  const response = await fetch("https://chatbot-rreu.onrender.com/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-  });
+    // https://chatbot-rreu.onrender.com
 
-  if (response.ok) {
-    const result = await response.json();
+    const response = await fetch("https://chatbot-rreu.onrender.com/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
-    // Store the token in localStorage
-    localStorage.setItem("token", result.token);
-    localStorage.setItem("username", result.username);
-    localStorage.setItem("role", result.role);
+    if (response.ok) {
+      const result = await response.json();
 
-    loginForm.reset();
+      // Store the token in localStorage
+      localStorage.setItem("token", result.token);
+      localStorage.setItem("username", result.username);
+      localStorage.setItem("role", result.role);
 
-    if (result.role === "admin") {
-      window.location.href = "admin.html";
+      loginForm.reset();
+
+      if (result.role === "admin") {
+        window.location.href = "admin.html";
+      } else {
+        const response = await fetch(
+          "https://chatbot-rreu.onrender.com/create-checkout-session",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              productName: intendedAction,
+              username: localStorage.getItem("username"),
+            }),
+          }
+        );
+
+        try {
+          const data = await response.json();
+          if (response.ok) {
+            window.location.href = data.url;
+          } else {
+            throw new Error(data.error);
+          }
+        } catch (error) {
+          alert(error.message);
+        }
+
+        // Clear the intended action
+        localStorage.removeItem("intendedAction");
+      }
     } else {
-      window.location.href = "selectService.html";
+      // Handle login error
+      const errorData = await response.json();
+      console.error(errorData.error);
+      document.getElementById("wrong__email-password").style.display = "block";
     }
   } else {
-    // Handle login error
-    const errorData = await response.json();
-    console.error(errorData.error);
-    document.getElementById("wrong__email-password").style.display = "block";
+    var email = document.getElementById("loginEmail").value;
+    var password = document.getElementById("loginPassword").value;
+
+    // https://chatbot-rreu.onrender.com
+
+    const response = await fetch("https://chatbot-rreu.onrender.com/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+
+      // Store the token in localStorage
+      localStorage.setItem("token", result.token);
+      localStorage.setItem("username", result.username);
+      localStorage.setItem("role", result.role);
+
+      loginForm.reset();
+
+      if (result.role === "admin") {
+        window.location.href = "admin.html";
+      } else {
+        window.location.href = "selectService.html";
+      }
+    } else {
+      // Handle login error
+      const errorData = await response.json();
+      console.error(errorData.error);
+      document.getElementById("wrong__email-password").style.display = "block";
+    }
   }
 }
 

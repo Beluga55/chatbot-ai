@@ -59,6 +59,19 @@ const resetPasswordRoute = () => {
   return true;
 };
 
+const protectSuccessRoute = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const sessionId = urlParams.get("session_id");
+
+  if (sessionId === "" || sessionId === null) {
+    alert("You do not have permission to access this page.");
+    window.location.href = "index.html";
+    return false;
+  }
+
+  return true;
+}
+
 // CHECK AND PROTECT ROUTES
 if (window.location.pathname === "/admin.html") {
   protectAdminRoute();
@@ -66,4 +79,6 @@ if (window.location.pathname === "/admin.html") {
   protectUserRoute();
 } else if (window.location.pathname === "/resetPassword.html") {
   resetPasswordRoute();
+} else if (window.location.pathname === "/success.html") {
+  protectSuccessRoute();
 }

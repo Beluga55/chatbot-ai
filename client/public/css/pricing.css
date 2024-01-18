@@ -1,0 +1,106 @@
+@import url(icons.css);
+@import url(header.css);
+@import url(footer.css);
+@import url(style.css);
+
+/* PRICING */
+.pricing {
+  margin-bottom: 5rem;
+}
+
+.pricing__container {
+  margin-top: 8rem;
+  margin-inline: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pricing__container h1 {
+  font-size: 2rem;
+  background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: 600;
+  text-align: center;
+}
+
+.pricing__container p {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  text-align: center;
+  max-width: 400px;
+}
+
+.pricing__container-card {
+  padding: 2rem 0 5rem;
+  margin-inline: 1.5rem;
+}
+
+.pricing__card {
+  background: var(--CardBackground);
+  border-radius: 0.25rem;
+  box-shadow: 0 0 10px 0 var(--CardBackground);
+  padding: 2rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.pricing__card p {
+  font-size: 0.85rem;
+}
+
+.pricing__card span {
+  font-size: 2.5rem;
+  color: var(--Accent);
+}
+
+.pricing__details {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pricing__card-description > div {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.pricing__card-description p {
+  font-weight: 600;
+}
+
+.pricing__buttons {
+  margin-top: 1rem;
+  background: var(--White);
+  padding: 0.65rem 0;
+  border-radius: 2rem;
+  transition: color 0.3s ease-in-out, background 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+}
+
+.pricing__buttons:hover {
+  color: var(--White);
+  background: var(--Accent);
+  transform: translate(0, -3px);
+  box-shadow: 0 2px 5px 0 var(--CardBackground);
+}
+
+@media screen and (min-width: 1024px) {
+  .pricing {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .pricing__container {
+    margin-top: 10rem;
+  }
+
+  .pricing__container-card {
+    margin: 0;
+  }
+}

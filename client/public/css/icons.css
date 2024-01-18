@@ -50,14 +50,47 @@
   font-size: 1.25rem;
 }
 
-.bx-check-square {
-  color: lime;
+.bx-x {
+  color: red;
   font-size: 1.25rem;
 }
 
-.bxs-x-square {
-  color: red;
-  font-size: 1.25rem;
+/* SWIPER */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  content: "";
+}
+
+.swiper-slide {
+  height: initial;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  top: initial;
+  bottom: 0;
+  width: initial;
+  height: initial;
+  background-color: var(--CardBackground);
+  border: 2px solid var(--TransparentWhite);
+  padding: 6px;
+  border-radius: 0.2rem;
+  font-size: 1.5rem;
+  color: var(--TextColor);
+  transition: 0.5s;
+}
+
+.swiper-button-prev {
+  left: calc(50% - 2.75rem);
+}
+
+.swiper-button-next {
+  right: calc(50% - 2.75rem);
+}
+
+.bx-check {
+  color: lime;
+  font-size: 1.5rem;
 }
 
 @media screen and (min-width: 576px) {

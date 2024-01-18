@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Success Page - Chatbot AI</title>
+
+    <link rel="stylesheet" href="css/success.css" />
+  </head>
+  <body>
+    <main>
+      <section class="success container">
+        <div class="success__container">
+          <h2 class="success__title">Payment Successful</h2>
+          <p class="success__description">
+            Thank you for your purchase. Enjoy your chatbot services. Have a
+            nice day.
+          </p>
+          <button
+            class="success__redirect-button"
+            type="button"
+            id="success-redirect-button"
+          >
+            Redirect To Chatbot Page
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="js/stripe/stripe.js"></script>
+    <script type="module" src="js/authMiddleware.js"></script>
+  </body>
+</html>

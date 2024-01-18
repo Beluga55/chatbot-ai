@@ -71,7 +71,7 @@ if (signupBtn.length > 0) {
 
 /*=============== CHANGE BACKGROUND HEADER ===============*/
 const scrollHeader = () => {
-  header.classList.toggle("scroll-header", window.scrollY >= 50);
+  header.classList.toggle("scroll-header", window.scrollY >= 30);
 };
 
 window.addEventListener("scroll", scrollHeader);
@@ -120,7 +120,7 @@ if (signoutBtn.length > 0) {
 const serviceContainers = document.querySelectorAll(".service__content");
 
 function handleClick(serviceName) {
-  if (serviceName === "GPT-3.5-Turbo") {
+  if (serviceName === "Chatbot AI") {
     window.location.href = "chatbot.html";
   }
 }

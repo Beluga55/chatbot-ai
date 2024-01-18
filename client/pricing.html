@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pricing Page - Chatbot AI</title>
+
+    <!-- ICONS -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- SWIPER CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/pricing.css" />
+  </head>
+  <body>
+    <header class="header" id="header">
+      <nav class="nav container">
+        <div class="nav__logo">
+          <div>
+            <h2>Chatbot AI</h2>
+            <i class="bx bx-bot"></i>
+          </div>
+        </div>
+
+        <div class="nav__menu">
+          <i class="bx bx-left-arrow-alt"></i>
+
+          <div class="nav__links">
+            <ul>
+              <li><i class="bx bxs-home"></i><a href="index.html">Home</a></li>
+              <li>
+                <i class="bx bxs-info-circle"></i><a href="about.html">About</a>
+              </li>
+              <li>
+                <i class="bx bxs-chat"></i>
+                <a href="faq.html">FAQs</a>
+              </li>
+              <li>
+                <i class="bx bxs-purchase-tag"></i>
+                <a href="pricing.html">Pricing</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="nav__menu-right">
+          <i class="bx bx-user-circle login__btn"></i>
+          <i class="bx bx-menu-alt-right"></i>
+        </div>
+
+        <button class="login__btn" id="login">Login</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="pricing container">
+        <div class="pricing__container">
+          <h1>Pay only for what you need</h1>
+          <p>
+            Discover a smarter, cost-efficient approach to meet your specific
+            requirements. No hidden fees, just customized solutions that fit
+            your budget.
+          </p>
+        </div>
+
+        <!-- Slider main container -->
+        <div class="swiper pricing__container-card">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide pricing__card">
+              <h3>Free plan</h3>
+              <span>$0</span>
+              <p>
+                "Unleash the potential of conversational AI with our Free
+                Chatbot Plan – drive engagement effortlessly and
+                cost-effectively."
+              </p>
+
+              <div class="pricing__card-description">
+                <div>
+                  <i class="bx bx-check"></i>
+                  <p>GPT-3.5-Turbo</p>
+                </div>
+                <div>
+                  <i class="bx bx-check"></i>
+                  <p>4,096 tokens</p>
+                </div>
+              </div>
+              <button type="button" class="pricing__buttons" id="pricing__free-button">
+                Get Started For Free
+              </button>
+            </div>
+            <div class="swiper-slide pricing__card">
+              <h3 id="premium-plan">Premium plan</h3>
+              <div class="pricing__details">
+                <span>$10</span>
+                <p>per month</p>
+              </div>
+              <p>
+                "Elevate your business with our Premium Chatbot Plan – unlock
+                advanced features and scale your business with ease."
+              </p>
+
+              <div class="pricing__card-description">
+                <div>
+                  <i class="bx bx-check"></i>
+                  <p>GPT-4</p>
+                </div>
+                <div>
+                  <i class="bx bx-check"></i>
+                  <p>8,192 tokens</p>
+                </div>
+              </div>
+              <button type="button" class="pricing__buttons" id="pricing__monthly-button">
+                Purchase This Plan
+              </button>
+            </div>
+            <div class="swiper-slide pricing__card">
+              <h3 id="best-deals">Best deals</h3>
+              <div class="pricing__details">
+                <span>$8</span>
+                <p>per month, $96 per year.</p>
+              </div>
+              <p>
+                "Unlock advanced features with our Best Deals Chatbot Plan –
+                guaranteed fast and reliable service."
+              </p>
+
+              <div class="pricing__card-description">
+                <div>
+                  <i class="bx bx-check"></i>
+                  <p>GPT-4-32K</p>
+                </div>
+                <div>
+                  <i class="bx bx-check"></i>
+                  <p>32,768 tokens</p>
+                </div>
+              </div>
+              <button type="button" class="pricing__buttons" id="pricing__yearly-button">
+                Get The Best Deals
+              </button>
+            </div>
+          </div>
+
+          <!-- If we need navigation buttons -->
+          <div class="swiper-button-prev">
+            <i class="bx bx-chevron-left"></i>
+          </div>
+          <div class="swiper-button-next">
+            <i class="bx bx-chevron-right"></i>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="js/navigation.js"></script>
+    <script type="module" src="js/swiper.js"></script>
+    <script type="module" src="js/stripe/stripe.js"></script>
+    <!-- SWIPER JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  </body>
+</html>

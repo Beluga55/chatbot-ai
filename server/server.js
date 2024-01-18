@@ -27,19 +27,96 @@ import { google } from "googleapis";
 import fs from "fs";
 import formidable from "formidable";
 
+/* ========== PAYMENT MODULE ========== */
+import Stripe from "stripe";
+
 /* ========== ACCESS TO ENVIRONMENT VARIABLES (ENV) ========== */
 dotenv.config();
 
 /* ========== CONNECT EXPRESS, CORS, COMPRESSION ========== */
 const app = express();
 app.use(cors());
-app.use(express.json());
 app.use(compression());
+
+/* ========== GETTING WEBHOOKS FROM STRIPE API ========== */
+app.post(
+  "/webhook",
+  express.raw({ type: "application/json" }),
+  async (req, res) => {
+    const sig = req.headers["stripe-signature"];
+    const payload = req.body;
+    let event;
+
+    try {
+      event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+    } catch (err) {
+      console.error("Webhook error:", err.message); // Log the error message
+      return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    if (event.type === "checkout.session.completed") {
+      // EXECUTE
+      const session = event.data.object;
+      const username = session.metadata.username;
+      const productName = session.metadata.productName;
+
+      if (productName === "Premium plan") {
+        // UPDATE THE USERS COLLECTION WITH THE NEW PLAN
+        try {
+          const currentUser = await users.findOne({ username });
+
+          if (currentUser) {
+            // Calculate the expiry date as 30 days from now
+            const expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + 30);
+
+            // Update the user's document with the new plan and expiry date
+            await users.updateOne(
+              { username: username },
+              { $set: { plan: productName, expiryDate: expiryDate } }
+            );
+          }
+        } catch (error) {
+          console.error("Error updating user subscription:", error);
+        }
+      } else if (productName === "Best deals") {
+        try {
+          const currentUser = await users.findOne({ username });
+          console.log(currentUser);
+
+          if (currentUser) {
+            // Calculate the expiry date as 30 days from now
+            const expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + 365);
+
+            console.log("New expiry date:", expiryDate);
+
+            // Update the user's document with the new plan and expiry date
+            await users.updateOne(
+              { username: username },
+              { $set: { plan: productName, expiryDate: expiryDate } }
+            );
+          }
+        } catch (error) {
+          console.error("Error updating user subscription:", error);
+        }
+      }
+    }
+
+    res.json({ received: true });
+  }
+);
+
+app.use(express.json());
 
 /* ========== EXTRACT KEYS FROM ENV FILE ========== */
 const uri = process.env.MONGODB_KEY;
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const secretKey = process.env.SECRET_KEY;
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: "2023-10-16",
+});
+const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 /* ========== CONNECTION TO MONGO DATABASE ========== */
 const client = new MongoClient(uri, {
@@ -67,6 +144,7 @@ initializeMongoClient().catch(console.dir);
 
 /* ========== GLOBAL VARIABLES FOR MONGODB DATABASE, COLLECTION AND CHATBOT ARRAY ========== */
 const database = client.db("Chatbot");
+const products = database.collection("Products");
 const title = database.collection("Title");
 const users = database.collection("Users");
 const converHistory = database.collection("conversationHistory");
@@ -1085,6 +1163,63 @@ app.delete("/adminDeleteChatHistory", async (req, res) => {
 
     // SUCCESS RESPONSE
     res.status(200).json({ message: "Chat history deleted" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+/* ========== EXPRESS STRIPE API CHECKOUT SESSION  ========== */
+app.post("/create-checkout-session", async (req, res) => {
+  try {
+    const { productName, username } = req.body;
+
+    if (!username) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // CHECK THE PLAN NAME
+    const user = await users.findOne({ username });
+    const expiryDate = new Date(user.expiryDate);
+
+    if (expiryDate > new Date()) {
+      return res
+        .status(404)
+        .json({ error: "Your current plan has not expired" });
+    }
+
+    // GET THE PRICE FROM THE DATABASE
+    const productPrice = await products.findOne({ productName });
+
+    // EXTRACT THE PRICE
+    const price = productPrice.price;
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      mode: "payment",
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: productName,
+            },
+            unit_amount: price * 100, // Stripe expects the amount in cents
+          },
+          quantity: 1,
+        },
+      ],
+      metadata: {
+        username: username,
+        productName: productName,
+      },
+      success_url:
+        "http://localhost:5173/success.html?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url:
+        "http://localhost:5173/cancel.html?session_id={CHECKOUT_SESSION_ID}",
+    });
+
+    res.json({ url: session.url });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
