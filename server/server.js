@@ -82,14 +82,11 @@ app.post(
       } else if (productName === "Best deals") {
         try {
           const currentUser = await users.findOne({ username });
-          console.log(currentUser);
 
           if (currentUser) {
             // Calculate the expiry date as 30 days from now
             const expiryDate = new Date();
             expiryDate.setDate(expiryDate.getDate() + 365);
-
-            console.log("New expiry date:", expiryDate);
 
             // Update the user's document with the new plan and expiry date
             await users.updateOne(
@@ -1214,9 +1211,9 @@ app.post("/create-checkout-session", async (req, res) => {
         productName: productName,
       },
       success_url:
-        "http://localhost:5173/success.html?session_id={CHECKOUT_SESSION_ID}",
+        "https://chatbot-ai-ashy.vercel.app/success.html?session_id={CHECKOUT_SESSION_ID}",
       cancel_url:
-        "http://localhost:5173/cancel.html?session_id={CHECKOUT_SESSION_ID}",
+        "https://chatbot-ai-ashy.vercel.app/cancel.html?session_id={CHECKOUT_SESSION_ID}",
     });
 
     res.json({ url: session.url });
