@@ -47,10 +47,29 @@
 
         <div class="nav__menu-right">
           <i class="bx bx-user-circle login__btn"></i>
+          <p class="nav__retrived-username"></p>
+          <i class="bx bx-chevron-down"></i>
           <i class="bx bx-menu-alt-right"></i>
+
+          <div class="nav__dropdown-menu">
+            <button class="nav__trigger-menu" type="button">Menu</button>
+            <button class="nav__redirect-chatbot" type="button">Chatbot</button>
+            <button class="signout" type="button">Signout</button>
+          </div>
         </div>
 
         <button class="login__btn" id="login">Login</button>
+
+        <!-- Username after login (take from localstorage) -->
+        <div class="nav__login-username">
+          <p class="nav__retrived-username"></p>
+          <i class="bx bx-chevron-down"></i>
+
+          <div class="nav__dropdown-menu">
+            <button class="nav__redirect-chatbot" type="button">Chatbot</button>
+            <button class="signout" type="button">Signout</button>
+          </div>
+        </div>
       </nav>
     </header>
 

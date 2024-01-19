@@ -5,7 +5,7 @@
   background: transparent;
   transition: 0.3s ease-in-out;
   z-index: 2;
-  border-bottom: 1px solid var(--TransparentWhite);
+  border-bottom: 1px solid var(--CardBackground);
 }
 
 .nav {
@@ -114,6 +114,8 @@
   display: flex;
   align-items: center;
   column-gap: 0.35rem;
+  cursor: pointer;
+  position: relative;
 }
 
 .nav__menu-right .bx-log-out {
@@ -122,8 +124,54 @@
 
 /* Navigation Button For Desktop */
 #signout,
-#login {
+#login,
+.nav__login-username {
   display: none;
+}
+
+.nav__login-username {
+  cursor: pointer;
+  position: relative;
+}
+
+.nav__retrived-username {
+  font-size: 0.938rem;
+  font-weight: 500;
+}
+
+.nav__dropdown-menu {
+  background: var(--CardBackgroundNoOpacity);
+  position: absolute;
+  bottom: -9.5rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.25rem;
+  padding: 1rem 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  z-index: 1;
+}
+
+.nav__dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav__login-username .nav__dropdown-menu {
+  bottom: -7.5rem;
+}
+
+.nav__dropdown-menu button {
+  color: var(--White);
+  padding: 0.5rem 0;
+  transition: color 0.3s ease-in-out, background 0.3s ease-in-out;
+}
+
+.nav__dropdown-menu button:hover {
+  background: var(--White);
+  color: var(--Black);
 }
 
 /* Change background header */
@@ -139,9 +187,13 @@
   z-index: -1;
 }
 
+.login__btn.hide {
+  display: none;
+}
+
 @media screen and (min-width: 576px) {
   .nav {
-    margin: 1.25rem;
+    margin: 1.3rem;
   }
 
   .nav__menu {
@@ -189,6 +241,12 @@
   .nav__links ul li i,
   .nav__menu-right {
     display: none;
+  }
+
+  .nav__login-username {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
   }
 
   #signout,

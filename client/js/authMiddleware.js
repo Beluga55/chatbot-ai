@@ -20,6 +20,10 @@ const protectUserRoute = () => {
     return false;
   }
 
+  if (checkRole() === "admin") {
+    return true;
+  }
+
   if (checkRole() !== "user") {
     alert("You do not have permission to access this page.");
     window.location.href = "login.html";
@@ -70,7 +74,7 @@ const protectSuccessRoute = () => {
   }
 
   return true;
-}
+};
 
 // CHECK AND PROTECT ROUTES
 if (window.location.pathname === "/admin.html") {

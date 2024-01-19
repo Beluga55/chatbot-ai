@@ -237,6 +237,10 @@
   height: 100svh;
 }
 
+.nav__dropdown-menu {
+  bottom: -7rem;
+}
+
 .nav__header {
   display: flex;
   align-items: center;
@@ -553,10 +557,12 @@ form img {
 }
 
 @media screen and (min-width: 576px) {
-  .nav__menu-right,
-  .bx-menu-alt-right,
   .bx-left-arrow-alt {
     display: block;
+  }
+
+  .nav__menu-right {
+    display: flex;
   }
 
   .nav__menu {
@@ -566,12 +572,6 @@ form img {
   .nav__logo .nav__username span {
     color: var(--TextColor);
     font-size: 0.85rem;
-  }
-
-  .nav button {
-    padding: initial;
-    border-radius: 0;
-    background: none;
   }
 
   .nav__user-selection button {

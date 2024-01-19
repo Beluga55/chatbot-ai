@@ -10,6 +10,7 @@
   --TextColor: hsl(212, 38%, 91%);
   --CardBackground: hsl(209, 40%, 73%, 5%);
   --LightPurple: hsl(234, 75%, 75%);
+  --CardBackgroundNoOpacity: rgba(16, 21, 28, 255);
   --Poppins: "Poppins", sans-serif;
 }
 

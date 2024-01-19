@@ -210,28 +210,184 @@ app.post("/", async (req, res) => {
         return;
       }
 
-      // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
-      const completion = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo-1106",
-        messages: [
-          {
-            role: "system",
-            content: "You are a helpful assistant and your name is Chatbot.",
-          },
-          ...storedResponses,
-        ],
-        stream: true,
-        temperature: 0,
-        max_tokens: 400,
-        top_p: 1,
-        frequency_penalty: 0.6,
-        presence_penalty: 0.6,
-      });
+      // WE NEED TO CHECK THE PLAN OF THE USER INORDER TO USE THE APROPRIATE MODEL
+      const currentUser = await users.findOne({ username });
 
-      // COMBINE STREAM WORDS USING FOR LOOP
-      for await (const chunk of completion) {
-        if (chunk.choices[0].delta.content !== undefined) {
-          botResponse += chunk.choices[0].delta.content;
+      if (currentUser) {
+        const userPlan = currentUser.plan;
+
+        if (userPlan === "Free Plan") {
+
+          // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
+          const completion = await openai.chat.completions.create({
+            model: "gpt-4-1106-preview",
+            messages: [
+              {
+                role: "system",
+                content:
+                  "You are a helpful assistant and your name is Chatbot.",
+              },
+              ...storedResponses,
+            ],
+            stream: true,
+            temperature: 0,
+            max_tokens: 400,
+            top_p: 1,
+            frequency_penalty: 0.6,
+            presence_penalty: 0.6,
+          });
+
+          // COMBINE STREAM WORDS USING FOR LOOP
+          for await (const chunk of completion) {
+            if (chunk.choices[0].delta.content !== undefined) {
+              botResponse += chunk.choices[0].delta.content;
+            }
+          }
+        } else if (userPlan === "Premium plan") {
+          // COMPARE THE DATE TODAY WITH THE EXPIRY DATE
+          const expiryDate = new Date(currentUser.expiryDate);
+          const currentDate = new Date();
+
+          if (currentDate > expiryDate) {
+            // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
+            const completion = await openai.chat.completions.create({
+              model: "gpt-3.5-turbo-1106",
+              messages: [
+                {
+                  role: "system",
+                  content:
+                    "You are a helpful assistant and your name is Chatbot.",
+                },
+                ...storedResponses,
+              ],
+              stream: true,
+              temperature: 0,
+              max_tokens: 400,
+              top_p: 1,
+              frequency_penalty: 0.6,
+              presence_penalty: 0.6,
+            });
+
+            // COMBINE STREAM WORDS USING FOR LOOP
+            for await (const chunk of completion) {
+              if (chunk.choices[0].delta.content !== undefined) {
+                botResponse += chunk.choices[0].delta.content;
+              }
+            }
+          } else if (currentDate < expiryDate) {
+            // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
+            const completion = await openai.chat.completions.create({
+              model: "gpt-4",
+              messages: [
+                {
+                  role: "system",
+                  content:
+                    "You are a helpful assistant and your name is Chatbot.",
+                },
+                ...storedResponses,
+              ],
+              stream: true,
+              temperature: 0,
+              max_tokens: 400,
+              top_p: 1,
+              frequency_penalty: 0.6,
+              presence_penalty: 0.6,
+            });
+
+            // COMBINE STREAM WORDS USING FOR LOOP
+            for await (const chunk of completion) {
+              if (chunk.choices[0].delta.content !== undefined) {
+                botResponse += chunk.choices[0].delta.content;
+              }
+            }
+          }
+        } else if (userPlan === "Best deals") {
+          // COMPARE THE DATE TODAY WITH THE EXPIRY DATE
+          const expiryDate = new Date(currentUser.expiryDate);
+          const currentDate = new Date();
+
+          if (currentDate > expiryDate) {
+            // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
+            const completion = await openai.chat.completions.create({
+              model: "gpt-3.5-turbo-1106",
+              messages: [
+                {
+                  role: "system",
+                  content:
+                    "You are a helpful assistant and your name is Chatbot.",
+                },
+                ...storedResponses,
+              ],
+              stream: true,
+              temperature: 0,
+              max_tokens: 400,
+              top_p: 1,
+              frequency_penalty: 0.6,
+              presence_penalty: 0.6,
+            });
+
+            // COMBINE STREAM WORDS USING FOR LOOP
+            for await (const chunk of completion) {
+              if (chunk.choices[0].delta.content !== undefined) {
+                botResponse += chunk.choices[0].delta.content;
+              }
+            }
+          } else if (currentDate < expiryDate) {
+
+            // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
+            const completion = await openai.chat.completions.create({
+              model: "gpt-4",
+              messages: [
+                {
+                  role: "system",
+                  content:
+                    "You are a helpful assistant and your name is Chatbot.",
+                },
+                ...storedResponses,
+              ],
+              stream: true,
+              temperature: 0,
+              max_tokens: 400,
+              top_p: 1,
+              frequency_penalty: 0.6,
+              presence_penalty: 0.6,
+            });
+
+            // COMBINE STREAM WORDS USING FOR LOOP
+            for await (const chunk of completion) {
+              if (chunk.choices[0].delta.content !== undefined) {
+                botResponse += chunk.choices[0].delta.content;
+              }
+            }
+          }
+        }
+
+        if (userPlan === "" || userPlan === null || userPlan === undefined) {
+          // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
+          const completion = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo-1106",
+            messages: [
+              {
+                role: "system",
+                content:
+                  "You are a helpful assistant and your name is Chatbot.",
+              },
+              ...storedResponses,
+            ],
+            stream: true,
+            temperature: 0,
+            max_tokens: 400,
+            top_p: 1,
+            frequency_penalty: 0.6,
+            presence_penalty: 0.6,
+          });
+
+          // COMBINE STREAM WORDS USING FOR LOOP
+          for await (const chunk of completion) {
+            if (chunk.choices[0].delta.content !== undefined) {
+              botResponse += chunk.choices[0].delta.content;
+            }
+          }
         }
       }
 

@@ -8,7 +8,9 @@ function newChat() {
       <div class="chat__greeting">
         <h2>How can i help you today?</h2>
         <p>
-        Hello! I'm your chat companion, driven by the powerful GPT-3.5. Ask away or just chat casually—I'm here for a simple and enjoyable conversation! 
+          Hello! I'm your chat companion, driven by the powerful
+          API from ChatGPT. Ask away or just chat casually—I'm here for a
+          simple and enjoyable conversation!
         </p>
       </div>
     </div>`;

@@ -53,10 +53,29 @@
 
         <div class="nav__menu-right">
           <i class="bx bx-user-circle login__btn"></i>
+          <p class="nav__retrived-username"></p>
+          <i class="bx bx-chevron-down"></i>
           <i class="bx bx-menu-alt-right"></i>
+
+          <div class="nav__dropdown-menu">
+            <button class="nav__trigger-menu" type="button">Menu</button>
+            <button class="nav__redirect-chatbot" type="button">Chatbot</button>
+            <button class="signout" type="button">Signout</button>
+          </div>
         </div>
 
         <button class="login__btn" id="login">Login</button>
+
+        <!-- Username after login (take from localstorage) -->
+        <div class="nav__login-username">
+          <p class="nav__retrived-username"></p>
+          <i class="bx bx-chevron-down"></i>
+
+          <div class="nav__dropdown-menu">
+            <button class="nav__redirect-chatbot" type="button">Chatbot</button>
+            <button class="signout" type="button">Signout</button>
+          </div>
+        </div>
       </nav>
     </header>
 
@@ -95,7 +114,11 @@
                   <p>4,096 tokens</p>
                 </div>
               </div>
-              <button type="button" class="pricing__buttons" id="pricing__free-button">
+              <button
+                type="button"
+                class="pricing__buttons"
+                id="pricing__free-button"
+              >
                 Get Started For Free
               </button>
             </div>
@@ -120,7 +143,11 @@
                   <p>8,192 tokens</p>
                 </div>
               </div>
-              <button type="button" class="pricing__buttons" id="pricing__monthly-button">
+              <button
+                type="button"
+                class="pricing__buttons"
+                id="pricing__monthly-button"
+              >
                 Purchase This Plan
               </button>
             </div>
@@ -138,14 +165,18 @@
               <div class="pricing__card-description">
                 <div>
                   <i class="bx bx-check"></i>
-                  <p>GPT-4-32K</p>
+                  <p>GPT-4</p>
                 </div>
                 <div>
                   <i class="bx bx-check"></i>
-                  <p>32,768 tokens</p>
+                  <p>8,192 tokens</p>
                 </div>
               </div>
-              <button type="button" class="pricing__buttons" id="pricing__yearly-button">
+              <button
+                type="button"
+                class="pricing__buttons"
+                id="pricing__yearly-button"
+              >
                 Get The Best Deals
               </button>
             </div>
@@ -160,6 +191,79 @@
           </div>
         </div>
       </section>
+
+      <hr class="upper__hr container" />
+
+      <!-- Footer -->
+      <footer class="footer container">
+        <div class="footer__container">
+          <div class="footer__content">
+            <!-- Chatbot AI -->
+            <div class="nav__logo">
+              <div>
+                <h2>Chatbot AI</h2>
+                <i class="bx bx-bot"></i>
+              </div>
+            </div>
+            <p>
+              Transforming interactions with advanced chatbot AI for seamless
+              communication.
+            </p>
+          </div>
+          <div class="footer__content">
+            <span>Contact Information</span>
+            <div class="footer__contact-information">
+              <div class="footer__contact-content">
+                <i class="bx bx-phone"></i>
+                <p>(555) 123-4567</p>
+              </div>
+              <div class="footer__contact-content">
+                <i class="bx bx-mail-send"></i>
+                <p>info@yourdomain.com</p>
+              </div>
+              <div class="footer__contact-content">
+                <i class="bx bxs-map"></i>
+                <p>123 Main Street Cityville, State 54321 Countryland</p>
+              </div>
+            </div>
+          </div>
+          <div class="footer__content">
+            <!-- Navigation Links -->
+            <span>Navigation Links</span>
+            <div class="footer__nav-links">
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faq.html">FAQs</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer__content">
+            <span>All The Credits</span>
+            <div class="footer__contact-information">
+              <div class="footer__contact-content">
+                <i class="bx bx-images"></i>
+                <p>Images From Javascript Mastery</p>
+              </div>
+              <div class="footer__contact-content">
+                <i class="bx bx-bulb"></i>
+                <p>Ideas From Javascript Mastery</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <hr class="lower__hr container" />
+
+      <footer class="sub__footer container">
+        <span>Coded By Justin, All Rights Reserved</span>
+        <div class="footer__social-icons">
+          <i class="bx bxl-github"></i>
+          <i class="bx bxl-instagram"></i>
+          <i class="bx bxl-meta"></i>
+        </div>
+      </footer>
     </main>
 
     <!-- SCRIPTS -->

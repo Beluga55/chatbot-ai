@@ -132,3 +132,96 @@ serviceContainers.forEach(function (selection) {
     handleClick(serviceName);
   });
 });
+
+// LOGIN STATE TO CHANGE THE NAV MENU
+const loginBtns = document.querySelectorAll(".login__btn");
+const hamburger = document.querySelectorAll(".bx-menu-alt-right");
+const appendUsernameText = document.querySelectorAll(".nav__retrived-username");
+const navLoginUsername = document.querySelector(".nav__login-username");
+const navMenuRight = document.querySelector(".nav__menu-right");
+const navDropdownMenu = document.querySelectorAll(".nav__dropdown-menu");
+const navTriggerMenu = document.querySelector(".nav__trigger-menu");
+const loginAtHeader = document.querySelector("#login");
+const navRedirectChatbot = document.querySelectorAll(".nav__redirect-chatbot");
+const arrowDown = document.querySelector(".bx-chevron-down");
+
+// GET THE LOGIN STATE AT THE LOCAL STORAGE
+const loginState = localStorage.getItem("token");
+// RETRIEVE THE USERNAME FROM LOCAL STORAGE
+const username = localStorage.getItem("username");
+
+// FUNCTION TO HANDLE THE CLICK EVENT FOR THE NAV LOGIN USERNAME
+function handleNavLoginUsernameClick() {
+  // Stop the event from propagating up the DOM tree
+  event.stopPropagation();
+
+  navDropdownMenu.forEach((menu) => {
+    menu.classList.add("show");
+  });
+
+  document.addEventListener("click", function (event) {
+    const isClickInside = navMenuRight.contains(event.target);
+
+    if (!isClickInside) {
+      navDropdownMenu.forEach((menu) => {
+        menu.classList.remove("show");
+      });
+    }
+  });
+}
+
+navMenuRight.addEventListener("click", handleNavLoginUsernameClick);
+
+if (navLoginUsername) {
+  navLoginUsername.addEventListener("click", handleNavLoginUsernameClick);
+}
+
+if (navTriggerMenu) {
+  navTriggerMenu.addEventListener("click", () => {
+    event.stopPropagation();
+
+    navDropdownMenu.forEach((menu) => {
+      menu.classList.remove("show");
+    });
+    openNavigationMenu();
+  });
+}
+
+if (navRedirectChatbot) {
+  navRedirectChatbot.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      window.location.href = "chatbot.html";
+    });
+  });
+}
+
+// IF LOGIN STATE IS TRUE, CHANGE THE NAV MENU
+if (loginState) {
+  loginBtns.forEach((btn) => {
+    // REMOVE THE LOGIN BTN
+    btn.classList.add("hide");
+  });
+  hamburger.forEach((btn) => {
+    // REMOVE THE HAMBURGER BTN
+    btn.remove();
+  });
+  if (loginAtHeader) {
+    loginAtHeader.remove();
+  }
+} else {
+  navLoginUsername.remove();
+  arrowDown.remove();
+  appendUsernameText.forEach((text) => {
+    text.remove();
+  });
+  navMenuRight.removeEventListener("click", handleNavLoginUsernameClick);
+}
+
+// APPEND THE USERNAME TO THE NAV MENU
+if (username) {
+  document.addEventListener("DOMContentLoaded", function () {
+    appendUsernameText.forEach((text) => {
+      text.innerHTML = username;
+    });
+  });
+}

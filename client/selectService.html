@@ -35,17 +35,39 @@
                 <i class="bx bxs-chat"></i>
                 <a href="faq.html">FAQs</a>
               </li>
+              <li>
+                <i class="bx bxs-purchase-tag"></i>
+                <a href="pricing.html">Pricing</a>
+              </li>
             </ul>
           </div>
         </div>
 
         <div class="nav__menu-right">
-          <i class="bx bx-log-out signout"></i>
+          <i class="bx bx-user-circle login__btn"></i>
+          <p class="nav__retrived-username"></p>
+          <i class="bx bx-chevron-down"></i>
           <i class="bx bx-menu-alt-right"></i>
+
+          <div class="nav__dropdown-menu">
+            <button class="nav__trigger-menu" type="button">Menu</button>
+            <button class="nav__redirect-chatbot" type="button">Chatbot</button>
+            <button class="signout" type="button">Signout</button>
+          </div>
         </div>
 
-        <!-- DESKTOP SIGNOUT BUTTON -->
-        <button id="signout-btn" class="signout">Signout</button>
+        <button class="login__btn" id="login">Login</button>
+
+        <!-- Username after login (take from localstorage) -->
+        <div class="nav__login-username">
+          <p class="nav__retrived-username"></p>
+          <i class="bx bx-chevron-down"></i>
+
+          <div class="nav__dropdown-menu">
+            <button class="nav__redirect-chatbot" type="button">Chatbot</button>
+            <button class="signout" type="button">Signout</button>
+          </div>
+        </div>
       </nav>
     </header>
 
