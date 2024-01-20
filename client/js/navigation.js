@@ -225,3 +225,18 @@ if (username) {
     });
   });
 }
+
+// ISADMIN FUNCTIONALITY
+const isAdmin = localStorage.getItem("role");
+
+if (isAdmin === "admin" && window.location.pathname !== "/admin.html") {
+  const adminBtn = document.querySelector("#isAdmin");
+  // SET THE CLASSLIST TO EMPTY
+  adminBtn.classList = "";
+
+  adminBtn.textContent = "Admin";
+
+  adminBtn.addEventListener("click", () => {
+    window.location.href = "admin.html";
+  });
+}
