@@ -92,6 +92,19 @@
                 <button class="signout" type="button">Signout</button>
               </div>
             </div>
+
+            <!-- Username after login (take from localstorage) -->
+            <div class="nav__login-username">
+              <p class="nav__retrived-username"></p>
+              <i class="bx bx-chevron-down"></i>
+
+              <div class="nav__dropdown-menu">
+                <button id="isAdmin" class="nav__redirect-chatbot" type="button">
+                  Chatbot
+                </button>
+                <button class="signout" type="button">Signout</button>
+              </div>
+            </div>
           </div>
 
           <div id="app">
@@ -100,8 +113,8 @@
                 <div class="chat__greeting">
                   <h2>How can i help you today?</h2>
                   <p>
-                    Hello! I'm your chat companion, driven by the powerful
-                    API from ChatGPT. Ask away or just chat casually—I'm here for a
+                    Hello! I'm your chat companion, driven by the powerful API
+                    from ChatGPT. Ask away or just chat casually—I'm here for a
                     simple and enjoyable conversation!
                   </p>
                 </div>

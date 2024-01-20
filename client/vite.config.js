@@ -34,7 +34,10 @@ export default defineConfig({
         deleteUser: resolve(root, "js/admin/deleteUser.js"),
         retrieveInformation: resolve(root, "js/admin/retrieveInformation.js"),
         changeAvatar: resolve(root, "js/chatbot/changeAvatar.js"),
-        changeTextareaHeight: resolve(root, "js/chatbot/changeTextareaHeight.js"),
+        changeTextareaHeight: resolve(
+          root,
+          "js/chatbot/changeTextareaHeight.js"
+        ),
         chatbotJS: resolve(root, "js/chatbot/chatbot.js"),
         chatStripe: resolve(root, "js/chatbot/chatStripe.js"),
         clipboard: resolve(root, "js/chatbot/clipboard.js"),
@@ -44,11 +47,20 @@ export default defineConfig({
         openai: resolve(root, "js/chatbot/openai.js"),
         openSetupMenu: resolve(root, "js/chatbot/openSetupMenu.js"),
         retrieveChatHistory: resolve(root, "js/chatbot/retrieveChatHistory.js"),
-        retrieveProfilePicture: resolve(root, "js/chatbot/retrieveProfilePicture.js"),
+        retrieveProfilePicture: resolve(
+          root,
+          "js/chatbot/retrieveProfilePicture.js"
+        ),
         retrieveTitle: resolve(root, "js/chatbot/retrieveTitle.js"),
         retrieveUsername: resolve(root, "js/chatbot/retrieveUsername.js"),
-        uploadProfilePicture: resolve(root, "js/chatbot/uploadProfilePicture.js"),
-        redirectSelectService: resolve(root, "js/stripe/redirectSelectService.js"),
+        uploadProfilePicture: resolve(
+          root,
+          "js/chatbot/uploadProfilePicture.js"
+        ),
+        redirectSelectService: resolve(
+          root,
+          "js/stripe/redirectSelectService.js"
+        ),
       },
     },
   },

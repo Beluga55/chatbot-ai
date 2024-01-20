@@ -254,6 +254,10 @@
   display: none;
 }
 
+.nav__login-username {
+  display: none;
+}
+
 #app {
   width: 100vw;
   min-height: 0;
@@ -460,12 +464,6 @@ form img {
   height: 30px;
 }
 
-/* Add desired styles for code blocks */
-/* .code-block {
-  background-color: #f0f0f0;
-  padding: 10px;
-} */
-
 .bot__mistakes {
   text-align: center;
   color: var(--TextColor);
@@ -621,9 +619,16 @@ form img {
 
 @media screen and (min-width: 768px) {
   .bx-menu-alt-right,
-  .nav__menu-right,
   .bx-left-arrow-alt {
     display: block;
+  }
+
+  .nav__header {
+    width: 100%;
+  }
+
+  .nav__login-username {
+    display: flex;
   }
 
   #chatbot-form {
