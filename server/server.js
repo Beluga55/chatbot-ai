@@ -231,7 +231,7 @@ app.post("/", async (req, res) => {
             ],
             stream: true,
             temperature: 0,
-            max_tokens: 400,
+            max_tokens: 350,
             top_p: 1,
             frequency_penalty: 0.6,
             presence_penalty: 0.6,
@@ -796,7 +796,7 @@ app.get("/reset-password/:id/:token", async (req, res) => {
 
           res.send(`
           <script>
-            window.location.href = 'https://chatbot-ai-ashy.vercel.app/resetPassword.html?id=${id}&token=${token}&userEmail=${matchingEmail}';
+            window.location.href = 'https://aichatkey.net/resetPassword.html?id=${id}&token=${token}&userEmail=${matchingEmail}';
           </script>
           `);
         } catch (error) {
@@ -1367,9 +1367,9 @@ app.post("/create-checkout-session", async (req, res) => {
         productName: productName,
       },
       success_url:
-        "https://chatbot-ai-ashy.vercel.app/success.html?session_id={CHECKOUT_SESSION_ID}",
+        "https://aichatkey.net/success.html?session_id={CHECKOUT_SESSION_ID}",
       cancel_url:
-        "https://chatbot-ai-ashy.vercel.app/cancel.html?session_id={CHECKOUT_SESSION_ID}",
+        "https://aichatkey.net/cancel.html?session_id={CHECKOUT_SESSION_ID}",
     });
 
     res.json({ url: session.url });
