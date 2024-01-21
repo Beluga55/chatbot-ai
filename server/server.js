@@ -1383,52 +1383,51 @@ app.post("/create-checkout-session", async (req, res) => {
 
 /* ========== EXPRESS ROUTING  ========== */
 app.get("/index", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "client", "index.html"));
+  res.redirect("https://aichatkey.net/index.html");
 });
 
 app.get("/about", (req, res) => {
-  // res.sendFile(path.join(__dirname, "../", "client", "about.html"));
-  proxy.web(req, res, { target: "https://aichatkey.net/about.html" });
+  res.redirect("https://aichatkey.net/about.html");
 });
 
 app.get("/pricing", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "client", "pricing.html"));
+  res.redirect("https://aichatkey.net/pricing.html");
 });
 
 app.get("/chatbot", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "client", "chatbot.html"));
+  res.redirect("https://aichatkey.net/chatbot.html");
 });
 
 app.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "client", "login.html"));
+  res.redirect("https://aichatkey.net/login.html");
 });
 
 app.get("/signup", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "client", "signup.html"));
+  res.redirect("https://aichatkey.net/signup.html");
 });
 
 app.get("/selectService", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "client", "selectService.html"));
+  res.redirect("https://aichatkey.net/selectService.html");
 });
 
 app.get("/forgotPassword", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "client", "forgotPassword.html"));
+  res.redirect("https://aichatkey.net/forgotPassword.html");
 });
 
 app.get("/resetPassword", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "client", "resetPassword.html"));
+  res.redirect("https://aichatkey.net/resetPassword.html");
 });
 
 app.get("/admin", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "client", "admin.html"));
+  res.redirect("https://aichatkey.net/admin.html");
 });
 
 app.get("/success", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "client", "success.html"));
+  res.redirect("https://aichatkey.net/success.html");
 });
 
 app.get("/cancel", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "client", "cancel.html"));
+  res.redirect("https://aichatkey.net/cancel.html");
 });
 
 app.listen(5001, () =>
