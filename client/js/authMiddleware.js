@@ -1,7 +1,7 @@
 // FUNCTION TO ALERT USER WHEN ITS NOT AUTHORIZED
 const redirectToLogin = () => {
   alert("Unauthorized Access !!! Please Sign In or Sign Up !!!");
-  window.location.href = "login.html";
+  window.location.href = "/login";
 };
 
 // RETRIEVE THE STATUS OF THE LOCALSTORAGE (DEFAULT SET TO TRUE)
@@ -26,7 +26,7 @@ const protectUserRoute = () => {
 
   if (checkRole() !== "user") {
     alert("You do not have permission to access this page.");
-    window.location.href = "login.html";
+    window.location.href = "/login";
     return false;
   }
 
@@ -42,7 +42,7 @@ const protectAdminRoute = () => {
 
   if (checkRole() !== "admin") {
     alert("You do not have permission to access this page.");
-    window.location.href = "login.html";
+    window.location.href = "/login";
     return false;
   }
 
@@ -56,7 +56,7 @@ const resetPasswordRoute = () => {
 
   if (userToken === "" || userToken === null) {
     alert("You do not have permission to access this page.");
-    window.location.href = "index.html";
+    window.location.href = "/index";
     return false;
   }
 
@@ -69,7 +69,7 @@ const protectSuccessRoute = () => {
 
   if (sessionId === "" || sessionId === null) {
     alert("You do not have permission to access this page.");
-    window.location.href = "index.html";
+    window.location.href = "/index";
     return false;
   }
 
@@ -77,12 +77,12 @@ const protectSuccessRoute = () => {
 };
 
 // CHECK AND PROTECT ROUTES
-if (window.location.pathname === "/admin.html") {
+if (window.location.pathname === "/admin") {
   protectAdminRoute();
-} else if (window.location.pathname === "/chatbot.html") {
+} else if (window.location.pathname === "/chatbot") {
   protectUserRoute();
-} else if (window.location.pathname === "/resetPassword.html") {
+} else if (window.location.pathname === "/resetPassword") {
   resetPasswordRoute();
-} else if (window.location.pathname === "/success.html") {
+} else if (window.location.pathname === "/success") {
   protectSuccessRoute();
 }

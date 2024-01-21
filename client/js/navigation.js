@@ -47,7 +47,7 @@ if (navList) {
 const loginBtn = document.querySelectorAll(".login__btn");
 
 const redirectToLoginPage = () => {
-  window.location.href = "login.html";
+  window.location.href = "/login";
 };
 
 if (loginBtn.length > 0) {
@@ -60,7 +60,7 @@ if (loginBtn.length > 0) {
 const signupBtn = document.querySelectorAll(".signup__button");
 
 const redirectToSignupPage = () => {
-  window.location.href = "signup.html";
+  window.location.href = "/signup";
 };
 
 if (signupBtn.length > 0) {
@@ -104,7 +104,7 @@ instagram.forEach((instagram) => {
 const signoutBtn = document.querySelectorAll(".signout");
 
 const redirectToMainPage = () => {
-  window.location.href = "index.html";
+  window.location.href = "/index";
   localStorage.removeItem("token");
   localStorage.removeItem("username");
   localStorage.removeItem("role");
@@ -121,7 +121,7 @@ const serviceContainers = document.querySelectorAll(".service__content");
 
 function handleClick(serviceName) {
   if (serviceName === "Chatbot AI") {
-    window.location.href = "chatbot.html";
+    window.location.href = "/chatbot";
   }
 }
 
@@ -190,7 +190,7 @@ if (navTriggerMenu) {
 if (navRedirectChatbot) {
   navRedirectChatbot.forEach((btn) => {
     btn.addEventListener("click", () => {
-      window.location.href = "chatbot.html";
+      window.location.href = "/chatbot";
     });
   });
 }
@@ -209,8 +209,13 @@ if (loginState) {
     loginAtHeader.remove();
   }
 } else {
-  navLoginUsername.remove();
-  arrowDown.remove();
+  if (navLoginUsername) {
+    navLoginUsername.remove();
+  }
+  if (arrowDown) {
+    arrowDown.remove();
+  }
+
   appendUsernameText.forEach((text) => {
     text.remove();
   });
@@ -229,14 +234,17 @@ if (username) {
 // ISADMIN FUNCTIONALITY
 const isAdmin = localStorage.getItem("role");
 
-if (isAdmin === "admin" && window.location.pathname !== "/admin.html") {
+if (isAdmin === "admin" && window.location.pathname !== "/admin") {
   const adminBtn = document.querySelector("#isAdmin");
-  // SET THE CLASSLIST TO EMPTY
-  adminBtn.classList = "";
 
-  adminBtn.textContent = "Admin";
+  if (adminBtn) {
+    // SET THE CLASSLIST TO EMPTY
+    adminBtn.classList = "";
 
-  adminBtn.addEventListener("click", () => {
-    window.location.href = "admin.html";
-  });
+    adminBtn.textContent = "Admin";
+
+    adminBtn.addEventListener("click", () => {
+      window.location.href = "/admin";
+    });
+  }
 }

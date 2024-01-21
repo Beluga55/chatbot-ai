@@ -30,6 +30,14 @@ import formidable from "formidable";
 /* ========== PAYMENT MODULE ========== */
 import Stripe from "stripe";
 
+/* ========== PATH MODULE ========== */
+import path from "path";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 /* ========== ACCESS TO ENVIRONMENT VARIABLES (ENV) ========== */
 dotenv.config();
 
@@ -217,7 +225,6 @@ app.post("/", async (req, res) => {
         const userPlan = currentUser.plan;
 
         if (userPlan === "Free Plan") {
-
           // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
           const completion = await openai.chat.completions.create({
             model: "gpt-4-1106-preview",
@@ -333,7 +340,6 @@ app.post("/", async (req, res) => {
               }
             }
           } else if (currentDate < expiryDate) {
-
             // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
             const completion = await openai.chat.completions.create({
               model: "gpt-4",
@@ -796,7 +802,7 @@ app.get("/reset-password/:id/:token", async (req, res) => {
 
           res.send(`
           <script>
-            window.location.href = 'https://aichatkey.net/resetPassword.html?id=${id}&token=${token}&userEmail=${matchingEmail}';
+            window.location.href = 'https://aichatkey.net//resetPassword?id=${id}&token=${token}&userEmail=${matchingEmail}';
           </script>
           `);
         } catch (error) {
@@ -1367,9 +1373,9 @@ app.post("/create-checkout-session", async (req, res) => {
         productName: productName,
       },
       success_url:
-        "https://aichatkey.net/success.html?session_id={CHECKOUT_SESSION_ID}",
+        "https://aichatkey.net/success?session_id={CHECKOUT_SESSION_ID}",
       cancel_url:
-        "https://aichatkey.net/cancel.html?session_id={CHECKOUT_SESSION_ID}",
+        "https://aichatkey.net/cancel?session_id={CHECKOUT_SESSION_ID}",
     });
 
     res.json({ url: session.url });
@@ -1377,6 +1383,55 @@ app.post("/create-checkout-session", async (req, res) => {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
+});
+
+/* ========== EXPRESS ROUTING  ========== */
+app.get("/index", (req, res) => {
+  res.sendFile(path.join(__dirname, "../", "client", "index.html"));
+});
+
+app.get("/about", (req, res) => {
+  res.sendFile(path.join(__dirname, "../", "client", "about.html"));
+});
+
+app.get("/pricing", (req, res) => {
+  res.sendFile(path.join(__dirname, "../", "client", "pricing.html"));
+});
+
+app.get("/chatbot", (req, res) => {
+  res.sendFile(path.join(__dirname, "../", "client", "chatbot.html"));
+});
+
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "../", "client", "login.html"));
+});
+
+app.get("/signup", (req, res) => {
+  res.sendFile(path.join(__dirname, "../", "client", "signup.html"));
+});
+
+app.get("/selectService", (req, res) => {
+  res.sendFile(path.join(__dirname, "../", "client", "selectService.html"));
+});
+
+app.get("/forgotPassword", (req, res) => {
+  res.sendFile(path.join(__dirname, "../", "client", "forgotPassword.html"));
+});
+
+app.get("/resetPassword", (req, res) => {
+  res.sendFile(path.join(__dirname, "../", "client", "resetPassword.html"));
+});
+
+app.get("/admin", (req, res) => {
+  res.sendFile(path.join(__dirname, "../", "client", "admin.html"));
+});
+
+app.get("/success", (req, res) => {
+  res.sendFile(path.join(__dirname, "../", "client", "success.html"));
+});
+
+app.get("/cancel", (req, res) => {
+  res.sendFile(path.join(__dirname, "../", "client", "cancel.html"));
 });
 
 app.listen(5001, () =>

@@ -11,9 +11,9 @@ async function plansButtons() {
     // IF YES, REDIRECT THEM TO THE SELECT SERVICE PAGE
 
     if (username) {
-      window.location.href = "selectService.html";
+      window.location.href = "/selectService";
     } else {
-      window.location.href = "login.html";
+      window.location.href = "/login";
     }
   } else if (clickedButtonId === "pricing__monthly-button") {
     if (username) {
@@ -44,7 +44,7 @@ async function plansButtons() {
     } else {
       // Store the intended action
       localStorage.setItem("intendedAction", premiumPlan);
-      window.location.href = "login.html";
+      window.location.href = "/login";
     }
   } else if (clickedButtonId === "pricing__yearly-button") {
     if (username) {
@@ -75,7 +75,7 @@ async function plansButtons() {
     } else {
       // Store the intended action
       localStorage.setItem("intendedAction", bestDeals);
-      window.location.href = "login.html";
+      window.location.href = "/login";
     }
   }
 }
