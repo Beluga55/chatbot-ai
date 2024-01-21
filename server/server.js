@@ -30,13 +30,9 @@ import formidable from "formidable";
 /* ========== PAYMENT MODULE ========== */
 import Stripe from "stripe";
 
-/* ========== PATH MODULE ========== */
-import path from "path";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+/* ========== HTTP PROXY ========== */
+import httpProxy from "http-proxy";
+const proxy = httpProxy.createProxyServer();
 
 /* ========== ACCESS TO ENVIRONMENT VARIABLES (ENV) ========== */
 dotenv.config();
@@ -1391,7 +1387,8 @@ app.get("/index", (req, res) => {
 });
 
 app.get("/about", (req, res) => {
-  res.sendFile(path.join(__dirname, "../", "client", "about.html"));
+  // res.sendFile(path.join(__dirname, "../", "client", "about.html"));
+  proxy.web(req, res, { target: "https://aichatkey.net/about.html" });
 });
 
 app.get("/pricing", (req, res) => {
