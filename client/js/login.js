@@ -69,7 +69,7 @@ async function submitLogin(event) {
       loginForm.reset();
 
       if (result.role === "admin") {
-        window.location.href = "/admin";
+        window.location.href = "admin.html";
       } else {
         const response = await fetch(
           "https://chatbot-rreu.onrender.com/create-checkout-session",
@@ -130,9 +130,9 @@ async function submitLogin(event) {
       loginForm.reset();
 
       if (result.role === "admin") {
-        window.location.href = "/admin";
+        window.location.href = "admin.html";
       } else {
-        window.location.href = "/selectService";
+        window.location.href = "selectService.html";
       }
     } else {
       // Handle login error

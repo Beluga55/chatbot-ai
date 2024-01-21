@@ -1,5 +1,5 @@
 function redirectSelectService() {
-  window.location.href = "/selectService";
+  window.location.href = "selectService.html";
 }
 
 export { redirectSelectService };

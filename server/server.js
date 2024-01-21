@@ -798,7 +798,7 @@ app.get("/reset-password/:id/:token", async (req, res) => {
 
           res.send(`
           <script>
-            window.location.href = 'https://aichatkey.net//resetPassword?id=${id}&token=${token}&userEmail=${matchingEmail}';
+            window.location.href = 'https://aichatkey.net/resetPassword.html?id=${id}&token=${token}&userEmail=${matchingEmail}';
           </script>
           `);
         } catch (error) {
@@ -1369,7 +1369,7 @@ app.post("/create-checkout-session", async (req, res) => {
         productName: productName,
       },
       success_url:
-        "https://aichatkey.net/success?session_id={CHECKOUT_SESSION_ID}",
+        "https://aichatkey.net/success.html?session_id={CHECKOUT_SESSION_ID}",
       cancel_url:
         "https://aichatkey.net/cancel?session_id={CHECKOUT_SESSION_ID}",
     });
@@ -1379,55 +1379,6 @@ app.post("/create-checkout-session", async (req, res) => {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
-});
-
-/* ========== EXPRESS ROUTING  ========== */
-app.get("/index", (req, res) => {
-  res.redirect("https://aichatkey.net/index.html");
-});
-
-app.get("/about", (req, res) => {
-  res.redirect("https://aichatkey.net/about.html");
-});
-
-app.get("/pricing", (req, res) => {
-  res.redirect("https://aichatkey.net/pricing.html");
-});
-
-app.get("/chatbot", (req, res) => {
-  res.redirect("https://aichatkey.net/chatbot.html");
-});
-
-app.get("/login", (req, res) => {
-  res.redirect("https://aichatkey.net/login.html");
-});
-
-app.get("/signup", (req, res) => {
-  res.redirect("https://aichatkey.net/signup.html");
-});
-
-app.get("/selectService", (req, res) => {
-  res.redirect("https://aichatkey.net/selectService.html");
-});
-
-app.get("/forgotPassword", (req, res) => {
-  res.redirect("https://aichatkey.net/forgotPassword.html");
-});
-
-app.get("/resetPassword", (req, res) => {
-  res.redirect("https://aichatkey.net/resetPassword.html");
-});
-
-app.get("/admin", (req, res) => {
-  res.redirect("https://aichatkey.net/admin.html");
-});
-
-app.get("/success", (req, res) => {
-  res.redirect("https://aichatkey.net/success.html");
-});
-
-app.get("/cancel", (req, res) => {
-  res.redirect("https://aichatkey.net/cancel.html");
 });
 
 app.listen(5001, () =>
