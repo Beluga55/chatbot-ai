@@ -68,7 +68,7 @@ export default defineConfig({
     proxy: {
       "^/(index|about|pricing|chatbot|login|signup|selectService|forgotPassword|resetPassword|admin|success|cancel)":
         {
-          target: "https://aichatkey.net/",
+          target: "https://chatbot-rreu.onrender.com",
           changeOrigin: true,
         },
     },
