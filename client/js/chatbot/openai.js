@@ -2,6 +2,9 @@ import chatStripe from "./chatStripe";
 import generateUniqueId from "./generateUniqueId";
 
 let loadInterval;
+let interval;
+let element;
+let text;
 
 function loader(element) {
   element.innerHTML = "";
@@ -15,18 +18,39 @@ function loader(element) {
   }, 300);
 }
 
-function typeText(element, text) {
+function typeText(elem, txt) {
+  element = elem;
+  text = txt;
   let index = 0;
 
-  const interval = setInterval(() => {
+  // SHOW THE SKIP BUTTON
+  const skipButton = document.getElementById("skip-response");
+  skipButton.style.opacity = "1";
+  skipButton.style.visibility = "visible";
+
+  interval = setInterval(() => {
     if (index < text.length) {
       element.innerHTML += text.charAt(index);
       index++;
     } else {
       clearInterval(interval);
+      // Hide the skip button after completion
+      skipButton.style.opacity = "0";
+      skipButton.style.visibility = "hidden";
     }
   }, 20);
 }
+
+// SKIP BUTTON LISTENER
+const skipButton = document.getElementById("skip-response");
+skipButton.addEventListener("click", () => {
+  // Remove element and text parameters
+  clearInterval(interval);
+  element.innerHTML = text; // Show all text immediately
+  // Hide the skip button after completion
+  skipButton.style.opacity = "0";
+  skipButton.style.visibility = "hidden";
+});
 
 async function handleSubmit() {
   event.preventDefault();

@@ -23,7 +23,7 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-  z-index: 1;
+  z-index: 2;
   display: grid;
   grid-template-rows: auto 1fr auto;
   overflow-y: auto;
@@ -303,6 +303,38 @@
   margin-top: 1rem;
   font-size: 14px;
   text-align: center;
+}
+
+.skip__continue-control {
+  position: relative;
+  z-index: 1;
+}
+
+.skip__continue-control div {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: -1rem;
+}
+
+.skip__continue-control button {
+  background: var(--White);
+  color: var(--Black);
+  padding: 0.7rem 1.25rem;
+  font-weight: 500;
+  border-radius: 2rem;
+  transition: color 0.3s ease-in-out, background 0.3s ease-in-out,
+    transform 0.3s ease-in-out, opacity 0.3s ease-in-out,
+    visibility 0.3s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.skip__continue-control button:hover {
+  color: var(--White);
+  background: var(--Accent);
+  transform: translate(0, -3px);
+  box-shadow: 0 20px 80px -10px var(--Accent);
 }
 
 .title {

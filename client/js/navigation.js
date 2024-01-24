@@ -261,3 +261,14 @@ if (window.location.pathname === "/chatbot.html") {
     });
   }
 }
+
+// HOME PAGE REDIRECT
+const navLogo = document.querySelectorAll(".nav__logo");
+
+if (navLogo) {
+  navLogo.forEach((logo) => {
+    logo.addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+  });
+}

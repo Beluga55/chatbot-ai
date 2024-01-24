@@ -15,6 +15,10 @@
   margin: 1.5rem;
 }
 
+.nav__logo {
+  cursor: pointer;
+}
+
 .nav__logo div:first-child {
   display: flex;
   align-items: center;
@@ -155,6 +159,7 @@
   max-width: 100px;
   left: 50%;
   transform: translate(-50%);
+  border: 1px solid var(--CardBackground);
 }
 
 .nav__dropdown-menu.show {

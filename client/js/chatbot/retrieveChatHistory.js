@@ -18,6 +18,11 @@ async function retrieveChatHistory(event) {
     // Add active__title class to the clicked title
     clickedElement.classList.add("active__title");
 
+    // REMOVE THE SKIP RESPONSE BUTTON IF IT EXISTS
+    const skipButton = document.getElementById("skip-response");
+    skipButton.style.opacity = "0";
+    skipButton.style.visibility = "hidden";
+
     const response = await fetch(
       "https://chatbot-rreu.onrender.com/retrieveHistory",
       {
