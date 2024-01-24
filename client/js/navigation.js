@@ -235,16 +235,29 @@ if (username) {
 const isAdmin = localStorage.getItem("role");
 
 if (isAdmin === "admin" && window.location.pathname !== "admin.html") {
-  const adminBtn = document.querySelector("#isAdmin");
+  const adminBtn = document.querySelectorAll("#isAdmin");
 
   if (adminBtn) {
-    // SET THE CLASSLIST TO EMPTY
-    adminBtn.classList = "";
+    adminBtn.forEach((btn) => {
+      // SET THE CLASSLIST TO EMPTY
+      btn.classList = "";
 
-    adminBtn.textContent = "Admin";
+      btn.textContent = "Admin";
 
-    adminBtn.addEventListener("click", () => {
-      window.location.href = "admin.html";
+      btn.addEventListener("click", () => {
+        window.location.href = "admin.html";
+      });
+    });
+  }
+}
+
+// IF THE USER IS ALREADY IN THE CHATBOT.html PAGE, REMOVE THE CHATBOT BTN
+if (window.location.pathname === "/chatbot.html") {
+  const chatbotBtn = document.querySelectorAll(".nav__redirect-chatbot");
+
+  if (chatbotBtn) {
+    chatbotBtn.forEach((btn) => {
+      btn.remove();
     });
   }
 }

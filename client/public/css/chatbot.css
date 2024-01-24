@@ -237,10 +237,6 @@
   height: 100svh;
 }
 
-.nav__dropdown-menu {
-  bottom: -7rem;
-}
-
 .nav__header {
   display: flex;
   align-items: center;

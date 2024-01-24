@@ -30,10 +30,6 @@ import formidable from "formidable";
 /* ========== PAYMENT MODULE ========== */
 import Stripe from "stripe";
 
-/* ========== HTTP PROXY ========== */
-import httpProxy from "http-proxy";
-const proxy = httpProxy.createProxyServer();
-
 /* ========== ACCESS TO ENVIRONMENT VARIABLES (ENV) ========== */
 dotenv.config();
 
@@ -1371,7 +1367,7 @@ app.post("/create-checkout-session", async (req, res) => {
       success_url:
         "https://aichatkey.net/success.html?session_id={CHECKOUT_SESSION_ID}",
       cancel_url:
-        "https://aichatkey.net/cancel?session_id={CHECKOUT_SESSION_ID}",
+        "https://aichatkey.net/cancel.html?session_id={CHECKOUT_SESSION_ID}",
     });
 
     res.json({ url: session.url });
