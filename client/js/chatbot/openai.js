@@ -56,6 +56,7 @@ async function handleSubmit() {
   event.preventDefault();
 
   const chatContainer = document.getElementById("chat_container");
+  const toggleSwitch = document.getElementById("toggle-switch");
 
   // Declare the status variable outside the if-else block
   let status;
@@ -99,6 +100,7 @@ async function handleSubmit() {
       username: localStorage.getItem("username"),
       status: status,
       randomID: getRandomID,
+      toggleSwitch: toggleSwitch.checked,
     }),
   });
 

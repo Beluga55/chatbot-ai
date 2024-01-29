@@ -49,7 +49,7 @@ async function plansButtons() {
   } else if (clickedButtonId === "pricing__yearly-button") {
     if (username) {
       const response = await fetch(
-        "https://chatbot-rreu.onrender.com/create-checkout-session",
+        "https://chatbot-rreu.onrender.com/create-checkout-session", // https://chatbot-rreu.onrender.com/create-checkout-session
         {
           method: "POST",
           headers: {

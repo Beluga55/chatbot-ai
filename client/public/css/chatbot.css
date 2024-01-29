@@ -254,6 +254,49 @@
   display: none;
 }
 
+.nav__expired-date {
+  font-size: 0.75rem;
+}
+
+.nav__models-desktop-buttons {
+  display: none;
+}
+
+#toggle-switch {
+  display: none; /* Hide the checkbox input */
+}
+
+#toggle-switch + label {
+  display: inline-block;
+  width: 50px; /* Adjust width as needed */
+  height: 25px; /* Adjust height as needed */
+  background-color: #ccc;
+  border-radius: 17px; /* Create rounded corners */
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#toggle-switch:checked + label {
+  background-color: var(--Accent); /* Change background color on toggle */
+}
+
+#toggle-switch + label:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 15px;
+  height: 15px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+}
+
+#toggle-switch:checked + label:before {
+  transform: translateX(25px); /* Move the circle when toggled */
+}
+
 #app {
   width: 100vw;
   min-height: 0;
@@ -595,11 +638,6 @@ form img {
     width: 250px;
   }
 
-  .nav__logo .nav__username span {
-    color: var(--TextColor);
-    font-size: 0.85rem;
-  }
-
   .nav__user-selection button {
     color: var(--White);
     display: flex;
@@ -649,6 +687,14 @@ form img {
   .bx-menu-alt-right,
   .bx-left-arrow-alt {
     display: block;
+  }
+
+  .nav__models-desktop-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--White);
+    font-size: 0.8rem;
   }
 
   .nav__header {

@@ -75,6 +75,14 @@ app.post(
               { username: username },
               { $set: { plan: productName, expiryDate: expiryDate } }
             );
+
+            // STORE THE ORDERS INSIDE THE ORDER COLLECTION (USERNAME, PRODUCT NAME, PRICE, DATE)
+            await orders.insertOne({
+              username,
+              productName,
+              price: session.amount_total / 100,
+              date: new Date(),
+            });
           }
         } catch (error) {
           console.error("Error updating user subscription:", error);
@@ -93,6 +101,14 @@ app.post(
               { username: username },
               { $set: { plan: productName, expiryDate: expiryDate } }
             );
+
+            // STORE THE ORDERS INSIDE THE ORDER COLLECTION (USERNAME, PRODUCT NAME, PRICE, DATE)
+            await orders.insertOne({
+              username,
+              productName,
+              price: session.amount_total / 100,
+              date: new Date(),
+            });
           }
         } catch (error) {
           console.error("Error updating user subscription:", error);
@@ -111,9 +127,10 @@ const uri = process.env.MONGODB_KEY;
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const secretKey = process.env.SECRET_KEY;
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  // CHANGE IT BACK ONCE DONE TESTING
   apiVersion: "2023-10-16",
 });
-const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET; // CHANGE IT BACK ONCE DONE TESTING
 
 /* ========== CONNECTION TO MONGO DATABASE ========== */
 const client = new MongoClient(uri, {
@@ -144,6 +161,7 @@ const database = client.db("Chatbot");
 const products = database.collection("Products");
 const title = database.collection("Title");
 const users = database.collection("Users");
+const orders = database.collection("Orders");
 const converHistory = database.collection("conversationHistory");
 const uploadFiles = database.collection("uploads.files");
 const uploadChunks = database.collection("uploads.chunks");
@@ -154,7 +172,7 @@ let storedResponses = [];
 /* ========== EXPRESS CHATBOT CONFIGURATION ========== */
 app.post("/", async (req, res) => {
   try {
-    const { prompt, username, status, randomID } = req.body;
+    const { prompt, username, status, randomID, toggleSwitch } = req.body;
 
     // CHECK RANDOM ID (MATCH OR EMPTY)
     if (randomID !== "") {
@@ -219,7 +237,7 @@ app.post("/", async (req, res) => {
         if (userPlan === "Free Plan") {
           // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
           const completion = await openai.chat.completions.create({
-            model: "gpt-4-1106-preview",
+            model: "gpt-3.5-turbo-1106",
             messages: [
               {
                 role: "system",
@@ -242,40 +260,70 @@ app.post("/", async (req, res) => {
             }
           }
         } else if (userPlan === "Premium plan") {
-          // COMPARE THE DATE TODAY WITH THE EXPIRY DATE
-          const expiryDate = new Date(currentUser.expiryDate);
-          const currentDate = new Date();
+          if (toggleSwitch === true) {
+            // USING GPT 4 MODEL
+            // COMPARE THE DATE TODAY WITH THE EXPIRY DATE
+            const expiryDate = new Date(currentUser.expiryDate);
+            const currentDate = new Date();
 
-          if (currentDate > expiryDate) {
+            if (currentDate > expiryDate) {
+              // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
+              const completion = await openai.chat.completions.create({
+                model: "gpt-3.5-turbo-1106",
+                messages: [
+                  {
+                    role: "system",
+                    content:
+                      "You are a helpful assistant and your name is Chatbot.",
+                  },
+                  ...storedResponses,
+                ],
+                stream: true,
+                temperature: 0,
+                max_tokens: 400,
+                top_p: 1,
+                frequency_penalty: 0.6,
+                presence_penalty: 0.6,
+              });
+
+              // COMBINE STREAM WORDS USING FOR LOOP
+              for await (const chunk of completion) {
+                if (chunk.choices[0].delta.content !== undefined) {
+                  botResponse += chunk.choices[0].delta.content;
+                }
+              }
+            } else if (currentDate < expiryDate) {
+              // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
+              const completion = await openai.chat.completions.create({
+                model: "gpt-4",
+                messages: [
+                  {
+                    role: "system",
+                    content:
+                      "You are a helpful assistant and your name is Chatbot.",
+                  },
+                  ...storedResponses,
+                ],
+                stream: true,
+                temperature: 0,
+                max_tokens: 400,
+                top_p: 1,
+                frequency_penalty: 0.6,
+                presence_penalty: 0.6,
+              });
+
+              // COMBINE STREAM WORDS USING FOR LOOP
+              for await (const chunk of completion) {
+                if (chunk.choices[0].delta.content !== undefined) {
+                  botResponse += chunk.choices[0].delta.content;
+                }
+              }
+            }
+          } else {
+            // USING GPT 3.5 MODEL
             // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
             const completion = await openai.chat.completions.create({
               model: "gpt-3.5-turbo-1106",
-              messages: [
-                {
-                  role: "system",
-                  content:
-                    "You are a helpful assistant and your name is Chatbot.",
-                },
-                ...storedResponses,
-              ],
-              stream: true,
-              temperature: 0,
-              max_tokens: 400,
-              top_p: 1,
-              frequency_penalty: 0.6,
-              presence_penalty: 0.6,
-            });
-
-            // COMBINE STREAM WORDS USING FOR LOOP
-            for await (const chunk of completion) {
-              if (chunk.choices[0].delta.content !== undefined) {
-                botResponse += chunk.choices[0].delta.content;
-              }
-            }
-          } else if (currentDate < expiryDate) {
-            // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
-            const completion = await openai.chat.completions.create({
-              model: "gpt-4",
               messages: [
                 {
                   role: "system",
@@ -300,40 +348,69 @@ app.post("/", async (req, res) => {
             }
           }
         } else if (userPlan === "Best deals") {
-          // COMPARE THE DATE TODAY WITH THE EXPIRY DATE
-          const expiryDate = new Date(currentUser.expiryDate);
-          const currentDate = new Date();
+          if (toggleSwitch === true) {
+            // COMPARE THE DATE TODAY WITH THE EXPIRY DATE
+            const expiryDate = new Date(currentUser.expiryDate);
+            const currentDate = new Date();
 
-          if (currentDate > expiryDate) {
+            if (currentDate > expiryDate) {
+              // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
+              const completion = await openai.chat.completions.create({
+                model: "gpt-3.5-turbo-1106",
+                messages: [
+                  {
+                    role: "system",
+                    content:
+                      "You are a helpful assistant and your name is Chatbot.",
+                  },
+                  ...storedResponses,
+                ],
+                stream: true,
+                temperature: 0,
+                max_tokens: 400,
+                top_p: 1,
+                frequency_penalty: 0.6,
+                presence_penalty: 0.6,
+              });
+
+              // COMBINE STREAM WORDS USING FOR LOOP
+              for await (const chunk of completion) {
+                if (chunk.choices[0].delta.content !== undefined) {
+                  botResponse += chunk.choices[0].delta.content;
+                }
+              }
+            } else if (currentDate < expiryDate) {
+              // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
+              const completion = await openai.chat.completions.create({
+                model: "gpt-4",
+                messages: [
+                  {
+                    role: "system",
+                    content:
+                      "You are a helpful assistant and your name is Chatbot.",
+                  },
+                  ...storedResponses,
+                ],
+                stream: true,
+                temperature: 0,
+                max_tokens: 400,
+                top_p: 1,
+                frequency_penalty: 0.6,
+                presence_penalty: 0.6,
+              });
+
+              // COMBINE STREAM WORDS USING FOR LOOP
+              for await (const chunk of completion) {
+                if (chunk.choices[0].delta.content !== undefined) {
+                  botResponse += chunk.choices[0].delta.content;
+                }
+              }
+            }
+          } else {
+            // USING GPT 3.5 MODEL
             // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
             const completion = await openai.chat.completions.create({
               model: "gpt-3.5-turbo-1106",
-              messages: [
-                {
-                  role: "system",
-                  content:
-                    "You are a helpful assistant and your name is Chatbot.",
-                },
-                ...storedResponses,
-              ],
-              stream: true,
-              temperature: 0,
-              max_tokens: 400,
-              top_p: 1,
-              frequency_penalty: 0.6,
-              presence_penalty: 0.6,
-            });
-
-            // COMBINE STREAM WORDS USING FOR LOOP
-            for await (const chunk of completion) {
-              if (chunk.choices[0].delta.content !== undefined) {
-                botResponse += chunk.choices[0].delta.content;
-              }
-            }
-          } else if (currentDate < expiryDate) {
-            // WAIT THE RESPONSE FROM OPENAI (USING STREAM METHOD)
-            const completion = await openai.chat.completions.create({
-              model: "gpt-4",
               messages: [
                 {
                   role: "system",
@@ -1370,6 +1447,61 @@ app.post("/create-checkout-session", async (req, res) => {
     });
 
     res.json({ url: session.url });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+/* ========== EXPRESS RETRIEVE SUBSCRIPTION DATE  ========== */
+app.post("/retrieve-subscription-date", async (req, res) => {
+  try {
+    const username = req.body.username;
+
+    // FIND THE USERNAME IN THE DATABASE
+    const findUser = await users.findOne({ username });
+
+    if (findUser) {
+      const expiryDate = findUser.expiryDate;
+      const currentPlan = findUser.plan;
+
+      // COMPARE IT AND CHANGE IT TO DAYS
+      const currentDate = new Date();
+      const expiryDateInDays = new Date(expiryDate);
+      const differenceInTime =
+        expiryDateInDays.getTime() - currentDate.getTime();
+      const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+
+      // MAKE IT TO NO DECIMAL PLACES
+      const roundedDays = Math.round(differenceInDays);
+
+      // CHECK WHETHER IT IS EXPIRE OR NOT
+      if (roundedDays > 0) {
+        res.status(200).json({ roundedDays });
+      } else {
+        // SEND THE ROUNDED DAYS TO 0
+        res.status(200).json({ plan: currentPlan, roundedDays: 0 });
+      }
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+/* ========== EXPRESS CHECK PLAN  ========== */
+app.post("/checkPlan", async (req, res) => {
+  try {
+    const username = req.body.username;
+
+    // FIND THE USERNAME IN THE DATABASE
+    const findUser = await users.findOne({ username });
+
+    if (findUser) {
+      const plan = findUser.plan;
+
+      res.status(200).json({ plan });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

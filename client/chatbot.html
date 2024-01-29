@@ -35,7 +35,10 @@
                 src="assets/empty-user.png"
                 alt="empty-user"
               />
-              <span class="nav-username"></span>
+              <div class="nav__user-description">
+                <span class="nav-username"></span>
+                <p class="nav__expired-date"></p>
+              </div>
             </div>
             <div class="nav__user-selection">
               <button id="delete-all-conversation">
@@ -78,9 +81,12 @@
                 <h2>Chatbot AI</h2>
                 <i class="bx bx-bot"></i>
               </div>
-              <div class="nav__username">
-                <span>Welcome Back, <span class="nav-username"></span></span>
-              </div>
+            </div>
+
+            <div class="nav__models-desktop-buttons">
+              <label id="nav__toggle-text" for="toggle-switch"></label>
+              <input type="checkbox" id="toggle-switch" />
+              <label for="toggle-switch"></label>
             </div>
 
             <div class="nav__menu-right">

@@ -38,6 +38,9 @@ import {
   textarea,
 } from "./changeTextareaHeight";
 import copyResponses from "./clipboard";
+import retrieveSubscriptionDate from "./retrieveSubscriptionDate";
+import { changeModelText, navToggle } from "./changeModelText";
+import checkPlan from "./checkPlan";
 
 document.addEventListener("DOMContentLoaded", retrieveTitle);
 document.addEventListener("DOMContentLoaded", setUsername);
@@ -62,3 +65,7 @@ form.addEventListener("keyup", (e) => {
 textarea.addEventListener("input", changeTextareaHeightWhenInput);
 textarea.addEventListener("keydown", changeTextareaHeightWhenKeyDown);
 document.addEventListener("click", copyResponses);
+document.addEventListener("DOMContentLoaded", retrieveSubscriptionDate);
+navToggle.addEventListener("change", changeModelText);
+document.addEventListener("DOMContentLoaded", changeModelText);
+document.addEventListener("DOMContentLoaded", checkPlan);
