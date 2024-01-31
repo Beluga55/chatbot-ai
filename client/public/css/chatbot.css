@@ -259,7 +259,13 @@
 }
 
 .nav__models-desktop-buttons {
-  display: none;
+  align-items: center;
+  position: absolute;
+  right: 1.5rem;
+  gap: 0.5rem;
+  top: 1.45rem;
+  color: var(--White);
+  font-size: 0.8rem;
 }
 
 #toggle-switch {
@@ -690,11 +696,8 @@ form img {
   }
 
   .nav__models-desktop-buttons {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--White);
-    font-size: 0.8rem;
+    transform: translateX(50%);
+    right: 50%;
   }
 
   .nav__header {
@@ -718,7 +721,7 @@ form img {
   }
 
   .new__chat {
-    margin-top: 1.5rem;
+    margin-top: 4rem;
   }
 
   .nav__menu {
