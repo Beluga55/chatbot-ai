@@ -70,199 +70,199 @@ async function retrieveInformation() {
     } else if (clickedLink.textContent === "Rules") {
       retrieveQueryDiv.innerHTML = `
       <h1>Rules and Guidelines</h1>
-      <div class="rules__guidelines container">
-        <ul>
-          <li>
-            <h4>Access Control and Permissions</h4>
-            <div class="rules__description">
-              <div>
-                <i class="bx bx-check-square"></i>
-                <p>
-                  Admins will be granted access based on their roles and
-                  responsibilities.
-                </p>
-              </div>
-              <div>
-                <i class="bx bx-check-square"></i>
-                <p>
-                  Permissions will be reviewed regularly to ensure they
-                  align with job functions.
-                </p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <h4>Security Best Practices</h4>
-            <div class="rules__description">
-              <div>
-                <i class="bx bx-check-square"></i>
-                <p>
-                  Admins must follow security best practices, including
-                  strong password usage and enabling two-factor
-                  authentication.
-                </p>
-              </div>
-              <div>
-                <i class="bx bx-check-square"></i>
-                <p>
-                  Regularly update and patch the system to address security
-                  vulnerabilities.
-                </p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <h4>Data Privacy</h4>
-            <div class="rules__description">
-              <div>
-                <i class="bx bx-check-square"></i>
-                <p>Admins are expected to respect user privacy.</p>
-              </div>
-              <div>
-                <i class="bx bx-check-square"></i>
-                <p>
-                  Sensitive user information should only be accessed when
-                  necessary for authorized tasks.
-                </p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <h4>Training and Documentation</h4>
-            <div class="rules__description">
-              <div>
-                <i class="bx bx-check-square"></i>
-                <p>
-                  Admins are required to undergo comprehensive training on
-                  system features and best practices.
-                </p>
-              </div>
-              <div>
-                <i class="bx bx-check-square"></i>
-                <p>
-                  Keep documentation up-to-date and accessible for admin
-                  procedures and workflows.
-                </p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <h4>Audit Trail</h4>
-            <div class="rules__description">
-              <div>
-                <i class="bx bx-check-square"></i>
-                <p>
-                  All admin actions will be logged for auditing purposes.
-                </p>
-              </div>
-              <div>
-                <i class="bx bx-check-square"></i>
-                <p>
-                  Admins must regularly review audit logs for any unusual or
-                  suspicious activities.
-                </p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <h4>Incident Response</h4>
-            <div class="rules__description">
-              <div>
-                <i class="bx bx-check-square"></i>
-                <p>
-                  Admins must be familiar with the incident response plan
-                  and report security incidents promptly.
-                </p>
-              </div>
-              <div>
-                <i class="bx bx-check-square"></i>
-                <p>
-                  Regularly test and update the incident response plan to
-                  ensure effectiveness.
-                </p>
-              </div>
-            </div>
-          </li>
-        </ul>
-        <!-- ADMINS CANT DO -->
-        <ul class="rules__cant-do">
-          <li>
-            <h4>Unauthorized Access</h4>
-            <div class="rules__description">
-              <div>
-                <i class="bx bxs-x-square"></i>
-                <p>
-                  Admins must not access user accounts, data, or features
-                  beyond their designated responsibilities without proper
-                  authorization.
-                </p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <h4>Misuse of Privileges</h4>
-            <div class="rules__description">
-              <div>
-                <i class="bx bxs-x-square"></i>
-                <p>
-                  Admins must not use their privileges to access or modify
-                  data for personal gain.
-                </p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <h4>Unauthorized Changes</h4>
-            <div class="rules__description">
-              <div>
-                <i class="bx bxs-x-square"></i>
-                <p>
-                  Admins must not make unauthorized changes to the system
-                  configuration or settings.
-                </p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <h4>Bypassing Security Measures</h4>
-            <div class="rules__description">
-              <div>
-                <i class="bx bxs-x-square"></i>
-                <p>
-                  Admins should not attempt to bypass security measures or
-                  disable security features unless required for system
-                  maintenance.
-                </p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <h4>Sharing Credentials</h4>
-            <div class="rules__description">
-              <div>
-                <i class="bx bxs-x-square"></i>
-                <p>
-                  Admins must not share their login credentials or any
-                  access information with unauthorized individuals.
-                </p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <h4>Unauthorized System Modifications</h4>
-            <div class="rules__description">
-              <div>
-                <i class="bx bxs-x-square"></i>
-                <p>
-                  Admins should not make unauthorized changes to the system
-                  configuration or code without proper approval and
-                  following change control procedures.
-                </p>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
+          <div class="rules__guidelines container">
+            <ul>
+              <li>
+                <h4>Access Control and Permissions</h4>
+                <div class="rules__description">
+                  <div>
+                    <i class="bx bx-check"></i>
+                    <p>
+                      Admins will be granted access based on their roles and
+                      responsibilities.
+                    </p>
+                  </div>
+                  <div>
+                    <i class="bx bx-check"></i>
+                    <p>
+                      Permissions will be reviewed regularly to ensure they
+                      align with job functions.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <h4>Security Best Practices</h4>
+                <div class="rules__description">
+                  <div>
+                    <i class="bx bx-check"></i>
+                    <p>
+                      Admins must follow security best practices, including
+                      strong password usage and enabling two-factor
+                      authentication.
+                    </p>
+                  </div>
+                  <div>
+                    <i class="bx bx-check"></i>
+                    <p>
+                      Regularly update and patch the system to address security
+                      vulnerabilities.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <h4>Data Privacy</h4>
+                <div class="rules__description">
+                  <div>
+                    <i class="bx bx-check"></i>
+                    <p>Admins are expected to respect user privacy.</p>
+                  </div>
+                  <div>
+                    <i class="bx bx-check"></i>
+                    <p>
+                      Sensitive user information should only be accessed when
+                      necessary for authorized tasks.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <h4>Training and Documentation</h4>
+                <div class="rules__description">
+                  <div>
+                    <i class="bx bx-check"></i>
+                    <p>
+                      Admins are required to undergo comprehensive training on
+                      system features and best practices.
+                    </p>
+                  </div>
+                  <div>
+                    <i class="bx bx-check"></i>
+                    <p>
+                      Keep documentation up-to-date and accessible for admin
+                      procedures and workflows.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <h4>Audit Trail</h4>
+                <div class="rules__description">
+                  <div>
+                    <i class="bx bx-check"></i>
+                    <p>
+                      All admin actions will be logged for auditing purposes.
+                    </p>
+                  </div>
+                  <div>
+                    <i class="bx bx-check"></i>
+                    <p>
+                      Admins must regularly review audit logs for any unusual or
+                      suspicious activities.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <h4>Incident Response</h4>
+                <div class="rules__description">
+                  <div>
+                    <i class="bx bx-check"></i>
+                    <p>
+                      Admins must be familiar with the incident response plan
+                      and report security incidents promptly.
+                    </p>
+                  </div>
+                  <div>
+                    <i class="bx bx-check"></i>
+                    <p>
+                      Regularly test and update the incident response plan to
+                      ensure effectiveness.
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <!-- ADMINS CANT DO -->
+            <ul class="rules__cant-do">
+              <li>
+                <h4>Unauthorized Access</h4>
+                <div class="rules__description">
+                  <div>
+                    <i class="bx bx-x"></i>
+                    <p>
+                      Admins must not access user accounts, data, or features
+                      beyond their designated responsibilities without proper
+                      authorization.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <h4>Misuse of Privileges</h4>
+                <div class="rules__description">
+                  <div>
+                    <i class="bx bx-x"></i>
+                    <p>
+                      Admins must not use their privileges to access or modify
+                      data for personal gain.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <h4>Unauthorized Changes</h4>
+                <div class="rules__description">
+                  <div>
+                    <i class="bx bx-x"></i>
+                    <p>
+                      Admins must not make unauthorized changes to the system
+                      configuration or settings.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <h4>Bypassing Security Measures</h4>
+                <div class="rules__description">
+                  <div>
+                    <i class="bx bx-x"></i>
+                    <p>
+                      Admins should not attempt to bypass security measures or
+                      disable security features unless required for system
+                      maintenance.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <h4>Sharing Credentials</h4>
+                <div class="rules__description">
+                  <div>
+                    <i class="bx bx-x"></i>
+                    <p>
+                      Admins must not share their login credentials or any
+                      access information with unauthorized individuals.
+                    </p>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <h4>Unauthorized System Modifications</h4>
+                <div class="rules__description">
+                  <div>
+                    <i class="bx bx-x"></i>
+                    <p>
+                      Admins should not make unauthorized changes to the system
+                      configuration or code without proper approval and
+                      following change control procedures.
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
           `;
     } else if (clickedLink.textContent === "Chat History") {
       const response = await fetch(

@@ -1157,10 +1157,13 @@ app.get("/retrieveUsersAdmin", async (req, res) => {
   try {
     const usersCollection = await users.find().toArray();
 
-    if (usersCollection.length > 0) {
-      res.json({ usersCollection });
+    // LIMIT THE usersCollection to 15
+    const limitedUsersCollection = usersCollection.slice(0, 15);
+
+    if (limitedUsersCollection.length > 0) {
+      res.json({ usersCollection: limitedUsersCollection });
     } else {
-      res.status(200).json({ usersCollection: [] });
+      res.status(404).json({ error: "No users found" });
     }
   } catch (error) {
     console.error("Error retrieving users:", error);
@@ -1363,7 +1366,10 @@ app.get("/retrieveChatHistoryAdmin", async (req, res) => {
       .flat()
       .filter((item) => item !== null);
 
-    res.json({ chatHistory: filteredChatHistory });
+    // Limit the output to 15 items
+    const limitedChatHistory = filteredChatHistory.slice(0, 15);
+
+    res.json({ chatHistory: limitedChatHistory });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
