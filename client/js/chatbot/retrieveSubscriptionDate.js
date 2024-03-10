@@ -23,9 +23,11 @@ async function retrieveSubscriptionDate() {
 
       if (data.plan === "Free Plan") {
         subscriptionDate.textContent = `Plan: ${data.plan}`;
-      } else {
+      } else if (data.roundedDays !== 0) {
         // APPEND TO THE PARAGRAPHS
         subscriptionDate.textContent = `Expires: ${data.roundedDays} days left`;
+      } else {
+        subscriptionDate.innerHTML = `${data.expiryMessage} , <a href="pricing.html">Renew Now</a>`;
       }
     }
   } catch (error) {

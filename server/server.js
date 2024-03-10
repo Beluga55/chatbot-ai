@@ -1486,7 +1486,13 @@ app.post("/retrieve-subscription-date", async (req, res) => {
         res.status(200).json({ roundedDays });
       } else {
         // SEND THE ROUNDED DAYS TO 0
-        res.status(200).json({ plan: currentPlan, roundedDays: 0 });
+        res
+          .status(200)
+          .json({
+            plan: currentPlan,
+            roundedDays: 0,
+            expiryMessage: "Expired",
+          });
       }
     }
   } catch (error) {
@@ -1495,7 +1501,7 @@ app.post("/retrieve-subscription-date", async (req, res) => {
   }
 });
 
-/* ========== EXPRESS CHECK PLAN  ========== */
+/* ========== EXPRESS CHECK PLAN AND DATE  ========== */
 app.post("/checkPlan", async (req, res) => {
   try {
     const username = req.body.username;
@@ -1506,7 +1512,14 @@ app.post("/checkPlan", async (req, res) => {
     if (findUser) {
       const plan = findUser.plan;
 
-      res.status(200).json({ plan });
+      // CHECK THE EXPIRY DATE AND PLAN
+      const expiryDate = new Date(findUser.expiryDate);
+
+      if (expiryDate > new Date()) {
+        res.status(200).json({ plan, expiryDate });
+      } else {
+        res.status(200).json({ plan, expiryDate: "Expired" });
+      }
     }
   } catch (error) {
     console.error(error);

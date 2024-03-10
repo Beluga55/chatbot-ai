@@ -14,7 +14,7 @@
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .login__content span,
@@ -63,7 +63,7 @@
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .login__email,
@@ -237,7 +237,7 @@ input[type="text"] {
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1100px) {
   .login__container {
     margin-inline: 0;
   }

@@ -62,6 +62,35 @@
   overflow-y: scroll;
 }
 
+.nav__title-content::-webkit-scrollbar,
+.preview__image-content::-webkit-scrollbar,
+.image__wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+.nav__title-content::-webkit-scrollbar-track,
+.preview__image-content::-webkit-scrollbar-track,
+.image__wrapper::-webkit-scrollbar-track {
+  background: var(--White);
+  border-radius: 0.85rem;
+}
+
+/* Handle */
+.nav__title-content::-webkit-scrollbar-thumb,
+.preview__image-content::-webkit-scrollbar-thumb,
+.image__wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 0.85rem;
+}
+
+/* Handle on hover */
+.nav__title-content::-webkit-scrollbar-thumb:hover,
+.preview__image-content::-webkit-scrollbar-thumb:hover,
+.image__wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 .active__title {
   background: var(--White);
   color: var(--Black);
@@ -116,7 +145,7 @@
   margin-inline: 0.85rem;
   background: var(--MainBackground);
   width: calc(100% - 1.7rem);
-  border: 1px solid var(--White);
+  border: 2px solid var(--Accent);
   border-radius: 0.85rem;
   padding: 1rem 0;
   opacity: 0;
@@ -148,15 +177,6 @@
 
 .nav__user-selection button:hover {
   background: var(--White);
-  color: var(--Black);
-}
-
-.nav__user-selection button i {
-  transition: color 0.3s ease-in-out;
-}
-
-.nav__user-selection button:hover i {
-  color: var(--Black);
 }
 
 /* PREVIEW IMAGE OVERLAY */
@@ -256,6 +276,16 @@
 
 .nav__expired-date {
   font-size: 0.75rem;
+}
+
+.nav__expired-date a {
+  font-weight: 500;
+  color: var(--Accent);
+}
+
+.nav__expired-date a:hover {
+  text-decoration: underline;
+  font-weight: 600;
 }
 
 .nav__models-desktop-buttons {
@@ -588,7 +618,7 @@ form img {
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.75rem;
 }
 
@@ -655,8 +685,7 @@ form img {
   }
 
   .nav__user-selection button:hover {
-    background: var(--White);
-    color: var(--Black);
+    background: var(--TransparentWhite);
   }
 
   .form__upload-image button {
@@ -763,7 +792,7 @@ form img {
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1100px) {
   .nav__wrapper {
     align-items: center;
   }

@@ -5,11 +5,10 @@
   --Black: hsl(0, 0%, 0%);
   --MainBackground: hsl(213, 41%, 5%);
   --TransparentWhite: rgba(255, 255, 255, 0.2);
-  --Primary: hsl(209, 40%, 73%);
-  --Accent: hsl(283, 39%, 59%);
+  --Primary: hsl(352, 82%, 74%);
+  --Accent: hsl(16, 71%, 54%);
   --TextColor: hsl(212, 38%, 91%);
   --CardBackground: hsl(209, 40%, 73%, 5%);
-  --LightPurple: hsl(234, 75%, 75%);
   --CardBackgroundNoOpacity: rgba(16, 21, 28, 255);
   --Poppins: "Poppins", sans-serif;
 }
@@ -61,9 +60,9 @@ p {
   color: var(--TextColor);
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1100px) {
   .container {
-    max-width: 1024px;
+    max-width: 1100px;
     margin-inline: auto;
   }
 }

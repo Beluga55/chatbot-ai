@@ -15,11 +15,20 @@ async function checkPlan() {
       const modelToggleButton = document.querySelector(
         ".nav__models-desktop-buttons"
       );
+      const newChatContainer = document.querySelector(".new__chat");
 
       if (data.plan === "Free Plan") {
         modelToggleButton.style.display = "none";
-      } else if (data.plan === "Best deals" || data.plan === "Premium plan") {
+        newChatContainer.style.marginTop = "2rem";
+      } else if (
+        (data.plan === "Best deals" || data.plan === "Premium plan") &&
+        data.expiryDate === "Expired"
+      ) {
+        modelToggleButton.style.display = "none";
+        newChatContainer.style.marginTop = "2rem";
+      } else {
         modelToggleButton.style.display = "flex";
+        newChatContainer.style.marginTop = "4rem";
       }
     }
   } catch (error) {
