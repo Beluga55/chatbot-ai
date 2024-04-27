@@ -71,7 +71,7 @@ export const forgotPassword = async (req, res) => {
         const secret = process.env.VALIDATE_JWT_SECRET_KEY + password;
         const payload = { email: email, id: id };
         const token = jwt.sign(payload, secret, { expiresIn: "15m" });
-        const link = `http://localhost:5001/reset-password/${id}/${token}`;
+        const link = `https://chatbot-rreu.onrender.com/reset-password/${id}/${token}`;
 
         // SEND THE LINK USING FUNCTION
         sendResetPasswordEmail(email, link);

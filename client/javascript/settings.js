@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // SEND A REQUEST TO THE SERVER
       const response = await fetch(
-        "http://localhost:5001/users/updateUsername",
+        "https://chatbot-rreu.onrender.com/users/updateUsername",
         {
           method: "PUT",
           headers: {
@@ -239,13 +239,16 @@ document.addEventListener("DOMContentLoaded", () => {
     formData.append("username", username);
 
     // SEND A REQUEST TO THE SERVER
-    const response = await fetch("http://localhost:5001/users/uploadProfile", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: formData,
-    });
+    const response = await fetch(
+      "https://chatbot-rreu.onrender.com/users/uploadProfile",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: formData,
+      }
+    );
 
     // Initialize a new Notyf instance
     var notyf = new Notyf({
@@ -300,7 +303,7 @@ const pollForImages = async (file, interval, maxAttempt) => {
   for (let i = 0; i < maxAttempt; i++) {
     // RETRIEVE THE IMAGE FROM THE BACKEND
     const response = await fetch(
-      `http://localhost:5001/users/getImage/${file}`
+      `https://chatbot-rreu.onrender.com/users/getImage/${file}`
     );
 
     if (response.ok) {
@@ -351,14 +354,17 @@ const deleteAccount = async () => {
   const username = localStorage.getItem("username");
 
   // SEND A REQUEST TO THE SERVER
-  const response = await fetch("http://localhost:5001/users/deleteAccount", {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-    body: JSON.stringify({ username }),
-  });
+  const response = await fetch(
+    "https://chatbot-rreu.onrender.com/users/deleteAccount",
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify({ username }),
+    }
+  );
 
   // GET THE RESPONSE
   if (response.ok) {
@@ -396,7 +402,7 @@ const deleteAccount = async () => {
 // RETRIEVE THE CURRENT EMAIL OF THE USER
 const retrieveCurrentEmail = async () => {
   const response = await fetch(
-    "http://localhost:5001/users/getEmailAndStatus",
+    "https://chatbot-rreu.onrender.com/users/getEmailAndStatus",
     {
       method: "POST",
       headers: {
@@ -462,7 +468,7 @@ const observer = new MutationObserver(async (mutationsList, observer) => {
           event.preventDefault();
 
           const response = await fetch(
-            "http://localhost:5001/users/verifyEmail",
+            "https://chatbot-rreu.onrender.com/users/verifyEmail",
             {
               method: "POST",
               headers: {
@@ -527,7 +533,9 @@ const observerChangeEmail = new MutationObserver(
             ).value;
 
             // CHECK IF THE EMAIL IS THE SAME AS THE CURRENT EMAIL
-            const currentEmail = document.querySelector(".settings__content-password-email-form p span").textContent;
+            const currentEmail = document.querySelector(
+              ".settings__content-password-email-form p span"
+            ).textContent;
 
             // CHECK THE EMAIL IS EMPTY
             if (newEmail === "") {
@@ -638,7 +646,7 @@ const observerChangePassword = new MutationObserver(
             ).value;
 
             const response = await fetch(
-              "http://localhost:5001/users/changePassword",
+              "https://chatbot-rreu.onrender.com/users/changePassword",
               {
                 method: "PUT",
                 headers: {

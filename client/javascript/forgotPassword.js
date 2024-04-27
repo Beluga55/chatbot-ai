@@ -60,13 +60,16 @@ forgotPasswordBtn.addEventListener("click", async (event) => {
   const email = document.getElementById("user-email").value;
 
   // SEND THE REQUEST TO THE SERVER
-  const response = await fetch("http://localhost:5001/users/forgotPassword", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email }),
-  });
+  const response = await fetch(
+    "https://chatbot-rreu.onrender.com/users/forgotPassword",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    }
+  );
 
   try {
     if (response.ok) {

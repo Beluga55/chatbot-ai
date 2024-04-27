@@ -117,13 +117,16 @@ submitSignupButton.addEventListener("click", async (e) => {
   const password = document.getElementById("signup-password").value;
 
   // SEND A REQUEST TO THE SERVER
-  const response = await fetch("http://localhost:5001/users/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ username, email, password }),
-  });
+  const response = await fetch(
+    "https://chatbot-rreu.onrender.com/users/signup",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, email, password }),
+    }
+  );
 
   // Initialize a new Notyf instance
   var notyf = new Notyf({

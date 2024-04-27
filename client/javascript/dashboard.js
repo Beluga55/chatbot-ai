@@ -174,7 +174,7 @@ const handleSubmit = async (event) => {
   chatInput.rows = 1;
 
   // FETCH THE AI RESPONSE
-  const response = await fetch("http://localhost:5001/users/chatbot", {
+  const response = await fetch("https://chatbot-rreu.onrender.com/users/chatbot", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -392,7 +392,7 @@ chatIcon.addEventListener("click", handleSubmit);
 
 // GET ALL THE TITLES FROM THE DATABASE AND RENDER THEM
 const getTitles = async () => {
-  const response = await fetch("http://localhost:5001/users/getTitles", {
+  const response = await fetch("https://chatbot-rreu.onrender.com/users/getTitles", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -486,7 +486,7 @@ const deleteChat = async () => {
   }
 
   // FETCH THE DELETE CHAT
-  const response = await fetch("http://localhost:5001/users/deleteSingleChat", {
+  const response = await fetch("https://chatbot-rreu.onrender.com/users/deleteSingleChat", {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -569,7 +569,7 @@ const retrieveChatHistory = (parentElements) => {
 
       // FETCH THE CHAT HISTORY
       const response = await fetch(
-        "http://localhost:5001/users/retrieveChatHistory",
+        "https://chatbot-rreu.onrender.com/users/retrieveChatHistory",
         {
           method: "POST",
           headers: {
@@ -889,7 +889,7 @@ const renameChat = async () => {
   }
 
   // FETCH THE RENAME CHAT
-  const response = await fetch("http://localhost:5001/users/renameChat", {
+  const response = await fetch("https://chatbot-rreu.onrender.com/users/renameChat", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -985,7 +985,7 @@ const clearChat = document.getElementById("clear-chat");
 // FUNCTION TO FETCH THE CLEAR ALL CHAT
 const clearChatFunction = async () => {
   // FETCH THE CLEAR CHAT
-  const response = await fetch("http://localhost:5001/users/clearChat", {
+  const response = await fetch("https://chatbot-rreu.onrender.com/users/clearChat", {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

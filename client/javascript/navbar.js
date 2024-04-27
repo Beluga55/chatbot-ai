@@ -46,13 +46,16 @@ const loginState = async () => {
 
   // SEND TO THE BACKEND TO VERIFY THE TOKEN
   if (token) {
-    const response = await fetch("http://localhost:5001/users/verifyToken", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      "https://chatbot-rreu.onrender.com/users/verifyToken",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     if (response.ok) {
       const username = localStorage.getItem("username");
@@ -95,7 +98,7 @@ export const retrieveProfilePicture = async () => {
   if (!username) return;
 
   const imageResponse = await fetch(
-    "http://localhost:5001/users/retrieveProfilePicture",
+    "https://chatbot-rreu.onrender.com/users/retrieveProfilePicture",
     {
       method: "POST",
       headers: {

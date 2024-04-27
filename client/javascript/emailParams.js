@@ -17,16 +17,19 @@ const verifyEmail = async () => {
     verifyTips.textContent = "You can verify your email later in settings.";
   }
 
-  if (!sessionStorage.getItem('fetchMade')) {
-    response = await fetch("http://localhost:5001/users/verifySignupEmail", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, username }),
-    });
-  
-    sessionStorage.setItem('fetchMade', 'true');
+  if (!sessionStorage.getItem("fetchMade")) {
+    response = await fetch(
+      "https://chatbot-rreu.onrender.com/users/verifySignupEmail",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, username }),
+      }
+    );
+
+    sessionStorage.setItem("fetchMade", "true");
   }
 
   // GET THE RESPONSE
@@ -61,6 +64,6 @@ const verifyEmail = async () => {
 
     notyf.error(data.error);
   }
-}
+};
 
 verifyEmail();

@@ -65,7 +65,7 @@ export const verifyEmail = async (req, res) => {
       expiresIn: "15m",
     });
 
-    const link = `http://localhost:5001/users/verify/${id}/${emailToken}`;
+    const link = `https://chatbot-rreu.onrender.com/users/verify/${id}/${emailToken}`;
 
     sendEmail(email, link);
 
@@ -90,7 +90,7 @@ export const verifySignupEmail = async (req, res) => {
     expiresIn: "15m",
   });
 
-  const link = `http://localhost:5001/users/verifySignup/${emailToken}`;
+  const link = `https://chatbot-rreu.onrender.com/users/verifySignup/${emailToken}`;
 
   sendEmail(email, link);
 
