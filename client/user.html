@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
+
+    <!-- ICONS -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- NOYTF CSS -->
+    <link rel="stylesheet" href="node_modules/notyf/notyf.min.css" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/settings.css" />
+
+    <title>Settings Page - Chatbot AI</title>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav container">
+        <div class="nav__logo">
+          <i class="bx bx-bot"></i>
+          <a href="index.html">Chatbot AI</a>
+        </div>
+
+        <!-- SIDEBAR MENU -->
+        <div class="nav__list">
+          <div class="nav__logo">
+            <i class="bx bx-bot"></i>
+            <a href="index.html">Chatbot AI</a>
+          </div>
+
+          <div class="nav__links">
+            <div class="nav__link">
+              <i class="bx bx-home-smile"></i>
+              <a href="index.html">Home</a>
+            </div>
+            <div class="nav__link">
+              <i class="bx bx-compass"></i>
+              <a href="about.html">About</a>
+            </div>
+            <div class="nav__link">
+              <i class="bx bx-message-square-dots"></i>
+              <a href="faq.html">FAQs</a>
+            </div>
+            <div class="nav__link">
+              <i class="bx bx-purchase-tag"></i>
+              <a href="pricing.html">Pricing</a>
+            </div>
+          </div>
+
+          <div class="nav__login">
+            <i class="bx bx-user-circle"></i>
+            <a href="signup.html">Signup</a>
+          </div>
+        </div>
+
+        <div class="nav__menu">
+          <i class="bx bx-menu-alt-right"></i>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="settings container">
+        <div class="settings__container">
+          <div class="settings__title">
+            <h1>Settings</h1>
+            <button class="buttons">Logout</button>
+          </div>
+
+          <div class="settings__selection-container">
+            <div class="settings__selection">
+              <div class="settings__profile active">
+                <i class="bx bx-cog"></i>
+                <span>Account</span>
+
+                <div class="settings__bar"></div>
+              </div>
+              <div class="settings__profile">
+                <i class="bx bx-lock"></i>
+                <span>Password & Authentication</span>
+
+                <div class="settings__bar"></div>
+              </div>
+              <div class="settings__profile">
+                <i class="bx bx-history"></i>
+                <span>Order History</span>
+
+                <div class="settings__bar"></div>
+              </div>
+            </div>
+
+            <div class="settings__content">
+              <!-- DYNAMICALLY GENERATED -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- SCRIPT JS -->
+    <script src="javascript/redirection.js"></script>
+    <script src="node_modules/notyf/notyf.min.js"></script>
+    <script type="module" src="javascript/settings.js"></script>
+    <script src="javascript/authMiddleware.js"></script>
+  </body>
+</html>

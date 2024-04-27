@@ -1,0 +1,16 @@
+@import url(style.css);
+@import url(header_nav.css);
+@import url(signup.css);
+
+.login__form-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.login__form-cta p {
+  display: flex;
+  gap: 0.25rem;
+  flex-direction: column;
+}

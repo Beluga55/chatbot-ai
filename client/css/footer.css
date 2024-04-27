@@ -1,0 +1,144 @@
+.footer {
+  padding: 4rem 0;
+}
+
+.footer__content-first {
+  max-width: fit-content;
+}
+
+.footer__content-first > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer__content-first p {
+  font-size: 0.85rem;
+}
+
+.footer__content-first > p:last-child {
+  margin-top: 1rem;
+  max-width: 300px;
+}
+
+.footer__content-second {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.footer__content-second ul {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__content-second ul li {
+  font-size: 0.85rem;
+}
+
+.footer__content-second ul li:first-child {
+  font-weight: 600;
+  position: relative;
+  width: fit-content;
+  text-decoration: underline;
+  text-decoration-color: var(--clr-3);
+  text-underline-position: under;
+}
+
+.footer__social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer__social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--clr-3);
+  color: var(--text-100);
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.footer__social-icons a:hover {
+  background-color: var(--clr-3);
+  color: var(--text-100);
+  border: none;
+}
+
+.footer__copyright {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer__copyright p {
+  font-size: 0.75rem;
+}
+
+.footer__copyright button {
+  width: 150px;
+  padding: 0.65rem 0;
+  border: none;
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+  font-weight: 600;
+  background: var(--bg-200);
+  color: var(--text-100);
+  transition: background 0.3s, color 0.3s;
+}
+
+.footer__copyright button:hover {
+  background: var(--clr-3);
+  color: var(--text-100);
+}
+
+@media screen and (min-width: 400px) {
+  .footer__content-second {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .footer__content-second {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer__copyright {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .footer__copyright button {
+    width: 150px;
+    margin-top: 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .footer__container-first {
+    display: grid;
+    grid-template-columns: 375px 1fr;
+    place-self: center;
+    max-width: fit-content;
+  }
+
+  .footer__content-second {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 0;
+    gap: 1rem;
+  }
+
+  .footer__content-second ul:not(:last-child) {
+    place-self: center;
+  }
+}

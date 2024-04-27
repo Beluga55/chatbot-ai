@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
+
+    <!-- ICONS -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- NOYTF CSS -->
+    <link rel="stylesheet" href="node_modules/notyf/notyf.min.css" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/signup.css" />
+
+    <!-- SCROLL REVEAL -->
+    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+
+    <title>Signup Page - Chatbot AI</title>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav container">
+        <div class="nav__logo">
+          <i class="bx bx-bot"></i>
+          <a href="index.html">Chatbot AI</a>
+        </div>
+
+        <!-- SIDEBAR MENU -->
+        <div class="nav__list">
+          <div class="nav__logo">
+            <i class="bx bx-bot"></i>
+            <a href="index.html">Chatbot AI</a>
+          </div>
+
+          <div class="nav__links">
+            <div class="nav__link">
+              <i class="bx bx-home-smile"></i>
+              <a href="index.html">Home</a>
+            </div>
+            <div class="nav__link">
+              <i class="bx bx-compass"></i>
+              <a href="about.html">About</a>
+            </div>
+            <div class="nav__link">
+              <i class="bx bx-message-square-dots"></i>
+              <a href="faq.html">FAQs</a>
+            </div>
+            <div class="nav__link">
+              <i class="bx bx-purchase-tag"></i>
+              <a href="pricing.html">Pricing</a>
+            </div>
+          </div>
+
+          <div class="nav__login">
+            <i class="bx bx-user-circle"></i>
+            <a href="login.html">Login</a>
+          </div>
+        </div>
+
+        <div class="nav__menu">
+          <i class="bx bx-menu-alt-right"></i>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="signup container">
+        <div class="signup__container">
+          <div>
+            <h1>Signup</h1>
+
+            <form class="signup__form">
+              <input
+                type="text"
+                id="signup-username"
+                placeholder="Enter username"
+              />
+              <input type="email" id="signup-email" placeholder="Enter email" />
+              <input
+                type="password"
+                id="signup-password"
+                placeholder="Enter password"
+              />
+              <input
+                type="password"
+                id="signup-confirm-password"
+                placeholder="Confirm password"
+              />
+
+              <p>Already have an account? <a href="login.html">Login Now</a></p>
+
+              <button class="buttons" type="submit">Signup</button>
+            </form>
+          </div>
+
+          <div class="signup__image">
+            <img src="assets/signup.svg" alt="signup.svg" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- SCRIPT JS -->
+    <script type="module" src="javascript/navbar.js"></script>
+    <script src="javascript/redirection.js"></script>
+    <script src="node_modules/notyf/notyf.min.js"></script>
+    <script type="module" src="javascript/signupValidation.js"></script>
+    <script src="javascript/scrollReveal.js"></script>
+  </body>
+</html>

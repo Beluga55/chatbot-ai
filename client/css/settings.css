@@ -1,0 +1,290 @@
+@import url(style.css);
+@import url(header_nav.css);
+
+.settings__container {
+  padding: 8.5rem 0 5rem;
+}
+
+.settings__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.settings__title h1 {
+  font-size: clamp(1.78rem, 4vw, 2.5rem);
+}
+
+.settings__title button {
+  background: var(--bg-200);
+  color: var(--text-200);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.settings__title button:hover {
+  background: var(--primary-100);
+  color: var(--text-100);
+}
+
+.settings__selection-container {
+  display: grid;
+  padding: 2rem 0;
+}
+
+.settings__selection {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.settings__profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0.5rem;
+  border-radius: 0.5rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.settings__bar {
+  position: absolute;
+  left: -7px;
+  width: 3px;
+  height: 50%;
+  background: var(--primary-200);
+  border-radius: 0.85rem;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.settings__profile.active {
+  background: var(--bg-200);
+}
+
+.settings__profile.active .settings__bar {
+  opacity: 1;
+  visibility: visible;
+}
+
+.settings__profile span {
+  font-size: 0.938rem;
+}
+
+hr {
+  border: 1px solid var(--bg-300);
+  border-radius: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.settings__content-account h2,
+.settings__content-account-profile h2,
+.settings__content-account-delete h2,
+.settings__content-password h2,
+.settings__content-password-email h2 {
+  font-size: clamp(1.25rem, 4vw, 1.5rem);
+}
+
+.settings__content-account-form,
+.settings__content-password-form,
+.settings__content-password-email-form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.settings__content-password-form,
+.settings__content-password-email-form {
+  gap: 1rem;
+}
+
+.settings__content-password-form p,
+.settings__content-password-email-form p {
+  font-size: 0.75rem;
+}
+
+.settings__content-account-form input,
+#settings__profile-picture-form .custom-file-upload,
+.settings__content-password-form input,
+.settings__content-password-email-form input {
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  background: transparent;
+  border: 2px solid var(--text-200);
+  border-radius: 0.25rem;
+  font-size: 0.85rem;
+  outline: none;
+  max-width: 350px;
+  color: var(--text-200);
+  transition: border 0.3s ease;
+}
+
+.settings__content-account-form input:focus,
+.settings__content-password-form input:focus,
+.settings__content-password-email-form input:focus {
+  border: 2px solid var(--primary-200);
+}
+
+.settings__content-account-form .buttons,
+.settings__content-password-form .buttons,
+.settings__content-password-email-form .buttons {
+  margin-top: 1rem;
+  max-width: 200px;
+  padding: 0.75rem;
+  background: var(--bg-200);
+  outline: none;
+  border: none;
+  color: var(--text-200);
+  border-radius: 0.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.settings__content-password-form .buttons,
+.settings__content-password-email-form .buttons {
+  margin-top: 0;
+}
+
+.settings__content-account-form .buttons:hover,
+.settings__content-password-form .buttons:hover,
+.settings__content-password-email-form .buttons:hover {
+  background: var(--bg-300);
+  color: var(--text-100);
+}
+
+.settings__content-account-profile,
+.settings__content-account-delete,
+.settings__content-password,
+.settings__content {
+  margin-top: 2rem;
+}
+
+.settings__content-account-delete h2 {
+  color: var(--primary-100);
+}
+
+.settings__content-account-delete p {
+  font-size: clamp(0.85rem, 4vw, 0.938rem);
+}
+
+.settings__content-account-delete button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-200);
+  color: var(--primary-100);
+  border: none;
+  border-radius: 0.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.settings__content-account-delete button:hover {
+  background: var(--primary-100);
+  color: var(--text-100);
+}
+
+.settings__profile-picture-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.delete__account-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(20px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.delete__account-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.delete__account-overlay > div {
+  margin-inline: 1.5rem;
+  border: 2px solid var(--text-200);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  max-width: 450px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.delete__account-overlay h2 {
+  font-size: clamp(1.5rem, 3vw, 1.75rem);
+  margin-bottom: 1rem;
+  color: var(--primary-100);
+}
+
+.delete__account-overlay p {
+  font-size: clamp(0.938rem, 3vw, 1rem);
+  margin-bottom: 1.5rem;
+}
+
+.delete__confirmation-button {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.delete__account-overlay button {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--bg-100);
+  outline: none;
+  border: none;
+  border-radius: 0.25rem;
+  color: var(--text-200);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.delete__account-overlay button:hover {
+  background: var(--bg-200);
+}
+
+.delete__confirmation-button button:first-child:hover {
+  background: var(--primary-100);
+  color: var(--text-100);
+}
+
+.settings__content-password-email-form p span {
+  color: var(--primary-200);
+}
+
+.settings__content-password-email-form p a {
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.settings__content-password-email-form p a:hover {
+  color: var(--primary-200);
+}
+
+/* Hide the default file input */
+#settings__profile-picture-form input[type="file"] {
+  display: none;
+}
+
+
+@media screen and (min-width: 768px) {
+  /* FIRST COLUMN 200px, SECOND COLUMN 1FR */
+  .settings__selection-container {
+    grid-template-columns: 275px 1fr;
+    gap: 2rem;
+  }
+
+  .settings__content {
+    margin-top: 0;
+  }
+}

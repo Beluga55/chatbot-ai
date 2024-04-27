@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
+
+    <!-- ICONS -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- NOYTF CSS -->
+    <link rel="stylesheet" href="node_modules/notyf/notyf.min.css" />
+
+    <!-- HIGHLIGHT JS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github-dark.min.css"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/dashboard.css" />
+
+    <title>Main Page - Chatbot AI</title>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav container">
+        <div class="nav__sidebar-desktop">
+          <button class="buttons">
+            <i class="bx bx-message-square-add"></i>
+            New Chat
+          </button>
+        </div>
+
+        <div class="nav__dashboard">
+          <div>
+            <div class="nav__logo">
+              <i class="bx bx-bot"></i>
+              <a class="current__title" href="index.html">Chatbot AI</a>
+            </div>
+
+            <!-- SIDEBAR MENU -->
+            <div class="nav__list">
+              <div class="nav__logo">
+                <i class="bx bx-bot"></i>
+                <a href="index.html">Chatbot AI</a>
+              </div>
+
+              <div class="nav__links">
+                <div class="nav__link">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="25"
+                    height="25"
+                    fill="currentColor"
+                    viewBox="0 0 256 256"
+                    aria-label="Chat controls"
+                  >
+                    <path
+                      d="M40,88H73a32,32,0,0,0,62,0h81a8,8,0,0,0,0-16H135a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16Zm64-24A16,16,0,1,1,88,80,16,16,0,0,1,104,64ZM216,168H199a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16h97a32,32,0,0,0,62,0h17a8,8,0,0,0,0-16Zm-48,24a16,16,0,1,1,16-16A16,16,0,0,1,168,192Z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- ADDING CHAT HISTORY SECTION -->
+              <div class="nav__chat-history">
+                <div class="nav__chat-history-content">
+                  <button class="buttons">
+                    <i class="bx bx-message-square-add"></i>
+                    New Chat
+                  </button>
+
+                  <div class="nav__chat-history-title">
+                    <!-- CHAT HISTORY MOBILE STARTS HERE -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="nav__login">
+                <i class="bx bx-user-circle"></i>
+                <a href="login.html">Login</a>
+              </div>
+            </div>
+
+            <div class="nav__menu">
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  viewBox="0 0 256 256"
+                >
+                  <path
+                    d="M40,88H73a32,32,0,0,0,62,0h81a8,8,0,0,0,0-16H135a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16Zm64-24A16,16,0,1,1,88,80,16,16,0,0,1,104,64ZM216,168H199a32,32,0,0,0-62,0H40a8,8,0,0,0,0,16h97a32,32,0,0,0,62,0h17a8,8,0,0,0,0-16Zm-48,24a16,16,0,1,1,16-16A16,16,0,0,1,168,192Z"
+                  ></path>
+                </svg>
+              </div>
+              <div>
+                <i class="bx bx-menu-alt-right"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="dashboard container">
+        <div class="dashboard__container">
+          <div class="dashboard__sidebar-desktop">
+            <!-- CHAT HISTORY STARTS HERE -->
+          </div>
+          <div class="dashboard__chatbot">
+            <div id="dashboard__chat">
+              <div class="chat__container-greeting">
+                <div class="chat__greeting">
+                  <h2 class="poppins-extrabold">How can I help you today?</h2>
+                  <p>
+                    Hello! I'm your chat companion, driven by the powerful API
+                    from Gemini. Ask away or just chat casually — I'm here for a
+                    simple and enjoyable conversation!
+                  </p>
+                </div>
+              </div>
+            </div>
+            <form class="dashboard__form">
+              <textarea
+                name="prompt"
+                rows="1"
+                cols="1"
+                placeholder="Ask Chatbot..."
+                class="dashboard__input"
+              ></textarea>
+              <button class="buttons" type="submit">
+                <i class="bx bx-chevrons-up"></i>
+              </button>
+            </form>
+            <p class="dashboard__warning">
+              Chatbot is capable of making errors. It's advisable to verify
+              critical information.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="chat__control">
+        <div class="chat__control-overlay">
+          <div class="chat__control-nav">
+            <h2>Chat Controls</h2>
+            <!-- CLOSE ICON -->
+            <i class="bx bx-x"></i>
+          </div>
+          <hr />
+          <div class="chat__control-body">
+            <div class="chat__control-content-settings">
+              <div>
+                <!-- CLEAR CHAT -->
+                <h4>Clear Chat</h4>
+                <p>Clear all messages</p>
+              </div>
+              <button class="buttons" id="clear-chat">
+                <i class="bx bx-trash"></i>
+                Clear Chat
+              </button>
+            </div>
+            <div class="chat__control-content-settings">
+              <div>
+                <!-- RENAME CHAT -->
+                <h4>Edit Chat</h4>
+                <p>Change the title's name</p>
+              </div>
+              <button class="buttons" id="rename-chat">
+                <i class="bx bx-edit"></i>
+                Edit Chat
+              </button>
+            </div>
+            <div class="chat__control-content-settings">
+              <div>
+                <!-- DELETE CHAT -->
+                <h4>Delete Chat</h4>
+                <p>Delete the current chat</p>
+              </div>
+              <button class="buttons" id="delete-chat">
+                <i class="bx bx-trash-alt"></i>
+                Delete Chat
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <!-- RENAME OVERLAY -->
+        <div class="dashboard__rename-overlay">
+          <div>
+            <h2>Rename chat</h2>
+            <p>
+              Give your chat a new name. This will help you identify it easily
+              in the future.
+            </p>
+            <input type="text" placeholder="Enter a new name" />
+            <div class="dashboard__rename-buttons">
+              <button class="buttons">Cancel</button>
+              <button class="buttons">Rename</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard__delete-overlay">
+          <div>
+            <h2>Delete chat?</h2>
+            <p>
+              You'll no longer see this chat here. This will also delete related
+              activity like prompts and responses from the chatbot.
+            </p>
+            <div class="dashboard__delete-buttons">
+              <button class="buttons">Cancel</button>
+              <button class="buttons">Delete</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- SCRIPT JS -->
+    <script src="javascript/authMiddleware.js"></script>
+    <script src="node_modules/notyf/notyf.min.js"></script>
+    <script type="module" src="javascript/navbar.js"></script>
+    <script src="javascript/redirection.js"></script>
+    <script type="module" src="javascript/dashboard.js"></script>
+  </body>
+</html>
