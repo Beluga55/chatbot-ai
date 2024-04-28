@@ -8,14 +8,14 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(root, "index"),
-        about: resolve(root, "about"),
-        user: resolve(root, "user"),
-        dashboard: resolve(root, "dashboard"),
-        verifyEmail: resolve(root, "verifyEmail"),
-        forgotPassword: resolve(root, "forgot-password"),
-        signup: resolve(root, "signup"),
-        login: resolve(root, "login"),
+        main: resolve(root, "index.html"),
+        about: resolve(root, "about.html"),
+        user: resolve(root, "user.html"),
+        dashboard: resolve(root, "dashboard.html"),
+        verifyEmail: resolve(root, "verifyEmail.html"),
+        forgotPassword: resolve(root, "forgot-password.html"),
+        signup: resolve(root, "signup.html"),
+        login: resolve(root, "login.html"),
         navbar: resolve(root, "javascript/navbar.js"),
         redirection: resolve(root, "javascript/redirection.js"),
         signupValidation: resolve(root, "javascript/signupValidation.js"),

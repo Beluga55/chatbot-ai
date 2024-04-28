@@ -148,7 +148,7 @@ submitSignupButton.addEventListener("click", async (e) => {
 
       let encodedEmail = btoa(email);
       // REDIRECT TO VERIFY EMAIL PAGE
-      window.location.href = "verifyEmail?email=" + encodedEmail;
+      window.location.href = "verifyEmail.html?email=" + encodedEmail;
     } else {
       const data = await response.json();
 

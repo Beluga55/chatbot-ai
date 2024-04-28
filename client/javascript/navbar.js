@@ -67,19 +67,19 @@ const loginState = async () => {
         ".nav__links .nav__link:first-child"
       );
 
-      if (navHome && window.location.pathname !== "/dashboard") {
+      if (navHome && window.location.pathname !== "/dashboard.html") {
         navHome.remove();
       }
 
       // ADD THE DASHBOARD NAV
       const navDashboard = document.createElement("div");
       navDashboard.classList.add("nav__link");
-      navDashboard.innerHTML = `<i class='bx bxs-dashboard'></i><a href="dashboard">Dashboard</a>`;
+      navDashboard.innerHTML = `<i class='bx bxs-dashboard'></i><a href="dashboard.html">Dashboard</a>`;
 
       // GET THE NAV LINKS CONTAINER
       const navLinks = document.querySelector(".nav__links");
 
-      if (navLinks && window.location.pathname !== "/dashboard") {
+      if (navLinks && window.location.pathname !== "/dashboard.html") {
         navLinks.appendChild(navDashboard);
       }
 

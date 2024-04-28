@@ -1,9 +1,7 @@
-const heroButton = document.querySelectorAll(
-  ".hero__button, .cta__content button, .footer__copyright button"
-);
+const heroButton = document.querySelectorAll(".hero__button, .cta__content button, .footer__copyright button");
 
 const redirectSignup = () => {
-  window.location.href = "signup";
+  window.location.href = "signup.html";
 };
 
 if (heroButton) {
@@ -18,7 +16,7 @@ const redirectLoginButtonOverlay = document.querySelector(
 );
 
 const redirectLogin = () => {
-  window.location.href = "login";
+  window.location.href = "login.html";
 };
 
 const token = localStorage.getItem("token");
@@ -26,7 +24,7 @@ const token = localStorage.getItem("token");
 if (token) {
   if (loginButton) {
     loginButton.addEventListener("click", () => {
-      window.location.href = "user";
+      window.location.href = "user.html";
     });
   }
 } else {
@@ -34,7 +32,7 @@ if (token) {
     loginButton.addEventListener("click", redirectLogin);
   }
 
-  if (loginButton && window.location.pathname === "/login") {
+  if (loginButton && window.location.pathname === "/login.html") {
     loginButton.addEventListener("click", redirectSignup);
   }
 }
