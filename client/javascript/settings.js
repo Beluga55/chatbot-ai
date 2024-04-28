@@ -1,4 +1,5 @@
 import { retrieveProfilePicture } from "./navbar.js";
+import { Notyf } from "notyf";
 import validateEmail from "./validateEmail.js";
 
 // LOGOUT FUNCTIONALITY

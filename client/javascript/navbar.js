@@ -1,3 +1,5 @@
+import { Notyf } from "notyf";
+
 const navMenu = document.querySelector(".nav__list");
 const navHamburger = document.querySelector(".bx-menu-alt-right");
 const settingsProfile = document.querySelectorAll(".settings__profile");

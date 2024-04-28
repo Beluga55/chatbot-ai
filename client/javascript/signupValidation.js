@@ -1,4 +1,5 @@
 import validateEmail from "./validateEmail.js";
+import { Notyf } from "notyf";
 
 const signupForm = document.querySelector(".signup__form");
 const submitSignupButton = document.querySelector(".signup__form .buttons");

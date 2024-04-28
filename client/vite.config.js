@@ -1,6 +1,5 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
-import { verify } from "crypto";
 
 const root = resolve(__dirname, "");
 

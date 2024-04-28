@@ -1,3 +1,5 @@
+import { Notyf } from "notyf";
+
 const loginForm = document.querySelector(".login__form");
 const loginSubmitButton = document.querySelector(".login__form .buttons");
 

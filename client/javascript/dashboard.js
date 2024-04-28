@@ -1,4 +1,5 @@
 import hljs from "highlight.js";
+import { Notyf } from "notyf";
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 
 // Function to escape HTML special characters

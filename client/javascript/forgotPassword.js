@@ -1,3 +1,5 @@
+import { Notyf } from "notyf";
+
 const forgotPasswordForm = document.getElementById("forgot-password-form");
 const forgotPasswordBtn = document.getElementById("forgot-password-btn");
 

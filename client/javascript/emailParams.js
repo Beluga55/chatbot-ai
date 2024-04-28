@@ -1,3 +1,5 @@
+import { Notyf } from "notyf";
+
 const verifyEmail = async () => {
   let params = new URLSearchParams(window.location.search);
   let encodedEmail = params.get("email");
