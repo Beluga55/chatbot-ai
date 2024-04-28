@@ -13,7 +13,7 @@ const verifyEmail = async () => {
   } else {
     // CHANGE THE WINDOW LOCATION HREF WHEN CLICKED THE BUTTON
     const haveAccountLink = document.querySelector(".have-account p a");
-    haveAccountLink.href = "user.html";
+    haveAccountLink.href = "user";
 
     const verifyTips = document.querySelector(".verify__tips p");
     verifyTips.textContent = "You can verify your email later in settings.";

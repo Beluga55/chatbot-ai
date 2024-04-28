@@ -1,7 +1,7 @@
 // PROTECTION ROUTES FOR AUTHENTICATED USERS
 const notAuthenticated = () => {
   alert("Unauthorized access, please login first");
-  window.location.href = "login.html";
+  window.location.href = "login";
 };
 
 const checkAuthToken = () => {
@@ -34,16 +34,19 @@ const protectVerifyEmail = () => {
   }
 
   return true;
-}
+};
 
 // CHECK AND PROTECT ROUTES
-if (window.location.pathname === "/user.html" || window.location.pathname === "/dashboard.html") {
+if (
+  window.location.pathname === "/user" ||
+  window.location.pathname === "/dashboard"
+) {
   protectSettings();
 }
 
-if (window.location.pathname === "/verifyEmail.html") {
-  if(!protectVerifyEmail()) {
+if (window.location.pathname === "/verifyEmail") {
+  if (!protectVerifyEmail()) {
     alert("Unauthorized access to this page");
-    window.location.href = "login.html";
+    window.location.href = "login";
   }
 }
