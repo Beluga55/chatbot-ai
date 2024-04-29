@@ -83,7 +83,7 @@ loginSubmitButton.addEventListener("click", async (e) => {
       localStorage.setItem("username", data.username);
 
       // REDIRECT TO THE DASHBOARD
-      window.location.href = "dashboard.html";
+      window.location.href = "dashboard";
     } else {
       const error = await response.json();
 

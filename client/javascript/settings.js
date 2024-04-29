@@ -10,7 +10,7 @@ const logout = () => {
   localStorage.removeItem("username");
   localStorage.removeItem("role");
 
-  window.location.href = "index.html";
+  window.location.href = "index";
 };
 
 logoutButton.addEventListener("click", logout);
@@ -380,7 +380,7 @@ const deleteAccount = async () => {
     localStorage.setItem("accountDeleted", "true");
 
     // REDIRECT TO THE INDEX PAGE
-    window.location.href = "index.html";
+    window.location.href = "index";
   } else {
     const data = await response.json();
 
@@ -595,10 +595,7 @@ const observerChangeEmail = new MutationObserver(
             let username = btoa(localStorage.getItem("username"));
             // REDIRECT TO VERIFY EMAIL PAGE
             window.location.href =
-              "verifyEmail.html?email=" +
-              encodedEmail +
-              "&username=" +
-              username;
+              "verifyEmail?email=" + encodedEmail + "&username=" + username;
           });
 
           // Indicate that the event listener has been attached

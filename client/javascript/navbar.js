@@ -74,7 +74,7 @@ const loginState = async () => {
       // ADD THE DASHBOARD NAV
       const navDashboard = document.createElement("div");
       navDashboard.classList.add("nav__link");
-      navDashboard.innerHTML = `<i class='bx bxs-dashboard'></i><a href="dashboard.html">Dashboard</a>`;
+      navDashboard.innerHTML = `<i class='bx bxs-dashboard'></i><a href="dashboard">Dashboard</a>`;
 
       // GET THE NAV LINKS CONTAINER
       const navLinks = document.querySelector(".nav__links");
@@ -213,9 +213,9 @@ const checkLinkClicked = () => {
 document.addEventListener("DOMContentLoaded", showNotyfNotification);
 document.addEventListener("DOMContentLoaded", checkLinkClicked);
 
-// REMOVE THE .html EXTENSION FROM THE URL
+// REMOVE THE  EXTENSION FROM THE URL
 window.addEventListener("load", function () {
-  if (window.location.href.endsWith(".html")) {
+  if (window.location.href.endsWith("")) {
     window.location.replace(window.location.href.slice(0, -5));
   }
 });

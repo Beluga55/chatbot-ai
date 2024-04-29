@@ -175,18 +175,21 @@ const handleSubmit = async (event) => {
   chatInput.rows = 1;
 
   // FETCH THE AI RESPONSE
-  const response = await fetch("https://chatbot-rreu.onrender.com/users/chatbot", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      prompt: userPrompt,
-      username: localStorage.getItem("username"),
-      status,
-      titleId: getTitleId,
-    }),
-  });
+  const response = await fetch(
+    "https://chatbot-rreu.onrender.com/users/chatbot",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        prompt: userPrompt,
+        username: localStorage.getItem("username"),
+        status,
+        titleId: getTitleId,
+      }),
+    }
+  );
 
   // PARSE THE RESPONSE
   if (response.ok) {
@@ -393,15 +396,18 @@ chatIcon.addEventListener("click", handleSubmit);
 
 // GET ALL THE TITLES FROM THE DATABASE AND RENDER THEM
 const getTitles = async () => {
-  const response = await fetch("https://chatbot-rreu.onrender.com/users/getTitles", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      username: localStorage.getItem("username"),
-    }),
-  });
+  const response = await fetch(
+    "https://chatbot-rreu.onrender.com/users/getTitles",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: localStorage.getItem("username"),
+      }),
+    }
+  );
 
   // PARSE THE RESPONSE
   if (response.ok) {
@@ -487,15 +493,18 @@ const deleteChat = async () => {
   }
 
   // FETCH THE DELETE CHAT
-  const response = await fetch("https://chatbot-rreu.onrender.com/users/deleteSingleChat", {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      titleId,
-    }),
-  });
+  const response = await fetch(
+    "https://chatbot-rreu.onrender.com/users/deleteSingleChat",
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        titleId,
+      }),
+    }
+  );
 
   // PARSE THE RESPONSE
   if (response.ok) {
@@ -505,7 +514,7 @@ const deleteChat = async () => {
     // CHANGE THE CURRENT TITLE ON TOP
     const navTitle = document.querySelector(".current__title");
     navTitle.textContent = "Chatbot AI";
-    navTitle.setAttribute("href", "index.html");
+    navTitle.setAttribute("href", "index");
 
     // REMOVE THE TITLE ELEMENT
     const allTitleContent = document.querySelectorAll(".nav__title-wrapper");
@@ -763,7 +772,7 @@ const clearChatWrapper = () => {
   // CLEAR THE CURRENT TITLE ON TOP
   const navTitle = document.querySelector(".current__title");
   navTitle.textContent = "Chatbot AI";
-  navTitle.setAttribute("href", "index.html");
+  navTitle.setAttribute("href", "index");
   const chatWrapper = document.getElementById("dashboard__chat");
   chatWrapper.className = "";
   chatWrapper.innerHTML = chatGreeting();
@@ -890,16 +899,19 @@ const renameChat = async () => {
   }
 
   // FETCH THE RENAME CHAT
-  const response = await fetch("https://chatbot-rreu.onrender.com/users/renameChat", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      titleId,
-      newTitle,
-    }),
-  });
+  const response = await fetch(
+    "https://chatbot-rreu.onrender.com/users/renameChat",
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        titleId,
+        newTitle,
+      }),
+    }
+  );
 
   // PARSE THE RESPONSE
   if (response.ok) {
@@ -986,15 +998,18 @@ const clearChat = document.getElementById("clear-chat");
 // FUNCTION TO FETCH THE CLEAR ALL CHAT
 const clearChatFunction = async () => {
   // FETCH THE CLEAR CHAT
-  const response = await fetch("https://chatbot-rreu.onrender.com/users/clearChat", {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      username: localStorage.getItem("username"),
-    }),
-  });
+  const response = await fetch(
+    "https://chatbot-rreu.onrender.com/users/clearChat",
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: localStorage.getItem("username"),
+      }),
+    }
+  );
 
   // PARSE THE RESPONSE
   if (response.ok) {

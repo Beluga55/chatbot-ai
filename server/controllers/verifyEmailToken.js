@@ -22,7 +22,7 @@ export const verifyEmailToken = async (req, res) => {
       return res.send(`
         <script>
           alert("User already verified");
-          window.location.href = 'https://aichatkey.net/user.html';
+          window.location.href = 'https://aichatkey.net/user';
         </script>
       `);
     } else {
@@ -34,7 +34,7 @@ export const verifyEmailToken = async (req, res) => {
 
     res.send(`
       <script>
-        window.location.href = 'https://aichatkey.net/user.html?showNotyf=true';
+        window.location.href = 'https://aichatkey.net/user?showNotyf=true';
       </script>
     `);
   } catch (error) {
@@ -42,7 +42,7 @@ export const verifyEmailToken = async (req, res) => {
       return res.send(`
         <script>
           alert("Invalid Signature");
-          window.location.href = 'https://aichatkey.net/user.html';
+          window.location.href = 'https://aichatkey.net/user';
         </script>
       `);
     } else {
@@ -83,14 +83,14 @@ export const verifySignupEmailToken = async (req, res) => {
     if (username !== null) {
       return res.send(`
         <script>
-          window.location.href = 'https://aichatkey.net/user.html?showNotyf=true&linkClicked=true';
+          window.location.href = 'https://aichatkey.net/user?showNotyf=true&linkClicked=true';
         </script>
       `);
     } else {
       // IF EMAIL IS PROVIDED, THEN REDIRECT TO SIGNUP PAGE
       return res.send(`
         <script>
-          window.location.href = 'https://aichatkey.net/login.html?showNotyf=true&linkClicked=true';
+          window.location.href = 'https://aichatkey.net/login?showNotyf=true&linkClicked=true';
         </script>
       `);
     }
@@ -99,7 +99,7 @@ export const verifySignupEmailToken = async (req, res) => {
       return res.send(`
         <script>
           alert("Invalid Signature");
-          window.location.href = 'https://aichatkey.net/signup.html';
+          window.location.href = 'https://aichatkey.net/signup';
         </script>
       `);
     } else {
