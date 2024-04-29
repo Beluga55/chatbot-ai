@@ -215,7 +215,7 @@ document.addEventListener("DOMContentLoaded", checkLinkClicked);
 
 // REMOVE THE  EXTENSION FROM THE URL
 window.addEventListener("load", function () {
-  if (window.location.href.endsWith("")) {
+  if (window.location.href.endsWith(".html")) {
     window.location.replace(window.location.href.slice(0, -5));
   }
 });
