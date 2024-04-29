@@ -11,6 +11,16 @@
   display: flex;
 }
 
+.nav__menu > div {
+  background: var(--bg-200);
+  display: grid;
+  place-content: center;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid var(--bg-300);
+}
+
 .nav {
   margin: 1.5rem;
   align-items: center;

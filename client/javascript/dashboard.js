@@ -296,9 +296,6 @@ const handleSubmit = async (event) => {
         }
       );
 
-      // Escape the HTML
-      geminiResponse = escapeHtml(geminiResponse);
-
       // Replace the placeholders with the original code blocks
       geminiResponse = geminiResponse.replace(
         /PLACEHOLDER(\d+)/g,
@@ -686,9 +683,6 @@ const retrieveChatHistory = (parentElements) => {
               }
             );
           }
-
-          // Escape the HTML
-          response = escapeHtml(response);
 
           // Replace the placeholders with the original code blocks
           response = response.replace(/PLACEHOLDER(\d+)/g, (match, p1) => {
