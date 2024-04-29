@@ -67,7 +67,7 @@ const loginState = async () => {
         ".nav__links .nav__link:first-child"
       );
 
-      if (navHome && window.location.pathname !== "/dashboard.html") {
+      if (navHome && window.location.pathname !== "/dashboard") {
         navHome.remove();
       }
 
@@ -79,7 +79,7 @@ const loginState = async () => {
       // GET THE NAV LINKS CONTAINER
       const navLinks = document.querySelector(".nav__links");
 
-      if (navLinks && window.location.pathname !== "/dashboard.html") {
+      if (navLinks && window.location.pathname !== "/dashboard") {
         navLinks.appendChild(navDashboard);
       }
 
@@ -212,3 +212,10 @@ const checkLinkClicked = () => {
 
 document.addEventListener("DOMContentLoaded", showNotyfNotification);
 document.addEventListener("DOMContentLoaded", checkLinkClicked);
+
+// REMOVE THE .html EXTENSION FROM THE URL
+window.addEventListener("load", function () {
+  if (window.location.href.endsWith(".html")) {
+    window.location.replace(window.location.href.slice(0, -5));
+  }
+});

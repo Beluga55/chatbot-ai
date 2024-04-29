@@ -37,7 +37,7 @@ const protectVerifyEmail = () => {
 }
 
 // CHECK AND PROTECT ROUTES
-if (window.location.pathname === "/user.html" || window.location.pathname === "/dashboard.html") {
+if (window.location.pathname === "/user" || window.location.pathname === "/dashboard") {
   protectSettings();
 }
 
