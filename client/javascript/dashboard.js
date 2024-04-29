@@ -343,8 +343,6 @@ const handleSubmit = async (event) => {
       // CLEAR THE MESSAGE DIV
       messageDiv.innerHTML = "";
 
-      geminiResponse = escapeHtml(geminiResponse);
-
       // Format the markdown in the response
       geminiResponse = marked(geminiResponse);
 
