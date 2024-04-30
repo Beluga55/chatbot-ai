@@ -72,7 +72,6 @@
 .bx-chevron-right {
   font-size: 1.25rem;
   transition: transform 0.3s ease-in-out;
-  height: 19px;
 }
 
 .hero__button:hover .bx-chevron-right {
@@ -131,6 +130,11 @@
 .benefits__content-card p {
   margin-top: 1rem;
   font-size: clamp(0.85rem, 3vw, 0.938rem);
+}
+
+.benefits__content-card i {
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
 
 @keyframes rotation {
