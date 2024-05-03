@@ -112,7 +112,7 @@ export const resetPassword = async (req, res) => {
 
           res.send(`
              <script>
-               window.location.href = 'http://localhost:5173/resetPassword?id=${userId}&token=${userToken}&userEmail=${userEmail}';
+               window.location.href = 'https://aichatkey.net/resetPassword?id=${userId}&token=${userToken}&userEmail=${userEmail}';
              </script>
            `);
         } catch (error) {
