@@ -1,4 +1,4 @@
-import { Notyf } from "notyf";
+import { notyf } from "./notyfInstance.js";
 
 const navMenu = document.querySelector(".nav__list");
 const navHamburger = document.querySelector(".bx-menu-alt-right");
@@ -151,15 +151,6 @@ const checkAccountDeleted = () => {
 
   if (accountDeleted) {
     // Initialize a new Notyf instance
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     // Show a success notification
     notyf.success("Account deleted successfully");
@@ -178,15 +169,6 @@ const showNotyfNotification = () => {
 
   if (showNotyf) {
     // Initialize a new Notyf instance
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     notyf.success("Email verified successfully");
 

@@ -1,4 +1,5 @@
 import { User } from "../db.js";
+import { ObjectId } from "mongodb";
 import jwt from "jsonwebtoken";
 import * as dotenv from "dotenv";
 import nodemailer from "nodemailer";
@@ -71,7 +72,7 @@ export const forgotPassword = async (req, res) => {
         const secret = process.env.VALIDATE_JWT_SECRET_KEY + password;
         const payload = { email: email, id: id };
         const token = jwt.sign(payload, secret, { expiresIn: "15m" });
-        const link = `https://chatbot-rreu.onrender.com/reset-password/${id}/${token}`;
+        const link = `https://chatbot-rreu.onrender.com/users/reset-password/${id}/${token}`; // NEED TO CHANGE TO PRODUCTION URL LATER
 
         // SEND THE LINK USING FUNCTION
         sendResetPasswordEmail(email, link);
@@ -79,11 +80,51 @@ export const forgotPassword = async (req, res) => {
         res.status(200).json({ message: "Password reset link sent to email." });
       }
     } else {
-      res.status(404).json({ message: "Email not found." });
+      res.status(404).json({ message: "Email not registered." });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-export const resetPassword = async (req, res) => {};
+export const resetPassword = async (req, res) => {
+  try {
+    const { id, token } = req.params;
+
+    // FIND ONE USER AND MATCH IT WITH THE ID FROM THE POST REQUEST
+    const user = await User.findOne({ _id: new ObjectId(id) });
+
+    // CHECK IF USER EXISTS
+    if (user) {
+      const matchingID = user._id.toString();
+      const matchingEmail = user.email;
+      const matchingPassword = user.password;
+
+      if (id === matchingID) {
+        const secret = process.env.VALIDATE_JWT_SECRET_KEY + matchingPassword;
+
+        try {
+          jwt.verify(token, secret);
+
+          var userId = btoa(id);
+          var userToken = btoa(token);
+          var userEmail = btoa(matchingEmail);
+
+          res.send(`
+             <script>
+               window.location.href = 'http://localhost:5173/resetPassword?id=${userId}&token=${userToken}&userEmail=${userEmail}';
+             </script>
+           `);
+        } catch (error) {
+          res.send(
+            `<script>
+              alert("Invalid Signature");
+            </script>`
+          );
+        }
+      }
+    }
+  } catch (error) {
+    console.error("There is an error occurred: ", error.message);
+  }
+};

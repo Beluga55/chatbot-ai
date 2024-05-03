@@ -19,6 +19,7 @@ import { retrieveChatHistory } from "../controllers/retrieveChatHistory.js";
 import { renameChat } from "../controllers/renameChat.js";
 import { clearChat } from "../controllers/clearChat.js";
 import { forgotPassword, resetPassword } from "../controllers/forgotPassword.js";
+import { updatePassword } from "../controllers/updatePassword.js";
 
 const router = express.Router();
 
@@ -44,6 +45,7 @@ router.put("/renameChat", renameChat);
 router.delete("/clearChat", clearChat);
 router.post("/forgotPassword", forgotPassword);
 router.get("/reset-password/:id/:token", resetPassword);
+router.post("/updatePassword", updatePassword);
 
 
 export default router;

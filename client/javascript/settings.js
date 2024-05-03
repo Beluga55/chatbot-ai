@@ -1,5 +1,5 @@
 import { retrieveProfilePicture } from "./navbar.js";
-import { Notyf } from "notyf";
+import { notyf } from "./notyfInstance.js";
 import validateEmail from "./validateEmail.js";
 
 // LOGOUT FUNCTIONALITY
@@ -293,6 +293,11 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       const data = await response.json();
 
+      // USE A DEFAULT IMAGE
+      const profileImage = document.querySelector(".nav__login img");
+
+      profileImage.src = "../assets/empty-user.png";
+
       // Show an error notification
       notyf.error(data.message);
     }
@@ -385,15 +390,6 @@ const deleteAccount = async () => {
     const data = await response.json();
 
     // Initialize a new Notyf instance
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     // Show an error notification
     notyf.error(data.message);
@@ -437,15 +433,6 @@ const retrieveCurrentEmail = async () => {
     const data = await response.json();
 
     // Initialize a new Notyf instance
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     // Show an error notification
     notyf.error(data.message);

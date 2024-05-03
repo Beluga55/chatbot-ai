@@ -14,6 +14,10 @@
   height: 100svh;
 }
 
+.hero__description {
+  margin: 6rem 0;
+}
+
 .earth__image {
   width: 100%;
   position: absolute;

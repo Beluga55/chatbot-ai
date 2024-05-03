@@ -1,4 +1,4 @@
-import { Notyf } from "notyf";
+import { notyf } from "./notyfInstance.js";
 
 const verifyEmail = async () => {
   let params = new URLSearchParams(window.location.search);
@@ -39,30 +39,12 @@ const verifyEmail = async () => {
     const data = await response.json();
 
     // DISPLAY A NOTYF SUCCESS MESSAGE
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     notyf.success(data.message);
   } else {
     const data = await response.json();
 
     // DISPLAY A NOTYF ERROR MESSAGE
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     notyf.error(data.error);
   }

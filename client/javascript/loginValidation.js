@@ -3,48 +3,27 @@ import { Notyf } from "notyf";
 const loginForm = document.querySelector(".login__form");
 const loginSubmitButton = document.querySelector(".login__form .buttons");
 
-const validateLoginForm = () => {
-  // GET THE FORM VALUES
+// FUNCTION THAT CHECK IF THE INPUT ARE NOT EMPTY
+const validateInput = () => {
   const username = document.getElementById("login-username").value;
   const password = document.getElementById("login-password").value;
 
-  // VALIDATE EMAIL
-  if (username === "") {
-    // CHANGE PLACEHOLDER TEXT AND RED COLOR PLACEHOLDER
-    document.getElementById("login-username").placeholder =
-      "Username is required";
-    document.getElementById("login-username").style.borderColor = "red";
-
+  if (username === "" || password === "") {
     return false;
-  } else {
-    // CHANGE GREEN COLOR BORDER
-    document.getElementById("login-username").style.borderColor = "lime";
-  }
-
-  // VALIDATE PASSWORD
-  if (password.trim() === "") {
-    // CHANGE PLACEHOLDER TEXT AND RED COLOR PLACEHOLDER
-    document.getElementById("login-password").placeholder =
-      "Password is required";
-    document.getElementById("login-password").style.borderColor = "red";
-
-    return false;
-  } else {
-    // CHANGE GREEN COLOR BORDER
-    document.getElementById("login-password").style.borderColor = "lime";
   }
 
   return true;
 };
 
-loginSubmitButton.addEventListener("click", async (e) => {
-  e.preventDefault();
-
-  if (!validateLoginForm()) return;
-
+loginSubmitButton.addEventListener("click", async (event) => {
   // GET THE FORM VALUES
   const username = document.getElementById("login-username").value;
   const password = document.getElementById("login-password").value;
+
+  // CHECK IF THE INPUTS ARE NOT EMPTY
+  if (!validateInput()) return;
+
+  event.preventDefault();
 
   // SEND THE FORM VALUES TO THE SERVER
   const response = await fetch(

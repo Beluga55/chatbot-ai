@@ -1,5 +1,5 @@
 import hljs from "highlight.js";
-import { Notyf } from "notyf";
+import { notyf } from "./notyfInstance.js";
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 
 // Function to escape HTML special characters
@@ -98,15 +98,6 @@ const handleSubmit = async (event) => {
   // CHECK IF THE USER PROMPT IS EMPTY
   if (userPrompt === "") {
     // GENERATE A NEW NOTFY INSTANCE
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     // DISPLAY THE NOTIFICATION
     notyf.error("Please provide a prompt!");
@@ -367,15 +358,6 @@ const handleSubmit = async (event) => {
     }
 
     // DISPLAY THE NOTIFICATION
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     notyf.error(data.message);
   }
@@ -468,15 +450,6 @@ const deleteChat = async () => {
 
   if (!titleId) {
     // GENERATE A NEW NOTFY INSTANCE
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     // DISPLAY THE NOTIFICATION
     notyf.error("Please select a chat to delete!");
@@ -528,29 +501,11 @@ const deleteChat = async () => {
     chatWrapper.innerHTML = chatGreeting();
 
     // Initisalize the notyf
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     // Display the notification
     notyf.success(data.message);
   } else {
     // Initialize the notyf
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     // Display the notification
     notyf.error("Something went wrong!");
@@ -810,15 +765,6 @@ const renameChat = async () => {
 
   if (!titleId) {
     // GENERATE A NEW NOTFY INSTANCE
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     // DISPLAY THE NOTIFICATION
     notyf.error("Please select a chat to rename!");
@@ -837,15 +783,6 @@ const renameChat = async () => {
   // CHECK THE NEW TITLE IS EMPTY IF YES RETURN
   if (newTitle === "") {
     // GENERATE A NEW NOTFY INSTANCE
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     // DISPLAY THE NOTIFICATION
     notyf.error("New Title Can't Be Empty!");
@@ -855,15 +792,6 @@ const renameChat = async () => {
   // NEW TITLE MUST BE LESS THAN OR EQUAL TO 5 WORDS
   if (newTitle.split(" ").length > 5) {
     // GENERATE A NEW NOTFY INSTANCE
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     // DISPLAY THE NOTIFICATION
     notyf.error("New Title Can't Be More Than 5 Words!");
@@ -875,15 +803,6 @@ const renameChat = async () => {
   // CHECK THE TITLE IS THE SAME AS THE NEW TITLE
   if (currentTitle.trim() === newTitle.trim()) {
     // GENERATE A NEW NOTFY INSTANCE
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     // DISPLAY THE NOTIFICATION
     notyf.error("New Title Can't Be The Same As The Old One!");
@@ -930,29 +849,11 @@ const renameChat = async () => {
     renameOverlay.classList.remove("active");
 
     // Initisalize the notyf
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     // Display the notification
     notyf.success(data.message);
   } else {
     // Initialize the notyf
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     // Display the notification
     notyf.error("Something went wrong!");
@@ -1030,29 +931,11 @@ const clearChatFunction = async () => {
     chatWrapper.innerHTML = chatGreeting();
 
     // Initialize the notyf
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     // Display the notification
     notyf.success(data.message);
   } else {
     // Initialize the notyf
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dismissible: true,
-      icon: true,
-    });
 
     // Display the notification
     notyf.error("Something went wrong!");
