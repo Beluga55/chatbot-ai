@@ -35,7 +35,8 @@ const setAccountSettingsContent = () => {
         <hr>
 
         <form id="settings__profile-picture-form" class="settings__content-account-form">
-          <img class="settings__profile-picture-preview" src="../assets/empty-user.png" />
+          <img class="settings__profile-picture-preview" src="assets/empty-user.png" />
+          <p>You can upload your own profile picture below</p>
           <input type="file" id="file" name="image" accept="image/*" />
           <label for="file" class="custom-file-upload">Choose File</label>
           <button class="buttons" type="submit">Upload</button>
@@ -84,7 +85,7 @@ const setAccountSettingsContent = () => {
 
         reader.readAsDataURL(file);
       } else {
-        previewImage.src = "../assets/empty-user.png";
+        previewImage.src = "assets/empty-user.png";
       }
     }
   });
@@ -296,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // USE A DEFAULT IMAGE
       const profileImage = document.querySelector(".nav__login img");
 
-      profileImage.src = "../assets/empty-user.png";
+      profileImage.src = "assets/empty-user.png";
 
       // Show an error notification
       notyf.error(data.message);

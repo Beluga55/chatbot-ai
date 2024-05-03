@@ -32,7 +32,7 @@ const chatStripe = (isAi, value, uniqueId) => {
         ${
           isAi
             ? ""
-            : '<img src="../assets/empty-user.png" alt="Profile Image" />'
+            : '<img src="assets/empty-user.png" alt="Profile Image" />'
         }
         </div>
         <div class="chat__content">

@@ -7,6 +7,7 @@ dotenv.config();
 
 export const loginUser = async (req, res) => {
   try {
+    let user = "";
     const { username, password } = req.body;
 
     // CHECK IF THESE TWO FIELDS ARE EMPTY
@@ -17,10 +18,15 @@ export const loginUser = async (req, res) => {
     }
 
     // CHECK IF THE USER EXISTS
-    const user = await User.findOne({ username });
+    user = await User.findOne({ username });
 
     if (!user) {
-      return res.status(400).json({ message: "User does not exist." });
+      // FIND THE USER BY EMAIL
+      user = await User.findOne({ email: username });
+
+      if (!user) {
+        return res.status(400).json({ message: "User does not exist." });
+      }
     }
 
     // CHECK IF THE PASSWORD IS CORRECT
@@ -42,7 +48,7 @@ export const loginUser = async (req, res) => {
       return res.status(200).json({
         token,
         role: user.role,
-        username,
+        username: user.username,
       });
     } else {
       return res.status(400).json({ message: "Invalid password." });

@@ -43,4 +43,4 @@ sr.reveal(".benefits__content-card", topIntervalReveal);
 sr.reveal(".cta__container", leftReveal);
 sr.reveal(".signup__image, .login__image", rightReveal);
 sr.reveal(".signup__form input, .login__form input", leftIntervalReveal);
-sr.reveal(".signup__container h1, .login__container h1, .signup__form p, .signup__form button, .login__form-cta, .login__form button", leftReveal);
+sr.reveal(".signup__container h1, .login__container h1, .login__container p, .signup__form p, .signup__form button, .login__form-cta, .login__form button", leftReveal);

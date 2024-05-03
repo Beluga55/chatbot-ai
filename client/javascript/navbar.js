@@ -83,7 +83,7 @@ const loginState = async () => {
         navLinks.appendChild(navDashboard);
       }
 
-      navLogin.innerHTML = `<img src="../assets/empty-user.png" /><p class="nav__username">${username}</p>`;
+      navLogin.innerHTML = `<img src="assets/empty-user.png" /><p class="nav__username">${username}</p>`;
     } else {
       localStorage.removeItem("token");
       localStorage.removeItem("username");

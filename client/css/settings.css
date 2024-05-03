@@ -89,6 +89,11 @@ hr {
   font-size: clamp(1.25rem, 4vw, 1.5rem);
 }
 
+.settings__content-account-form p {
+  font-size: 0.75rem;
+  margin: 1rem 0;
+}
+
 .settings__content-account-form,
 .settings__content-password-form,
 .settings__content-password-email-form {
@@ -191,7 +196,6 @@ hr {
   border-radius: 50%;
   overflow: hidden;
   object-fit: cover;
-  margin-bottom: 1rem;
 }
 
 .delete__account-overlay {

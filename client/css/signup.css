@@ -11,6 +11,12 @@
   font-size: clamp(1.78rem, 4vw, 2.5rem);
 }
 
+.login__container p:not(.login__form-cta p) {
+  font-size: 0.75rem;
+  margin: 0.5rem 0;
+  line-height: 1.25rem;
+}
+
 .verify__paragraph {
   font-size: clamp(0.875rem, 2vw, 0.938rem);
   margin-top: 1rem;
@@ -98,6 +104,13 @@
 .signup__form button:hover,
 .login__form button:hover {
   background: var(--bg-300);
+}
+
+.signup__form p {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  justify-content: space-between;
 }
 
 .signup__form p,
