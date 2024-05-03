@@ -1,4 +1,5 @@
 import { notyf } from "./notyfInstance.js";
+import myImage from "../assets/empty-user.png";
 
 const navMenu = document.querySelector(".nav__list");
 const navHamburger = document.querySelector(".bx-menu-alt-right");
@@ -83,7 +84,7 @@ const loginState = async () => {
         navLinks.appendChild(navDashboard);
       }
 
-      navLogin.innerHTML = `<img src="assets/empty-user.png" /><p class="nav__username">${username}</p>`;
+      navLogin.innerHTML = `<img src="${myImage}" /><p class="nav__username">${username}</p>`;
     } else {
       localStorage.removeItem("token");
       localStorage.removeItem("username");

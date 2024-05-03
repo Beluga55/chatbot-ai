@@ -1,6 +1,7 @@
 import { retrieveProfilePicture } from "./navbar.js";
 import { notyf } from "./notyfInstance.js";
 import validateEmail from "./validateEmail.js";
+import myImage from "../assets/empty-user.png";
 
 // LOGOUT FUNCTIONALITY
 const logoutButton = document.querySelector(".settings__title .buttons");
@@ -35,7 +36,7 @@ const setAccountSettingsContent = () => {
         <hr>
 
         <form id="settings__profile-picture-form" class="settings__content-account-form">
-          <img class="settings__profile-picture-preview" src="assets/empty-user.png" />
+          <img class="settings__profile-picture-preview" src="${myImage}" />
           <p>You can upload your own profile picture below</p>
           <input type="file" id="file" name="image" accept="image/*" />
           <label for="file" class="custom-file-upload">Choose File</label>
@@ -85,7 +86,7 @@ const setAccountSettingsContent = () => {
 
         reader.readAsDataURL(file);
       } else {
-        previewImage.src = "assets/empty-user.png";
+        previewImage.src = `${myImage}`;
       }
     }
   });
@@ -297,7 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // USE A DEFAULT IMAGE
       const profileImage = document.querySelector(".nav__login img");
 
-      profileImage.src = "assets/empty-user.png";
+      profileImage.src = `${myImage}`;
 
       // Show an error notification
       notyf.error(data.message);
