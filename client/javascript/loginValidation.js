@@ -1,4 +1,4 @@
-import { Notyf } from "notyf";
+import { notyf } from "./notyfInstance.js";
 
 const loginForm = document.querySelector(".login__form");
 const loginSubmitButton = document.querySelector(".login__form .buttons");
@@ -36,17 +36,6 @@ loginSubmitButton.addEventListener("click", async (event) => {
       body: JSON.stringify({ username, password }),
     }
   );
-
-  // Initialize a new Notyf instance
-  var notyf = new Notyf({
-    duration: 3000,
-    position: {
-      x: "right",
-      y: "top",
-    },
-    dismissible: true,
-    icon: true,
-  });
 
   // GET THE RESPONSE FROM THE SERVER
   try {

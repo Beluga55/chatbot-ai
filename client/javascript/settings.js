@@ -172,17 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       );
 
-      // Initialize a new Notyf instance
-      var notyf = new Notyf({
-        duration: 3000,
-        position: {
-          x: "right",
-          y: "top",
-        },
-        dismissible: true,
-        icon: true,
-      });
-
       // GET THE RESPONSE
       if (response.ok) {
         await response.json();
@@ -221,17 +210,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const file = form.querySelector('input[type="file"]').files[0];
 
     if (!file) {
-      // Initialize a new Notyf instance
-      var notyf = new Notyf({
-        duration: 3000,
-        position: {
-          x: "right",
-          y: "top",
-        },
-        dismissible: true,
-        icon: true,
-      });
-
       // Show an error notification
       notyf.error("Please select a file");
       return;
@@ -252,17 +230,6 @@ document.addEventListener("DOMContentLoaded", () => {
         body: formData,
       }
     );
-
-    // Initialize a new Notyf instance
-    var notyf = new Notyf({
-      duration: 3000,
-      position: {
-        x: "right",
-        y: "top",
-      },
-      dimissible: true,
-      icon: true,
-    });
 
     // GET THE RESPONSE
     if (response.ok) {
@@ -391,8 +358,6 @@ const deleteAccount = async () => {
   } else {
     const data = await response.json();
 
-    // Initialize a new Notyf instance
-
     // Show an error notification
     notyf.error(data.message);
   }
@@ -434,8 +399,6 @@ const retrieveCurrentEmail = async () => {
   } else {
     const data = await response.json();
 
-    // Initialize a new Notyf instance
-
     // Show an error notification
     notyf.error(data.message);
   }
@@ -470,16 +433,6 @@ const observer = new MutationObserver(async (mutationsList, observer) => {
           );
 
           const data = await response.json();
-          // Initialize a new Notyf instance
-          var notyf = new Notyf({
-            duration: 3000,
-            position: {
-              x: "right",
-              y: "top",
-            },
-            dismissible: true,
-            icon: true,
-          });
 
           // Show a notification based on the response status
           response.ok ? notyf.success(data.message) : notyf.error(data.message);
@@ -529,34 +482,12 @@ const observerChangeEmail = new MutationObserver(
 
             // CHECK THE EMAIL IS EMPTY
             if (newEmail === "") {
-              // Initialize a new Notyf instance
-              var notyf = new Notyf({
-                duration: 3000,
-                position: {
-                  x: "right",
-                  y: "top",
-                },
-                dismissible: true,
-                icon: true,
-              });
-
               // Show an error notification
               notyf.error("Email cannot be empty");
               return;
             }
 
             if (newEmail === currentEmail) {
-              // Initialize a new Notyf instance
-              var notyf = new Notyf({
-                duration: 3000,
-                position: {
-                  x: "right",
-                  y: "top",
-                },
-                dismissible: true,
-                icon: true,
-              });
-
               // Show an error notification
               notyf.error("The new email is the same as the current email");
               return;
@@ -564,17 +495,6 @@ const observerChangeEmail = new MutationObserver(
 
             // VALIDATE THE EMAIL
             if (!validateEmail(newEmail)) {
-              // Initialize a new Notyf instance
-              var notyf = new Notyf({
-                duration: 3000,
-                position: {
-                  x: "right",
-                  y: "top",
-                },
-                dismissible: true,
-                icon: true,
-              });
-
               // Show an error notification
               notyf.error("Invalid email format");
               return;
@@ -653,17 +573,6 @@ const observerChangePassword = new MutationObserver(
 
             // Clear the form fields
             changePasswordForm.reset();
-
-            // Initialize a new Notyf instance
-            var notyf = new Notyf({
-              duration: 3000,
-              position: {
-                x: "right",
-                y: "top",
-              },
-              dismissible: true,
-              icon: true,
-            });
 
             // Show a notification based on the response status
             response.ok
