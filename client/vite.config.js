@@ -16,6 +16,7 @@ export default defineConfig({
         forgotPassword: resolve(root, "forgot-password.html"),
         signup: resolve(root, "signup.html"),
         login: resolve(root, "login.html"),
+        resetPassword: resolve(root, "resetPassword.html"),
         navbar: resolve(root, "javascript/navbar.js"),
         redirection: resolve(root, "javascript/redirection.js"),
         signupValidation: resolve(root, "javascript/signupValidation.js"),
