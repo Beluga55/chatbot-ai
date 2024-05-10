@@ -101,7 +101,7 @@ export const retrieveProfilePicture = async () => {
   if (!username) return;
 
   const imageResponse = await fetch(
-    "http://localhost:5001/users/retrieveProfilePicture",
+    "https://chatbot-rreu.onrender.com/users/retrieveProfilePicture",
     {
       method: "POST",
       headers: {
