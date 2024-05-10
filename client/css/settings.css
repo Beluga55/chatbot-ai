@@ -280,6 +280,64 @@ hr {
   display: none;
 }
 
+.settings__content-feedback-form p,
+.settings__content-feedback-form label {
+  font-size: 0.85rem;
+  margin: 1rem 0 0;
+}
+
+.settings__content-form-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings__content-form-content > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.settings__content-form-content > div > input,
+.settings__content-form-content > div > textarea {
+  width: 100%;
+  padding: 0.85rem;
+  background: transparent;
+  border: 2px solid var(--text-200);
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  outline: none;
+  max-width: 350px;
+  color: var(--text-200);
+  transition: border 0.3s ease;
+  margin-top: 0.5rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.settings__content-form-content > div > textarea {
+  resize: none;
+}
+
+.settings__content-form-content > div > input:focus,
+.settings__content-form-content > div > textarea:focus {
+  border: 2px solid var(--primary-200);
+}
+
+.settings__content-form-content > button {
+  margin-top: 1rem;
+  max-width: 200px;
+  padding: 0.75rem;
+  background: var(--bg-200);
+  outline: none;
+  border: none;
+  color: var(--text-200);
+  border-radius: 0.5rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.settings__content-form-content > button:hover {
+  background: var(--bg-300);
+  color: var(--text-100);
+}
 
 @media screen and (min-width: 768px) {
   /* FIRST COLUMN 200px, SECOND COLUMN 1FR */

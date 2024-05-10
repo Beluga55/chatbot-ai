@@ -75,7 +75,7 @@
 
           <div class="settings__selection-container">
             <div class="settings__selection">
-              <div class="settings__profile active">
+              <div class="settings__profile">
                 <i class="bx bx-cog"></i>
                 <span>Account</span>
 
@@ -87,7 +87,7 @@
 
                 <div class="settings__bar"></div>
               </div>
-              <div class="settings__profile">
+              <div class="settings__profile active">
                 <i class="bx bx-message"></i>
                 <span>Feedback</span>
 
@@ -97,72 +97,33 @@
 
             <div class="settings__content">
               <!-- DYNAMICALLY GENERATED -->
-              <div class="settings__content-account">
-                <div class="settings__content-account-username">
-                  <h2>Change Username</h2>
-                  <hr />
-                  <form
-                    id="settings-change-username-form"
-                    class="settings__content-account-form"
-                  >
-                    <input
-                      type="text"
-                      id="new-username"
-                      placeholder="New username"
-                    />
-                    <button id="change-username" class="buttons" type="submit">
-                      Change username
-                    </button>
-                  </form>
-                </div>
-                <div class="settings__content-account-profile">
-                  <h2>Upload Profile Picture</h2>
-                  <hr />
 
-                  <form
-                    id="settings__profile-picture-form"
-                    class="settings__content-account-form"
-                  >
-                    <img
-                      class="settings__profile-picture-preview"
-                      src="assets/empty-user.png"
-                    />
-                    <p>You can upload your own profile picture below</p>
-                    <input
-                      type="file"
-                      id="file"
-                      name="image"
-                      accept="image/*"
-                    />
-                    <label for="file" class="custom-file-upload"
-                      >Choose File</label
-                    >
-                    <button class="buttons" type="submit">Upload</button>
-                  </form>
-                </div>
-                <div class="settings__content-account-delete">
-                  <h2>Delete Account</h2>
-                  <hr />
+              <div class="settings__content-feedback">
+                <h2>Feedback</h2>
+                <hr />
+                <form class="settings__content-feedback-form">
                   <p>
-                    Once you delete your account, there is no going back. Please
-                    be certain.
+                    Help us improve our services by providing your feedback
+                    below
                   </p>
-                  <button class="buttons" type="submit">Delete Account</button>
-                </div>
-
-                <div class="delete__account-overlay">
-                  <div>
-                    <h2>Delete Confirmation</h2>
-                    <p>
-                      Are you sure you want to delete your account? This action
-                      is irreversible.
-                    </p>
-                    <div class="delete__confirmation-button">
-                      <button class="buttons">Delete</button>
-                      <button class="buttons">Cancel</button>
+                  <div class="settings__content-form-content">
+                    <div>
+                      <label>Email</label>
+                      <input type="email" placeholder="Your email" />
                     </div>
+                    <div>
+                      <label>Feedback</label>
+                      <textarea
+                        rows="6"
+                        cols="1"
+                        placeholder="Your feedback"
+                      ></textarea>
+                    </div>
+                    <button id="submit-feedback" class="buttons" type="submit">
+                      Send feedback
+                    </button>
                   </div>
-                </div>
+                </form>
               </div>
             </div>
           </div>

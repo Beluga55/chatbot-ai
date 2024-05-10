@@ -11,6 +11,8 @@ export default defineConfig({
         main: resolve(root, "index.html"),
         about: resolve(root, "about.html"),
         user: resolve(root, "user.html"),
+        password: resolve(root, "password.html"),
+        feedback: resolve(root, "feedback.html"),
         dashboard: resolve(root, "dashboard.html"),
         verifyEmail: resolve(root, "verifyEmail.html"),
         forgotPassword: resolve(root, "forgot-password.html"),

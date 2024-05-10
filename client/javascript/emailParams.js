@@ -6,7 +6,6 @@ const verifyEmail = async () => {
   let encodedUsername = params.get("username");
   let email = atob(encodedEmail);
   let username = atob(encodedUsername);
-  let response = "";
 
   if (encodedUsername === null) {
     username = null;
@@ -19,33 +18,27 @@ const verifyEmail = async () => {
     verifyTips.textContent = "You can verify your email later in settings.";
   }
 
-  if (!sessionStorage.getItem("fetchMade")) {
-    response = await fetch(
-      "https://chatbot-rreu.onrender.com/users/verifySignupEmail",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, username }),
-      }
-    );
-
-    sessionStorage.setItem("fetchMade", "true");
-  }
+  const response = await fetch(
+    "https://chatbot-rreu.onrender.com/users/verifySignupEmail",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, username }),
+    }
+  );
 
   // GET THE RESPONSE
-  if (response.ok) {
+  if (response && response.ok) {
     const data = await response.json();
 
     // DISPLAY A NOTYF SUCCESS MESSAGE
-
     notyf.success(data.message);
-  } else {
+  } else if (response) {
     const data = await response.json();
 
     // DISPLAY A NOTYF ERROR MESSAGE
-
     notyf.error(data.error);
   }
 };
