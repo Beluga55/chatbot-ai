@@ -1,5 +1,5 @@
-import { retrieveProfilePicture } from "./navbar.js";
-import { notyf } from "./notyfInstance.js";
+import {retrieveProfilePicture} from "./navbar.js";
+import {notyf} from "./notyfInstance.js";
 import validateEmail from "./validateEmail.js";
 import myImage from "../assets/empty-user.png";
 
@@ -19,7 +19,7 @@ logoutButton.addEventListener("click", logout);
 // FUNCTION TO HAVE PREVIEW OF THE PROFILE PICTURE
 const settingsForm = document.querySelector("#settings__profile-picture-form");
 const previewImage = document.querySelector(
-  ".settings__profile-picture-preview"
+   ".settings__profile-picture-preview"
 );
 
 if (settingsForm) {
@@ -73,15 +73,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // SEND A REQUEST TO THE SERVER
         const response = await fetch(
-          "https://chatbot-rreu.onrender.com/users/updateUsername",
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-            body: JSON.stringify({ oldUsername, newUsername }),
-          }
+           "https://chatbot-rreu.onrender.com/users/updateUsername",
+           {
+             method: "PUT",
+             headers: {
+               "Content-Type": "application/json",
+               Authorization: `Bearer ${localStorage.getItem("token")}`,
+             },
+             body: JSON.stringify({oldUsername, newUsername}),
+           }
         );
 
         // GET THE RESPONSE
@@ -135,14 +135,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // SEND A REQUEST TO THE SERVER
       const response = await fetch(
-        "https://chatbot-rreu.onrender.com/users/uploadProfile",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-          body: formData,
-        }
+         "https://chatbot-rreu.onrender.com/users/uploadProfile",
+         {
+           method: "POST",
+           headers: {
+             Authorization: `Bearer ${localStorage.getItem("token")}`,
+           },
+           body: formData,
+         }
       );
 
       // GET THE RESPONSE
@@ -161,18 +161,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // CREATE A BLOB URL FROM THE IMAGE RESPONSE
         pollForImages(data.file, 1000, 10)
-          .then(async (imageResponse) => {
-            const imageBlob = await imageResponse.blob();
-            const imageUrl = URL.createObjectURL(imageBlob);
+           .then(async (imageResponse) => {
+             const imageBlob = await imageResponse.blob();
+             const imageUrl = URL.createObjectURL(imageBlob);
 
-            // Display the image
-            const profileImage = document.querySelector(".nav__login img");
-            profileImage.src = imageUrl;
-            profileImage.style.borderRadius = "50%";
-          })
-          .catch((error) => {
-            console.error("Error retrieving image:", error);
-          });
+             // Display the image
+             const profileImage = document.querySelector(".nav__login img");
+             profileImage.src = imageUrl;
+             profileImage.style.borderRadius = "50%";
+           })
+           .catch((error) => {
+             console.error("Error retrieving image:", error);
+           });
       } else {
         const data = await response.json();
 
@@ -193,7 +193,7 @@ const pollForImages = async (file, interval, maxAttempt) => {
   for (let i = 0; i < maxAttempt; i++) {
     // RETRIEVE THE IMAGE FROM THE BACKEND
     const response = await fetch(
-      `https://chatbot-rreu.onrender.com/users/getImage/${file}`
+       `https://chatbot-rreu.onrender.com/users/getImage/${file}`
     );
 
     if (response.ok) {
@@ -209,15 +209,15 @@ const pollForImages = async (file, interval, maxAttempt) => {
 // DELETE ACCOUNT FUNCTIONALITY
 document.addEventListener("DOMContentLoaded", () => {
   const deleteAccountButton = document.querySelector(
-    ".settings__content-account-delete .buttons"
+     ".settings__content-account-delete .buttons"
   );
 
   const deleteCancelButton = document.querySelector(
-    ".delete__confirmation-button .buttons:last-child"
+     ".delete__confirmation-button .buttons:last-child"
   );
 
   const deleteConfirmButton = document.querySelector(
-    ".delete__confirmation-button .buttons:first-child"
+     ".delete__confirmation-button .buttons:first-child"
   );
 
   if (deleteAccountButton && deleteCancelButton && deleteConfirmButton) {
@@ -229,14 +229,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const showDeleteAccountOverlay = () => {
   const deleteAccountOverlay = document.querySelector(
-    ".delete__account-overlay"
+     ".delete__account-overlay"
   );
   deleteAccountOverlay.classList.add("active");
 };
 
 const hideDeleteAccountOverlay = () => {
   const deleteAccountOverlay = document.querySelector(
-    ".delete__account-overlay"
+     ".delete__account-overlay"
   );
   deleteAccountOverlay.classList.remove("active");
 };
@@ -247,15 +247,15 @@ const deleteAccount = async () => {
 
   // SEND A REQUEST TO THE SERVER
   const response = await fetch(
-    "https://chatbot-rreu.onrender.com/users/deleteAccount",
-    {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify({ username }),
-    }
+     "https://chatbot-rreu.onrender.com/users/deleteAccount",
+     {
+       method: "DELETE",
+       headers: {
+         "Content-Type": "application/json",
+         Authorization: `Bearer ${localStorage.getItem("token")}`,
+       },
+       body: JSON.stringify({username}),
+     }
   );
 
   // GET THE RESPONSE
@@ -283,15 +283,15 @@ const deleteAccount = async () => {
 // RETRIEVE THE CURRENT EMAIL OF THE USER
 const retrieveCurrentEmail = async () => {
   const response = await fetch(
-    "https://chatbot-rreu.onrender.com/users/getEmailAndStatus",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify({ username: localStorage.getItem("username") }),
-    }
+     "https://chatbot-rreu.onrender.com/users/getEmailAndStatus",
+     {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+         Authorization: `Bearer ${localStorage.getItem("token")}`,
+       },
+       body: JSON.stringify({username: localStorage.getItem("username")}),
+     }
   );
 
   if (response.ok) {
@@ -299,7 +299,7 @@ const retrieveCurrentEmail = async () => {
     const email = data.email;
 
     const emailSpan = document.querySelector(
-      ".settings__content-password-email-form p span"
+       ".settings__content-password-email-form p span"
     );
 
     const verifyNotice = document.querySelectorAll(".verify-notice");
@@ -327,7 +327,7 @@ if (window.location.pathname === "/password") {
 
 // VERIFY EMAIL FUNCTIONALITY
 const verifyEmailLink = document.querySelector(
-  ".settings__content-password-email-form a"
+   ".settings__content-password-email-form a"
 );
 const username = localStorage.getItem("username");
 
@@ -336,15 +336,15 @@ if (verifyEmailLink) {
     event.preventDefault();
 
     const response = await fetch(
-      "https://chatbot-rreu.onrender.com/users/verifyEmail",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify({ username }),
-      }
+       "https://chatbot-rreu.onrender.com/users/verifyEmail",
+       {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+           Authorization: `Bearer ${localStorage.getItem("token")}`,
+         },
+         body: JSON.stringify({username}),
+       }
     );
 
     const data = await response.json();
@@ -356,11 +356,11 @@ if (verifyEmailLink) {
 
 // CHANGE EMAIL FUNCTIONALITY
 const changeEmailForm = document.querySelector(
-  ".settings__content-password-email-form"
+   ".settings__content-password-email-form"
 );
 
 const changeEmailButton = document.querySelector(
-  ".settings__content-password-email-form .buttons"
+   ".settings__content-password-email-form .buttons"
 );
 
 if (changeEmailButton) {
@@ -371,7 +371,7 @@ if (changeEmailButton) {
 
     // CHECK IF THE EMAIL IS THE SAME AS THE CURRENT EMAIL
     const currentEmail = document.querySelector(
-      ".settings__content-password-email-form p span"
+       ".settings__content-password-email-form p span"
     ).textContent;
 
     // CHECK THE EMAIL IS EMPTY
@@ -398,18 +398,18 @@ if (changeEmailButton) {
     let username = btoa(localStorage.getItem("username"));
     // REDIRECT TO VERIFY EMAIL PAGE
     window.location.href =
-      "verifyEmail?email=" + encodedEmail + "&username=" + username;
+       "verifyEmail?email=" + encodedEmail + "&username=" + username;
   });
 }
 
 // CHANGE PASSWORD FUNCTIONALITY
 
 const changePasswordForm = document.querySelector(
-  ".settings__content-password-form"
+   ".settings__content-password-form"
 );
 
 const changePasswordButton = document.querySelector(
-  ".settings__content-password-form .buttons"
+   ".settings__content-password-form .buttons"
 );
 const user = localStorage.getItem("username");
 
@@ -418,30 +418,30 @@ if (changePasswordButton) {
     event.preventDefault();
 
     const currentPassword = changePasswordForm.querySelector(
-      "input[type='password']:nth-child(1)"
+       "input[type='password']:nth-child(1)"
     ).value;
     const newPassword = changePasswordForm.querySelector(
-      "input[type='password']:nth-child(2)"
+       "input[type='password']:nth-child(2)"
     ).value;
     const confirmNewPassword = changePasswordForm.querySelector(
-      "input[type='password']:nth-child(3)"
+       "input[type='password']:nth-child(3)"
     ).value;
 
     const response = await fetch(
-      "https://chatbot-rreu.onrender.com/users/changePassword",
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify({
-          username: user,
-          currentPassword,
-          newPassword,
-          confirmNewPassword,
-        }),
-      }
+       "https://chatbot-rreu.onrender.com/users/changePassword",
+       {
+         method: "PUT",
+         headers: {
+           "Content-Type": "application/json",
+           Authorization: `Bearer ${localStorage.getItem("token")}`,
+         },
+         body: JSON.stringify({
+           username: user,
+           currentPassword,
+           newPassword,
+           confirmNewPassword,
+         }),
+       }
     );
 
     const data = await response.json();
@@ -462,13 +462,62 @@ document.body.addEventListener("change", function (e) {
   }
 });
 
-// Testing the id of the button
-const submitFeedbackButton = document.getElementById("submit-feedback");
+// FEEDBACK FUNCTIONALITY
+const feedbackForm = document.querySelector(".settings__content-feedback-form");
+const feedbackButton = document.getElementById("submit-feedback");
 
-if (submitFeedbackButton) {
-  submitFeedbackButton.addEventListener("click", async (event) => {
-    event.preventDefault();
+// FUNCTION TO VALIDATE THE FEEDBACK FORM
+const validateFeedbackForm = async () => {
+  event.preventDefault();
+  // GET THE FORM VALUES
+  const email = feedbackForm.querySelector("input[type='email']").value;
+  const feedback = feedbackForm.querySelector("textarea").value;
+  const username = localStorage.getItem("username");
 
-    console.log("Feedback submitted");
-  });
+  // CHECK IF THE EMAIL IS EMPTY
+  if (email === "") {
+    // Show an error notification
+    notyf.error("Email cannot be empty");
+    return false;
+  }
+
+  // VALIDATE THE EMAIL
+  if (!validateEmail(email)) {
+    // Show an error notification
+    notyf.error("Invalid email format");
+    return false;
+  }
+
+  // CHECK IF THE FEEDBACK IS EMPTY
+  if (feedback === "") {
+    // Show an error notification
+    notyf.error("Feedback cannot be empty");
+    return false;
+  }
+
+  // SEND A REQUEST TO THE SERVER
+  await fetch("https://chatbot-rreu.onrender.com/users/feedback", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({username, email, feedback}),
+  })
+     .then(async (response) => {
+       const data = await response.json();
+
+       // CLEAR THE FORM FIELD
+       feedbackForm.reset();
+
+       // Show a notification based on the response status
+       response.ok ? notyf.success(data.message) : notyf.error(data.message);
+     })
+     .catch((error) => {
+       console.error("Error sending feedback:", error);
+     });
+};
+
+// TEST THE VALIDATE FEEDBACK FORM FUNCTION
+if (feedbackButton) {
+  feedbackButton.addEventListener("click", validateFeedbackForm);
 }

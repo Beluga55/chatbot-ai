@@ -1,5 +1,5 @@
 import validateEmail from "./validateEmail.js";
-import { notyf } from "./notyfInstance.js";
+import {notyf} from "./notyfInstance.js";
 
 const signupForm = document.querySelector(".signup__form");
 const submitSignupButton = document.querySelector(".signup__form .buttons");
@@ -11,14 +11,14 @@ const validateSignupForm = () => {
   const email = document.getElementById("signup-email").value;
   const password = document.getElementById("signup-password").value;
   const confirmPassword = document.getElementById(
-    "signup-confirm-password"
+     "signup-confirm-password"
   ).value;
 
   if (
-    username === "" &&
-    email === "" &&
-    password === "" &&
-    confirmPassword === ""
+     username === "" &&
+     email === "" &&
+     password === "" &&
+     confirmPassword === ""
   ) {
     notyf.error("All fields are required");
     return false;
@@ -64,14 +64,14 @@ submitSignupButton.addEventListener("click", async (event) => {
 
   // SEND A REQUEST TO THE SERVER
   const response = await fetch(
-    "https://chatbot-rreu.onrender.com/users/signup",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, email, password }),
-    }
+     "https://chatbot-rreu.onrender.com/users/signup",
+     {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify({username, email, password}),
+     }
   );
 
   // GET THE RESPONSE
