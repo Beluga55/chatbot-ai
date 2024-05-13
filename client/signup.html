@@ -1,118 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 
-    <!-- FAVICON -->
-    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
+  <!-- FAVICON -->
+  <link href="favicon.ico" rel="icon" type="image/svg+xml"/>
 
-    <!-- ICONS -->
-    <link
+  <!-- ICONS -->
+  <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
-    />
+  />
 
-    <!-- NOYTF CSS -->
-    <link rel="stylesheet" href="node_modules/notyf/notyf.min.css" />
+  <!-- NOYTF CSS -->
+  <link href="node_modules/notyf/notyf.min.css" rel="stylesheet"/>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/signup.css" />
+  <!-- CSS -->
+  <link href="css/signup.css" rel="stylesheet"/>
 
-    <!-- SCROLL REVEAL -->
-    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+  <!-- SCROLL REVEAL -->
+  <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 
-    <title>Signup Page - Chatbot AI</title>
-  </head>
-  <body>
-    <header class="header">
-      <nav class="nav container">
-        <div class="nav__logo">
-          <i class="bx bx-bot"></i>
-          <a href="index">Chatbot AI</a>
+  <title>Signup Page - Chatbot AI</title>
+</head>
+<body>
+<header class="header">
+  <nav class="nav container">
+    <div class="nav__logo">
+      <i class="bx bx-bot"></i>
+      <a href="index">Chatbot AI</a>
+    </div>
+
+    <!-- SIDEBAR MENU -->
+    <div class="nav__list">
+      <div class="nav__logo">
+        <i class="bx bx-bot"></i>
+        <a href="index">Chatbot AI</a>
+      </div>
+
+      <div class="nav__links">
+        <div class="nav__link">
+          <i class="bx bx-home-smile"></i>
+          <a href="index">Home</a>
         </div>
-
-        <!-- SIDEBAR MENU -->
-        <div class="nav__list">
-          <div class="nav__logo">
-            <i class="bx bx-bot"></i>
-            <a href="index">Chatbot AI</a>
-          </div>
-
-          <div class="nav__links">
-            <div class="nav__link">
-              <i class="bx bx-home-smile"></i>
-              <a href="index">Home</a>
-            </div>
-            <div class="nav__link">
-              <i class="bx bx-compass"></i>
-              <a href="about">About</a>
-            </div>
-            <div class="nav__link">
-              <i class="bx bx-message-square-dots"></i>
-              <a href="faq">FAQs</a>
-            </div>
-          </div>
-
-          <div class="nav__login">
-            <i class="bx bx-user-circle"></i>
-            <a href="login">Login</a>
-          </div>
+        <div class="nav__link">
+          <i class="bx bx-compass"></i>
+          <a href="about">About</a>
         </div>
-
-        <div class="nav__menu">
-          <div>
-            <i class="bx bx-menu-alt-right"></i>
-          </div>
+        <div class="nav__link">
+          <i class="bx bx-message-square-dots"></i>
+          <a href="faq">FAQs</a>
         </div>
-      </nav>
-    </header>
+      </div>
 
-    <main>
-      <section class="signup container">
-        <div class="signup__container">
-          <div>
-            <h1>Signup</h1>
+      <div class="nav__login">
+        <i class="bx bx-user-circle"></i>
+        <a href="login">Login</a>
+      </div>
+    </div>
 
-            <form class="signup__form">
-              <input
-                type="text"
-                id="signup-username"
-                placeholder="Enter username"
-                required
-              />
-              <input type="email" id="signup-email" placeholder="Enter email" required />
-              <input
-                type="password"
-                id="signup-password"
-                placeholder="Enter password"
-                required
-              />
-              <input
-                type="password"
-                id="signup-confirm-password"
-                placeholder="Confirm password"
-                required
-              />
+    <div class="nav__menu">
+      <div>
+        <i class="bx bx-menu-alt-right"></i>
+      </div>
+    </div>
+  </nav>
+</header>
 
-              <p>Already have an account? <a href="login">Login Now</a></p>
+<main>
+  <section class="signup container">
+    <div class="signup__container">
+      <div>
+        <h1>Signup</h1>
 
-              <button class="buttons" type="submit">Signup</button>
-            </form>
-          </div>
+        <form class="signup__form">
+          <input
+              id="signup-username"
+              placeholder="Enter username"
+              required
+              type="text"
+          />
+          <input id="signup-email" placeholder="Enter email" required type="email"/>
+          <input
+              id="signup-password"
+              placeholder="Enter password"
+              required
+              type="password"
+          />
+          <input
+              id="signup-confirm-password"
+              placeholder="Confirm password"
+              required
+              type="password"
+          />
 
-          <div class="signup__image">
-            <img src="assets/signup.svg" alt="signup.svg" />
-          </div>
-        </div>
-      </section>
-    </main>
+          <p>Already have an account? <a href="login">Login Now</a></p>
 
-    <!-- SCRIPT JS -->
-    <script type="module" src="javascript/navbar.js"></script>
-    <script type="module" src="javascript/redirection.js"></script>
+          <button class="buttons" type="submit">Signup</button>
+        </form>
+      </div>
 
-    <script type="module" src="javascript/signupValidation.js"></script>
-    <script type="module" src="javascript/scrollReveal.js"></script>
-  </body>
+      <div class="signup__image">
+        <img alt="signup.svg" src="assets/signup.svg"/>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- SCRIPT JS -->
+<script src="javascript/navbar.js" type="module"></script>
+<script src="javascript/redirection.js" type="module"></script>
+
+<script src="javascript/signupValidation.js" type="module"></script>
+<script src="javascript/scrollReveal.js" type="module"></script>
+</body>
 </html>

@@ -1,178 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 
-    <!-- FAVICON -->
-    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
+  <!-- FAVICON -->
+  <link href="favicon.ico" rel="icon" type="image/svg+xml"/>
 
-    <!-- ICONS -->
-    <link
+  <!-- ICONS -->
+  <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
-    />
+  />
 
-    <!-- NOYTF CSS -->
-    <link rel="stylesheet" href="node_modules/notyf/notyf.min.css" />
+  <!-- NOYTF CSS -->
+  <link href="node_modules/notyf/notyf.min.css" rel="stylesheet"/>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/settings.css" />
+  <!-- CSS -->
+  <link href="css/settings.css" rel="stylesheet"/>
 
-    <title>Settings Page - Chatbot AI</title>
-  </head>
-  <body>
-    <header class="header">
-      <nav class="nav container">
-        <div class="nav__logo">
-          <i class="bx bx-bot"></i>
-          <a href="index">Chatbot AI</a>
+  <title>Settings Page - Chatbot AI</title>
+</head>
+<body>
+<header class="header">
+  <nav class="nav container">
+    <div class="nav__logo">
+      <i class="bx bx-bot"></i>
+      <a href="index">Chatbot AI</a>
+    </div>
+
+    <!-- SIDEBAR MENU -->
+    <div class="nav__list">
+      <div class="nav__logo">
+        <i class="bx bx-bot"></i>
+        <a href="index">Chatbot AI</a>
+      </div>
+
+      <div class="nav__links">
+        <div class="nav__link">
+          <i class="bx bx-home-smile"></i>
+          <a href="index">Home</a>
+        </div>
+        <div class="nav__link">
+          <i class="bx bx-compass"></i>
+          <a href="about">About</a>
+        </div>
+        <div class="nav__link">
+          <i class="bx bx-message-square-dots"></i>
+          <a href="faq">FAQs</a>
+        </div>
+      </div>
+
+      <div class="nav__login">
+        <i class="bx bx-user-circle"></i>
+        <a href="signup">Signup</a>
+      </div>
+    </div>
+
+    <div class="nav__menu">
+      <div>
+        <i class="bx bx-menu-alt-right"></i>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="settings container">
+    <div class="settings__container">
+      <div class="settings__title">
+        <h1>Settings</h1>
+        <button class="buttons">Logout</button>
+      </div>
+
+      <div class="settings__selection-container">
+        <div class="settings__selection">
+          <div class="settings__profile active">
+            <i class="bx bx-cog"></i>
+            <span>Account</span>
+
+            <div class="settings__bar"></div>
+          </div>
+          <div class="settings__profile">
+            <i class="bx bx-lock"></i>
+            <span>Password & Authentication</span>
+
+            <div class="settings__bar"></div>
+          </div>
+          <div class="settings__profile">
+            <i class="bx bx-message"></i>
+            <span>Feedback</span>
+
+            <div class="settings__bar"></div>
+          </div>
         </div>
 
-        <!-- SIDEBAR MENU -->
-        <div class="nav__list">
-          <div class="nav__logo">
-            <i class="bx bx-bot"></i>
-            <a href="index">Chatbot AI</a>
-          </div>
-
-          <div class="nav__links">
-            <div class="nav__link">
-              <i class="bx bx-home-smile"></i>
-              <a href="index">Home</a>
+        <div class="settings__content">
+          <!-- DYNAMICALLY GENERATED -->
+          <div class="settings__content-account">
+            <div class="settings__content-account-username">
+              <h2>Change Username</h2>
+              <hr/>
+              <form
+                  class="settings__content-account-form"
+                  id="settings-change-username-form"
+              >
+                <input
+                    id="new-username"
+                    placeholder="New username"
+                    type="text"
+                />
+                <button class="buttons" id="change-username" type="submit">
+                  Change username
+                </button>
+              </form>
             </div>
-            <div class="nav__link">
-              <i class="bx bx-compass"></i>
-              <a href="about">About</a>
+            <div class="settings__content-account-profile">
+              <h2>Upload Profile Picture</h2>
+              <hr/>
+
+              <form
+                  class="settings__content-account-form"
+                  id="settings__profile-picture-form"
+              >
+                <img
+                    class="settings__profile-picture-preview"
+                    src="assets/empty-user.png"
+                />
+                <p>You can upload your own profile picture below</p>
+                <input
+                    accept="image/*"
+                    id="file"
+                    name="image"
+                    type="file"
+                />
+                <label class="custom-file-upload" for="file"
+                >Choose File</label
+                >
+                <button class="buttons" type="submit">Upload</button>
+              </form>
             </div>
-            <div class="nav__link">
-              <i class="bx bx-message-square-dots"></i>
-              <a href="faq">FAQs</a>
-            </div>
-          </div>
-
-          <div class="nav__login">
-            <i class="bx bx-user-circle"></i>
-            <a href="signup">Signup</a>
-          </div>
-        </div>
-
-        <div class="nav__menu">
-          <div>
-            <i class="bx bx-menu-alt-right"></i>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <main>
-      <section class="settings container">
-        <div class="settings__container">
-          <div class="settings__title">
-            <h1>Settings</h1>
-            <button class="buttons">Logout</button>
-          </div>
-
-          <div class="settings__selection-container">
-            <div class="settings__selection">
-              <div class="settings__profile active">
-                <i class="bx bx-cog"></i>
-                <span>Account</span>
-
-                <div class="settings__bar"></div>
-              </div>
-              <div class="settings__profile">
-                <i class="bx bx-lock"></i>
-                <span>Password & Authentication</span>
-
-                <div class="settings__bar"></div>
-              </div>
-              <div class="settings__profile">
-                <i class="bx bx-message"></i>
-                <span>Feedback</span>
-
-                <div class="settings__bar"></div>
-              </div>
+            <div class="settings__content-account-delete">
+              <h2>Delete Account</h2>
+              <hr/>
+              <p>
+                Once you delete your account, there is no going back. Please
+                be certain.
+              </p>
+              <button class="buttons" type="submit">Delete Account</button>
             </div>
 
-            <div class="settings__content">
-              <!-- DYNAMICALLY GENERATED -->
-              <div class="settings__content-account">
-                <div class="settings__content-account-username">
-                  <h2>Change Username</h2>
-                  <hr />
-                  <form
-                    id="settings-change-username-form"
-                    class="settings__content-account-form"
-                  >
-                    <input
-                      type="text"
-                      id="new-username"
-                      placeholder="New username"
-                    />
-                    <button id="change-username" class="buttons" type="submit">
-                      Change username
-                    </button>
-                  </form>
-                </div>
-                <div class="settings__content-account-profile">
-                  <h2>Upload Profile Picture</h2>
-                  <hr />
-
-                  <form
-                    id="settings__profile-picture-form"
-                    class="settings__content-account-form"
-                  >
-                    <img
-                      class="settings__profile-picture-preview"
-                      src="assets/empty-user.png"
-                    />
-                    <p>You can upload your own profile picture below</p>
-                    <input
-                      type="file"
-                      id="file"
-                      name="image"
-                      accept="image/*"
-                    />
-                    <label for="file" class="custom-file-upload"
-                      >Choose File</label
-                    >
-                    <button class="buttons" type="submit">Upload</button>
-                  </form>
-                </div>
-                <div class="settings__content-account-delete">
-                  <h2>Delete Account</h2>
-                  <hr />
-                  <p>
-                    Once you delete your account, there is no going back. Please
-                    be certain.
-                  </p>
-                  <button class="buttons" type="submit">Delete Account</button>
-                </div>
-
-                <div class="delete__account-overlay">
-                  <div>
-                    <h2>Delete Confirmation</h2>
-                    <p>
-                      Are you sure you want to delete your account? This action
-                      is irreversible.
-                    </p>
-                    <div class="delete__confirmation-button">
-                      <button class="buttons">Delete</button>
-                      <button class="buttons">Cancel</button>
-                    </div>
-                  </div>
+            <div class="delete__account-overlay">
+              <div>
+                <h2>Delete Confirmation</h2>
+                <p>
+                  Are you sure you want to delete your account? This action
+                  is irreversible.
+                </p>
+                <div class="delete__confirmation-button">
+                  <button class="buttons">Delete</button>
+                  <button class="buttons">Cancel</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
+  </section>
+</main>
 
-    <!-- SCRIPT JS -->
-    <script type="module" src="javascript/redirection.js"></script>
-    <script type="module" src="javascript/settings.js"></script>
-    <script type="module" src="javascript/authMiddleware.js"></script>
-  </body>
+<!-- SCRIPT JS -->
+<script src="javascript/redirection.js" type="module"></script>
+<script src="javascript/settings.js" type="module"></script>
+<script src="javascript/authMiddleware.js" type="module"></script>
+</body>
 </html>

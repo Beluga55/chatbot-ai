@@ -1,105 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 
-    <!-- FAVICON -->
-    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
+  <!-- FAVICON -->
+  <link href="favicon.ico" rel="icon" type="image/svg+xml"/>
 
-    <!-- ICONS -->
-    <link
+  <!-- ICONS -->
+  <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
-    />
+  />
 
-    <!-- NOYTF CSS -->
-    <link rel="stylesheet" href="node_modules/notyf/notyf.min.css" />
+  <!-- NOYTF CSS -->
+  <link href="node_modules/notyf/notyf.min.css" rel="stylesheet"/>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/signup.css" />
+  <!-- CSS -->
+  <link href="css/signup.css" rel="stylesheet"/>
 
-    <title>Verify Email Page - Chatbot AI</title>
-  </head>
-  <body>
-    <header class="header">
-      <nav class="nav container">
-        <div class="nav__logo">
-          <i class="bx bx-bot"></i>
-          <a href="index">Chatbot AI</a>
+  <title>Verify Email Page - Chatbot AI</title>
+</head>
+<body>
+<header class="header">
+  <nav class="nav container">
+    <div class="nav__logo">
+      <i class="bx bx-bot"></i>
+      <a href="index">Chatbot AI</a>
+    </div>
+
+    <!-- SIDEBAR MENU -->
+    <div class="nav__list">
+      <div class="nav__logo">
+        <i class="bx bx-bot"></i>
+        <a href="index">Chatbot AI</a>
+      </div>
+
+      <div class="nav__links">
+        <div class="nav__link">
+          <i class="bx bx-home-smile"></i>
+          <a href="index">Home</a>
+        </div>
+        <div class="nav__link">
+          <i class="bx bx-compass"></i>
+          <a href="about">About</a>
+        </div>
+        <div class="nav__link">
+          <i class="bx bx-message-square-dots"></i>
+          <a href="faq">FAQs</a>
+        </div>
+      </div>
+
+      <div class="nav__login">
+        <i class="bx bx-user-circle"></i>
+        <a href="login">Login</a>
+      </div>
+    </div>
+
+    <div class="nav__menu">
+      <div>
+        <i class="bx bx-menu-alt-right"></i>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="signup container">
+    <div class="signup__container">
+      <div class="verify__container">
+        <h1>Verify Email</h1>
+
+        <p class="verify__paragraph">
+          We have sent you an email with a link to verify your account.
+          Please check your email and click on the link to verify your
+          account.
+        </p>
+
+        <div class="verify__tips">
+          <p>
+            You can verify your email later in settings.<br/>
+            Your account is successfully created.
+          </p>
         </div>
 
-        <!-- SIDEBAR MENU -->
-        <div class="nav__list">
-          <div class="nav__logo">
-            <i class="bx bx-bot"></i>
-            <a href="index">Chatbot AI</a>
-          </div>
-
-          <div class="nav__links">
-            <div class="nav__link">
-              <i class="bx bx-home-smile"></i>
-              <a href="index">Home</a>
-            </div>
-            <div class="nav__link">
-              <i class="bx bx-compass"></i>
-              <a href="about">About</a>
-            </div>
-            <div class="nav__link">
-              <i class="bx bx-message-square-dots"></i>
-              <a href="faq">FAQs</a>
-            </div>
-          </div>
-
-          <div class="nav__login">
-            <i class="bx bx-user-circle"></i>
-            <a href="login">Login</a>
-          </div>
+        <div class="have-account">
+          <p>Verify later? <a href="login">Click me</a></p>
         </div>
+      </div>
 
-        <div class="nav__menu">
-          <div>
-            <i class="bx bx-menu-alt-right"></i>
-          </div>
-        </div>
-      </nav>
-    </header>
+      <div class="signup__image">
+        <img alt="message.svg" src="assets/message.svg"/>
+      </div>
+    </div>
+  </section>
+</main>
 
-    <main>
-      <section class="signup container">
-        <div class="signup__container">
-          <div class="verify__container">
-            <h1>Verify Email</h1>
-
-            <p class="verify__paragraph">
-              We have sent you an email with a link to verify your account.
-              Please check your email and click on the link to verify your
-              account.
-            </p>
-
-            <div class="verify__tips">
-              <p>
-                You can verify your email later in settings.<br />
-                Your account is successfully created.
-              </p>
-            </div>
-
-            <div class="have-account">
-              <p>Verify later? <a href="login">Click me</a></p>
-            </div>
-          </div>
-
-          <div class="signup__image">
-            <img src="assets/message.svg" alt="message.svg" />
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- SCRIPT JS -->
-    <script type="module" src="javascript/authMiddleware.js"></script>
-    <script type="module" src="javascript/navbar.js"></script>
-    <script type="module" src="javascript/redirection.js"></script>
-    <script type="module" src="javascript/emailParams.js"></script>
-  </body>
+<!-- SCRIPT JS -->
+<script src="javascript/authMiddleware.js" type="module"></script>
+<script src="javascript/navbar.js" type="module"></script>
+<script src="javascript/redirection.js" type="module"></script>
+<script src="javascript/emailParams.js" type="module"></script>
+</body>
 </html>

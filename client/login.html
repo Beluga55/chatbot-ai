@@ -1,113 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 
-    <!-- FAVICON -->
-    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
+  <!-- FAVICON -->
+  <link href="favicon.ico" rel="icon" type="image/svg+xml"/>
 
-    <!-- ICONS -->
-    <link
+  <!-- ICONS -->
+  <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
-    />
+  />
 
-    <!-- NOYTF CSS -->
-    <link rel="stylesheet" href="node_modules/notyf/notyf.min.css" />
+  <!-- NOYTF CSS -->
+  <link href="node_modules/notyf/notyf.min.css" rel="stylesheet"/>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/login.css" />
+  <!-- CSS -->
+  <link href="css/login.css" rel="stylesheet"/>
 
-    <!-- SCROLL REVEAL -->
-    <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+  <!-- SCROLL REVEAL -->
+  <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
 
-    <title>Login Page - Chatbot AI</title>
-  </head>
-  <body>
-    <header class="header">
-      <nav class="nav container">
-        <div class="nav__logo">
-          <i class="bx bx-bot"></i>
-          <a href="index">Chatbot AI</a>
+  <title>Login Page - Chatbot AI</title>
+</head>
+<body>
+<header class="header">
+  <nav class="nav container">
+    <div class="nav__logo">
+      <i class="bx bx-bot"></i>
+      <a href="index">Chatbot AI</a>
+    </div>
+
+    <!-- SIDEBAR MENU -->
+    <div class="nav__list">
+      <div class="nav__logo">
+        <i class="bx bx-bot"></i>
+        <a href="index">Chatbot AI</a>
+      </div>
+
+      <div class="nav__links">
+        <div class="nav__link">
+          <i class="bx bx-home-smile"></i>
+          <a href="index">Home</a>
         </div>
-
-        <!-- SIDEBAR MENU -->
-        <div class="nav__list">
-          <div class="nav__logo">
-            <i class="bx bx-bot"></i>
-            <a href="index">Chatbot AI</a>
-          </div>
-
-          <div class="nav__links">
-            <div class="nav__link">
-              <i class="bx bx-home-smile"></i>
-              <a href="index">Home</a>
-            </div>
-            <div class="nav__link">
-              <i class="bx bx-compass"></i>
-              <a href="about">About</a>
-            </div>
-            <div class="nav__link">
-              <i class="bx bx-message-square-dots"></i>
-              <a href="faq">FAQs</a>
-            </div>
-          </div>
-
-          <div class="nav__login">
-            <i class="bx bx-user-circle"></i>
-            <a href="signup">Signup</a>
-          </div>
+        <div class="nav__link">
+          <i class="bx bx-compass"></i>
+          <a href="about">About</a>
         </div>
-
-        <div class="nav__menu">
-          <div>
-            <i class="bx bx-menu-alt-right"></i>
-          </div>
+        <div class="nav__link">
+          <i class="bx bx-message-square-dots"></i>
+          <a href="faq">FAQs</a>
         </div>
-      </nav>
-    </header>
+      </div>
 
-    <main>
-      <section class="login container">
-        <div class="login__container">
-          <div>
-            <h1>Login</h1>
+      <div class="nav__login">
+        <i class="bx bx-user-circle"></i>
+        <a href="signup">Signup</a>
+      </div>
+    </div>
 
-            <form class="login__form">
-              <input
-                type="text"
-                id="login-username"
-                placeholder="Enter email or username"
-                required
-              />
-              <input
-                type="password"
-                id="login-password"
-                placeholder="Enter password"
-                required
-              />
+    <div class="nav__menu">
+      <div>
+        <i class="bx bx-menu-alt-right"></i>
+      </div>
+    </div>
+  </nav>
+</header>
 
-              <div class="login__form-cta">
-                <p>Don't have an account? <a href="signup">Signup Now</a></p>
-                <a href="forgot-password">Forgot Password?</a>
-              </div>
+<main>
+  <section class="login container">
+    <div class="login__container">
+      <div>
+        <h1>Login</h1>
 
-              <button class="buttons" type="submit">Login</button>
-            </form>
+        <form class="login__form">
+          <input
+              id="login-username"
+              placeholder="Enter email or username"
+              required
+              type="text"
+          />
+          <input
+              id="login-password"
+              placeholder="Enter password"
+              required
+              type="password"
+          />
+
+          <div class="login__form-cta">
+            <p>Don't have an account? <a href="signup">Signup Now</a></p>
+            <a href="forgot-password">Forgot Password?</a>
           </div>
 
-          <div class="login__image">
-            <img src="assets/login.svg" alt="login.svg" />
-          </div>
-        </div>
-      </section>
-    </main>
+          <button class="buttons" type="submit">Login</button>
+        </form>
+      </div>
 
-    <!-- SCRIPT JS -->
-    <script type="module" src="javascript/navbar.js"></script>
-    <script type="module" src="javascript/redirection.js"></script>
-    <script type="module" src="javascript/loginValidation.js"></script>
-    <script type="module" src="javascript/scrollReveal.js"></script>
-  </body>
+      <div class="login__image">
+        <img alt="login.svg" src="assets/login.svg"/>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- SCRIPT JS -->
+<script src="javascript/navbar.js" type="module"></script>
+<script src="javascript/redirection.js" type="module"></script>
+<script src="javascript/loginValidation.js" type="module"></script>
+<script src="javascript/scrollReveal.js" type="module"></script>
+</body>
 </html>
