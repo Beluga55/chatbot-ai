@@ -65,39 +65,42 @@ var swiper = new Swiper('.swiperAbout', {
   },
 })
 
-// GET THE TESTIMONIALS CONTENT FROM BACKEND
-const response = await fetch('https://chatbot-rreu.onrender.com/users/getFeedback', {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-})
-
-if (response.ok) {
-  const data = await response.json()
-  data.forEach((item, index) => {
-    let url
-    if (item.profilePicture) {
-      // CREATE A BLOB FROM THE PROFILE PICTURE BUFFER
-      const blob = new Blob([new Uint8Array(item.profilePicture.data)], { type: 'image/jpeg' })
-      url = URL.createObjectURL(blob)
-    } else {
-      url = myImage
-    }
-
-    // FORMAT THE DATE
-    const date = new Date(item.createdAt)
-    const options = { year: 'numeric', month: 'long', day: 'numeric' }
-    const formattedDate = date.toLocaleDateString('en-US', options)
-
-    // CREATE A TESTIMONIALS CARD FOR THE ITEM
-    const cardItem = testimonialsContent(item.username, formattedDate, url, item.feedback)
-
-    // APPEND THE CARD INTO THE SWIPER
-    const swiperWrapper = document.querySelector('.swiper-wrapper')
-    swiperWrapper.innerHTML += cardItem
+async function fetchFeedback () {
+  const response = await fetch('https://chatbot-rreu.onrender.com/users/getFeedback', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
   })
-} else {
-  const data = await response.json()
-  console.log(data.message)
+
+  if (response.ok) {
+    const data = await response.json()
+    data.forEach((item, index) => {
+      let url
+      if (item.profilePicture) {
+        // CREATE A BLOB FROM THE PROFILE PICTURE BUFFER
+        const blob = new Blob([new Uint8Array(item.profilePicture.data)], { type: 'image/jpeg' })
+        url = URL.createObjectURL(blob)
+      } else {
+        url = myImage
+      }
+
+      // FORMAT THE DATE
+      const date = new Date(item.createdAt)
+      const options = { year: 'numeric', month: 'long', day: 'numeric' }
+      const formattedDate = date.toLocaleDateString('en-US', options)
+
+      // CREATE A TESTIMONIALS CARD FOR THE ITEM
+      const cardItem = testimonialsContent(item.username, formattedDate, url, item.feedback)
+
+      // APPEND THE CARD INTO THE SWIPER
+      const swiperWrapper = document.querySelector('.swiper-wrapper')
+      swiperWrapper.innerHTML += cardItem
+    })
+  } else {
+    const data = await response.json()
+    console.log(data.message)
+  }
 }
+
+fetchFeedback()
