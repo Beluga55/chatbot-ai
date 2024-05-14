@@ -11,7 +11,9 @@ const swiperDOM = () => {
   return `
     <div class="swiper swiperAbout">
       <div class="swiper-wrapper">
-        
+        <div class="loader-container">
+          <span class="loader"></span>
+        </div>
       </div>
       <div class="swiper-pagination"></div>
     </div>
@@ -76,6 +78,9 @@ async function fetchFeedback () {
 
   if (response.ok) {
     const data = await response.json()
+
+    document.querySelector('.loader').style.display = 'none'
+    
     data.forEach((item, index) => {
       let url
       if (item.profilePicture) {
