@@ -4,14 +4,14 @@ import Swiper from 'swiper/bundle'
 // import styles bundle
 import 'swiper/css/bundle'
 
+import myImage from '../assets/empty-user.png'
+
 // MAKE A RETURN STATEMENT WITH HTML IN A FUNCTION
 const swiperDOM = () => {
   return `
     <div class="swiper swiperAbout">
       <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          ${testimonialsContent()}
-        </div>
+        
       </div>
       <div class="swiper-pagination"></div>
     </div>
@@ -19,21 +19,23 @@ const swiperDOM = () => {
 }
 
 // TESTIMONIALS CONTENT TO THE SUB FUNCTION
-const testimonialsContent = () => {
+const testimonialsContent = (username, joinedDate, profilePicture, feedbackText) => {
   return `
-   <div class="testimonials__card">
-     <!-- PARAGRAPH AND IMAGES -->
-     <p class="testimonials__card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores beatae blanditiis doloremque eaque, eligendi est eveniet excepturi inventore iste libero molestiae non pariatur, perspiciatis praesentium quas quisquam quos suscipit voluptas?</p>
-       <div class="testimonials__card-user">
-         <div>
-           <img class="testimonials-pfp" src="../assets/empty-user.png" alt="profile picture">
-             <div>
-               <span id="testimonials__username">Example</span>  
-               <span id="testimonials__joined-date">Joined 2024</span>          
-             </div>
+  <div class="swiper-slide">
+    <div class="testimonials__card">
+      <!-- PARAGRAPH AND IMAGES -->
+      <p class="testimonials__card-text">${feedbackText}</p>
+        <div class="testimonials__card-user">
+          <div>
+            <img class="testimonials-pfp" src="${profilePicture}" alt="profile picture">
+              <div>
+                <span id="testimonials__username">${username}</span>  
+                <span id="testimonials__joined-date">Joined at: ${joinedDate}</span>          
+              </div>
+          </div>
         </div>
       </div>
-    </div>
+  </div>
   `
 }
 
@@ -45,16 +47,26 @@ aboutSwiperContainer.innerHTML = swiperDOM()
 // INITIALIZE SWIPER
 var swiper = new Swiper('.swiperAbout', {
   spaceBetween: 32,
-  centeredSlides: true,
-  // autoplay: { delay: 2500, disableOnInteraction: false },
+  autoplay: { delay: 2500, disableOnInteraction: false },
   pagination: { el: '.swiper-pagination', clickable: true },
-  loop: true,
   grabCursor: true,
-  slidesPerView: 'auto',
+
+  // RESPONSIVE BREAKPOINTS
+  breakpoints: {
+    320: {
+      slidesPerView: 1,
+    },
+    640: {
+      slidesPerView: 2,
+    },
+    1024: {
+      slidesPerView: 3,
+    },
+  },
 })
 
 // GET THE TESTIMONIALS CONTENT FROM BACKEND
-const response = await fetch('http://localhost:5001/users/getFeedback', {
+const response = await fetch('https://chatbot-rreu.onrender.com/users/getFeedback', {
   method: 'GET',
   headers: {
     'Content-Type': 'application/json',
@@ -63,13 +75,29 @@ const response = await fetch('http://localhost:5001/users/getFeedback', {
 
 if (response.ok) {
   const data = await response.json()
-  data.files.forEach((fileBuffer, index) => {
-    const blob = new Blob([new Uint8Array(fileBuffer.data)], { type: 'image/jpeg' })
-    const url = URL.createObjectURL(blob)
-    const img = document.querySelector('testimonials-pfp') // SOON WILL BE LOTS OF PICTURE TO LOOP (querySelectorAll)
-    img.src = url
+  data.forEach((item, index) => {
+    let url
+    if (item.profilePicture) {
+      // CREATE A BLOB FROM THE PROFILE PICTURE BUFFER
+      const blob = new Blob([new Uint8Array(item.profilePicture.data)], { type: 'image/jpeg' })
+      url = URL.createObjectURL(blob)
+    } else {
+      url = myImage
+    }
+
+    // FORMAT THE DATE
+    const date = new Date(item.createdAt)
+    const options = { year: 'numeric', month: 'long', day: 'numeric' }
+    const formattedDate = date.toLocaleDateString('en-US', options)
+
+    // CREATE A TESTIMONIALS CARD FOR THE ITEM
+    const cardItem = testimonialsContent(item.username, formattedDate, url, item.feedback)
+
+    // APPEND THE CARD INTO THE SWIPER
+    const swiperWrapper = document.querySelector('.swiper-wrapper')
+    swiperWrapper.innerHTML += cardItem
   })
 } else {
   const data = await response.json()
-  console.log(data)
+  console.log(data.message)
 }

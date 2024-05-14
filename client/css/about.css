@@ -171,7 +171,6 @@
 
 .swiper {
     width: 100%;
-    max-width: 300px;
 }
 
 .swiper-wrapper {
@@ -182,10 +181,15 @@
     border: 2px solid var(--clr-3);
     padding: 1rem;
     border-radius: 0.5rem;
+    min-height: 200px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
 }
 
 .swiper-pagination {
-    position: relative;
+    position: relative !important;
+    margin-top: 1rem;
 }
 
 .testimonials__card-text {
