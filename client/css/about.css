@@ -181,7 +181,8 @@
     border: 2px solid var(--clr-3);
     padding: 1rem;
     border-radius: 0.5rem;
-    min-height: 200px;
+    height: auto;
+    min-height: 250px;
     display: flex !important;
     align-items: center;
     justify-content: center;
@@ -226,6 +227,11 @@
 
 .testimonials__card-user > div > div span {
     font-size: 0.7rem;
+}
+
+.bxs-chat {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
 }
 
 @media screen and (max-width: 450px) {

@@ -24,6 +24,7 @@ const testimonialsContent = (username, joinedDate, profilePicture, feedbackText)
   <div class="swiper-slide">
     <div class="testimonials__card">
       <!-- PARAGRAPH AND IMAGES -->
+      <i class='bx bxs-chat'></i>
       <p class="testimonials__card-text">${feedbackText}</p>
         <div class="testimonials__card-user">
           <div>
