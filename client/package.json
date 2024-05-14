@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "highlight.js": "^11.9.0",
-    "notyf": "^3.10.0"
+    "notyf": "^3.10.0",
+    "swiper": "^11.1.3"
   }
 }
