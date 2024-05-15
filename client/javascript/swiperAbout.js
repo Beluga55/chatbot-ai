@@ -80,13 +80,25 @@ async function fetchFeedback () {
     const data = await response.json()
 
     document.querySelector('.loader').style.display = 'none'
-    
-    data.forEach((item, index) => {
+
+    // Open the cache
+    const cache = await caches.open('image-cache')
+
+    data.forEach(async (item, index) => {
       let url
       if (item.profilePicture) {
-        // CREATE A BLOB FROM THE PROFILE PICTURE BUFFER
-        const blob = new Blob([new Uint8Array(item.profilePicture.data)], { type: 'image/jpeg' })
-        url = URL.createObjectURL(blob)
+        // Check if the image is in the cache
+        const cachedResponse = await cache.match(item.profilePicture)
+
+        if (cachedResponse) {
+          // If the image is in the cache, use it
+          url = URL.createObjectURL(await cachedResponse.blob())
+        } else {
+          // If the image is not in the cache, fetch it and cache it
+          const blob = new Blob([new Uint8Array(item.profilePicture.data)], { type: 'image/jpeg' })
+          url = URL.createObjectURL(blob)
+          await cache.put(item.profilePicture, new Response(blob))
+        }
       } else {
         url = myImage
       }

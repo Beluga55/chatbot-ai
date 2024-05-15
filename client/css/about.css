@@ -1,5 +1,6 @@
 @import url(style.css);
 @import url(header_nav.css);
+@import url(footer.css);
 
 .about {
     padding: 8.5rem 0 5rem;
