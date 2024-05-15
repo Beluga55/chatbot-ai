@@ -1,56 +1,56 @@
-import hljs from "highlight.js";
-import { notyf } from "./notyfInstance.js";
-import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
-import myImage from "../assets/empty-user.png";
+import hljs from 'highlight.js'
+import { notyf } from './notyfInstance.js'
+import { marked } from 'https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js'
+import myImage from '../assets/empty-user.png'
 
 // Function to escape HTML special characters
-function escapeHtml(unsafe) {
+function escapeHtml (unsafe) {
   return unsafe
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
 }
 
 // Get the parent elements
 const parentElements = document.querySelectorAll(
-  ".nav__chat-history-title, .dashboard__sidebar-desktop"
-);
+  '.nav__chat-history-title, .dashboard__sidebar-desktop'
+)
 
 // CHATBOT FUNCTIONALITY - FUNCTIONS
 const submitOnEnter = (event) => {
-  if (event.key === "Enter" && !event.shiftKey) {
-    handleSubmit(event);
+  if (event.key === 'Enter' && !event.shiftKey) {
+    handleSubmit(event)
   }
-};
+}
 
 const chatStripe = (isAi, value, uniqueId) => {
   return `
-    <div class="chat__stripe ${isAi ? "ai" : "user"}">
+    <div class="chat__stripe ${isAi ? 'ai' : 'user'}">
       <div class="chat__wrapper">
         <div class="profile__image">
         ${
-          isAi
-            ? ""
-            : `<img src="${myImage}" alt="Profile Image" />`
-        }
+    isAi
+      ? ''
+      : `<img src="${myImage}" alt="Profile Image" />`
+  }
         </div>
         <div class="chat__content">
           <div id="${uniqueId}" class="chat__content-div">${value}</div>
         </div>
       </div>
     </div>
-  `;
-};
+  `
+}
 
 const generateUniqueId = () => {
-  const timestamp = Date.now();
-  const randomNumber = Math.random();
-  const hexadecimalString = randomNumber.toString(16);
+  const timestamp = Date.now()
+  const randomNumber = Math.random()
+  const hexadecimalString = randomNumber.toString(16)
 
-  return `id-${timestamp}-${hexadecimalString}`;
-};
+  return `id-${timestamp}-${hexadecimalString}`
+}
 
 // MAKE A FUNCTION FOR THE PARAGRAPH TITLE ELEMENT
 const titleWrapper = (title, id) => {
@@ -63,8 +63,8 @@ const titleWrapper = (title, id) => {
         </div>
       </div>
     </div>
-  `;
-};
+  `
+}
 
 // CHAT GREETINGS LAYOUT
 const chatGreeting = () => {
@@ -79,599 +79,599 @@ const chatGreeting = () => {
         </p>
       </div>
     </div>
-  `;
-};
+  `
+}
 
 const handleSubmit = async (event) => {
-  event.preventDefault();
+  event.preventDefault()
 
   // GET THE DASHBOARD CHAT WRAPPER
-  const chatWrapper = document.getElementById("dashboard__chat");
+  const chatWrapper = document.getElementById('dashboard__chat')
 
   // GET THE FORM
-  const form = document.querySelector(".dashboard__form");
+  const form = document.querySelector('.dashboard__form')
 
   // GET THE FORMDATA
-  const getTitleId = chatWrapper.getAttribute("class");
-  const data = new FormData(form);
-  const userPrompt = data.get("prompt");
+  const getTitleId = chatWrapper.getAttribute('class')
+  const data = new FormData(form)
+  const userPrompt = data.get('prompt')
 
   // CHECK IF THE USER PROMPT IS EMPTY
-  if (userPrompt === "") {
+  if (userPrompt === '') {
     // GENERATE A NEW NOTFY INSTANCE
 
     // DISPLAY THE NOTIFICATION
-    notyf.error("Please provide a prompt!");
-    return;
+    notyf.error('Please provide a prompt!')
+    return
   }
 
   // DEFINE THE STATUS WHETHER IS TRUE OR FALSE
-  let status;
+  let status
 
   // CHECK THE CONTAINER ELEMENT HAS ANY CLASSES
   if (chatWrapper.classList.length > 0) {
-    status = true;
+    status = true
   } else {
-    status = false;
-    chatWrapper.innerHTML = "";
+    status = false
+    chatWrapper.innerHTML = ''
   }
 
   // RESET THE TEXTAREA VALUE AND CHAT WRAPPER
-  chatInput.value = "";
+  chatInput.value = ''
 
-  const uniqueId = generateUniqueId();
+  const uniqueId = generateUniqueId()
 
   // CREATE A STRING WITH THE chat__stripe-wrapper DIV AND THE CHAT STRIPES
   const chatStripeWrapper = `
   <div class="chat__stripe-wrapper">
     ${chatStripe(false, escapeHtml(userPrompt))}
-    ${chatStripe(true, " ", uniqueId)}
+    ${chatStripe(true, ' ', uniqueId)}
   </div>
-`;
+`
 
   // APPEND THE chat__stripe-wrapper DIV AND THE CHAT STRIPES TO THE chatWrapper
-  chatWrapper.innerHTML += chatStripeWrapper;
+  chatWrapper.innerHTML += chatStripeWrapper
 
   // BEFORE ADDING REMOVE IT FIRST
   const allChatStripeWrapper = document.querySelectorAll(
-    ".chat__stripe-wrapper"
-  );
+    '.chat__stripe-wrapper'
+  )
 
   allChatStripeWrapper.forEach((chatStripeWrapper) => {
-    chatStripeWrapper.style.minHeight = "initial";
-  });
+    chatStripeWrapper.style.minHeight = 'initial'
+  })
 
   // ADD THE MIN HEIGHT TO THE chat__stripe-wrapper
   const chatStripeWrapperDiv = document.querySelector(
-    ".chat__stripe-wrapper:last-child"
-  );
-  chatStripeWrapperDiv.style.minHeight = "717px";
+    '.chat__stripe-wrapper:last-child'
+  )
+  chatStripeWrapperDiv.style.minHeight = '717px'
 
   // Get the user's chat stripe within the last chat__stripe-wrapper
   const userChatStripe =
-    chatStripeWrapperDiv.querySelector(".chat__stripe.user");
+    chatStripeWrapperDiv.querySelector('.chat__stripe.user')
 
   // Calculate the scroll position
   let scrollPosition = userChatStripe
     ? userChatStripe.offsetTop - 100
-    : chatWrapper.scrollHeight;
+    : chatWrapper.scrollHeight
 
-  chatWrapper.scrollTop = scrollPosition;
+  chatWrapper.scrollTop = scrollPosition
 
   // GET THE MESSAGE DIV ID
-  const messageDiv = document.getElementById(uniqueId);
+  const messageDiv = document.getElementById(uniqueId)
 
-  messageDiv.innerHTML = "Generating response...";
+  messageDiv.innerHTML = 'Generating response...'
 
   // TEXTAREA RESET TO ONE ROWS
-  chatInput.rows = 1;
+  chatInput.rows = 1
 
   // FETCH THE AI RESPONSE
   const response = await fetch(
-    "https://chatbot-rreu.onrender.com/users/chatbot",
+    'https://chatbot-rreu.onrender.com/users/chatbot',
     {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         prompt: userPrompt,
-        username: localStorage.getItem("username"),
+        username: localStorage.getItem('username'),
         status,
         titleId: getTitleId,
       }),
     }
-  );
+  )
 
   // PARSE THE RESPONSE
   if (response.ok) {
-    const data = await response.json();
+    const data = await response.json()
 
     // CHANGE THE CURRENT TITLE ON TOP
-    const navTitle = document.querySelector(".current__title");
+    const navTitle = document.querySelector('.current__title')
 
     // IF THE CURRENT TITLE IS CHATBOT AI
-    if (navTitle.textContent === "Chatbot AI") {
-      navTitle.textContent = data.title;
-      navTitle.removeAttribute("href");
+    if (navTitle.textContent === 'Chatbot AI') {
+      navTitle.textContent = data.title
+      navTitle.removeAttribute('href')
     }
 
-    let geminiResponse = data.response.trim();
+    let geminiResponse = data.response.trim()
 
     // CHECK THE STATUS
     if (data.status === false) {
-      const title = data.title.trim();
-      const titleElement = titleWrapper(title, data.titleId);
+      const title = data.title.trim()
+      const titleElement = titleWrapper(title, data.titleId)
 
       // APPEND THE TITLE ELEMENT
       const navChatHistoryMobile = document.querySelector(
-        ".nav__chat-history-title"
-      );
+        '.nav__chat-history-title'
+      )
       const navChatHistoryDesktop = document.querySelector(
-        ".dashboard__sidebar-desktop"
-      );
+        '.dashboard__sidebar-desktop'
+      )
 
-      navChatHistoryMobile.innerHTML += titleElement;
-      navChatHistoryDesktop.innerHTML += titleElement;
+      navChatHistoryMobile.innerHTML += titleElement
+      navChatHistoryDesktop.innerHTML += titleElement
 
-      chatWrapper.classList.add(`${data.titleId}`);
+      chatWrapper.classList.add(`${data.titleId}`)
     }
 
     // Placeholder for code blocks
-    const placeholders = [];
+    const placeholders = []
 
     // Index for placeholders
-    let i = 0;
+    let i = 0
 
     // CHECK IF THE RESPONSE CONTAINS A CODE BLOCK
-    if (geminiResponse.includes("```")) {
+    if (geminiResponse.includes('```')) {
       geminiResponse = geminiResponse.replace(
         /```(\w*)\n([\s\S]*?)```/g,
         (match, p1, p2) => {
           // Create a new div element for the block
-          let blockDiv = document.createElement("div");
-          blockDiv.className = "coding-block";
+          let blockDiv = document.createElement('div')
+          blockDiv.className = 'coding-block'
 
           // Create a new span element for the title
-          let titleSpan = document.createElement("span");
-          titleSpan.className = "code-title";
+          let titleSpan = document.createElement('span')
+          titleSpan.className = 'code-title'
           // Create a new text node with the language title
-          let titleTextNode = document.createTextNode(p1.toUpperCase());
+          let titleTextNode = document.createTextNode(p1.toUpperCase())
 
           // Append the title text node to the title span
-          titleSpan.appendChild(titleTextNode);
+          titleSpan.appendChild(titleTextNode)
 
           // Append the title span to the block div
-          blockDiv.appendChild(titleSpan);
+          blockDiv.appendChild(titleSpan)
 
           // Create a new span element for the code
-          let codeSpan = document.createElement("pre");
-          let code = document.createElement("code");
-          code.className = "hljs";
+          let codeSpan = document.createElement('pre')
+          let code = document.createElement('code')
+          code.className = 'hljs'
           // Create a new text node with the code
-          let codeTextNode = document.createTextNode(p2);
+          let codeTextNode = document.createTextNode(p2)
           // Append the code text node to the code span
-          codeSpan.appendChild(code);
-          code.appendChild(codeTextNode);
+          codeSpan.appendChild(code)
+          code.appendChild(codeTextNode)
 
           // Append the code span to the block div
-          blockDiv.appendChild(codeSpan);
+          blockDiv.appendChild(codeSpan)
 
           // Create a new div element for the caution message
-          let cautionDiv = document.createElement("div");
-          cautionDiv.className = "caution-block";
+          let cautionDiv = document.createElement('div')
+          cautionDiv.className = 'caution-block'
 
           // Create a new p element for the caution message
-          let cautionP = document.createElement("p");
+          let cautionP = document.createElement('p')
           // Create a new text node with the caution message
           let cautionTextNode = document.createTextNode(
-            "Use code with caution"
-          );
+            'Use code with caution'
+          )
           // Append the caution text node to the caution p element
-          cautionP.appendChild(cautionTextNode);
+          cautionP.appendChild(cautionTextNode)
 
           // Create a new i element for the copy icon
-          let copyIcon = document.createElement("i");
-          copyIcon.className = "bx bx-copy-alt";
+          let copyIcon = document.createElement('i')
+          copyIcon.className = 'bx bx-copy-alt'
 
           // Append the caution p element and the copy icon to the caution div
-          cautionDiv.appendChild(cautionP);
-          cautionDiv.appendChild(copyIcon);
+          cautionDiv.appendChild(cautionP)
+          cautionDiv.appendChild(copyIcon)
 
           // Append the caution div to the block div
-          blockDiv.appendChild(cautionDiv);
+          blockDiv.appendChild(cautionDiv)
 
           // Store the block div element in the placeholders array
-          placeholders[i] = blockDiv.outerHTML;
+          placeholders[i] = blockDiv.outerHTML
           // Return a placeholder for the block div element
-          return `PLACEHOLDER${i++}`;
+          return `PLACEHOLDER${i++}`
         }
-      );
+      )
 
       // Replace the placeholders with the original code blocks
       geminiResponse = geminiResponse.replace(
         /PLACEHOLDER(\d+)/g,
         (match, p1) => {
-          let block = placeholders[p1];
-          let blockElement = document.createElement("div");
-          blockElement.innerHTML = block;
-          hljs.highlightElement(blockElement.querySelector(".hljs"));
-          return blockElement.innerHTML;
+          let block = placeholders[p1]
+          let blockElement = document.createElement('div')
+          blockElement.innerHTML = block
+          hljs.highlightElement(blockElement.querySelector('.hljs'))
+          return blockElement.innerHTML
         }
-      );
+      )
 
       // Create a new renderer
-      let renderer = new marked.Renderer();
+      let renderer = new marked.Renderer()
 
       // Override the code block rendering to return the code as is
       renderer.code = function (code, language) {
-        return `<pre><code class="hljs">${code}</code></pre>`;
-      };
+        return `<pre><code class="hljs">${code}</code></pre>`
+      }
 
       // Override the paragraph rendering to return the text as is
       renderer.paragraph = function (text) {
-        return text;
-      };
+        return text
+      }
 
       // Override the codespan rendering to return the code as is
       renderer.codespan = function (text) {
-        return text;
-      };
+        return text
+      }
 
       // Set the options to use the new renderer
       marked.setOptions({
         renderer: renderer,
-      });
+      })
 
       // Format the markdown in the response
-      geminiResponse = marked(geminiResponse);
+      geminiResponse = marked(geminiResponse)
 
       // CHANGE THE AI INNERHTML TO THE RESPONSE
-      messageDiv.innerHTML = geminiResponse;
+      messageDiv.innerHTML = geminiResponse
 
       // Add the animation
-      messageDiv.style.animation = "fadeIn 1s ease-in-out";
+      messageDiv.style.animation = 'fadeIn 1s ease-in-out'
     } else {
       // CLEAR THE MESSAGE DIV
-      messageDiv.innerHTML = "";
+      messageDiv.innerHTML = ''
 
       // Format the markdown in the response
-      geminiResponse = marked(geminiResponse);
+      geminiResponse = marked(geminiResponse)
 
       // CHANGE THE AI INNERHTML TO THE RESPONSE
-      messageDiv.innerHTML = geminiResponse;
+      messageDiv.innerHTML = geminiResponse
 
       // Add the animation
-      messageDiv.style.animation = "fadeIn 1s ease-in-out";
+      messageDiv.style.animation = 'fadeIn 1s ease-in-out'
     }
   } else {
     // PARSE THE RESPONSE
-    const data = await response.json();
+    const data = await response.json()
 
     // Get the last chat__stripe-wrapper within dashboard__chat
     const lastChatStripeWrapper = chatWrapper.querySelector(
-      ".chat__stripe-wrapper:last-child"
-    );
+      '.chat__stripe-wrapper:last-child'
+    )
 
     // Remove the last chat__stripe-wrapper
     if (lastChatStripeWrapper) {
-      lastChatStripeWrapper.remove();
+      lastChatStripeWrapper.remove()
     }
 
     // DISPLAY THE NOTIFICATION
 
-    notyf.error(data.message);
+    notyf.error(data.message)
   }
-};
+}
 
 // GET THE TEXTAREA INPUT AND THE ICON
-const chatInput = document.querySelector(".dashboard__input");
-const chatIcon = document.querySelector(".bx-chevrons-up");
+const chatInput = document.querySelector('.dashboard__input')
+const chatIcon = document.querySelector('.bx-chevrons-up')
 
 // CHATBOT FUNCTIONALITY - EVENT LISTENERS
-chatInput.addEventListener("keydown", submitOnEnter);
-chatIcon.addEventListener("click", handleSubmit);
+chatInput.addEventListener('keydown', submitOnEnter)
+chatIcon.addEventListener('click', handleSubmit)
 
 // GET ALL THE TITLES FROM THE DATABASE AND RENDER THEM
 const getTitles = async () => {
   const response = await fetch(
-    "https://chatbot-rreu.onrender.com/users/getTitles",
+    'https://chatbot-rreu.onrender.com/users/getTitles',
     {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: localStorage.getItem("username"),
+        username: localStorage.getItem('username'),
       }),
     }
-  );
+  )
 
   // PARSE THE RESPONSE
   if (response.ok) {
-    const data = await response.json();
+    const data = await response.json()
 
     // GET THE NAV CHAT HISTORY ELEMENTS
     const navChatHistoryMobile = document.querySelector(
-      ".nav__chat-history-title"
-    );
+      '.nav__chat-history-title'
+    )
     const navChatHistoryDesktop = document.querySelector(
-      ".dashboard__sidebar-desktop"
-    );
+      '.dashboard__sidebar-desktop'
+    )
 
     // LOOP THROUGH THE DATA AND PUT THE ID INTO THE TITLE ELEMENT
     data.titles.forEach((title, index) => {
-      const id = data.titleId[index];
-      const titleElement = titleWrapper(title, id);
+      const id = data.titleId[index]
+      const titleElement = titleWrapper(title, id)
 
       // APPEND THE TITLE ELEMENT
-      navChatHistoryMobile.innerHTML += titleElement;
-      navChatHistoryDesktop.innerHTML += titleElement;
-    });
+      navChatHistoryMobile.innerHTML += titleElement
+      navChatHistoryDesktop.innerHTML += titleElement
+    })
   }
-};
+}
 
 // CALL THE FUNCTION
-document.addEventListener("DOMContentLoaded", getTitles);
+document.addEventListener('DOMContentLoaded', getTitles)
 
 // DELETE CHAT TOGGLE
-const deleteChatId = document.getElementById("delete-chat");
+const deleteChatId = document.getElementById('delete-chat')
 
-deleteChatId.addEventListener("click", () => {
-  const deleteOverlay = document.querySelector(".dashboard__delete-overlay");
+deleteChatId.addEventListener('click', () => {
+  const deleteOverlay = document.querySelector('.dashboard__delete-overlay')
 
-  deleteOverlay.classList.toggle("active");
+  deleteOverlay.classList.toggle('active')
 
   // REMOVE THE ACTIVE CLASS FROM THE CHAT CONTROL SETTINGS
-  const chatControlsOverlay = document.querySelector(".chat__control");
-  chatControlsOverlay.classList.remove("active");
-});
+  const chatControlsOverlay = document.querySelector('.chat__control')
+  chatControlsOverlay.classList.remove('active')
+})
 
 // CLOSE THE DELETE CHAT OVERLAY
 const cancelDeleteButtons = document.querySelector(
-  ".dashboard__delete-buttons > button:first-child"
-);
+  '.dashboard__delete-buttons > button:first-child'
+)
 
-cancelDeleteButtons.addEventListener("click", () => {
-  const deleteOverlay = document.querySelector(".dashboard__delete-overlay");
-  deleteOverlay.classList.remove("active");
-});
+cancelDeleteButtons.addEventListener('click', () => {
+  const deleteOverlay = document.querySelector('.dashboard__delete-overlay')
+  deleteOverlay.classList.remove('active')
+})
 
 // GET THE DELETE CHAT BUTTON
 const deleteButton = document.querySelector(
-  ".dashboard__delete-buttons > button:last-child"
-);
+  '.dashboard__delete-buttons > button:last-child'
+)
 
 // DELETE CHAT FUNCTIONALITY
 const deleteChat = async () => {
   // GET THE DASHBOARD CHAT WRAPPER
   const titleId = document
-    .getElementById("dashboard__chat")
-    .getAttribute("class");
+    .getElementById('dashboard__chat')
+    .getAttribute('class')
 
   if (!titleId) {
     // GENERATE A NEW NOTFY INSTANCE
 
     // DISPLAY THE NOTIFICATION
-    notyf.error("Please select a chat to delete!");
+    notyf.error('Please select a chat to delete!')
 
     // REMOVE THE ACTIVE CLASS
-    const deleteOverlay = document.querySelector(".dashboard__delete-overlay");
-    deleteOverlay.classList.remove("active");
-    return;
+    const deleteOverlay = document.querySelector('.dashboard__delete-overlay')
+    deleteOverlay.classList.remove('active')
+    return
   }
 
   // FETCH THE DELETE CHAT
   const response = await fetch(
-    "https://chatbot-rreu.onrender.com/users/deleteSingleChat",
+    'https://chatbot-rreu.onrender.com/users/deleteSingleChat',
     {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         titleId,
       }),
     }
-  );
+  )
 
   // PARSE THE RESPONSE
   if (response.ok) {
-    const data = await response.json();
-    const deleteOverlay = document.querySelector(".dashboard__delete-overlay");
+    const data = await response.json()
+    const deleteOverlay = document.querySelector('.dashboard__delete-overlay')
 
     // CHANGE THE CURRENT TITLE ON TOP
-    const navTitle = document.querySelector(".current__title");
-    navTitle.textContent = "Chatbot AI";
-    navTitle.setAttribute("href", "index");
+    const navTitle = document.querySelector('.current__title')
+    navTitle.textContent = 'Chatbot AI'
+    navTitle.setAttribute('href', 'index')
 
     // REMOVE THE TITLE ELEMENT
-    const allTitleContent = document.querySelectorAll(".nav__title-wrapper");
+    const allTitleContent = document.querySelectorAll('.nav__title-wrapper')
     // GET THE DASHBOARD CHAT WRAPPER
-    const chatWrapper = document.getElementById("dashboard__chat");
+    const chatWrapper = document.getElementById('dashboard__chat')
 
     allTitleContent.forEach((title) => {
-      if (title.querySelector("p").id === titleId) {
-        title.remove();
-        chatWrapper.className = "";
+      if (title.querySelector('p').id === titleId) {
+        title.remove()
+        chatWrapper.className = ''
       }
-    });
+    })
 
-    deleteOverlay.classList.remove("active");
+    deleteOverlay.classList.remove('active')
 
-    chatWrapper.innerHTML = chatGreeting();
+    chatWrapper.innerHTML = chatGreeting()
 
     // Initisalize the notyf
 
     // Display the notification
-    notyf.success(data.message);
+    notyf.success(data.message)
   } else {
     // Initialize the notyf
 
     // Display the notification
-    notyf.error("Something went wrong!");
+    notyf.error('Something went wrong!')
   }
-};
+}
 
 // ADD EVENT LISTENER TO THE DELETE BUTTON
-deleteButton.addEventListener("click", deleteChat);
+deleteButton.addEventListener('click', deleteChat)
 
 // RETRIEVE THE CHAT HISTORY WHEN CLICKED THE TITLE
 const retrieveChatHistory = (parentElements) => {
   parentElements.forEach((parentElement) => {
-    parentElement.addEventListener("click", async (event) => {
-      const titleContent = event.target.closest(".nav__title-content");
+    parentElement.addEventListener('click', async (event) => {
+      const titleContent = event.target.closest('.nav__title-content')
 
-      if (!titleContent) return;
+      if (!titleContent) return
 
-      let title = titleContent.querySelector("p").textContent;
+      let title = titleContent.querySelector('p').textContent
 
-      const titleId = titleContent.querySelector("p").id;
+      const titleId = titleContent.querySelector('p').id
 
       // FETCH THE CHAT HISTORY
       const response = await fetch(
-        "https://chatbot-rreu.onrender.com/users/retrieveChatHistory",
+        'https://chatbot-rreu.onrender.com/users/retrieveChatHistory',
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             titleId,
           }),
         }
-      );
+      )
 
       // PARSE THE RESPONSE
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.json()
 
         // GET THE NAV TITLE
-        const navTitle = document.querySelector(".current__title");
+        const navTitle = document.querySelector('.current__title')
 
         // CHANGE THE CURRENT TITLE ON TOP
         if (navTitle.textContent !== title) {
-          navTitle.textContent = title;
-          navTitle.removeAttribute("href");
+          navTitle.textContent = title
+          navTitle.removeAttribute('href')
         }
 
         // GET THE DASHBOARD CHAT WRAPPER
-        const chatWrapper = document.getElementById("dashboard__chat");
+        const chatWrapper = document.getElementById('dashboard__chat')
 
         // CLEAR THE CHAT WRAPPER CLASSLIST
-        chatWrapper.className = "";
-        chatWrapper.innerHTML = "";
-        chatWrapper.classList.add(titleId);
+        chatWrapper.className = ''
+        chatWrapper.innerHTML = ''
+        chatWrapper.classList.add(titleId)
 
         // LOOP THROUGH THE PROMPTS AND RESPONSES
         // Placeholder for code blocks
-        const placeholders = [];
+        const placeholders = []
 
         data.prompts.forEach((prompt, index) => {
-          let response = data.responses[index];
-          let i = 0;
+          let response = data.responses[index]
+          let i = 0
 
           // CHECK IF THE RESPONSE CONTAINS A CODE BLOCK
-          if (response.includes("```")) {
+          if (response.includes('```')) {
             response = response.replace(
               /```(\w*)\n([\s\S]*?)```/g,
               (match, p1, p2) => {
                 // Create a new div element for the block
-                let blockDiv = document.createElement("div");
-                blockDiv.className = "coding-block";
+                let blockDiv = document.createElement('div')
+                blockDiv.className = 'coding-block'
 
                 // Create a new span element for the title
-                let titleSpan = document.createElement("span");
-                titleSpan.className = "code-title";
+                let titleSpan = document.createElement('span')
+                titleSpan.className = 'code-title'
 
                 // Create a new text node with the language title
-                let titleTextNode = document.createTextNode(p1.toUpperCase());
+                let titleTextNode = document.createTextNode(p1.toUpperCase())
 
                 // Append the title text node to the title span
-                titleSpan.appendChild(titleTextNode);
+                titleSpan.appendChild(titleTextNode)
 
                 // Append the title span to the block div
-                blockDiv.appendChild(titleSpan);
+                blockDiv.appendChild(titleSpan)
 
                 // Create a new span element for the code
-                let codeSpan = document.createElement("pre");
-                let code = document.createElement("code");
-                code.className = "hljs";
+                let codeSpan = document.createElement('pre')
+                let code = document.createElement('code')
+                code.className = 'hljs'
                 // Create a new text node with the code
-                let codeTextNode = document.createTextNode(p2);
+                let codeTextNode = document.createTextNode(p2)
                 // Append the code text node to the code span
-                codeSpan.appendChild(code);
-                code.appendChild(codeTextNode);
+                codeSpan.appendChild(code)
+                code.appendChild(codeTextNode)
 
                 // Append the code span to the block div
-                blockDiv.appendChild(codeSpan);
+                blockDiv.appendChild(codeSpan)
 
                 // Create a new div element for the caution message
-                let cautionDiv = document.createElement("div");
-                cautionDiv.className = "caution-block";
+                let cautionDiv = document.createElement('div')
+                cautionDiv.className = 'caution-block'
 
                 // Create a new p element for the caution message
-                let cautionP = document.createElement("p");
+                let cautionP = document.createElement('p')
                 // Create a new text node with the caution message
                 let cautionTextNode = document.createTextNode(
-                  "Use code with caution"
-                );
+                  'Use code with caution'
+                )
                 // Append the caution text node to the caution p element
-                cautionP.appendChild(cautionTextNode);
+                cautionP.appendChild(cautionTextNode)
 
                 // Create a new i element for the copy icon
-                let copyIcon = document.createElement("i");
-                copyIcon.className = "bx bx-copy-alt";
+                let copyIcon = document.createElement('i')
+                copyIcon.className = 'bx bx-copy-alt'
 
                 // Append the caution p element and the copy icon to the caution div
-                cautionDiv.appendChild(cautionP);
-                cautionDiv.appendChild(copyIcon);
+                cautionDiv.appendChild(cautionP)
+                cautionDiv.appendChild(copyIcon)
 
                 // Append the caution div to the block div
-                blockDiv.appendChild(cautionDiv);
+                blockDiv.appendChild(cautionDiv)
 
                 // Store the block div element in the placeholders array
-                placeholders[i] = blockDiv.outerHTML;
+                placeholders[i] = blockDiv.outerHTML
                 // Return a placeholder for the block div element
-                return `PLACEHOLDER${i++}`;
+                return `PLACEHOLDER${i++}`
               }
-            );
+            )
           }
 
           // Replace the placeholders with the original code blocks
           response = response.replace(/PLACEHOLDER(\d+)/g, (match, p1) => {
-            let block = placeholders[p1];
-            let blockElement = document.createElement("div");
-            blockElement.innerHTML = block;
-            hljs.highlightElement(blockElement.querySelector(".hljs"));
-            return blockElement.innerHTML;
-          });
+            let block = placeholders[p1]
+            let blockElement = document.createElement('div')
+            blockElement.innerHTML = block
+            hljs.highlightElement(blockElement.querySelector('.hljs'))
+            return blockElement.innerHTML
+          })
 
           // Create a new renderer
-          let renderer = new marked.Renderer();
+          let renderer = new marked.Renderer()
 
           // Override the code block rendering to return the code as is
           renderer.code = function (code, language) {
-            return `<pre><code class="hljs">${code}</code></pre>`;
-          };
+            return `<pre><code class="hljs">${code}</code></pre>`
+          }
 
           // Override the paragraph rendering to return the text as is
           renderer.paragraph = function (text) {
-            return text;
-          };
+            return text
+          }
 
           // Override the codespan rendering to return the code as is
           renderer.codespan = function (text) {
-            return text;
-          };
+            return text
+          }
 
           // Set the options to use the new renderer
           marked.setOptions({
             renderer: renderer,
-          });
+          })
 
           // Format the markdown in the response
-          response = marked(response);
+          response = marked(response)
 
           // CREATE A STRING WITH THE chat__stripe-wrapper DIV AND THE CHAT STRIPES
           const chatStripeWrapper = `
@@ -679,363 +679,356 @@ const retrieveChatHistory = (parentElements) => {
               ${chatStripe(false, escapeHtml(prompt))}
               ${chatStripe(true, response)}
             </div>
-          `;
+          `
 
           // APPEND THE chat__stripe-wrapper DIV AND THE CHAT STRIPES TO THE chatWrapper
-          chatWrapper.innerHTML += chatStripeWrapper;
-        });
+          chatWrapper.innerHTML += chatStripeWrapper
+        })
 
         // ADD THE MIN HEIGHT TO THE chat__stripe-wrapper
         const chatStripeWrapperDiv = document.querySelector(
-          ".chat__stripe-wrapper:last-child"
-        );
+          '.chat__stripe-wrapper:last-child'
+        )
 
-        chatStripeWrapperDiv.style.minHeight = "717px";
+        chatStripeWrapperDiv.style.minHeight = '717px'
 
         // Get the user's chat stripe within the last chat__stripe-wrapper
         const userChatStripe =
-          chatStripeWrapperDiv.querySelector(".chat__stripe.user");
+          chatStripeWrapperDiv.querySelector('.chat__stripe.user')
 
         // Calculate the scroll position
         let scrollPosition = userChatStripe
           ? userChatStripe.offsetTop - 100
-          : chatWrapper.scrollHeight;
+          : chatWrapper.scrollHeight
 
         // Scroll to the calculated position
-        chatWrapper.scrollTop = scrollPosition;
+        chatWrapper.scrollTop = scrollPosition
       }
-    });
-  });
-};
+    })
+  })
+}
 
-retrieveChatHistory(parentElements);
+retrieveChatHistory(parentElements)
 
 // NEW CHAT FUNCTIONALITY
 const newChat = document.querySelectorAll(
-  ".nav__sidebar-desktop .buttons, .nav__chat-history-content .buttons"
-);
+  '.nav__sidebar-desktop .buttons, .nav__chat-history-content .buttons'
+)
 
 // MAKE A FUNCTION THAT CLEAR THE CHAT WRAPPER CLASS NAME AND THE INNER HTML
 const clearChatWrapper = () => {
   // CLEAR THE CURRENT TITLE ON TOP
-  const navTitle = document.querySelector(".current__title");
-  navTitle.textContent = "Chatbot AI";
-  navTitle.setAttribute("href", "index");
-  const chatWrapper = document.getElementById("dashboard__chat");
-  chatWrapper.className = "";
-  chatWrapper.innerHTML = chatGreeting();
-};
+  const navTitle = document.querySelector('.current__title')
+  navTitle.textContent = 'Chatbot AI'
+  navTitle.setAttribute('href', 'index')
+  const chatWrapper = document.getElementById('dashboard__chat')
+  chatWrapper.className = ''
+  chatWrapper.innerHTML = chatGreeting()
+}
 
 newChat.forEach((button) => {
-  button.addEventListener("click", clearChatWrapper);
-});
+  button.addEventListener('click', clearChatWrapper)
+})
 
 // RENAME CHAT FUNCTIONALITY
-const renameChatId = document.getElementById("rename-chat");
+const renameChatId = document.getElementById('rename-chat')
 
-renameChatId.addEventListener("click", () => {
-  const renameOverlay = document.querySelector(".dashboard__rename-overlay");
-  renameOverlay.classList.toggle("active");
+renameChatId.addEventListener('click', () => {
+  const renameOverlay = document.querySelector('.dashboard__rename-overlay')
+  renameOverlay.classList.toggle('active')
 
   // REMOVE THE ACTIVE CLASS FROM THE CHAT CONTROL SETTINGS
-  const chatControlsOverlay = document.querySelector(".chat__control");
-  chatControlsOverlay.classList.remove("active");
-});
+  const chatControlsOverlay = document.querySelector('.chat__control')
+  chatControlsOverlay.classList.remove('active')
+})
 
 // CLOSE THE RENAME CHAT OVERLAY
 const cancelButtons = document.querySelector(
-  ".dashboard__rename-buttons > button:first-child"
-);
+  '.dashboard__rename-buttons > button:first-child'
+)
 
-cancelButtons.addEventListener("click", () => {
-  const renameOverlay = document.querySelector(".dashboard__rename-overlay");
-  renameOverlay.classList.remove("active");
-});
+cancelButtons.addEventListener('click', () => {
+  const renameOverlay = document.querySelector('.dashboard__rename-overlay')
+  renameOverlay.classList.remove('active')
+})
 
 // GET THE RENAME CHAT BUTTON
 const renameButton = document.querySelector(
-  ".dashboard__rename-buttons button:last-child"
-);
+  '.dashboard__rename-buttons button:last-child'
+)
 
 // RENAME CHAT FUNCTIONALITY
 const renameChat = async () => {
   // GET THE CLASS FROM THE CHAT CONTAINER
   const titleId = document
-    .getElementById("dashboard__chat")
-    .getAttribute("class");
+    .getElementById('dashboard__chat')
+    .getAttribute('class')
 
   if (!titleId) {
     // GENERATE A NEW NOTFY INSTANCE
 
     // DISPLAY THE NOTIFICATION
-    notyf.error("Please select a chat to rename!");
+    notyf.error('Please select a chat to rename!')
 
     // REMOVE THE ACTIVE CLASS
-    const renameOverlay = document.querySelector(".dashboard__rename-overlay");
-    renameOverlay.classList.remove("active");
-    return;
+    const renameOverlay = document.querySelector('.dashboard__rename-overlay')
+    renameOverlay.classList.remove('active')
+    return
   }
 
   // GET THE NEW TITLE
   const newTitle = document.querySelector(
-    ".dashboard__rename-overlay input"
-  ).value;
+    '.dashboard__rename-overlay input'
+  ).value
 
   // CHECK THE NEW TITLE IS EMPTY IF YES RETURN
-  if (newTitle === "") {
+  if (newTitle === '') {
     // GENERATE A NEW NOTFY INSTANCE
 
     // DISPLAY THE NOTIFICATION
-    notyf.error("New Title Can't Be Empty!");
-    return;
+    notyf.error('New Title Can\'t Be Empty!')
+    return
   }
 
   // NEW TITLE MUST BE LESS THAN OR EQUAL TO 5 WORDS
-  if (newTitle.split(" ").length > 5) {
+  if (newTitle.split(' ').length > 5) {
     // GENERATE A NEW NOTFY INSTANCE
 
     // DISPLAY THE NOTIFICATION
-    notyf.error("New Title Can't Be More Than 5 Words!");
-    return;
+    notyf.error('New Title Can\'t Be More Than 5 Words!')
+    return
   }
 
-  const currentTitle = document.querySelector(".current__title").textContent;
+  const currentTitle = document.querySelector('.current__title').textContent
 
   // CHECK THE TITLE IS THE SAME AS THE NEW TITLE
   if (currentTitle.trim() === newTitle.trim()) {
     // GENERATE A NEW NOTFY INSTANCE
 
     // DISPLAY THE NOTIFICATION
-    notyf.error("New Title Can't Be The Same As The Old One!");
-    return;
+    notyf.error('New Title Can\'t Be The Same As The Old One!')
+    return
   }
 
   // FETCH THE RENAME CHAT
   const response = await fetch(
-    "https://chatbot-rreu.onrender.com/users/renameChat",
+    'https://chatbot-rreu.onrender.com/users/renameChat',
     {
-      method: "PUT",
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         titleId,
         newTitle,
       }),
     }
-  );
+  )
 
   // PARSE THE RESPONSE
   if (response.ok) {
-    const data = await response.json();
+    const data = await response.json()
 
-    const renameOverlay = document.querySelector(".dashboard__rename-overlay");
+    const renameOverlay = document.querySelector('.dashboard__rename-overlay')
 
     // CHANGE THE CURRENT TITLE ON TOP
-    const navTitle = document.querySelector(".current__title");
-    navTitle.textContent = newTitle;
+    const navTitle = document.querySelector('.current__title')
+    navTitle.textContent = newTitle
 
     // FIND THE TITLE ELEMENT WITH THE ID
-    const titleElement = document.querySelectorAll(`[id="${titleId}"]`);
+    const titleElement = document.querySelectorAll(`[id="${titleId}"]`)
 
     // CHANGE THE TITLE ELEMENT INNERHTML
     titleElement.forEach((element) => {
-      element.textContent = newTitle;
-    });
+      element.textContent = newTitle
+    })
 
     // CLEAR THE INPUT VALUE
-    renameOverlay.querySelector("input").value = "";
+    renameOverlay.querySelector('input').value = ''
 
     // REMOVE THE ACTIVE CLASS
-    renameOverlay.classList.remove("active");
+    renameOverlay.classList.remove('active')
 
     // Initisalize the notyf
 
     // Display the notification
-    notyf.success(data.message);
+    notyf.success(data.message)
   } else {
     // Initialize the notyf
 
     // Display the notification
-    notyf.error("Something went wrong!");
+    notyf.error('Something went wrong!')
   }
-};
+}
 
 // ADD EVENT LISTENER TO THE RENAME BUTTON
-renameButton.addEventListener("click", renameChat);
+renameButton.addEventListener('click', renameChat)
 
 // CHAT CONTROLS OVERLAY TOGGLE
 const chatControls = document.querySelectorAll(
-  ".nav__menu svg, .nav__link svg"
-);
+  '.nav__menu svg, .nav__link svg'
+)
 
 chatControls.forEach((control) => {
-  control.addEventListener("click", () => {
-    const chatControlsOverlay = document.querySelector(".chat__control");
-    chatControlsOverlay.classList.toggle("active");
-  });
-});
+  control.addEventListener('click', () => {
+    const chatControlsOverlay = document.querySelector('.chat__control')
+    chatControlsOverlay.classList.toggle('active')
+  })
+})
 
 // CLOSE THE CHAT CONTROLS OVERLAY
-const bxX = document.querySelectorAll(".bx-x");
+const bxX = document.querySelectorAll('.bx-x')
 
 bxX.forEach((x) => {
-  x.addEventListener("click", () => {
-    const chatControlsOverlay = document.querySelector(".chat__control");
-    chatControlsOverlay.classList.remove("active");
-  });
-});
+  x.addEventListener('click', () => {
+    const chatControlsOverlay = document.querySelector('.chat__control')
+    chatControlsOverlay.classList.remove('active')
+  })
+})
 
 // CLEAR CHAT FUNCTIONALITY
-const clearChat = document.getElementById("clear-chat");
+const clearChat = document.getElementById('clear-chat')
 
 // FUNCTION TO FETCH THE CLEAR ALL CHAT
 const clearChatFunction = async () => {
   // FETCH THE CLEAR CHAT
   const response = await fetch(
-    "https://chatbot-rreu.onrender.com/users/clearChat",
+    'https://chatbot-rreu.onrender.com/users/clearChat',
     {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        username: localStorage.getItem("username"),
+        username: localStorage.getItem('username'),
       }),
     }
-  );
+  )
 
   // PARSE THE RESPONSE
   if (response.ok) {
-    const data = await response.json();
+    const data = await response.json()
 
     // CLEAR THE CURRENT TITLE ON TOP
-    const navTitle = document.querySelector(".current__title");
-    navTitle.textContent = "Chatbot AI";
+    const navTitle = document.querySelector('.current__title')
+    navTitle.textContent = 'Chatbot AI'
 
     // REMOVE THE CHAT CONTROL OVERLAY
-    const chatControlsOverlay = document.querySelector(".chat__control");
-    chatControlsOverlay.classList.remove("active");
+    const chatControlsOverlay = document.querySelector('.chat__control')
+    chatControlsOverlay.classList.remove('active')
 
     // REMOVE ALL CHAT HISTORY ELEMENTS
-    const allTitleContent = document.querySelectorAll(".nav__title-wrapper");
+    const allTitleContent = document.querySelectorAll('.nav__title-wrapper')
 
     allTitleContent.forEach((title) => {
-      title.remove();
-    });
+      title.remove()
+    })
 
     // GET THE DASHBOARD CHAT WRAPPER
-    const chatWrapper = document.getElementById("dashboard__chat");
+    const chatWrapper = document.getElementById('dashboard__chat')
 
     // CLEAR THE CHAT WRAPPER CLASSLIST
-    chatWrapper.className = "";
-    chatWrapper.innerHTML = chatGreeting();
+    chatWrapper.className = ''
+    chatWrapper.innerHTML = chatGreeting()
 
     // Initialize the notyf
 
     // Display the notification
-    notyf.success(data.message);
+    notyf.success(data.message)
   } else {
     // Initialize the notyf
 
     // Display the notification
-    notyf.error("Something went wrong!");
+    notyf.error('Something went wrong!')
   }
-};
+}
 
 if (clearChat) {
-  clearChat.addEventListener("click", clearChatFunction);
+  clearChat.addEventListener('click', clearChatFunction)
 }
 
 // TEXTAREA AUTOSIZE FUNCTIONALITY
-const textarea = document.querySelector(".dashboard__input");
+const textarea = document.querySelector('.dashboard__input')
 
-textarea.addEventListener("keydown", function (event) {
-  if (event.shiftKey && event.key === "Enter") {
-    // Prevent the form from being submitted
-    event.preventDefault();
+// Function to adjust the height of the textarea
+const adjustHeight = () => {
+  textarea.style.height = 'auto'
+  textarea.style.height = `${textarea.scrollHeight}px`
+}
 
-    // Increase the rows attribute
-    textarea.rows++;
+// Function to calculate the number of rows needed
+const calculateRows = () => {
+  const charsPerRow = Math.floor(textarea.clientWidth / parseFloat(getComputedStyle(textarea).getPropertyValue('font-size')))
+  const rowsNeeded = Math.ceil(textarea.value.length / charsPerRow)
+  textarea.rows = rowsNeeded || 1
+}
 
-    // Get the cursor's position
-    const cursorPosition = textarea.selectionStart;
-
-    // Insert a newline character at the cursor's position
-    textarea.value =
-      textarea.value.substring(0, cursorPosition) +
-      "\n" +
-      textarea.value.substring(cursorPosition);
-
-    // Move the cursor to the next line
-    textarea.selectionStart = cursorPosition + 1;
-    textarea.selectionEnd = cursorPosition + 1;
+// Function to handle the 'input' event
+const handleInput = () => {
+  if (textarea.value === '') {
+    textarea.style.height = 'auto'
+  } else {
+    adjustHeight()
+    calculateRows()
   }
-});
+}
 
-// BACKSPACE REMOVE THE ROWS
-textarea.addEventListener("keydown", function (event) {
-  if (event.key === "Backspace") {
-    // Get the cursor's position
-    const cursorPosition = textarea.selectionStart;
-
-    // Check if the character being removed is a newline character
-    if (textarea.value[cursorPosition - 1] === "\n") {
-      // Decrease the rows attribute
-      textarea.rows--;
-    }
-  }
-});
-
-// IF THE TEXTAREA HAVE MULTIPLE LINES WHEN PASTE INCREASE THE ROWS
-textarea.addEventListener("paste", () => {
-  setTimeout(() => {
-    // Increase the rows attribute
-    textarea.rows = textarea.value.split("\n").length;
-  }, 0);
-});
-
-// IF THE TEXTAREA HAS NOTHING, RESET THE ROWS TO 1
-textarea.addEventListener("input", () => {
-  if (textarea.value === "") {
-    textarea.rows = 1;
-  }
-});
-
-// WHEN THE USER CLICK CTRL + Z, RESET THE ROWS TO THE LAST ROW
-textarea.addEventListener("keydown", (event) => {
-  if (event.ctrlKey && event.key === "z") {
-    // Wait until after the undo action has completed
+// Function to handle the 'keydown' event
+const handleKeyDown = (event) => {
+  if (event.shiftKey && event.key === 'Enter') {
+    event.preventDefault()
+    adjustHeight()
+    const cursorPosition = textarea.selectionStart
+    textarea.value = `${textarea.value.substring(0, cursorPosition)}\n${textarea.value.substring(cursorPosition)}`
+    textarea.selectionStart = cursorPosition + 1
+    textarea.selectionEnd = cursorPosition + 1
+  } else if (event.key === 'Backspace') {
+    calculateRows()
+  } else if (event.ctrlKey && event.key === 'z') {
     setTimeout(() => {
-      textarea.rows = textarea.value.split("\n").length;
-    }, 0);
+      const lines = textarea.value.split('\n').length
+      textarea.rows = lines
+    }, 0)
   }
-});
+}
+
+// Function to handle the 'paste' event
+const handlePaste = () => {
+  setTimeout(() => {
+    const lines = textarea.value.split('\n').length
+    textarea.rows = lines
+  }, 0)
+}
+
+// Add event listeners
+textarea.addEventListener('input', handleInput)
+textarea.addEventListener('keydown', handleKeyDown)
+textarea.addEventListener('paste', handlePaste)
 
 // COPY CODE FUNCTIONALITY
-document.addEventListener("click", () => {
-  if (event.target.matches(".bx-copy-alt")) {
-    let icon = event.target;
+document.addEventListener('click', () => {
+  if (event.target.matches('.bx-copy-alt')) {
+    let icon = event.target
 
-    let codingBlock = event.target.closest(".coding-block");
+    let codingBlock = event.target.closest('.coding-block')
 
-    let codePreElement = codingBlock.querySelector("pre");
+    let codePreElement = codingBlock.querySelector('pre')
 
-    let text = codePreElement.innerText;
+    let text = codePreElement.innerText
 
     navigator.clipboard.writeText(text).then(
       () => {
-        console.log("Copied to clipboard");
-        icon.classList.add("copied");
+        console.log('Copied to clipboard')
+        icon.classList.add('copied')
 
         // Remove the copied class after 2 seconds
         setTimeout(() => {
-          icon.classList.remove("copied");
-        }, 1000);
+          icon.classList.remove('copied')
+        }, 1000)
       },
       (err) => {
-        console.error("Failed to copy: ", err);
+        console.error('Failed to copy: ', err)
       }
-    );
+    )
   }
-});
+})
