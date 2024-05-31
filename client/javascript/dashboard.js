@@ -1,4 +1,4 @@
-import hljs from 'highlight.js'
+ import hljs from 'highlight.js'
 import { notyf } from './notyfInstance.js'
 import { marked } from 'https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js'
 import myImage from '../assets/empty-user.png'

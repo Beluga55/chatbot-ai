@@ -4,8 +4,8 @@
   "engines": {
     "node": "20.9.0"
   },
-  "type": "module",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "server": "nodemon server",
     "client": "npm run --prefix ../client dev",

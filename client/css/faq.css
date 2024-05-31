@@ -1,0 +1,50 @@
+@import url(style.css);
+@import url(header_nav.css);
+@import url(footer.css);
+
+.faq__container {
+  padding: 8.5rem 0 2rem;
+}
+
+.faq__general,
+.faq__usage {
+  margin-top: 2rem;
+}
+
+.faq__general,
+.faq__usage {
+  display: grid;
+  gap: 2rem;
+}
+
+.faq__general h3,
+.faq__usage h3 {
+  font-size: 0.938rem;
+  font-weight: 400;
+}
+
+.faq__general p,
+.faq__usage p {
+  font-size: 0.85rem;
+  max-width: 700px;
+  margin-top: 1rem;
+  display: none;
+}
+
+.faq__general p.active,
+.faq__usage p.active {
+  display: block;
+}
+
+.faq__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.faq__content {
+  border: 1px solid var(--clr-3);
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+  width: fit-content;
+}
