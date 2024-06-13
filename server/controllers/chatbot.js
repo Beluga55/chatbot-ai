@@ -1,46 +1,42 @@
-import {
-  GoogleGenerativeAI,
-  HarmBlockThreshold,
-  HarmCategory,
-} from "@google/generative-ai";
-import * as dotenv from "dotenv";
+import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory, } from '@google/generative-ai'
+import * as dotenv from 'dotenv'
 
-import { Title, Chat } from "../db.js";
-import { ObjectId } from "mongodb";
+import { Chat, Title } from '../db.js'
+import { ObjectId } from 'mongodb'
 
-dotenv.config();
+dotenv.config()
 
 export const chatbot = async (req, res) => {
   try {
     // DEFINE THE VARIABLES SO IT CAN BE USED LATER
-    let content = "";
-    let title = "";
-    let findLastBotResponse = "";
+    let content = ''
+    let title = ''
+    let findLastBotResponse = ''
 
     // GET THE USER PROMPT
-    const { prompt, username, status, titleId } = req.body;
+    const { prompt, username, status, titleId } = req.body
 
     // CHECK IF THE USER PROMPT IS EMPTY
     if (!prompt) {
-      return res.status(400).json({ message: "Please provide a prompt!" });
+      return res.status(400).json({ message: 'Please provide a prompt!' })
     }
 
     // ACCESS THE ENVIRONMENT VARIABLES FOR GEMINI
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
 
     // DEFINE THE CONFIG
     const generationConfig = {
       temperature: 0.9, // Lower than 0.9 for more focused output
       topP: 0.1, // Higher than 0.1 for a bit more diversity
       topK: 15, // Higher than 16 for a bit more diversity
-    };
+    }
 
     const titleConfig = {
       temperature: 0.9,
       topP: 0.1,
       topK: 16,
       maxOutputTokens: 5,
-    };
+    }
 
     // HARM CATERORY CONFIG
     const safetySettings = [
@@ -60,85 +56,85 @@ export const chatbot = async (req, res) => {
         category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
         threshold: HarmBlockThreshold.BLOCK_NONE,
       },
-    ];
+    ]
 
     // DEFINE THE MODEL FOR THE RESPONSE (PROMPT)
     const model = genAI.getGenerativeModel({
-      model: "gemini-pro",
+      model: 'gemini-1.5-flash',
       generationConfig,
       safetySettings,
-    });
+    })
 
     /// GET THE LAST BOT RESPONSE
     if (titleId) {
       findLastBotResponse = await Chat.findOne(
         { titleId: new ObjectId(titleId) },
         { lastBotResponse: 1 }
-      );
+      )
     }
 
     // EXTRACT THE lastBotResponse
-    let lastUserPrompt = "";
-    let lastBotResponse = "";
+    let lastUserPrompt = ''
+    let lastBotResponse = ''
     if (findLastBotResponse) {
-      lastUserPrompt = findLastBotResponse.lastUserPrompt;
-      lastBotResponse = findLastBotResponse.lastBotResponse;
+      lastUserPrompt = findLastBotResponse.lastUserPrompt
+      lastBotResponse = findLastBotResponse.lastBotResponse
     }
 
-    let history;
+    let history
 
     if (lastUserPrompt && lastBotResponse) {
       history = [
         {
-          role: "user",
+          role: 'user',
           parts: [{ text: `${prompt}` }],
         },
         {
-          role: "model",
+          role: 'model',
           parts: [
             {
               text: `Create a response using the provided prompt: \n\n Prompt: ${prompt}. The previous conversation was as follows:\n\nUser's Prompt: ${lastUserPrompt}\nBot's Response: ${lastBotResponse}\n`,
             },
           ],
         },
-      ];
+      ]
     } else {
-      history = [];
+      history = []
     }
 
-    const chat = model.startChat({ history });
+    const chat = model.startChat({ history })
 
     // GENERATE A RESPONSE
-    const response = await chat.sendMessageStream(prompt);
+    const response = await chat.sendMessageStream(prompt)
 
     for await (const chunk of response.stream) {
       try {
-        const chunkText = chunk.text();
-        content += chunkText;
+        const chunkText = chunk.text()
+        content += chunkText
       } catch (error) {
-        console.error(error);
+        console.error(error)
         return res.status(500).json({
-          message: "Response was blocked due to harmful content!",
-        });
+          message: 'Response was blocked due to harmful content!',
+        })
       }
     }
     // GENERATE TITLE IF THE STATUS IS FALSE
     if (!status) {
       const modelTitle = genAI.getGenerativeModel({
-        model: "gemini-pro",
+        model: 'gemini-1.5-flash',
         titleConfig,
-      });
+      })
 
       // DEFINE THE CONTENT
-      const promptTitle = `Generate a concise title with less than 4 words based on the following conversation:\n\nUser Prompt: ${prompt}\n`;
+      const promptTitle = `Generate a concise title with less than 4 words based on the following conversation:\n\nUser Prompt: ${prompt}\n`
 
       // GENERATE A RESPONSE
-      const titleResponse = await modelTitle.generateContentStream(promptTitle);
+      const titleResponse = await modelTitle.generateContentStream(promptTitle)
 
       // LOOP OVER THE CHUNKS
       for await (const chunk of titleResponse.stream) {
-        const chunkText = chunk.text();
-        title += chunkText;
+        const chunkText = chunk.text()
+        title += chunkText
       }
 
       // SAVE THE CHAT
@@ -146,10 +142,10 @@ export const chatbot = async (req, res) => {
         username,
         title,
         prompt,
-      });
+      })
 
       // GET THE TITLE OBJECT ID
-      const titleId = titleInsert.insertedId;
+      const titleId = titleInsert.insertedId
 
       // SAVE THE CHAT
       await Chat.insertOne({
@@ -159,7 +155,7 @@ export const chatbot = async (req, res) => {
         lastUserPrompt: prompt,
         lastBotResponse: content,
         timestamp: new Date(),
-      });
+      })
 
       // SEND THE RESPONSE
       res.status(200).json({
@@ -167,7 +163,7 @@ export const chatbot = async (req, res) => {
         title,
         titleId,
         status,
-      });
+      })
     } else {
       // UPDATE THE CHAT
       const updateResult = await Chat.updateOne(
@@ -180,7 +176,7 @@ export const chatbot = async (req, res) => {
             timestamp: new Date(),
           },
         }
-      );
+      )
 
       // CHECK THE UPDATE RESULT
       if (updateResult.modifiedCount > 0) {
@@ -188,13 +184,13 @@ export const chatbot = async (req, res) => {
         res.status(200).json({
           response: content,
           status,
-        });
+        })
       } else {
-        res.status(500).json({ message: "Something went wrong!" });
+        res.status(500).json({ message: 'Something went wrong!' })
       }
     }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Something went wrong!" });
+    console.error(error)
+    res.status(500).json({ message: 'Something went wrong!' })
   }
-};
+}

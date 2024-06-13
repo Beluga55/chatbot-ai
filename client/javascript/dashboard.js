@@ -1,4 +1,4 @@
- import hljs from 'highlight.js'
+import hljs from 'highlight.js'
 import { notyf } from './notyfInstance.js'
 import { marked } from 'https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js'
 import myImage from '../assets/empty-user.png'
@@ -197,6 +197,7 @@ const handleSubmit = async (event) => {
     }
 
     let geminiResponse = data.response.trim()
+    console.log(geminiResponse)
 
     // CHECK THE STATUS
     if (data.status === false) {
@@ -288,6 +289,9 @@ const handleSubmit = async (event) => {
         }
       )
 
+      // Format the markdown in the response
+      geminiResponse = marked(geminiResponse)
+
       // Replace the placeholders with the original code blocks
       geminiResponse = geminiResponse.replace(
         /PLACEHOLDER(\d+)/g,
@@ -300,32 +304,6 @@ const handleSubmit = async (event) => {
         }
       )
 
-      // Create a new renderer
-      let renderer = new marked.Renderer()
-
-      // Override the code block rendering to return the code as is
-      renderer.code = function (code, language) {
-        return `<pre><code class="hljs">${code}</code></pre>`
-      }
-
-      // Override the paragraph rendering to return the text as is
-      renderer.paragraph = function (text) {
-        return text
-      }
-
-      // Override the codespan rendering to return the code as is
-      renderer.codespan = function (text) {
-        return text
-      }
-
-      // Set the options to use the new renderer
-      marked.setOptions({
-        renderer: renderer,
-      })
-
-      // Format the markdown in the response
-      geminiResponse = marked(geminiResponse)
-
       // CHANGE THE AI INNERHTML TO THE RESPONSE
       messageDiv.innerHTML = geminiResponse
 
@@ -335,6 +313,7 @@ const handleSubmit = async (event) => {
       // CLEAR THE MESSAGE DIV
       messageDiv.innerHTML = ''
 
+      console.log(geminiResponse)
       // Format the markdown in the response
       geminiResponse = marked(geminiResponse)
 
@@ -638,6 +617,9 @@ const retrieveChatHistory = (parentElements) => {
             )
           }
 
+          // Format the markdown in the response
+          response = marked(response)
+
           // Replace the placeholders with the original code blocks
           response = response.replace(/PLACEHOLDER(\d+)/g, (match, p1) => {
             let block = placeholders[p1]
@@ -646,32 +628,6 @@ const retrieveChatHistory = (parentElements) => {
             hljs.highlightElement(blockElement.querySelector('.hljs'))
             return blockElement.innerHTML
           })
-
-          // Create a new renderer
-          let renderer = new marked.Renderer()
-
-          // Override the code block rendering to return the code as is
-          renderer.code = function (code, language) {
-            return `<pre><code class="hljs">${code}</code></pre>`
-          }
-
-          // Override the paragraph rendering to return the text as is
-          renderer.paragraph = function (text) {
-            return text
-          }
-
-          // Override the codespan rendering to return the code as is
-          renderer.codespan = function (text) {
-            return text
-          }
-
-          // Set the options to use the new renderer
-          marked.setOptions({
-            renderer: renderer,
-          })
-
-          // Format the markdown in the response
-          response = marked(response)
 
           // CREATE A STRING WITH THE chat__stripe-wrapper DIV AND THE CHAT STRIPES
           const chatStripeWrapper = `
