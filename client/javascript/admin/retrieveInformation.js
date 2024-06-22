@@ -7,7 +7,7 @@ async function retrieveInformation () {
 
     if (clickedLink.textContent === 'Users') {
       const response = await fetch(
-        'http://localhost:5001/admin/retrieveUsersAdmin',
+        'https://chatbot-rreu.onrender.com/admin/retrieveUsersAdmin',
         {
           method: 'GET',
           headers: {
@@ -266,7 +266,7 @@ async function retrieveInformation () {
           `
     } else if (clickedLink.textContent === 'Chat History') {
       const response = await fetch(
-        'http://localhost:5001/admin/retrieveChatHistoryAdmin',
+        'https://chatbot-rreu.onrender.com/admin/retrieveChatHistoryAdmin',
         {
           method: 'GET',
           headers: {

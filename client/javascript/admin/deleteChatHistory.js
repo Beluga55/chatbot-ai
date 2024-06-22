@@ -10,7 +10,7 @@ async function deleteChatHistory (e) {
     if (!conifrmation) return
 
     const response = await fetch(
-      'http://localhost:5001/admin/adminDeleteChatHistory',
+      'https://chatbot-rreu.onrender.com/admin/adminDeleteChatHistory',
       {
         method: 'DELETE',
         headers: {

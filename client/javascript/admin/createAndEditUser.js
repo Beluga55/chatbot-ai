@@ -154,7 +154,7 @@ async function submitForm (event) {
   var role = document.getElementById('role__admin-create').value
 
   const response = await fetch(
-    'http://localhost:5001/admin/adminCreateUser',
+    'https://chatbot-rreu.onrender.com/admin/adminCreateUser',
     {
       method: 'POST',
       headers: {
@@ -200,7 +200,7 @@ async function submitEditUserForm (event) {
   var role = document.getElementById('role__admin-create').value
 
   const response = await fetch(
-    'http://localhost:5001/admin/adminEditUser',
+    'https://chatbot-rreu.onrender.com/admin/adminEditUser',
     {
       method: 'PUT',
       headers: {

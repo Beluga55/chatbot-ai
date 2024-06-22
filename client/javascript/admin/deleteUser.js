@@ -10,7 +10,7 @@ async function deleteUser (e) {
 
     // SEND A REQUEST TO BACKEND TO DELETE THE USER
     const response = await fetch(
-      'http://localhost:5001/admin/adminDeleteUser',
+      'https://chatbot-rreu.onrender.com/admin/adminDeleteUser',
       {
         method: 'DELETE',
         headers: {
