@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+  <!-- FAVICON -->
+  <link href="favicon.ico" rel="icon" type="image/svg+xml"/>
+
+  <!-- ICONS -->
+  <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+  />
+
+  <!-- NOYTF CSS -->
+  <link href="node_modules/notyf/notyf.min.css" rel="stylesheet"/>
+
+  <!-- CSS -->
+  <link href="css/admin.css" rel="stylesheet"/>
+
+  <title>Main Page - Chatbot AI</title>
+</head>
+<body>
+<header class="header">
+  <nav class="nav container">
+    <div class="nav__logo">
+      <i class="bx bx-bot"></i>
+      <a href="index">Chatbot AI</a>
+    </div>
+
+    <!-- SIDEBAR MENU -->
+    <div class="nav__list">
+      <div class="nav__logo">
+        <i class="bx bx-bot"></i>
+        <a href="index">Chatbot AI</a>
+      </div>
+
+      <div class="nav__links">
+        <div class="nav__link">
+          <i class="bx bx-home-smile"></i>
+          <a href="index">Home</a>
+        </div>
+        <div class="nav__link">
+          <i class="bx bx-home"></i>
+          <a class="dashboard">Rules</a>
+        </div>
+        <div class="nav__link">
+          <i class="bx bx-user-circle"></i>
+          <a class="manage__users">Users</a>
+        </div>
+        <div class="nav__link">
+          <i class="bx bxs-hourglass-bottom"></i>
+          <a class="history__management">Chat History</a>
+        </div>
+      </div>
+
+      <div class="nav__login">
+        <i class="bx bx-user-circle"></i>
+        <a href="login">Login</a>
+      </div>
+    </div>
+
+    <div class="nav__menu">
+      <div>
+        <i class="bx bx-menu-alt-right"></i>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="admin__container container">
+    <div class="retrived__query" id="retrieveQuery">
+      <!-- EVERYTHING ELSE SHOULD BE HERE RETRIEVE BY DATABASE (DEFAULT IS CODED HERE) -->
+      <h1>Rules and Guidelines</h1>
+      <div class="rules__guidelines container">
+        <ul>
+          <li>
+            <h4>Access Control and Permissions</h4>
+            <div class="rules__description">
+              <div>
+                <i class="bx bx-check"></i>
+                <p>
+                  Admins will be granted access based on their roles and
+                  responsibilities.
+                </p>
+              </div>
+              <div>
+                <i class="bx bx-check"></i>
+                <p>
+                  Permissions will be reviewed regularly to ensure they
+                  align with job functions.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <h4>Security Best Practices</h4>
+            <div class="rules__description">
+              <div>
+                <i class="bx bx-check"></i>
+                <p>
+                  Admins must follow security best practices, including
+                  strong password usage and enabling two-factor
+                  authentication.
+                </p>
+              </div>
+              <div>
+                <i class="bx bx-check"></i>
+                <p>
+                  Regularly update and patch the system to address security
+                  vulnerabilities.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <h4>Data Privacy</h4>
+            <div class="rules__description">
+              <div>
+                <i class="bx bx-check"></i>
+                <p>Admins are expected to respect user privacy.</p>
+              </div>
+              <div>
+                <i class="bx bx-check"></i>
+                <p>
+                  Sensitive user information should only be accessed when
+                  necessary for authorized tasks.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <h4>Training and Documentation</h4>
+            <div class="rules__description">
+              <div>
+                <i class="bx bx-check"></i>
+                <p>
+                  Admins are required to undergo comprehensive training on
+                  system features and best practices.
+                </p>
+              </div>
+              <div>
+                <i class="bx bx-check"></i>
+                <p>
+                  Keep documentation up-to-date and accessible for admin
+                  procedures and workflows.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <h4>Audit Trail</h4>
+            <div class="rules__description">
+              <div>
+                <i class="bx bx-check"></i>
+                <p>
+                  All admin actions will be logged for auditing purposes.
+                </p>
+              </div>
+              <div>
+                <i class="bx bx-check"></i>
+                <p>
+                  Admins must regularly review audit logs for any unusual or
+                  suspicious activities.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <h4>Incident Response</h4>
+            <div class="rules__description">
+              <div>
+                <i class="bx bx-check"></i>
+                <p>
+                  Admins must be familiar with the incident response plan
+                  and report security incidents promptly.
+                </p>
+              </div>
+              <div>
+                <i class="bx bx-check"></i>
+                <p>
+                  Regularly test and update the incident response plan to
+                  ensure effectiveness.
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <!-- ADMINS CANT DO -->
+        <ul class="rules__cant-do">
+          <li>
+            <h4>Unauthorized Access</h4>
+            <div class="rules__description">
+              <div>
+                <i class="bx bx-x"></i>
+                <p>
+                  Admins must not access user accounts, data, or features
+                  beyond their designated responsibilities without proper
+                  authorization.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <h4>Misuse of Privileges</h4>
+            <div class="rules__description">
+              <div>
+                <i class="bx bx-x"></i>
+                <p>
+                  Admins must not use their privileges to access or modify
+                  data for personal gain.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <h4>Unauthorized Changes</h4>
+            <div class="rules__description">
+              <div>
+                <i class="bx bx-x"></i>
+                <p>
+                  Admins must not make unauthorized changes to the system
+                  configuration or settings.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <h4>Bypassing Security Measures</h4>
+            <div class="rules__description">
+              <div>
+                <i class="bx bx-x"></i>
+                <p>
+                  Admins should not attempt to bypass security measures or
+                  disable security features unless required for system
+                  maintenance.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <h4>Sharing Credentials</h4>
+            <div class="rules__description">
+              <div>
+                <i class="bx bx-x"></i>
+                <p>
+                  Admins must not share their login credentials or any
+                  access information with unauthorized individuals.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <h4>Unauthorized System Modifications</h4>
+            <div class="rules__description">
+              <div>
+                <i class="bx bx-x"></i>
+                <p>
+                  Admins should not make unauthorized changes to the system
+                  configuration or code without proper approval and
+                  following change control procedures.
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER SECTION -->
+<footer class="footer container">
+  <div class="footer__container-first">
+    <div class="footer__content-first">
+      <div>
+        <i class="bx bx-bot"></i>
+        <p>Chatbot AI</p>
+      </div>
+      <p>
+        Chatbot AI, a type of artificial intelligence, helps people easily
+        complete their daily tasks.
+      </p>
+    </div>
+    <div class="footer__content-second">
+      <ul>
+        <li>Quick Links</li>
+        <li><a href="index">Home</a></li>
+        <li><a href="about">About</a></li>
+        <li><a href="about#about-content">AI Benefits</a></li>
+      </ul>
+
+      <ul>
+        <li>Support</li>
+        <li><a href="faq">FAQs</a></li>
+        <li><a href="index">Feedback</a></li>
+        <li><a href="about">Contact Us</a></li>
+      </ul>
+
+      <ul>
+        <li>Social</li>
+        <div class="footer__social-icons">
+          <a href="#"><i class="bx bxl-facebook"></i></a>
+          <a href="#"><i class="bx bxl-twitter"></i></a>
+          <a href="#"><i class="bx bxl-instagram"></i></a>
+          <a href="#"><i class="bx bxl-linkedin"></i></a>
+        </div>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__container-second">
+    <div class="footer__copyright">
+      <p>Copyright &copy; 2024 Chatbot AI. All rights reserved.</p>
+      <button class="buttons">Get Started</button>
+    </div>
+  </div>
+</footer>
+
+<!-- SCRIPT JS -->
+
+<script src="javascript/navbar.js" type="module"></script>
+<script src="javascript/redirection.js" type="module"></script>
+<script src="javascript/authMiddleware.js" type="module"></script>
+<script src="javascript/admin/admin.js" type="module"></script>
+</body>
+</html>

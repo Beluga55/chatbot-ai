@@ -55,7 +55,6 @@ body {
   border-radius: 0.5rem;
   outline: none;
   border: none;
-  color: var(--text-300);
   transition: background 0.3s ease-in-out;
   display: flex;
   align-items: center;
@@ -588,7 +587,7 @@ hr {
 }
 
 .chat__control-content-settings:not(:first-child):not(:last-child)
-  button:hover {
+button:hover {
   background: var(--primary-200);
 }
 

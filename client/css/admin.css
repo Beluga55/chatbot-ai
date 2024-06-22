@@ -1,0 +1,242 @@
+@import url(style.css);
+@import url(header_nav.css);
+@import url(footer.css);
+
+.retrived__query {
+  margin-inline: 1.5rem;
+  padding: 7rem 0 2rem;
+  overflow-x: auto;
+}
+
+.retrived__query h1 {
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 2rem;
+  color: var(--White);
+  font-weight: 600;
+}
+
+.rules__guidelines {
+  margin-top: 3rem;
+}
+
+.rules__guidelines ul {
+  display: grid;
+  gap: 2rem;
+}
+
+.nav__links ul li {
+  padding: 1rem 0.5rem;
+}
+
+.nav__links ul li p {
+  font-size: 13px;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.rules__guidelines h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--White);
+}
+
+.rules__guidelines p {
+  font-size: 12px;
+}
+
+.rules__description {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.rules__description > div {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.rules__cant-do {
+  margin-top: 2rem;
+}
+
+.table {
+  width: 100%;
+  margin-top: 2rem;
+}
+
+.table > thead > tr td,
+.table > tbody > tr td {
+  color: var(--White);
+  font-size: 12px;
+  text-align: center;
+  background: var(--CardBackground);
+}
+
+.table th,
+.table td {
+  border: 1px solid var(--clr-4);
+  padding: 10px;
+}
+
+.table td:not(.button__wrapper) {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  font-size: 0.938rem;
+  background-color: var(--CardBackground);
+  color: white;
+}
+
+#retrieveQueryTable > tr td {
+  color: var(--White);
+  font-size: 12px;
+  text-align: center;
+}
+
+.elipsis {
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.button__wrapper:not(.delete__wrapper) {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.delete__wrapper {
+  width: auto;
+}
+
+.edit__button,
+.delete__button,
+.add__user-btn,
+.delete__button-history {
+  background: var(--White);
+  color: var(--Black);
+  padding: 0.5rem;
+  width: 100%;
+  border-radius: 0.25rem;
+  transition: 0.3s ease-in-out;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 0.75rem;
+  border: none;
+  outline: none;
+}
+
+.edit__button:hover,
+.edit__button-history:hover {
+  background: var(--clr-3);
+  color: var(--White);
+}
+
+.delete__button:hover,
+.delete__button-history:hover {
+  background: red;
+  color: var(--White);
+}
+
+#error-username,
+#error-email,
+#error-password,
+#error-role {
+  color: red;
+  font-size: 12px;
+  margin-top: 0.5rem;
+  text-align: center;
+  display: none;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  width: 100%;
+  background: transparent;
+  padding: 0.5rem;
+  border: 2px solid var(--White);
+  outline: none;
+  border-radius: 0.25rem;
+  color: var(--White);
+  font-size: 12px;
+}
+
+.bx-check {
+  color: lime;
+  font-size: 1.5rem;
+}
+
+.bx-x {
+  color: red;
+  font-size: 1.5rem;
+}
+
+.admin__container {
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+@media screen and (min-width: 576px) {
+  .nav__links ul {
+    gap: 2.5rem;
+  }
+
+  .nav__links ul li {
+    padding: 0;
+  }
+
+  .nav__links ul li:hover p {
+    color: var(--White);
+  }
+
+  .nav__menu ul li p::before {
+    content: "";
+    width: 0%;
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(120deg, var(--Primary) 0%, var(--Accent) 100%);
+    bottom: -5px;
+    border-radius: 4px;
+    transition: width 0.3s ease-in-out; /* Add transition for a smooth effect */
+  }
+
+  .nav__menu ul li p:hover::before {
+    width: 10%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .rules__guidelines {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+
+  .rules__cant-do {
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .retrived__query {
+    margin: 0;
+  }
+
+  #retrieveQueryTable > tr td {
+    font-size: 13px;
+  }
+
+  .table > thead > tr td {
+    font-size: 13px;
+  }
+}
